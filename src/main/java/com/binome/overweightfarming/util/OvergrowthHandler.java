@@ -17,6 +17,7 @@ import java.util.Random;
 
 public class OvergrowthHandler {
 
+    //TODO: Remove this, convert this to datagen
     public static final LinkedHashMap<Block, Block> CROPS_TO_OVERGROWN = Util.make(Maps.newLinkedHashMap(), map -> {
         map.put(Blocks.CARROTS, OFBlocks.OVERWEIGHT_CARROT.get());
         map.put(Blocks.POTATOES, OFBlocks.OVERWEIGHT_POTATO.get());
