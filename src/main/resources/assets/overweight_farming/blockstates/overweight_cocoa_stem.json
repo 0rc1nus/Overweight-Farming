@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "overweight_farming:block/overweight_cocoa_stem"
+    },
+    "facing=north": {
+      "model": "overweight_farming:block/overweight_cocoa_stem"
+    },
+    "facing=west": {
+      "model": "overweight_farming:block/overweight_cocoa_stem"
+    },
+    "facing=east": {
+      "model": "overweight_farming:block/overweight_cocoa_stem"
+    }
+  }
+}

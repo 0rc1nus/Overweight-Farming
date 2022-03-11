@@ -1,0 +1,23 @@
+modLoader="javafml"
+loaderVersion="[39,)"
+license="All Rights Reserved"
+[[mods]]
+modId="overweight_farming"
+version="${file.jarVersion}"
+displayName="Overweight Farming"
+authors="Binome"
+description='''
+This mod enhances the farming system
+'''
+[[dependencies.overweight_farming]]
+   modId="forge"
+   mandatory=true
+   versionRange="[39,)"
+   ordering="NONE"
+   side="BOTH"
+[[dependencies.overweight_farming]]
+   modId="minecraft"
+   mandatory=true
+   versionRange="[1.18.1,1.19)"
+   ordering="NONE"
+   side="BOTH"

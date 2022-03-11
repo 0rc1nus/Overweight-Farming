@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.binome.overweightfarming.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "minVersion": "0.8",
+  "refmap": "overweightfarming.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
