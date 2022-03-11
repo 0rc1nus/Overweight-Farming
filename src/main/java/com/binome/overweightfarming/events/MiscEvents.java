@@ -34,8 +34,7 @@ public class MiscEvents {
                     boolean flag2 = state.hasProperty(BeetrootBlock.AGE) && state.getValue(BeetrootBlock.AGE) < BeetrootBlock.MAX_AGE && state.getValue(BeetrootBlock.AGE) > 1;
                     if (flag || flag1 || flag2) {
                         float chance = world.isNight() && world.getMoonPhase() == 0 ? 0.0010538863F : 3.4290552E-4F;
-                        float floatTinBoat = random.nextFloat();
-                        if (floatTinBoat < chance) {
+                        if (random.nextFloat() < chance) {
                             event.setResult(Event.Result.DENY);
                             OvergrowthHandler.overweightGrowth(random, state, world, blockPos, cropBlock);
                         }
