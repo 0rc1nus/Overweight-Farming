@@ -59,7 +59,8 @@ public class OvergrowthHandler {
 
     private static void setBlock(ServerLevel world, BlockPos blockPos, BlockState OVERWEIGHT_CARROT_STEM) {
         for (Block cropBlock : CROPS_TO_OVERGROWN.keySet()) {
-            if (world.getBlockState(blockPos).isAir() || world.getBlockState(blockPos).getBlock() == cropBlock || world.getBlockState(blockPos).is(Blocks.FARMLAND) || world.getBlockState(blockPos).is(BlockTags.DIRT)) {
+            BlockState state = world.getBlockState(blockPos);
+            if (state.isAir() || state.getBlock() == cropBlock || state.is(Blocks.FARMLAND) || state.is(Blocks.DIRT)) {
                 world.setBlock(blockPos, OVERWEIGHT_CARROT_STEM, 2);
             }
         }
