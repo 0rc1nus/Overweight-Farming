@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "overweight_farming",
+  "version": "${version}",
+
+  "name": "Overweight Farming",
+  "description": "This mod enhances the farming system",
+  "authors": [
+    "Binome",
+    "MrSterner"
+  ],
+
+  "license": "All Rights Reserved",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.binome.overweightfarming.OverweightFarming"
+    ],
+    "client": [
+      "com.binome.overweightfarming.OverweightFarmingClient"
+    ]
+  },
+  "mixins": [
+    "overweightfarming.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

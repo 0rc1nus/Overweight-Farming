@@ -1,24 +1,23 @@
 package com.binome.overweightfarming.entities;
 
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
-public class SeedProjectileEntity extends ThrowableItemProjectile {
+public class SeedProjectileEntity extends ThrownItemEntity {
 
-    public SeedProjectileEntity(EntityType<? extends ThrowableItemProjectile> type, Level world) {
+    public SeedProjectileEntity(EntityType<? extends ThrownItemEntity> type, World world) {
         super(type, world);
     }
 
-    public SeedProjectileEntity(Level world, LivingEntity entity, ItemStack stack) {
+    public SeedProjectileEntity(World world, LivingEntity entity, ItemStack stack) {
         super(EntityType.SNOWBALL, entity, world);
     }
 
-    public SeedProjectileEntity(Level world, double x, double y, double z) {
+    public SeedProjectileEntity(World world, double x, double y, double z) {
         super(EntityType.SNOWBALL, x, y, z, world);
     }
 

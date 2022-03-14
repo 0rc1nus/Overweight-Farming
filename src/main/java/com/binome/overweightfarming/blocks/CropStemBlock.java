@@ -1,31 +1,28 @@
 package com.binome.overweightfarming.blocks;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldView;
 
-public class CropStemBlock extends BushBlock {
-    public static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D);
+public class CropStemBlock extends PlantBlock {
+    public static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D);
 
-    public CropStemBlock(Properties properties) {
-        super(properties);
+    public CropStemBlock(Settings settings) {
+        super(settings);
     }
 
     @Override
-    public boolean canSurvive(BlockState state, LevelReader world, BlockPos blockPos) {
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         Direction direction = Direction.UP;
-        BlockPos blockpos = blockPos.relative(direction.getOpposite());
-        return world.getBlockState(blockpos).isFaceSturdy(world, blockpos, direction);
+        BlockPos blockpos = pos.offset(direction.getOpposite());
+        return world.getBlockState(blockpos).isSideSolidFullSquare(world, blockpos, direction);
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos blockPos, CollisionContext context) {
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
 }

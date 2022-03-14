@@ -1,21 +1,18 @@
 package com.binome.overweightfarming.blocks;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
+
+import net.minecraft.block.*;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class CropFullBlock extends Block implements BonemealableBlock {
+public class CropFullBlock extends Block implements Fertilizable {
     private final Block stemBlock;
 
-    public CropFullBlock(Block stemBlock, Properties properties) {
+    public CropFullBlock(Block stemBlock, Settings properties) {
         super(properties);
         this.stemBlock = stemBlock;
     }
@@ -25,24 +22,25 @@ public class CropFullBlock extends Block implements BonemealableBlock {
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter world, BlockPos blockPos, BlockState state, boolean isClient) {
-        return !world.getBlockState(blockPos.above()).is(this.stemBlock);
+    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+        return !world.getBlockState(pos.up()).isOf(this.stemBlock);
     }
 
+
     @Override
-    public boolean isBonemealSuccess(Level world, Random random, BlockPos blockPos, BlockState state) {
+    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
         return true;
     }
 
     @Override
-    public void performBonemeal(ServerLevel world, Random random, BlockPos blockPos, BlockState state) {
-        BlockPos above = blockPos.above();
-        BlockPos below = blockPos.below();
-        if (world.isStateAtPosition(above, BlockBehaviour.BlockStateBase::isAir)) {
-            world.setBlock(above, stemBlock.defaultBlockState(), 2);
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        BlockPos above = pos.up();
+        BlockPos below = pos.down();
+        if (world.testBlockState(above, AbstractBlock.AbstractBlockState::isAir)) {
+            world.setBlockState(above, stemBlock.getDefaultState(), 2);
         }
-        if (world.isStateAtPosition(below, BlockBehaviour.BlockStateBase::isAir)) {
-            world.setBlock(below, Blocks.HANGING_ROOTS.defaultBlockState(), 2);
+        if (world.testBlockState(below, AbstractBlock.AbstractBlockState::isAir)) {
+            world.setBlockState(below, Blocks.HANGING_ROOTS.getDefaultState(), 2);
         }
     }
 }

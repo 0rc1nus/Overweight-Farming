@@ -1,18 +1,13 @@
 package com.binome.overweightfarming.init;
 
 import com.binome.overweightfarming.OverweightFarming;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Item;
-import net.minecraftforge.common.Tags;
+import net.fabricmc.fabric.api.tag.TagFactory;
+import net.minecraft.item.Item;
+import net.minecraft.tag.Tag;
+import net.minecraft.util.Identifier;
 
 public class OFItemTags {
-
-    public static final Tags.IOptionalNamedTag<Item> OVERWEIGHT_HARVESTABLES = register("overweight_harvestables");
-    public static final Tags.IOptionalNamedTag<Item> POUCH_SEED_ITEMS = register("pouch_seed_items");
-
-    public static Tags.IOptionalNamedTag<Item> register(String name) {
-        return ItemTags.createOptional(new ResourceLocation(OverweightFarming.MODID, name));
-    }
+    public static final Tag<Item> OVERWEIGHT_HARVESTABLES = TagFactory.ITEM.create(new Identifier(OverweightFarming.MODID, "overweight_harvestables"));
+    public static final Tag<Item> POUCH_SEED_ITEMS = TagFactory.ITEM.create(new Identifier(OverweightFarming.MODID, "pouch_seed_items"));
 
 }
