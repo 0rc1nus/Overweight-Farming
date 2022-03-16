@@ -10,9 +10,9 @@ public class OverweightFarming implements ModInitializer {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "overweight_farming";
 
-
     @Override
     public void onInitialize() {
         OFObjects.init();
     }
+
 }
