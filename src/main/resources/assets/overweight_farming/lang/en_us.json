@@ -2,5 +2,9 @@
   "block.overweight_farming.overweight_beetroot_block": "Overweight Beetroot Block",
   "block.overweight_farming.overweight_cocoa_block": "Overweight Cocoa Block",
   "block.overweight_farming.overweight_carrot_block": "Overweight Carrot Block",
-  "block.overweight_farming.overweight_potato_block": "Overweight Potato Block"
+  "block.overweight_farming.overweight_potato_block": "Overweight Potato Block",
+  "block.overweight_farming.allium_bush": "Allium Bush",
+  "block.overweight_farming.overweight_onion_block": "Overweight Onion Block",
+  "block.overweight_farming.overweight_cabbage_block": "Overweight Cabbage Block",
+  "item.overweight_farming.straw_hat": "Straw Hat"
 }

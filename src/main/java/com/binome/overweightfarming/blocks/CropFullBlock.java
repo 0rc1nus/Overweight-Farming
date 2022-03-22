@@ -1,5 +1,6 @@
 package com.binome.overweightfarming.blocks;
 
+import com.binome.overweightfarming.init.OFBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockGetter;
@@ -7,6 +8,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.TallFlowerBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -26,7 +29,7 @@ public class CropFullBlock extends Block implements BonemealableBlock {
 
     @Override
     public boolean isValidBonemealTarget(BlockGetter world, BlockPos blockPos, BlockState state, boolean isClient) {
-        return !world.getBlockState(blockPos.above()).is(this.stemBlock);
+        return this == OFBlocks.OVERWEIGHT_CABBAGE.get() ? world.getBlockState(blockPos.below()).isAir() : !world.getBlockState(blockPos.above()).is(this.stemBlock);
     }
 
     @Override
@@ -38,8 +41,12 @@ public class CropFullBlock extends Block implements BonemealableBlock {
     public void performBonemeal(ServerLevel world, Random random, BlockPos blockPos, BlockState state) {
         BlockPos above = blockPos.above();
         BlockPos below = blockPos.below();
-        if (world.isStateAtPosition(above, BlockBehaviour.BlockStateBase::isAir)) {
-            world.setBlock(above, stemBlock.defaultBlockState(), 2);
+        if (this.stemBlock != null && world.isStateAtPosition(above, BlockBehaviour.BlockStateBase::isAir)) {
+            if (this.stemBlock instanceof TallFlowerBlock) {
+                DoublePlantBlock.placeAt(world, stemBlock.defaultBlockState(), blockPos.above(), 2);
+            } else {
+                world.setBlock(above, stemBlock.defaultBlockState(), 2);
+            }
         }
         if (world.isStateAtPosition(below, BlockBehaviour.BlockStateBase::isAir)) {
             world.setBlock(below, Blocks.HANGING_ROOTS.defaultBlockState(), 2);

@@ -6,11 +6,14 @@ import com.google.common.collect.Maps;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WallBannerBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
 import java.util.Random;
@@ -23,7 +26,14 @@ public class OvergrowthHandler {
         map.put(Blocks.POTATOES, OFBlocks.OVERWEIGHT_POTATO.get());
         map.put(Blocks.COCOA, OFBlocks.OVERWEIGHT_COCOA.get());
         map.put(Blocks.BEETROOTS, OFBlocks.OVERWEIGHT_BEETROOT.get());
+        map.put(getCompatBlock("farmersdelight", "cabbages"), OFBlocks.OVERWEIGHT_CABBAGE.get());
+        map.put(getCompatBlock("farmersdelight", "onions"), OFBlocks.OVERWEIGHT_ONION.get());
     });
+
+    @Nullable
+    private static Block getCompatBlock(String modid, String name) {
+        return ForgeRegistries.BLOCKS.getValue(new ResourceLocation(modid, name));
+    }
 
     public static void overweightGrowth(Random random, BlockState state, ServerLevel world, BlockPos blockPos , Block cropBlock) {
         growOverweightCrop(random, state, world, blockPos, cropBlock);
@@ -35,13 +45,18 @@ public class OvergrowthHandler {
         } else if (state.is(Blocks.COCOA)) {
             world.setBlock(blockPos, OFBlocks.OVERWEIGHT_COCOA.get().defaultBlockState(), 2);
         } else {
-            simpleOverweightGrowth(world, blockPos, OvergrowthHandler.CROPS_TO_OVERGROWN.get(cropBlock).defaultBlockState(), ((CropFullBlock) OvergrowthHandler.CROPS_TO_OVERGROWN.get(cropBlock)).getStemBlock().defaultBlockState());
+            Block stemBlock = ((CropFullBlock) OvergrowthHandler.CROPS_TO_OVERGROWN.get(cropBlock)).getStemBlock();
+            if (stemBlock != null) {
+                simpleOverweightGrowth(world, blockPos, OvergrowthHandler.CROPS_TO_OVERGROWN.get(cropBlock).defaultBlockState(), stemBlock.defaultBlockState());
+            } else  {
+                world.setBlock(blockPos, OvergrowthHandler.CROPS_TO_OVERGROWN.get(cropBlock).defaultBlockState(), 2);
+            }
         }
     }
 
-    private static void simpleOverweightGrowth(ServerLevel world, BlockPos blockPos, BlockState CROPS_TO_OVERGROWN, BlockState CROPS_TO_OVERGROWN1) {
-        setBlock(world, blockPos, CROPS_TO_OVERGROWN);
-        setBlock(world, blockPos.above(), CROPS_TO_OVERGROWN1);
+    private static void simpleOverweightGrowth(ServerLevel world, BlockPos blockPos, BlockState overweightCrop, BlockState stemBlock) {
+        setBlock(world, blockPos, overweightCrop);
+        setBlock(world, blockPos.above(), stemBlock);
     }
 
     public static void growCarrotStem(ServerLevel world, BlockPos blockPos, Random random) {

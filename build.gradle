@@ -81,10 +81,14 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    maven {
+        url "https://www.cursemaven.com"
+    }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.1-39.1.2'
+    implementation fg.deobf("curse.maven:farmers-delight-398521:3615366")
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }
 

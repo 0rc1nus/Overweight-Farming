@@ -4,6 +4,8 @@
     "overweight_farming:overweight_beetroot_block",
     "overweight_farming:overweight_carrot_block",
     "overweight_farming:overweight_potato_block",
-    "overweight_farming:overweight_cocoa_block"
+    "overweight_farming:overweight_cocoa_block",
+    "overweight_farming:overweight_onion_block",
+    "overweight_farming:overweight_cabbage_block"
   ]
 }
