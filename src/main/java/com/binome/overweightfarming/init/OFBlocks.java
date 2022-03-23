@@ -3,6 +3,7 @@ package com.binome.overweightfarming.init;
 import com.binome.overweightfarming.OverweightFarming;
 import com.binome.overweightfarming.blocks.CropFullBlock;
 import com.binome.overweightfarming.blocks.CropStemBlock;
+import com.binome.overweightfarming.blocks.OverweightOnionBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
@@ -37,13 +38,7 @@ public class OFBlocks {
     public static final RegistryObject<Block> OVERWEIGHT_CARROT = registerBlock("overweight_carrot_block", () -> new CropFullBlock(OVERWEIGHT_CARROT_STEM.get(), BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> OVERWEIGHT_COCOA = registerBlock("overweight_cocoa_block", () -> new Block(BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> OVERWEIGHT_POTATO = registerBlock("overweight_potato_block", () -> new CropFullBlock(OVERWEIGHT_POTATO_STEM.get(), BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
-    public static final RegistryObject<Block> OVERWEIGHT_ONION = registerCompatBlock("farmersdelight", "overweight_onion_block", () -> new CropFullBlock(ALLIUM_BUSH.get(), BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)){
-        @Override
-        public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
-            BlockState plant = plantable.getPlant(world, pos.relative(facing));
-            return plant.is(OFBlocks.ALLIUM_BUSH.get());
-        }
-    }, CreativeModeTab.TAB_FOOD);
+    public static final RegistryObject<Block> OVERWEIGHT_ONION = registerCompatBlock("farmersdelight", "overweight_onion_block", () -> new OverweightOnionBlock(ALLIUM_BUSH.get(), BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> OVERWEIGHT_CABBAGE = registerCompatBlock("farmersdelight", "overweight_cabbage_block", () -> new CropFullBlock(null, BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
 
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> block, CreativeModeTab tab) {

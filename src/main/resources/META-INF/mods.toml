@@ -3,7 +3,7 @@ loaderVersion="[39,)"
 license="All Rights Reserved"
 [[mods]]
 modId="overweight_farming"
-version="1.18.1-1.0.1-forge"
+version="1.18.1-1.1.0-forge"
 displayName="Overweight Farming"
 authors="Binome"
 description='''

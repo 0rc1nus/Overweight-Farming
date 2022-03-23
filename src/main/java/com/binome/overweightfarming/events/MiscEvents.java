@@ -26,7 +26,7 @@ public class MiscEvents {
         BlockPos blockPos = event.getPos();
         BlockState state = event.getState();
         Random random = level.getRandom();
-        if (level instanceof ServerLevel world){
+        if (level instanceof ServerLevel world) {
             for (Block cropBlock : OvergrowthHandler.CROPS_TO_OVERGROWN.keySet()) {
                 if (state.is(cropBlock)) {
                     boolean flag = state.hasProperty(CropBlock.AGE) && state.getValue(CropBlock.AGE) < 7 && state.getValue(CropBlock.AGE) == 3;

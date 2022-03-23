@@ -21,8 +21,10 @@ public class OverweightFarming {
     public OverweightFarming() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::setup);
+
         OFBlocks.BLOCKS.register(modEventBus);
         OFItems.ITEMS.register(modEventBus);
+
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new MiscEvents());
         MinecraftForge.EVENT_BUS.register(new MobEvents());

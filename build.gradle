@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = "https://files.minecraftforge.net/maven" }
         maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
         mavenCentral()
     }
@@ -11,6 +12,7 @@ buildscript {
 }
 
 apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'maven-publish'
 apply plugin: "org.spongepowered.mixin"
 
 mixin {
@@ -18,7 +20,7 @@ mixin {
 }
 
 group = 'com'
-version = '1.18.1-1.0.1-forge'
+version = '1.18.1-1.1.0-forge'
 
 java {
     archivesBaseName = 'overweightfarming'
@@ -88,7 +90,9 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.1-39.1.2'
-    implementation fg.deobf("curse.maven:farmers-delight-398521:3615366")
+//    implementation fg.deobf("curse.maven:farmers-delight-398521:3615366")
+    implementation fg.deobf("curse.maven:jei-238222:3599262")
+    implementation fg.deobf("curse.maven:jade-324717:3681458")
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }
 
@@ -97,7 +101,7 @@ jar {
         attributes([
                 "Specification-Title"     : "OverweightFarming",
                 "Specification-Vendor"    : "Binome",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Specification-Version"   : "1",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "Binome",
@@ -108,3 +112,16 @@ jar {
 }
 
 jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "https://maven.minecraftforge.net"
+        }
+    }
+}
