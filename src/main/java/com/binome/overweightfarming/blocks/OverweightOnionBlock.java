@@ -2,18 +2,40 @@ package com.binome.overweightfarming.blocks;
 
 import com.binome.overweightfarming.init.OFObjects;
 import net.minecraft.block.*;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
 import java.util.Iterator;
+import java.util.Random;
 
 public class OverweightOnionBlock extends CropFullBlock {
 
     public OverweightOnionBlock(Block stemBlock, Settings settings) {
         super(stemBlock, settings);
     }
+
+    @Override
+    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+        return world.getBlockState(pos.up()).isAir() && world.getBlockState(pos.up(2)).isAir();
+    }
+
+    @Override
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        BlockPos above = pos.up();
+        BlockPos below = pos.down();
+        if (this.getStemBlock() != null && world.getBlockState(above).isAir() && world.getBlockState(pos.up(2)).isAir()) {
+            world.setBlockState(above, this.getStemBlock().getDefaultState(), 2);
+            TallPlantBlock.placeAt(world, this.getStemBlock().getDefaultState(), above, 2);
+        }
+        if (world.testBlockState(below, AbstractBlockState::isAir)) {
+            world.setBlockState(below, Blocks.HANGING_ROOTS.getDefaultState(), 2);
+        }
+    }
+
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
