@@ -16,8 +16,5 @@ public class OverweightFarmingClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),OFObjects.ALLIUM_BUSH, OFObjects.OVERWEIGHT_BEETROOT_STEM, OFObjects.OVERWEIGHT_CARROT_STEM, OFObjects.OVERWEIGHT_POTATO_STEM);
-        EntityModelLayerRegistry.registerModelLayer(StrawHatModel.LAYER_LOCATION, StrawHatModel::createBodyLayer);
-        ArmorRenderer.register(new StrawHatRenderer(new Identifier(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat.png"), null), OFObjects.STRAW_HAT);
-
     }
 }
