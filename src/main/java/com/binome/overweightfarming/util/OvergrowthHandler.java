@@ -9,9 +9,12 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.BlockTags;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
 import java.util.Random;
@@ -23,7 +26,14 @@ public class OvergrowthHandler {
         map.put(Blocks.POTATOES, OFObjects.OVERWEIGHT_POTATO);
         map.put(Blocks.COCOA, OFObjects.OVERWEIGHT_COCOA);
         map.put(Blocks.BEETROOTS, OFObjects.OVERWEIGHT_BEETROOT);
+        map.put(getCompatBlock("farmersdelight", "cabbages"), OFObjects.OVERWEIGHT_CABBAGE);
+        map.put(getCompatBlock("farmersdelight", "onions"), OFObjects.OVERWEIGHT_ONION);
     });
+
+    @Nullable
+    private static Block getCompatBlock(String modid, String name) {
+        return Registry.BLOCK.get(new Identifier(modid, name));
+    }
 
     public static void overweightGrowth(Random random, BlockState state, ServerWorld world, BlockPos blockPos , Block cropBlock) {
         growOverweightCrop(random, state, world, blockPos, cropBlock);
