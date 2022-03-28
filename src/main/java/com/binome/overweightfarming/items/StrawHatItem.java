@@ -1,20 +1,13 @@
 package com.binome.overweightfarming.items;
 
 
-import com.binome.overweightfarming.OverweightFarming;
-import com.binome.overweightfarming.client.model.StrawHatModel;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
 
 public class StrawHatItem extends ArmorItem {
     public static final StrawHatMaterial MATERIAL = new StrawHatMaterial();

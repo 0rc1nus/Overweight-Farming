@@ -36,10 +36,10 @@ public class CropFullBlock extends Block implements Fertilizable {
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         BlockPos above = pos.up();
         BlockPos below = pos.down();
-        if (world.testBlockState(above, AbstractBlock.AbstractBlockState::isAir)) {
+        if (world.testBlockState(above, AbstractBlockState::isAir)) {
             world.setBlockState(above, stemBlock.getDefaultState(), 2);
         }
-        if (world.testBlockState(below, AbstractBlock.AbstractBlockState::isAir)) {
+        if (world.testBlockState(below, AbstractBlockState::isAir)) {
             world.setBlockState(below, Blocks.HANGING_ROOTS.getDefaultState(), 2);
         }
     }
