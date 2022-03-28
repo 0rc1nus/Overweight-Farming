@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Random;
 
 public class CropFullBlock extends Block implements BonemealableBlock {
-    private final Block stemBlock;
+    public final Block stemBlock;
 
     public CropFullBlock(Block stemBlock, Properties properties) {
         super(properties);
@@ -41,12 +41,8 @@ public class CropFullBlock extends Block implements BonemealableBlock {
     public void performBonemeal(ServerLevel world, Random random, BlockPos blockPos, BlockState state) {
         BlockPos above = blockPos.above();
         BlockPos below = blockPos.below();
-        if (this.stemBlock != null && world.isStateAtPosition(above, BlockBehaviour.BlockStateBase::isAir)) {
-            if (this.stemBlock instanceof TallFlowerBlock) {
-                DoublePlantBlock.placeAt(world, stemBlock.defaultBlockState(), blockPos.above(), 2);
-            } else {
-                world.setBlock(above, stemBlock.defaultBlockState(), 2);
-            }
+        if (this.stemBlock != null && world.getBlockState(above).isAir()) {
+            world.setBlock(above, stemBlock.defaultBlockState(), 2);
         }
         if (world.isStateAtPosition(below, BlockBehaviour.BlockStateBase::isAir)) {
             world.setBlock(below, Blocks.HANGING_ROOTS.defaultBlockState(), 2);

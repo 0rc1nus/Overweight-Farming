@@ -1,7 +1,6 @@
 package com.binome.overweightfarming;
 
 import com.binome.overweightfarming.events.MiscEvents;
-import com.binome.overweightfarming.events.MobEvents;
 import com.binome.overweightfarming.init.OFBlocks;
 import com.binome.overweightfarming.init.OFItems;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,7 +26,6 @@ public class OverweightFarming {
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new MiscEvents());
-        MinecraftForge.EVENT_BUS.register(new MobEvents());
     }
 
     private void setup(final FMLCommonSetupEvent event) {
