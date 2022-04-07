@@ -46,7 +46,7 @@ public class StrawHatItem extends ArmorItem {
     }
 
     public static boolean isTrans(ItemStack stack) {
-        return getContents(stack).equals("Trans");
+        return getContents(stack).equals("Trans Rights");
     }
 
     @NotNull
