@@ -2,7 +2,9 @@ package com.binome.overweightfarming.events;
 
 import com.binome.overweightfarming.OverweightFarming;
 import com.binome.overweightfarming.init.OFItems;
+import com.binome.overweightfarming.util.OFItemsForEmeralds;
 import com.binome.overweightfarming.util.OvergrowthHandler;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -14,6 +16,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BeetrootBlock;
@@ -23,13 +27,27 @@ import net.minecraft.world.level.block.StemBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.List;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = OverweightFarming.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MobEvents {
+
+    @SubscribeEvent
+    public void onVillagerTradesInit(VillagerTradesEvent event) {
+        VillagerProfession profession = event.getType();
+        if (profession == VillagerProfession.FARMER) {
+            VillagerTrades.ItemListing hatTrade = new OFItemsForEmeralds(OFItems.STRAW_HAT.get(), 20, 1, 4);
+            Int2ObjectMap<List<VillagerTrades.ItemListing>> map = event.getTrades();
+            List<VillagerTrades.ItemListing> list = event.getTrades().get(5);
+            list.add(hatTrade);
+            map.put(5, list);
+        }
+    }
 
     @SubscribeEvent
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
