@@ -7,7 +7,6 @@ import com.binome.overweightfarming.init.OFItems;
 import com.binome.overweightfarming.items.StrawHatItem;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BundleItem;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
