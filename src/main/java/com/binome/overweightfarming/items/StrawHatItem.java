@@ -23,6 +23,7 @@ import java.util.function.Consumer;
 public class StrawHatItem extends ArmorItem {
     public static final StrawHatMaterial MATERIAL = new StrawHatMaterial();
     private static final ResourceLocation TEXTURE = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat.png");
+    private static final ResourceLocation STRAW_TEXTURE = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat_straw.png");
     private static final ResourceLocation TEXTURE_420 = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/420.png");
 
     public StrawHatItem(EquipmentSlot slot, Properties properties) {
@@ -32,11 +33,15 @@ public class StrawHatItem extends ArmorItem {
     @Nullable
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        return is420(stack) ? TEXTURE_420.toString() : TEXTURE.toString();
+        return is420(stack) ? TEXTURE_420.toString() : isStraw(stack) ? STRAW_TEXTURE.toString() : TEXTURE.toString();
     }
 
     public static boolean is420(ItemStack stack) {
         return stack.getHoverName().getContents().equals("420");
+    }
+
+    public static boolean isStraw(ItemStack stack) {
+        return stack.getHoverName().getContents().equals("Straw");
     }
 
     @Override
