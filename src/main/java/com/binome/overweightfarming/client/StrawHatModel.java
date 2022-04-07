@@ -28,8 +28,9 @@ public class StrawHatModel<T extends LivingEntity> extends HumanoidModel<T> {
         PartDefinition partdefinition = meshdefinition.getRoot();
 
         PartDefinition Head = partdefinition.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 16).mirror().addBox(-8.0F, -4.0F, -8.0F, 16.0F, 0.0F, 16.0F, new CubeDeformation(0.0F)).mirror(false)
-                .texOffs(0, -10).addBox(0.0F, -1.0F, 4.0F, 0.0F, 5.0F, 10.0F, new CubeDeformation(0.0F))
                 .texOffs(16, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.25F)), PartPose.offset(0.0F, -1.0F, 0.0F));
+
+        PartDefinition straw_r1 = Head.addOrReplaceChild("straw_r1", CubeListBuilder.create().texOffs(0, -10).addBox(0.0F, -26.0F, 4.0F, 0.0F, 5.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 25.0F, 0.0F, -3.1416F, 0.0F, 3.1416F));
 
         return LayerDefinition.create(meshdefinition, 48, 48);
     }

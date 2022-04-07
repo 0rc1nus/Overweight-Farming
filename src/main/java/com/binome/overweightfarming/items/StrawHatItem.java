@@ -16,6 +16,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.IItemRenderProperties;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -23,6 +24,7 @@ import java.util.function.Consumer;
 public class StrawHatItem extends ArmorItem {
     public static final StrawHatMaterial MATERIAL = new StrawHatMaterial();
     private static final ResourceLocation TEXTURE = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat.png");
+    private static final ResourceLocation TRANS_TEXTURE = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/trans_rights.png");
     private static final ResourceLocation STRAW_TEXTURE = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat_straw.png");
     private static final ResourceLocation TEXTURE_420 = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/420.png");
 
@@ -33,15 +35,24 @@ public class StrawHatItem extends ArmorItem {
     @Nullable
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        return is420(stack) ? TEXTURE_420.toString() : isStraw(stack) ? STRAW_TEXTURE.toString() : TEXTURE.toString();
+        return is420(stack) ? TEXTURE_420.toString() : isStraw(stack) ? STRAW_TEXTURE.toString() : isTrans(stack) ? TRANS_TEXTURE.toString() : TEXTURE.toString();
     }
 
     public static boolean is420(ItemStack stack) {
-        return stack.getHoverName().getContents().equals("420");
+        return getContents(stack).equals("420");
     }
 
     public static boolean isStraw(ItemStack stack) {
-        return stack.getHoverName().getContents().equals("Straw");
+        return getContents(stack).equals("Straw");
+    }
+
+    public static boolean isTrans(ItemStack stack) {
+        return getContents(stack).equals("Trans");
+    }
+
+    @NotNull
+    private static String getContents(ItemStack stack) {
+        return stack.getHoverName().getContents();
     }
 
     @Override
