@@ -42,15 +42,6 @@ public class OverweightFarming {
     private void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> ItemProperties.register(OFItems.STRAW_HAT.get(),
                 new ResourceLocation(OverweightFarming.MODID, "420"), (stack, world, entity, p_174628_) -> {
-            /*if (entity != null) {
-                if (StrawHatItem.is420(stack)) {
-                    return 1.0F;
-                } else {
-                    return 0.0F;
-                }
-            } else {
-                return 0.0F;
-            }*/
                     return entity != null && StrawHatItem.is420(stack) ? 1.0F : 0.0F;
                 })
         );
