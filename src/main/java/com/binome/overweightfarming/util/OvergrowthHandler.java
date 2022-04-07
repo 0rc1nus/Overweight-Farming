@@ -35,7 +35,7 @@ public class OvergrowthHandler {
         return ForgeRegistries.BLOCKS.getValue(new ResourceLocation(modid, name));
     }
 
-    public static void overweightGrowth(Random random, BlockState state, ServerLevel world, BlockPos blockPos , Block cropBlock) {
+    public static void overweightGrowth(Random random, BlockState state, ServerLevel world, BlockPos blockPos, Block cropBlock) {
         growOverweightCrop(random, state, world, blockPos, cropBlock);
     }
 
