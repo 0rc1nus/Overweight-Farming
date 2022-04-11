@@ -11,16 +11,17 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
+    maven {
+        name = "cloth config"
+        url = "https://maven.shedaniel.me/"
+    }
     /*
     maven {
         name = "Farmers Delight, Bewitchment"
         url = "https://www.cursemaven.com"
     }
 
-    maven {
-        name = "cloth config"
-        url = "https://maven.shedaniel.me/"
-    }
+
     maven {
         name = "patchouli"
         url = "https://maven.blamejared.com"
@@ -51,6 +52,10 @@ repositories {
     }
 
      */
+    maven {
+        name = "Mod Menu"
+        url =  "https://maven.terraformersmc.com/releases"
+    }
 }
 
 dependencies {
@@ -58,6 +63,11 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     /*
     modImplementation "curse.maven:farmers-delight-482834:${project.farmers_delight_version}"
 
@@ -71,9 +81,7 @@ dependencies {
     include "io.github.ladysnake:PlayerAbilityLib:${pal_version}"
     modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
+
     modImplementation("com.github.virtuoel:pehkui:${project.pehkui_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }

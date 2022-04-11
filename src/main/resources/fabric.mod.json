@@ -19,6 +19,9 @@
     ],
     "client": [
       "com.binome.overweightfarming.OverweightFarmingClient"
+    ],
+    "modmenu": [
+      "com.binome.overweightfarming.client.compat.OFModMenu"
     ]
   },
   "mixins": [

@@ -2,6 +2,8 @@ package com.binome.overweightfarming;
 
 import com.binome.overweightfarming.init.OFObjects;
 import com.binome.overweightfarming.util.EmeraldToItemOffer;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.item.ItemStack;
@@ -13,9 +15,12 @@ public class OverweightFarming implements ModInitializer {
 
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "overweight_farming";
+    public static OFConfig config;
 
     @Override
     public void onInitialize() {
+        AutoConfig.register(OFConfig.class, GsonConfigSerializer::new);
+        config = AutoConfig.getConfigHolder(OFConfig.class).getConfig();
         OFObjects.init();
 
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 5, factories -> {

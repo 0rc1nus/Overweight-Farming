@@ -1,5 +1,6 @@
 package com.binome.overweightfarming.util;
 
+import com.binome.overweightfarming.OverweightFarming;
 import
 com.binome.overweightfarming.blocks.CropFullBlock;
 import com.binome.overweightfarming.init.OFObjects;
@@ -21,15 +22,33 @@ public class OvergrowthHandler {
 
     //TODO: Remove this, convert this to datagen
     public static final LinkedHashMap<Block, Block> CROPS_TO_OVERGROWN = Util.make(Maps.newLinkedHashMap(), map -> {
-        map.put(Blocks.CARROTS, OFObjects.OVERWEIGHT_CARROT);
-        map.put(Blocks.POTATOES, OFObjects.OVERWEIGHT_POTATO);
-        map.put(Blocks.COCOA, OFObjects.OVERWEIGHT_COCOA);
-        map.put(Blocks.BEETROOTS, OFObjects.OVERWEIGHT_BEETROOT);
-        map.put(getCompatBlock("farmersdelight", "cabbages"), OFObjects.OVERWEIGHT_CABBAGE);
-        map.put(getCompatBlock("farmersdelight", "onions"), OFObjects.OVERWEIGHT_ONION);
-        map.put(getCompatBlock("bewitchment", "mandrake"), OFObjects.OVERWEIGHT_MANDRAKE);
-        map.put(getCompatBlock("bewitchment", "garlic"), OFObjects.OVERWEIGHT_GARLIC);
-        map.put(getCompatBlock("bwplus", "bloodroot"), OFObjects.OVERWEIGHT_BLOODROOT);
+        if(OverweightFarming.config.crops.allowOverweightCarrot){
+            map.put(Blocks.CARROTS, OFObjects.OVERWEIGHT_CARROT);
+        }
+        if(OverweightFarming.config.crops.allowOverweightPotato){
+            map.put(Blocks.POTATOES, OFObjects.OVERWEIGHT_POTATO);
+        }
+        if(OverweightFarming.config.crops.allowOverweightCocoa){
+            map.put(Blocks.COCOA, OFObjects.OVERWEIGHT_COCOA);
+        }
+        if(OverweightFarming.config.crops.allowOverweightBeetroot) {
+            map.put(Blocks.BEETROOTS, OFObjects.OVERWEIGHT_BEETROOT);
+        }
+        if(OverweightFarming.config.compatCrops.allowOverweightCabbage){
+            map.put(getCompatBlock("farmersdelight", "cabbages"), OFObjects.OVERWEIGHT_CABBAGE);
+        }
+        if(OverweightFarming.config.compatCrops.allowOverweightOnion){
+            map.put(getCompatBlock("farmersdelight", "onions"), OFObjects.OVERWEIGHT_ONION);
+        }
+        if(OverweightFarming.config.compatCrops.allowOverweightMandrake){
+            map.put(getCompatBlock("bewitchment", "mandrake"), OFObjects.OVERWEIGHT_MANDRAKE);
+        }
+        if(OverweightFarming.config.compatCrops.allowOverweightGarlic){
+            map.put(getCompatBlock("bewitchment", "garlic"), OFObjects.OVERWEIGHT_GARLIC);
+        }
+        if(OverweightFarming.config.compatCrops.allowOverweightBloodroot){
+            map.put(getCompatBlock("bwplus", "bloodroot"), OFObjects.OVERWEIGHT_BLOODROOT);
+        }
     });
 
     @Nullable
