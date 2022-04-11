@@ -3,7 +3,7 @@
     {
       "condition": "fabric:all_mods_loaded",
       "values": [
-        "farmersdelight"
+        "bewitchment"
       ]
     }
   ],
@@ -41,7 +41,7 @@
                       "add": false
                     }
                   ],
-                  "name": "farmersdelight:onion"
+                  "name": "bewitchment:mandrake_root"
                 },
                 {
                   "type": "minecraft:item",
@@ -55,7 +55,7 @@
                       "function": "minecraft:explosion_decay"
                     }
                   ],
-                  "name": "overweight_farming:overweight_onion_block"
+                  "name": "overweight_farming:overweight_mandrake_block"
                 }
               ]
             }

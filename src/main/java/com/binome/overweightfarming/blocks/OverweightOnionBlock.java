@@ -39,7 +39,7 @@ public class OverweightOnionBlock extends CropFullBlock {
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        Iterator var4 = Direction.Type.HORIZONTAL.iterator();
+        Iterator<Direction> var4 = Direction.Type.HORIZONTAL.iterator();
         Direction direction;
         Material material;
         do {
@@ -47,7 +47,7 @@ public class OverweightOnionBlock extends CropFullBlock {
                 BlockState blockState2 = world.getBlockState(pos.down());
                 return (blockState2.isOf(OFObjects.ALLIUM_BUSH) && !world.getBlockState(pos.up()).getMaterial().isLiquid());
             }
-            direction = (Direction)var4.next();
+            direction = var4.next();
             BlockState blockState = world.getBlockState(pos.offset(direction));
             material = blockState.getMaterial();
         } while(!material.isSolid() && !world.getFluidState(pos.offset(direction)).isIn(FluidTags.LAVA));

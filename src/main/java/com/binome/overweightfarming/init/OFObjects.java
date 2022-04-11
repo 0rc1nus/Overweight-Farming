@@ -4,6 +4,8 @@ import com.binome.overweightfarming.OverweightFarming;
 import com.binome.overweightfarming.blocks.CropFullBlock;
 import com.binome.overweightfarming.blocks.CropStemBlock;
 import com.binome.overweightfarming.blocks.OverweightOnionBlock;
+import com.binome.overweightfarming.items.StrawHatItem;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
@@ -23,6 +25,8 @@ public class OFObjects {
     private static final Map<Block, Identifier> BLOCKS = new LinkedHashMap<>();
     private static final Map<Item, Identifier> ITEMS = new LinkedHashMap<>();
 
+    public static final Item STRAW_HAT = register("straw_hat", new StrawHatItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));
+
     public static final Block OVERWEIGHT_BEETROOT_STEM = register("overweight_beetroot_stem", new CropStemBlock(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly().noCollision()),false, gen());
     public static final Block OVERWEIGHT_CARROT_STEM = register("overweight_carrot_stem", new CropStemBlock(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly().noCollision()),false, gen());
     public static final Block OVERWEIGHT_POTATO_STEM = register("overweight_potato_stem", new CropStemBlock(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly().noCollision()),false, gen());
@@ -35,6 +39,16 @@ public class OFObjects {
 
     public static final Block OVERWEIGHT_ONION = register("overweight_onion_block", new OverweightOnionBlock(ALLIUM_BUSH, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), FabricLoader.getInstance().isModLoaded("farmersdelight"), gen());
     public static final Block OVERWEIGHT_CABBAGE = register("overweight_cabbage_block", new CropFullBlock(null, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),FabricLoader.getInstance().isModLoaded("farmersdelight"), gen());
+
+
+    public static final Block OVERWEIGHT_MANDRAKE_STEM = register("overweight_mandrake_stem", new CropStemBlock(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly().noCollision()),false, gen());
+    public static final Block OVERWEIGHT_GARLIC_STEM = register("overweight_garlic_stem", new CropStemBlock(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly().noCollision()),false, gen());
+    public static final Block OVERWEIGHT_BLOODROOT_STEM = register("overweight_bloodroot_stem", new CropStemBlock(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly().noCollision()),false, gen());
+
+    public static final Block OVERWEIGHT_MANDRAKE = register("overweight_mandrake_block", new CropFullBlock(OVERWEIGHT_MANDRAKE_STEM, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),FabricLoader.getInstance().isModLoaded("bewitchment"), gen());
+    public static final Block OVERWEIGHT_GARLIC = register("overweight_garlic_block", new CropFullBlock(OVERWEIGHT_GARLIC_STEM, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),FabricLoader.getInstance().isModLoaded("bewitchment"), gen());
+    public static final Block OVERWEIGHT_BLOODROOT = register("overweight_bloodroot_block", new CropFullBlock(OVERWEIGHT_BLOODROOT_STEM, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),FabricLoader.getInstance().isModLoaded("bwplus"), gen());
+
 
     private static Item.Settings gen() {
         return new Item.Settings().group(ItemGroup.FOOD);

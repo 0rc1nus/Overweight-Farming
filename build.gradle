@@ -11,10 +11,46 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
+    /*
     maven {
-        name = "Farmers Delight"
+        name = "Farmers Delight, Bewitchment"
         url = "https://www.cursemaven.com"
     }
+
+    maven {
+        name = "cloth config"
+        url = "https://maven.shedaniel.me/"
+    }
+    maven {
+        name = "patchouli"
+        url = "https://maven.blamejared.com"
+    }
+    maven {
+        name = 'Ladysnake Mods'
+        url = 'https://ladysnake.jfrog.io/artifactory/mods'
+    }
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+
+    maven {
+        url = "https://jitpack.io"
+    }
+    maven {
+        name "impersonate"
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+    maven {
+        name = "wood api"
+        url = "https://maven.terraformersmc.com/"
+    }
+    maven {
+        name = "reach"
+        url = "https://maven.jamieswhiteshirt.com/libs-release"
+    }
+
+     */
 }
 
 dependencies {
@@ -22,7 +58,28 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    //modImplementation "curse.maven:farmers-delight-482834:${project.farmers_delight_version}"
+    /*
+    modImplementation "curse.maven:farmers-delight-482834:${project.farmers_delight_version}"
+
+    modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
+    include "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
+    modImplementation "com.jamieswhiteshirt:reach-entity-attributes:${project.reach_version}"
+    include "com.jamieswhiteshirt:reach-entity-attributes:${project.reach_version}"
+    modImplementation "io.github.ladysnake:PlayerAbilityLib:${pal_version}"
+    modImplementation "com.github.emilyploszaj:step-height-entity-attribute:${step_height_version}"
+    modImplementation "io.github.ladysnake:PlayerAbilityLib:${pal_version}"
+    include "io.github.ladysnake:PlayerAbilityLib:${pal_version}"
+    modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
+    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+    modImplementation("com.github.virtuoel:pehkui:${project.pehkui_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+    modImplementation "curse.maven:bewitchment-394915:${project.bewitchment_version}"
+
+     */
 }
 
 processResources {

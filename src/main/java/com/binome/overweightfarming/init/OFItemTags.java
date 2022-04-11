@@ -9,6 +9,4 @@ import net.minecraft.util.registry.Registry;
 
 public class OFItemTags {
     public static final TagKey<Item> OVERWEIGHT_HARVESTABLES = TagKey.of(Registry.ITEM_KEY, new Identifier(OverweightFarming.MODID, "overweight_harvestables"));
-    public static final TagKey<Item> POUCH_SEED_ITEMS = TagKey.of(Registry.ITEM_KEY, new Identifier(OverweightFarming.MODID, "pouch_seed_items"));
-
 }

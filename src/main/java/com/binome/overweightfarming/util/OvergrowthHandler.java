@@ -27,6 +27,9 @@ public class OvergrowthHandler {
         map.put(Blocks.BEETROOTS, OFObjects.OVERWEIGHT_BEETROOT);
         map.put(getCompatBlock("farmersdelight", "cabbages"), OFObjects.OVERWEIGHT_CABBAGE);
         map.put(getCompatBlock("farmersdelight", "onions"), OFObjects.OVERWEIGHT_ONION);
+        map.put(getCompatBlock("bewitchment", "mandrake"), OFObjects.OVERWEIGHT_MANDRAKE);
+        map.put(getCompatBlock("bewitchment", "garlic"), OFObjects.OVERWEIGHT_GARLIC);
+        map.put(getCompatBlock("bwplus", "bloodroot"), OFObjects.OVERWEIGHT_BLOODROOT);
     });
 
     @Nullable
@@ -39,8 +42,8 @@ public class OvergrowthHandler {
     }
 
     public static void growOverweightCrop(Random random, BlockState state, ServerWorld world, BlockPos blockPos, Block cropBlock) {
-        if (state.isOf(Blocks.CARROTS)) {
-            growCarrotStem(world, blockPos, random);
+        if (state.isOf(Blocks.CARROTS) || state.isOf(getCompatBlock("bewitchment", "mandrake"))) {
+            growDoubleStem(world, blockPos, random, state);
         } else if (state.isOf(Blocks.COCOA)) {
             world.setBlockState(blockPos, OFObjects.OVERWEIGHT_COCOA.getDefaultState(), 2);
         } else {
@@ -53,23 +56,24 @@ public class OvergrowthHandler {
         setBlock(world, blockPos.up(), CROPS_TO_OVERGROWN1);
     }
 
-    public static void growCarrotStem(ServerWorld world, BlockPos blockPos, Random random) {
+    public static void growDoubleStem(ServerWorld world, BlockPos blockPos, Random random, BlockState blockState) {
         int height = random.nextBoolean() && random.nextInt(5) == 0 ? random.nextBoolean() && random.nextInt(10) == 0 ? 4 : 3 : 2;
         BlockPos startPos = blockPos.up();
         BlockPos.Mutable mutableBlockPos = startPos.mutableCopy();
         for (int i = 0; i < height; i++) {
-            BlockState placeState = OFObjects.OVERWEIGHT_CARROT.getDefaultState();
-            if (i == 0)
-                placeState = OFObjects.OVERWEIGHT_CARROT_STEM.getDefaultState();
+            BlockState placeState = blockState.isOf(Blocks.CARROTS) ? OFObjects.OVERWEIGHT_CARROT.getDefaultState() : OFObjects.OVERWEIGHT_MANDRAKE.getDefaultState();
+            if (i == 0){
+                placeState = blockState.isOf(Blocks.CARROTS) ? OFObjects.OVERWEIGHT_CARROT_STEM.getDefaultState() : OFObjects.OVERWEIGHT_MANDRAKE_STEM.getDefaultState();
+            }
             setBlock(world, mutableBlockPos, placeState);
             mutableBlockPos.move(Direction.DOWN);
         }
     }
 
-    private static void setBlock(ServerWorld world, BlockPos blockPos, BlockState OVERWEIGHT_CARROT_STEM) {
+    private static void setBlock(ServerWorld world, BlockPos blockPos, BlockState blockState) {
         for (Block cropBlock : CROPS_TO_OVERGROWN.keySet()) {
             if (world.getBlockState(blockPos).isAir() || world.getBlockState(blockPos).getBlock() == cropBlock || world.getBlockState(blockPos).isOf(Blocks.FARMLAND) || world.getBlockState(blockPos).isOf(Blocks.DIRT)) {
-                world.setBlockState(blockPos, OVERWEIGHT_CARROT_STEM, 2);
+                world.setBlockState(blockPos, blockState, 2);
             }
         }
     }

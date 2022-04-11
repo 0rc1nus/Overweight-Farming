@@ -1,5 +1,6 @@
 package com.binome.overweightfarming.client.renderer;
 
+import com.binome.overweightfarming.OverweightFarming;
 import com.binome.overweightfarming.client.model.StrawHatModel;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.minecraft.client.MinecraftClient;
@@ -15,13 +16,16 @@ import org.jetbrains.annotations.Nullable;
 
 public class StrawHatRenderer implements ArmorRenderer {
     private static StrawHatModel<LivingEntity> armorModel;
-    private final Identifier texture;
+    private static final Identifier TEXTURE = new Identifier(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat.png");
+    private static final Identifier TRANS_TEXTURE = new Identifier(OverweightFarming.MODID, "textures/entity/straw_hat/trans_rights.png");
+    private static final Identifier STRAW_TEXTURE = new Identifier(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat_straw.png");
+    private static final Identifier TEXTURE_420 = new Identifier(OverweightFarming.MODID, "textures/entity/straw_hat/420.png");
     private final Item hatItem;
 
-    public StrawHatRenderer(Identifier texture, @Nullable Item hatItem) {
-        this.texture = texture;
+    public StrawHatRenderer(@Nullable Item hatItem) {
         this.hatItem = hatItem;
     }
+
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int light, BipedEntityModel<LivingEntity> contextModel) {
         if (armorModel == null) {
@@ -30,7 +34,23 @@ public class StrawHatRenderer implements ArmorRenderer {
             contextModel.setAttributes(armorModel);
             armorModel.setVisible(false);
             armorModel.head.visible = slot == EquipmentSlot.HEAD;
-            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, armorModel, texture);
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, armorModel, is420(stack) ? TEXTURE_420 : isStraw(stack) ? STRAW_TEXTURE : isTrans(stack) ? TRANS_TEXTURE : TEXTURE);
         }
+    }
+
+    public static boolean is420(ItemStack stack) {
+        return getContents(stack).equals("420");
+    }
+
+    public static boolean isStraw(ItemStack stack) {
+        return getContents(stack).equals("Straw");
+    }
+
+    public static boolean isTrans(ItemStack stack) {
+        return getContents(stack).equals("Trans Rights");
+    }
+
+    private static String getContents(ItemStack stack) {
+        return stack.getName().getString();
     }
 }
