@@ -20,7 +20,7 @@ mixin {
 }
 
 group = 'com'
-version = '1.18.2-1.2.0-forge'
+version = '1.18.2-1.2.1-forge'
 
 java {
     archivesBaseName = 'overweightfarming'
