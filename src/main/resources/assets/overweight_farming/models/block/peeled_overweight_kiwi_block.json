@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "overweight_farming:block/peeled_overweight_kiwi"
+  }
+}

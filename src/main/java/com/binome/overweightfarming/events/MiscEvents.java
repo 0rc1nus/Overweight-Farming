@@ -1,15 +1,33 @@
 package com.binome.overweightfarming.events;
 
 import com.binome.overweightfarming.OverweightFarming;
+import com.binome.overweightfarming.init.OFBlocks;
+import com.binome.overweightfarming.init.OFItems;
 import com.binome.overweightfarming.util.OvergrowthHandler;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CocoaBlock;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,6 +37,34 @@ import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = OverweightFarming.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MiscEvents {
+
+    @SubscribeEvent
+    public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        ItemStack stack = event.getItemStack();
+        Level world = event.getWorld();
+        BlockPos blockPos = event.getPos();
+        BlockState state = world.getBlockState(blockPos);
+        Player player = event.getPlayer();
+        InteractionHand hand = event.getHand();
+        if (stack.getItem() instanceof AxeItem) {
+            Util.make(ImmutableMap.<Block, Block>builder(), map -> {
+                map.put(OFBlocks.OVERWEIGHT_BEETROOT.get(), OFBlocks.PEELED_OVERWEIGHT_BEETROOT.get());
+                map.put(OFBlocks.OVERWEIGHT_CARROT.get(), OFBlocks.PEELED_OVERWEIGHT_CARROT.get());
+                map.put(OFBlocks.OVERWEIGHT_POTATO.get(), OFBlocks.PEELED_OVERWEIGHT_POTATO.get());
+                map.put(OFBlocks.OVERWEIGHT_ONION.get(), OFBlocks.PEELED_OVERWEIGHT_ONION.get());
+                map.put(OFBlocks.OVERWEIGHT_KIWI.get(), OFBlocks.PEELED_OVERWEIGHT_KIWI.get());
+                map.put(Blocks.MELON, OFBlocks.SEEDED_PEELED_MELON.get());
+            }).build().forEach((unstripped, stripped) -> {
+                if (state.getBlock() == unstripped) {
+                    stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                    world.playSound(null, blockPos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    Block.popResource(world, blockPos, new ItemStack(OFItems.VEGETABLE_PEELS.get()));
+                    world.setBlockAndUpdate(blockPos, stripped.defaultBlockState());
+                    player.swing(hand);
+                }
+            });
+        }
+    }
 
     @SubscribeEvent
     public void onCropsGrow(BlockEvent.CropGrowEvent.Pre event) {

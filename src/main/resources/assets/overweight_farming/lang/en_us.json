@@ -10,5 +10,17 @@
   "block.overweight_farming.allium_bush": "Allium Bush",
   "block.overweight_farming.overweight_onion_block": "Overweight Onion Block",
   "block.overweight_farming.overweight_cabbage_block": "Overweight Cabbage Block",
-  "item.overweight_farming.straw_hat": "Straw hat"
+  "block.overweight_farming.overweight_kiwi_block": "Overweight Kiwi Block",
+  "block.overweight_farming.overweight_poisonous_potato_block": "Overweight Poisonous Potato Block",
+  "block.overweight_farming.overweight_baked_potato_block": "Overweight Baked Potato Block",
+  "block.overweight_farming.peeled_overweight_carrot_block": "Peeled Overweight Carrot Block",
+  "block.overweight_farming.peeled_overweight_potato_block": "Peeled Overweight Potato Block",
+  "block.overweight_farming.peeled_overweight_beetroot_block": "Peeled Overweight Beetroot Block",
+  "block.overweight_farming.seedless_peeled_melon": "Seedless Peeled Melon",
+  "block.overweight_farming.half_seeded_peeled_melon": "Half Seeded Peeled Melon",
+  "block.overweight_farming.seeded_peeled_melon": "Seeded Peeled Melon",
+  "block.overweight_farming.vegetable_compost": "Vegetable Compost Block",
+  "item.overweight_farming.straw_hat": "Straw hat",
+  "item.overweight_farming.melon_juice": "Melon Juice",
+  "item.overweight_farming.vegetable_peels": "Vegetable Peels"
 }
