@@ -20,7 +20,7 @@ mixin {
 }
 
 group = 'com'
-version = "${project.minecraft_version}-${project.mod_version}"
+version = "${project.minecraft_version}-${project.mod_version}-forge"
 
 java {
     archivesBaseName = 'overweightfarming'
