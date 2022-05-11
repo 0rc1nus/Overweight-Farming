@@ -4,6 +4,7 @@ import com.binome.overweightfarming.events.MiscEvents;
 import com.binome.overweightfarming.events.MobEvents;
 import com.binome.overweightfarming.init.OFBlocks;
 import com.binome.overweightfarming.init.OFItems;
+import com.binome.overweightfarming.init.OFParticleTypes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -24,6 +25,7 @@ public class OverweightFarming {
 
         OFBlocks.BLOCKS.register(modEventBus);
         OFItems.ITEMS.register(modEventBus);
+        OFParticleTypes.PARTICLE_TYPES.register(modEventBus);
 
         IEventBus eventBus = MinecraftForge.EVENT_BUS;
         eventBus.register(this);

@@ -1,7 +1,7 @@
 package com.binome.overweightfarming.items;
 
 import com.binome.overweightfarming.OverweightFarming;
-import com.binome.overweightfarming.client.StrawHatModel;
+import com.binome.overweightfarming.client.models.StrawHatModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;

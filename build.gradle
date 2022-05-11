@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: "${project.forgegradle_version}", changing: true
         classpath group: "org.spongepowered", name: "mixingradle", version: "0.7-SNAPSHOT"
     }
 }
@@ -20,7 +20,7 @@ mixin {
 }
 
 group = 'com'
-version = '1.18.2-1.2.1-forge'
+version = "${project.minecraft_version}-${project.mod_version}"
 
 java {
     archivesBaseName = 'overweightfarming'
@@ -89,7 +89,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.0.2'
+    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 //    implementation fg.deobf("curse.maven:farmers-delight-398521:3615366")
     implementation fg.deobf("curse.maven:jei-238222:3670531")
     implementation fg.deobf("curse.maven:jade-324717:3671210")

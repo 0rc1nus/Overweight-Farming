@@ -2,9 +2,9 @@ package com.binome.overweightfarming.blocks;
 
 import com.binome.overweightfarming.init.OFBlocks;
 import com.binome.overweightfarming.init.OFItems;
+import com.binome.overweightfarming.init.OFParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -65,7 +65,7 @@ public class PeeledMelonBlock extends Block {
     }
 
     private void spawnFluidParticle(Level world, double minX, double maxX, double minZ, double maxZ, double y) {
-        world.addParticle(ParticleTypes.DRIPPING_HONEY, Mth.lerp(world.random.nextDouble(), minX, maxX), y, Mth.lerp(world.random.nextDouble(), minZ, maxZ), 0.0D, 0.0D, 0.0D);
+        world.addParticle(OFParticleTypes.DRIPPING_MELON.get(), Mth.lerp(world.random.nextDouble(), minX, maxX), y, Mth.lerp(world.random.nextDouble(), minZ, maxZ), 0.0D, 0.0D, 0.0D);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class PeeledMelonBlock extends Block {
             if (stack.isEmpty()) {
                 player.setItemInHand(hand, new ItemStack(OFItems.MELON_JUICE.get()));
             } else if (!player.getInventory().add(new ItemStack(OFItems.MELON_JUICE.get()))) {
-                player.drop(new ItemStack(Items.HONEY_BOTTLE), false);
+                player.drop(new ItemStack(OFItems.MELON_JUICE.get()), false);
             }
             world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
             if (!world.isClientSide()) {
