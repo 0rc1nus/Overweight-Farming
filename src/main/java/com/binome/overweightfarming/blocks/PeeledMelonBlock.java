@@ -18,6 +18,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -84,6 +85,7 @@ public class PeeledMelonBlock extends Block {
             } else if (!player.getInventory().add(new ItemStack(OFItems.MELON_JUICE.get()))) {
                 player.drop(new ItemStack(OFItems.MELON_JUICE.get()), false);
             }
+            world.gameEvent(player, GameEvent.FLUID_PICKUP, pos);
             world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
             if (!world.isClientSide()) {
                 if (world.getRandom().nextInt(7) == 0) {

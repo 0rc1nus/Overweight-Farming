@@ -11,22 +11,33 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.StemBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -46,6 +57,48 @@ public class MobEvents {
             List<VillagerTrades.ItemListing> list = event.getTrades().get(5);
             list.add(hatTrade);
             map.put(5, list);
+        }
+    }
+
+    @SubscribeEvent
+    public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
+        Entity entity = event.getTarget();
+        Player player = event.getPlayer();
+        InteractionHand hand = event.getHand();
+        ItemStack stack = player.getItemInHand(hand);
+        if (entity instanceof Pig pig) {
+            if (stack.getItem() == OFItems.VEGETABLE_PEELS.get()) {
+                int i = pig.getAge();
+                if (!pig.level.isClientSide && i == 0 && pig.canFallInLove()) {
+                    event.setCanceled(true);
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(1);
+                    }
+                    pig.setInLove(player);
+                    pig.gameEvent(GameEvent.MOB_INTERACT, pig.eyeBlockPosition());
+                    event.setCancellationResult(InteractionResult.SUCCESS);
+                }
+
+                if (pig.isBaby()) {
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(1);
+                    }
+                    pig.ageUp((int)((float)(-i / 20) * 0.1F), true);
+                    pig.gameEvent(GameEvent.MOB_INTERACT, pig.eyeBlockPosition());
+                    player.swing(hand);
+                }
+
+                if (pig.level.isClientSide) {
+                    event.setCancellationResult(InteractionResult.CONSUME);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onEntityJoinWorld(EntityJoinWorldEvent event) {
+        if (event.getEntity() instanceof Pig pig) {
+            pig.goalSelector.addGoal(4, new TemptGoal(pig, 1.2D, Ingredient.of(OFItems.VEGETABLE_PEELS.get()), false));
         }
     }
 

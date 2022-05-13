@@ -10,11 +10,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
+import java.util.Objects;
 import java.util.Random;
 
 public class OvergrowthHandler {
@@ -47,6 +49,11 @@ public class OvergrowthHandler {
             Block stemBlock = ((CropFullBlock) OvergrowthHandler.CROPS_TO_OVERGROWN.get(cropBlock)).getStemBlock();
             Block block = random.nextInt(5) == 0 ? OFBlocks.OVERWEIGHT_POISONOUS_POTATO.get() : OFBlocks.OVERWEIGHT_POTATO.get();
             simpleOverweightGrowth(world, blockPos, block.defaultBlockState(), stemBlock.defaultBlockState());
+        } else if (state.is(Objects.requireNonNull(getCompatBlock("farmersdelight", "onions")))) {
+            setBlock(world, blockPos, OFBlocks.OVERWEIGHT_GINGER.get().defaultBlockState());
+            if (world.isEmptyBlock(blockPos.above()) && world.isEmptyBlock(blockPos.above(2))) {
+                DoublePlantBlock.placeAt(world, OFBlocks.ALLIUM_BUSH.get().defaultBlockState(), blockPos.above(), 2);
+            }
         }
         else {
             Block stemBlock = ((CropFullBlock) OvergrowthHandler.CROPS_TO_OVERGROWN.get(cropBlock)).getStemBlock();

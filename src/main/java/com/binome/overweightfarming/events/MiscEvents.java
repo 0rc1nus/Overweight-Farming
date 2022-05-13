@@ -4,15 +4,21 @@ import com.binome.overweightfarming.OverweightFarming;
 import com.binome.overweightfarming.init.OFBlocks;
 import com.binome.overweightfarming.init.OFItems;
 import com.binome.overweightfarming.util.OvergrowthHandler;
+import com.google.common.base.Suppliers;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import net.minecraft.Util;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -34,9 +40,16 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = OverweightFarming.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MiscEvents {
+    public static final Supplier<BiMap<Block, Block>> WAXABLES = Suppliers.memoize(() -> ImmutableBiMap.<Block, Block>builder()
+            .put(OFBlocks.SEEDED_PEELED_MELON.get(), OFBlocks.WAXED_SEEDED_PEELED_MELON.get())
+            .put(OFBlocks.HALF_SEEDED_PEELED_MELON.get(), OFBlocks.WAXED_HALF_SEEDED_PEELED_MELON.get())
+            .put(OFBlocks.SEEDLESS_PEELED_MELON.get(), OFBlocks.WAXED_SEEDLESS_PEELED_MELON.get())
+            .build());
+    public static final Supplier<BiMap<Block, Block>> WAX_OFF_BY_BLOCK = Suppliers.memoize(() -> WAXABLES.get().inverse());
 
     @SubscribeEvent
     public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
@@ -47,22 +60,33 @@ public class MiscEvents {
         Player player = event.getPlayer();
         InteractionHand hand = event.getHand();
         if (stack.getItem() instanceof AxeItem) {
-            Util.make(ImmutableMap.<Block, Block>builder(), map -> {
-                map.put(OFBlocks.OVERWEIGHT_BEETROOT.get(), OFBlocks.PEELED_OVERWEIGHT_BEETROOT.get());
-                map.put(OFBlocks.OVERWEIGHT_CARROT.get(), OFBlocks.PEELED_OVERWEIGHT_CARROT.get());
-                map.put(OFBlocks.OVERWEIGHT_POTATO.get(), OFBlocks.PEELED_OVERWEIGHT_POTATO.get());
-                map.put(OFBlocks.OVERWEIGHT_ONION.get(), OFBlocks.PEELED_OVERWEIGHT_ONION.get());
-                map.put(OFBlocks.OVERWEIGHT_KIWI.get(), OFBlocks.PEELED_OVERWEIGHT_KIWI.get());
-                map.put(Blocks.MELON, OFBlocks.SEEDED_PEELED_MELON.get());
-            }).build().forEach((unstripped, stripped) -> {
-                if (state.getBlock() == unstripped) {
+            for (Block block : WAX_OFF_BY_BLOCK.get().keySet()) {
+                if (state.is(block)) {
+                    if (player instanceof ServerPlayer) {
+                        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockPos, stack);
+                    }
                     stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
-                    world.playSound(null, blockPos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
-                    Block.popResource(world, blockPos, new ItemStack(OFItems.VEGETABLE_PEELS.get()));
-                    world.setBlockAndUpdate(blockPos, stripped.defaultBlockState());
-                    player.swing(hand);
+                    world.playSound(null, blockPos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    world.setBlockAndUpdate(blockPos, WAX_OFF_BY_BLOCK.get().get(block).defaultBlockState());
+                    world.levelEvent(player, 3004, blockPos, 0);
+                    event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide));
                 }
-            });
+            }
+        }
+        if (stack.getItem() == Items.HONEYCOMB) {
+            for (Block block : WAXABLES.get().keySet()) {
+                if (state.is(block)) {
+                    event.setCanceled(true);
+                    if (player instanceof ServerPlayer) {
+                        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockPos, stack);
+                    }
+                    stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                    world.playSound(null, blockPos, SoundEvents.HONEYCOMB_WAX_ON, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    world.setBlockAndUpdate(blockPos, WAXABLES.get().get(block).defaultBlockState());
+                    world.levelEvent(player, 3003, blockPos, 0);
+                    event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide));
+                }
+            }
         }
     }
 
