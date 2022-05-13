@@ -2,6 +2,6 @@
   "parent": "minecraft:block/orientable_vertical",
   "textures": {
     "front": "overweight_farming:block/overweight_sliced_kiwi",
-    "side": "overweight_farming:block/peeled_overweight_kiwi"
+    "side": "overweight_farming:block/overweight_kiwi"
   }
 }

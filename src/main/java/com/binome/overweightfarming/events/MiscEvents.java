@@ -72,6 +72,26 @@ public class MiscEvents {
                     event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide));
                 }
             }
+            Util.make(ImmutableMap.<Block, Block>builder(), map -> {
+                map.put(OFBlocks.OVERWEIGHT_BEETROOT.get(), OFBlocks.PEELED_OVERWEIGHT_BEETROOT.get());
+                map.put(OFBlocks.OVERWEIGHT_CARROT.get(), OFBlocks.PEELED_OVERWEIGHT_CARROT.get());
+                map.put(OFBlocks.OVERWEIGHT_POTATO.get(), OFBlocks.PEELED_OVERWEIGHT_POTATO.get());
+                map.put(OFBlocks.OVERWEIGHT_ONION.get(), OFBlocks.PEELED_OVERWEIGHT_ONION.get());
+                map.put(OFBlocks.OVERWEIGHT_KIWI.get(), OFBlocks.OVERWEIGHT_SLICED_KIWI.get());
+                map.put(OFBlocks.OVERWEIGHT_SLICED_KIWI.get(), OFBlocks.PEELED_OVERWEIGHT_KIWI.get());
+                map.put(Blocks.MELON, OFBlocks.SEEDED_PEELED_MELON.get());
+            }).build().forEach((unstripped, stripped) -> {
+                if (state.is(unstripped)) {
+                    if (player instanceof ServerPlayer) {
+                        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, blockPos, stack);
+                    }
+                    stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                    world.playSound(null, blockPos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    Block.popResource(world, blockPos, new ItemStack(OFItems.VEGETABLE_PEELS.get()));
+                    world.setBlockAndUpdate(blockPos, stripped.defaultBlockState());
+                    player.swing(hand);
+                }
+            });
         }
         if (stack.getItem() == Items.HONEYCOMB) {
             for (Block block : WAXABLES.get().keySet()) {
