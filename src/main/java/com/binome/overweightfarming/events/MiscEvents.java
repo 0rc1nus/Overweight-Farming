@@ -79,7 +79,7 @@ public class MiscEvents {
                 map.put(OFBlocks.OVERWEIGHT_ONION.get(), OFBlocks.PEELED_OVERWEIGHT_ONION.get());
                 map.put(OFBlocks.OVERWEIGHT_KIWI.get(), OFBlocks.OVERWEIGHT_SLICED_KIWI.get());
                 map.put(OFBlocks.OVERWEIGHT_SLICED_KIWI.get(), OFBlocks.PEELED_OVERWEIGHT_KIWI.get());
-                map.put(OFBlocks.OVERWEIGHT_GINGER.get(), OFBlocks.PEELED_OVERWEIGHT_GINGER.get())
+                map.put(OFBlocks.OVERWEIGHT_GINGER.get(), OFBlocks.PEELED_OVERWEIGHT_GINGER.get());
                 map.put(Blocks.MELON, OFBlocks.SEEDED_PEELED_MELON.get());
             }).build().forEach((unstripped, stripped) -> {
                 if (state.is(unstripped)) {
