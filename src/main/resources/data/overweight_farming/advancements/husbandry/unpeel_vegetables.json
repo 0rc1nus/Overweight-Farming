@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:husbandry/safely_harvest_honey",
+  "display": {
+    "icon": {
+      "item": "overweight_farming:vegetable_peels"
+    },
+    "title": {
+      "translate": "advancements.husbandry.unpeel_vegetables.title"
+    },
+    "description": {
+      "translate": "advancements.husbandry.unpeel_vegetables.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "unpeel_vegetables": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "blocks": [
+              "overweight_farming:peeled_overweight_beetroot_block",
+              "overweight_farming:peeled_overweight_potato_block",
+              "overweight_farming:peeled_overweight_carrot_block",
+              "overweight_farming:peeled_overweight_onion_block",
+              "overweight_farming:peeled_overweight_kiwi_block",
+              "overweight_farming:peeled_overweight_ginger_block",
+              "overweight_farming:seeded_peeled_melon"
+            ]
+          }
+        },
+        "item": {
+          "items": [
+            "overweight_farming:vegetable_peels"
+          ]
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "unpeel_vegetables"
+    ]
+  ]
+}

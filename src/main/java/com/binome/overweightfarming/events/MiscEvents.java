@@ -50,6 +50,17 @@ public class MiscEvents {
             .put(OFBlocks.SEEDLESS_PEELED_MELON.get(), OFBlocks.WAXED_SEEDLESS_PEELED_MELON.get())
             .build());
     public static final Supplier<BiMap<Block, Block>> WAX_OFF_BY_BLOCK = Suppliers.memoize(() -> WAXABLES.get().inverse());
+    public static final Supplier<BiMap<Block, Block>> PEELABLES = Suppliers.memoize(() -> ImmutableBiMap.<Block, Block>builder()
+            .put(OFBlocks.OVERWEIGHT_BEETROOT.get(), OFBlocks.PEELED_OVERWEIGHT_BEETROOT.get())
+            .put(OFBlocks.OVERWEIGHT_CARROT.get(), OFBlocks.PEELED_OVERWEIGHT_CARROT.get())
+            .put(OFBlocks.OVERWEIGHT_POTATO.get(), OFBlocks.PEELED_OVERWEIGHT_POTATO.get())
+            .put(OFBlocks.OVERWEIGHT_ONION.get(), OFBlocks.PEELED_OVERWEIGHT_ONION.get())
+            .put(OFBlocks.OVERWEIGHT_KIWI.get(), OFBlocks.OVERWEIGHT_SLICED_KIWI.get())
+            .put(OFBlocks.OVERWEIGHT_SLICED_KIWI.get(), OFBlocks.PEELED_OVERWEIGHT_KIWI.get())
+            .put(OFBlocks.OVERWEIGHT_GINGER.get(), OFBlocks.PEELED_OVERWEIGHT_GINGER.get())
+            .put(Blocks.MELON, OFBlocks.SEEDED_PEELED_MELON.get())
+            .build());
+    public static final Supplier<BiMap<Block, Block>> UNPEELABLES = Suppliers.memoize(() -> PEELABLES.get().inverse());
 
     @SubscribeEvent
     public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
@@ -62,8 +73,8 @@ public class MiscEvents {
         if (stack.getItem() instanceof AxeItem) {
             for (Block block : WAX_OFF_BY_BLOCK.get().keySet()) {
                 if (state.is(block)) {
-                    if (player instanceof ServerPlayer) {
-                        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockPos, stack);
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, blockPos, stack);
                     }
                     stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
                     world.playSound(null, blockPos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -72,39 +83,44 @@ public class MiscEvents {
                     event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide));
                 }
             }
-            Util.make(ImmutableMap.<Block, Block>builder(), map -> {
-                map.put(OFBlocks.OVERWEIGHT_BEETROOT.get(), OFBlocks.PEELED_OVERWEIGHT_BEETROOT.get());
-                map.put(OFBlocks.OVERWEIGHT_CARROT.get(), OFBlocks.PEELED_OVERWEIGHT_CARROT.get());
-                map.put(OFBlocks.OVERWEIGHT_POTATO.get(), OFBlocks.PEELED_OVERWEIGHT_POTATO.get());
-                map.put(OFBlocks.OVERWEIGHT_ONION.get(), OFBlocks.PEELED_OVERWEIGHT_ONION.get());
-                map.put(OFBlocks.OVERWEIGHT_KIWI.get(), OFBlocks.OVERWEIGHT_SLICED_KIWI.get());
-                map.put(OFBlocks.OVERWEIGHT_SLICED_KIWI.get(), OFBlocks.PEELED_OVERWEIGHT_KIWI.get());
-                map.put(OFBlocks.OVERWEIGHT_GINGER.get(), OFBlocks.PEELED_OVERWEIGHT_GINGER.get());
-                map.put(Blocks.MELON, OFBlocks.SEEDED_PEELED_MELON.get());
-            }).build().forEach((unstripped, stripped) -> {
-                if (state.is(unstripped)) {
-                    if (player instanceof ServerPlayer) {
-                        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, blockPos, stack);
+            for (Block block : PEELABLES.get().keySet()) {
+                if (state.is(block)) {
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, blockPos, stack);
                     }
                     stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
                     world.playSound(null, blockPos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
                     Block.popResource(world, blockPos, new ItemStack(OFItems.VEGETABLE_PEELS.get()));
-                    world.setBlockAndUpdate(blockPos, stripped.defaultBlockState());
+                    world.setBlockAndUpdate(blockPos, PEELABLES.get().get(block).defaultBlockState());
                     player.swing(hand);
                 }
-            });
+            }
         }
         if (stack.getItem() == Items.HONEYCOMB) {
             for (Block block : WAXABLES.get().keySet()) {
                 if (state.is(block)) {
                     event.setCanceled(true);
-                    if (player instanceof ServerPlayer) {
-                        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockPos, stack);
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, blockPos, stack);
                     }
-                    stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                    if (!player.getAbilities().instabuild) stack.shrink(1);
                     world.playSound(null, blockPos, SoundEvents.HONEYCOMB_WAX_ON, SoundSource.BLOCKS, 1.0F, 1.0F);
                     world.setBlockAndUpdate(blockPos, WAXABLES.get().get(block).defaultBlockState());
                     world.levelEvent(player, 3003, blockPos, 0);
+                    event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide));
+                }
+            }
+        }
+        if (stack.getItem() == OFItems.VEGETABLE_PEELS.get()) {
+            for (Block block : UNPEELABLES.get().keySet()) {
+                if (state.is(block)) {
+                    event.setCanceled(true);
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, blockPos, stack);
+                    }
+                    if (!player.getAbilities().instabuild) stack.shrink(1);
+                    world.playSound(null, blockPos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    world.setBlockAndUpdate(blockPos, UNPEELABLES.get().get(block).defaultBlockState());
                     event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide));
                 }
             }

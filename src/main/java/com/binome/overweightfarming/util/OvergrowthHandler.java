@@ -29,6 +29,8 @@ public class OvergrowthHandler {
         map.put(Blocks.BEETROOTS, OFBlocks.OVERWEIGHT_BEETROOT.get());
         map.put(getCompatBlock("farmersdelight", "cabbages"), OFBlocks.OVERWEIGHT_CABBAGE.get());
         map.put(getCompatBlock("farmersdelight", "onions"), OFBlocks.OVERWEIGHT_ONION.get());
+        map.put(getCompatBlock("hedgehog", "kiwi_vines"), OFBlocks.OVERWEIGHT_KIWI.get());
+        map.put(getCompatBlock("snowyspirit", "ginger"), OFBlocks.OVERWEIGHT_GINGER.get());
     });
 
     @Nullable
@@ -49,7 +51,10 @@ public class OvergrowthHandler {
             Block stemBlock = ((CropFullBlock) OvergrowthHandler.CROPS_TO_OVERGROWN.get(cropBlock)).getStemBlock();
             Block block = random.nextInt(5) == 0 ? OFBlocks.OVERWEIGHT_POISONOUS_POTATO.get() : OFBlocks.OVERWEIGHT_POTATO.get();
             simpleOverweightGrowth(world, blockPos, block.defaultBlockState(), stemBlock.defaultBlockState());
-        } else if (state.is(Objects.requireNonNull(getCompatBlock("farmersdelight", "onions")))) {
+        } else if (state.is(Objects.requireNonNull(getCompatBlock("hedgehog", "kiwi_vines")))) {
+            setBlock(world, blockPos, OFBlocks.OVERWEIGHT_KIWI.get().defaultBlockState());
+        }
+        else if (state.is(Objects.requireNonNull(getCompatBlock("farmersdelight", "onions")))) {
             setBlock(world, blockPos, OFBlocks.OVERWEIGHT_GINGER.get().defaultBlockState());
             if (world.isEmptyBlock(blockPos.above()) && world.isEmptyBlock(blockPos.above(2))) {
                 DoublePlantBlock.placeAt(world, OFBlocks.ALLIUM_BUSH.get().defaultBlockState(), blockPos.above(), 2);
