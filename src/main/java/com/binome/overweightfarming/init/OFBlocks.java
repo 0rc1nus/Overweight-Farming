@@ -37,6 +37,7 @@ public class OFBlocks {
     public static final RegistryObject<Block> OVERWEIGHT_BAKED_POTATO = registerBlock("overweight_baked_potato_block", () -> new Block(BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> OVERWEIGHT_POISONOUS_POTATO = registerBlock("overweight_poisonous_potato_block", () -> new Block(BlockBehaviour.Properties.copy(OVERWEIGHT_BAKED_POTATO.get())), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> ALLIUM_BUSH = registerCompatBlock("farmersdelight", "allium_bush", () -> new TallFlowerBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS)), CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> VEGETABLE_COMPOST = registerBlock("vegetable_compost", () -> new Block(BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.MOSS)), CreativeModeTab.TAB_MISC);
     public static final RegistryObject<Block> OVERWEIGHT_ONION = registerCompatBlock("farmersdelight", "overweight_onion_block", () -> new OverweightOnionBlock(ALLIUM_BUSH.get(), BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> OVERWEIGHT_CABBAGE = registerCompatBlock("farmersdelight", "overweight_cabbage_block", () -> new CropFullBlock(null, BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> OVERWEIGHT_KIWI = registerCompatBlock("hedgehog", "overweight_kiwi_block", () -> new Block(BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
@@ -54,7 +55,6 @@ public class OFBlocks {
     public static final RegistryObject<Block> PEELED_OVERWEIGHT_ONION = registerCompatBlock("farmersdelight", "peeled_overweight_onion_block", () -> new Block(BlockBehaviour.Properties.copy(OVERWEIGHT_ONION.get())), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> PEELED_OVERWEIGHT_KIWI = registerCompatBlock("hedgehog", "peeled_overweight_kiwi_block", () -> new Block(BlockBehaviour.Properties.copy(OVERWEIGHT_KIWI.get())), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> PEELED_OVERWEIGHT_GINGER = registerCompatBlock("snowyspirit", "peeled_overweight_ginger_block", () -> new Block(BlockBehaviour.Properties.copy(OVERWEIGHT_GINGER.get())), CreativeModeTab.TAB_FOOD);
-    public static final RegistryObject<Block> VEGETABLE_COMPOST = registerBlock("vegetable_compost", () -> new Block(BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.MOSS)), CreativeModeTab.TAB_MISC);
 
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> block, CreativeModeTab tab) {
         RegistryObject<B> blocks = BLOCKS.register(name, block);

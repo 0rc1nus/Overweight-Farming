@@ -5,6 +5,7 @@ import com.binome.overweightfarming.events.MobEvents;
 import com.binome.overweightfarming.init.OFBlocks;
 import com.binome.overweightfarming.init.OFItems;
 import com.binome.overweightfarming.init.OFParticleTypes;
+import com.binome.overweightfarming.init.OFVanillaIntegration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -34,6 +35,7 @@ public class OverweightFarming {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+        OFVanillaIntegration.init();
     }
 
 }

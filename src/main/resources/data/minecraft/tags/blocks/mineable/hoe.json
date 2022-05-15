@@ -19,6 +19,9 @@
     "overweight_farming:seeded_peeled_melon",
     "overweight_farming:seedless_peeled_melon",
     "overweight_farming:half_seeded_peeled_melon",
+    "overweight_farming:waxed_seeded_peeled_melon",
+    "overweight_farming:waxed_seedless_peeled_melon",
+    "overweight_farming:waxed_half_seeded_peeled_melon",
     "overweight_farming:overweight_baked_potato_block",
     "overweight_farming:overweight_poisonous_potato_block",
     "overweight_farming:vegetable_compost"
