@@ -19,9 +19,8 @@ import java.util.LinkedHashMap;
 import java.util.Objects;
 import java.util.Random;
 
-public class OvergrowthHandler {
+public class OverweightGrowthManager {
 
-    //TODO: Remove this, convert this to datagen
     public static final LinkedHashMap<Block, Block> CROPS_TO_OVERGROWN = Util.make(Maps.newLinkedHashMap(), map -> {
         map.put(Blocks.CARROTS, OFBlocks.OVERWEIGHT_CARROT.get());
         map.put(Blocks.POTATOES, OFBlocks.OVERWEIGHT_POTATO.get());
@@ -48,24 +47,22 @@ public class OvergrowthHandler {
         } else if (state.is(Blocks.COCOA)) {
             world.setBlock(blockPos, OFBlocks.OVERWEIGHT_COCOA.get().defaultBlockState(), 2);
         } else if (state.is(Blocks.POTATOES)) {
-            Block stemBlock = ((CropFullBlock) OvergrowthHandler.CROPS_TO_OVERGROWN.get(cropBlock)).getStemBlock();
+            Block stemBlock = ((CropFullBlock) OverweightGrowthManager.CROPS_TO_OVERGROWN.get(cropBlock)).getStemBlock();
             Block block = random.nextInt(5) == 0 ? OFBlocks.OVERWEIGHT_POISONOUS_POTATO.get() : OFBlocks.OVERWEIGHT_POTATO.get();
             simpleOverweightGrowth(world, blockPos, block.defaultBlockState(), stemBlock.defaultBlockState());
         } else if (state.is(Objects.requireNonNull(getCompatBlock("hedgehog", "kiwi_vines")))) {
             setBlock(world, blockPos, OFBlocks.OVERWEIGHT_KIWI.get().defaultBlockState());
-        }
-        else if (state.is(Objects.requireNonNull(getCompatBlock("farmersdelight", "onions")))) {
+        } else if (state.is(Objects.requireNonNull(getCompatBlock("farmersdelight", "onions")))) {
             setBlock(world, blockPos, OFBlocks.OVERWEIGHT_ONION.get().defaultBlockState());
             if (world.isEmptyBlock(blockPos.above()) && world.isEmptyBlock(blockPos.above(2))) {
                 DoublePlantBlock.placeAt(world, OFBlocks.ALLIUM_BUSH.get().defaultBlockState(), blockPos.above(), 2);
             }
-        }
-        else {
-            Block stemBlock = ((CropFullBlock) OvergrowthHandler.CROPS_TO_OVERGROWN.get(cropBlock)).getStemBlock();
+        } else {
+            Block stemBlock = ((CropFullBlock) OverweightGrowthManager.CROPS_TO_OVERGROWN.get(cropBlock)).getStemBlock();
             if (stemBlock != null) {
-                simpleOverweightGrowth(world, blockPos, OvergrowthHandler.CROPS_TO_OVERGROWN.get(cropBlock).defaultBlockState(), stemBlock.defaultBlockState());
+                simpleOverweightGrowth(world, blockPos, OverweightGrowthManager.CROPS_TO_OVERGROWN.get(cropBlock).defaultBlockState(), stemBlock.defaultBlockState());
             } else  {
-                world.setBlock(blockPos, OvergrowthHandler.CROPS_TO_OVERGROWN.get(cropBlock).defaultBlockState(), 2);
+                world.setBlock(blockPos, OverweightGrowthManager.CROPS_TO_OVERGROWN.get(cropBlock).defaultBlockState(), 2);
             }
         }
     }

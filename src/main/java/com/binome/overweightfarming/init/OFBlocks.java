@@ -1,8 +1,11 @@
 package com.binome.overweightfarming.init;
 
 import com.binome.overweightfarming.OverweightFarming;
-import com.binome.overweightfarming.blocks.*;
-import com.sun.jna.platform.win32.OaIdl;
+import com.binome.overweightfarming.blocks.CropFullBlock;
+import com.binome.overweightfarming.blocks.CropStemBlock;
+import com.binome.overweightfarming.blocks.OverweightOnionBlock;
+import com.binome.overweightfarming.blocks.OverweightPotatoBlock;
+import com.binome.overweightfarming.blocks.PeeledMelonBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;

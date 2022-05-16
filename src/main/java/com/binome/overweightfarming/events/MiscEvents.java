@@ -3,13 +3,10 @@ package com.binome.overweightfarming.events;
 import com.binome.overweightfarming.OverweightFarming;
 import com.binome.overweightfarming.init.OFBlocks;
 import com.binome.overweightfarming.init.OFItems;
-import com.binome.overweightfarming.util.OvergrowthHandler;
+import com.binome.overweightfarming.util.OverweightGrowthManager;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
-import net.minecraft.Util;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -17,11 +14,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
@@ -138,7 +132,7 @@ public class MiscEvents {
         BlockState state = event.getState();
         Random random = level.getRandom();
         if (level instanceof ServerLevel world) {
-            for (Block cropBlock : OvergrowthHandler.CROPS_TO_OVERGROWN.keySet()) {
+            for (Block cropBlock : OverweightGrowthManager.CROPS_TO_OVERGROWN.keySet()) {
                 if (state.is(cropBlock)) {
                     boolean flag = state.hasProperty(CropBlock.AGE) && state.getValue(CropBlock.AGE) < 7 && state.getValue(CropBlock.AGE) == 3;
                     boolean flag1 = state.hasProperty(CocoaBlock.AGE) && state.getValue(CocoaBlock.AGE) == 1;
@@ -148,7 +142,7 @@ public class MiscEvents {
                         float chance = world.isNight() && world.getMoonPhase() == 0 ? 0.0010538863F : 3.4290552E-4F;
                         if (random.nextFloat() < chance) {
                             event.setResult(Event.Result.DENY);
-                            OvergrowthHandler.overweightGrowth(random, state, world, blockPos, cropBlock);
+                            OverweightGrowthManager.overweightGrowth(random, state, world, blockPos, cropBlock);
                         }
                     }
                 }

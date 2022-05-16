@@ -3,7 +3,7 @@ package com.binome.overweightfarming.events;
 import com.binome.overweightfarming.OverweightFarming;
 import com.binome.overweightfarming.init.OFItems;
 import com.binome.overweightfarming.util.OFItemsForEmeralds;
-import com.binome.overweightfarming.util.OvergrowthHandler;
+import com.binome.overweightfarming.util.OverweightGrowthManager;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -26,7 +26,6 @@ import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BeetrootBlock;
@@ -35,8 +34,6 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.StemBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
@@ -133,7 +130,7 @@ public class MobEvents {
                                 if (world instanceof ServerLevel serverLevel) {
                                     if (flag) {
                                         if (block == kiwiVines && state.getValue(BlockStateProperties.BERRIES)) {
-                                            OvergrowthHandler.overweightGrowth(serverLevel.getRandom(), state, serverLevel, cropPos, kiwiVines);
+                                            OverweightGrowthManager.overweightGrowth(serverLevel.getRandom(), state, serverLevel, cropPos, kiwiVines);
                                         }
                                         if (state.hasProperty(CropBlock.AGE)) {
                                             if (block instanceof CropBlock crop) {
@@ -159,9 +156,9 @@ public class MobEvents {
                                                 validForOverweight = true;
                                         }
                                         if (validForOverweight) {
-                                            for (Block overgrowth : OvergrowthHandler.CROPS_TO_OVERGROWN.keySet()) {
+                                            for (Block overgrowth : OverweightGrowthManager.CROPS_TO_OVERGROWN.keySet()) {
                                                 if (state.is(overgrowth)) {
-                                                    OvergrowthHandler.overweightGrowth(serverLevel.getRandom(), state, serverLevel, cropPos, overgrowth);
+                                                    OverweightGrowthManager.overweightGrowth(serverLevel.getRandom(), state, serverLevel, cropPos, overgrowth);
                                                 }
                                             }
                                         }
