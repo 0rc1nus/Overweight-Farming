@@ -1,7 +1,5 @@
 package net.orcinus.overweightfarming.util;
 
-import net.orcinus.overweightfarming.blocks.CropFullBlock;
-import net.orcinus.overweightfarming.init.OFBlocks;
 import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
@@ -14,6 +12,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.orcinus.overweightfarming.blocks.CropFullBlock;
+import net.orcinus.overweightfarming.init.OFBlocks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -24,14 +24,13 @@ public record OverweightGrowthManager(Random random) {
     public Map<Block, Pair<OverweightType, Block>> getOverweightMap() {
         return Util.make(Maps.newHashMap(), map -> {
             map.put(Blocks.CARROTS, Pair.of(OverweightType.SPROUT, OFBlocks.OVERWEIGHT_CARROT.get()));
-            Block second = this.random.nextInt(20) == 0 ? OFBlocks.OVERWEIGHT_POISONOUS_POTATO.get() : OFBlocks.OVERWEIGHT_POTATO.get();
-            map.put(Blocks.POTATOES, Pair.of(OverweightType.DEFAULT, second));
+            map.put(Blocks.POTATOES, Pair.of(OverweightType.DEFAULT, this.random.nextInt(20) == 0 ? OFBlocks.OVERWEIGHT_POISONOUS_POTATO.get() : OFBlocks.OVERWEIGHT_POTATO.get()));
             map.put(Blocks.BEETROOTS, Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_BEETROOT.get()));
             map.put(Blocks.COCOA, Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_COCOA.get()));
-            map.put(getCompatBlock("farmersdelight", "cabbages"), Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_CABBAGE.get()));
-            map.put(getCompatBlock("farmersdelight", "onions"), Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_ONION.get()));
-            map.put(getCompatBlock("hedgehog", "kiwi_vines"), Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_KIWI.get()));
-            map.put(getCompatBlock("snowyspirit", "ginger"), Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_GINGER.get()));
+            map.put(this.getCompatBlock("farmersdelight", "cabbages"), Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_CABBAGE.get()));
+            map.put(this.getCompatBlock("farmersdelight", "onions"), Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_ONION.get()));
+            map.put(this.getCompatBlock("hedgehog", "kiwi_vines"), Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_KIWI.get()));
+            map.put(this.getCompatBlock("snowyspirit", "ginger"), Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_GINGER.get()));
         });
     }
 
