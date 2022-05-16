@@ -84,7 +84,7 @@ public class MiscEvents {
                     world.playSound(null, blockPos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
                     world.setBlockAndUpdate(blockPos, WAX_OFF_BY_BLOCK.get().get(block).defaultBlockState());
                     world.levelEvent(player, 3004, blockPos, 0);
-                    event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide));
+                    player.swing(hand);
                 }
             }
             for (Block block : PEELABLES.get().keySet()) {
