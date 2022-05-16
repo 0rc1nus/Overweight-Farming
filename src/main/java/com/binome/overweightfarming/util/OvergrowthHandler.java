@@ -55,7 +55,7 @@ public class OvergrowthHandler {
             setBlock(world, blockPos, OFBlocks.OVERWEIGHT_KIWI.get().defaultBlockState());
         }
         else if (state.is(Objects.requireNonNull(getCompatBlock("farmersdelight", "onions")))) {
-            setBlock(world, blockPos, OFBlocks.OVERWEIGHT_GINGER.get().defaultBlockState());
+            setBlock(world, blockPos, OFBlocks.OVERWEIGHT_ONION.get().defaultBlockState());
             if (world.isEmptyBlock(blockPos.above()) && world.isEmptyBlock(blockPos.above(2))) {
                 DoublePlantBlock.placeAt(world, OFBlocks.ALLIUM_BUSH.get().defaultBlockState(), blockPos.above(), 2);
             }
