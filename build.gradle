@@ -90,9 +90,15 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-//    implementation fg.deobf("curse.maven:farmers-delight-398521:3615366")
+
+//    implementation fg.deobf("curse.maven:farmers-delight-398521:3784851")
+    implementation fg.deobf("curse.maven:hedgehogs-561115:3735938")
+    implementation fg.deobf("curse.maven:snowy-spirit-566142:3763538")
+    implementation fg.deobf("curse.maven:selene-499980:3778802")
+
     implementation fg.deobf("curse.maven:jei-238222:3670531")
     implementation fg.deobf("curse.maven:jade-324717:3671210")
+
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }
 

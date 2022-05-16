@@ -7,6 +7,7 @@ import com.binome.overweightfarming.util.OvergrowthHandler;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -33,6 +34,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.StemBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
@@ -41,8 +45,10 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = OverweightFarming.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -115,13 +121,18 @@ public class MobEvents {
                             BlockPos entityPosition = entity.blockPosition();
                             BlockPos cropPos = new BlockPos(entityPosition.getX() + x, entityPosition.getY() + y, entityPosition.getZ() + z);
                             BlockState state = world.getBlockState(cropPos);
-                            if (state.is(BlockTags.CROPS)) {
+                            ResourceLocation resourceLocation = new ResourceLocation("hedgehog", "kiwi_vines");
+                            Block value = ForgeRegistries.BLOCKS.getValue(resourceLocation);
+                            if (state.is(BlockTags.CROPS) || state.is(Objects.requireNonNull(value))) {
                                 Block block = state.getBlock();
                                 float v = world.getRandom().nextFloat();
                                 boolean flag = v < 1.6540289E-4 && world.getRandom().nextBoolean();
                                 boolean validForOverweight = false;
                                 if (world instanceof ServerLevel serverLevel) {
                                     if (flag) {
+                                        if (block == value) {
+                                            OvergrowthHandler.overweightGrowth(serverLevel.getRandom(), state, serverLevel, cropPos, value);
+                                        }
                                         if (state.hasProperty(CropBlock.AGE)) {
                                             if (block instanceof CropBlock crop) {
                                                 int age = state.getValue(CropBlock.AGE);
