@@ -44,6 +44,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -121,17 +122,18 @@ public class MobEvents {
                             BlockPos entityPosition = entity.blockPosition();
                             BlockPos cropPos = new BlockPos(entityPosition.getX() + x, entityPosition.getY() + y, entityPosition.getZ() + z);
                             BlockState state = world.getBlockState(cropPos);
-                            ResourceLocation resourceLocation = new ResourceLocation("hedgehog", "kiwi_vines");
-                            Block value = ForgeRegistries.BLOCKS.getValue(resourceLocation);
-                            if (state.is(BlockTags.CROPS) || state.is(Objects.requireNonNull(value))) {
+                            String hedgehogModid = "hedgehog";
+                            Block kiwiVines = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(hedgehogModid, "kiwi_vines"));
+                            boolean hedgehogFlag = ModList.get().isLoaded(hedgehogModid) && state.is(Objects.requireNonNull(kiwiVines));
+                            if (state.is(BlockTags.CROPS) || hedgehogFlag) {
                                 Block block = state.getBlock();
                                 float v = world.getRandom().nextFloat();
                                 boolean flag = v < 1.6540289E-4 && world.getRandom().nextBoolean();
                                 boolean validForOverweight = false;
                                 if (world instanceof ServerLevel serverLevel) {
                                     if (flag) {
-                                        if (block == value) {
-                                            OvergrowthHandler.overweightGrowth(serverLevel.getRandom(), state, serverLevel, cropPos, value);
+                                        if (block == kiwiVines && state.getValue(BlockStateProperties.BERRIES)) {
+                                            OvergrowthHandler.overweightGrowth(serverLevel.getRandom(), state, serverLevel, cropPos, kiwiVines);
                                         }
                                         if (state.hasProperty(CropBlock.AGE)) {
                                             if (block instanceof CropBlock crop) {
