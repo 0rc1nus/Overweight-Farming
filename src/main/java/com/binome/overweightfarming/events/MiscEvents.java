@@ -131,8 +131,9 @@ public class MiscEvents {
         BlockPos blockPos = event.getPos();
         BlockState state = event.getState();
         Random random = level.getRandom();
+        OverweightGrowthManager manager = new OverweightGrowthManager(random);
         if (level instanceof ServerLevel world) {
-            for (Block cropBlock : OverweightGrowthManager.CROPS_TO_OVERGROWN.keySet()) {
+            for (Block cropBlock : manager.getOverweightMap().keySet()) {
                 if (state.is(cropBlock)) {
                     boolean flag = state.hasProperty(CropBlock.AGE) && state.getValue(CropBlock.AGE) < 7 && state.getValue(CropBlock.AGE) == 3;
                     boolean flag1 = state.hasProperty(CocoaBlock.AGE) && state.getValue(CocoaBlock.AGE) == 1;
@@ -142,7 +143,7 @@ public class MiscEvents {
                         float chance = world.isNight() && world.getMoonPhase() == 0 ? 0.0010538863F : 3.4290552E-4F;
                         if (random.nextFloat() < chance) {
                             event.setResult(Event.Result.DENY);
-                            OverweightGrowthManager.overweightGrowth(random, state, world, blockPos, cropBlock);
+                            manager.growOverweightCrops(world, blockPos, state, random);
                         }
                     }
                 }

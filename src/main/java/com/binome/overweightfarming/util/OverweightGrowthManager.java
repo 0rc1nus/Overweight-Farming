@@ -3,6 +3,7 @@ package com.binome.overweightfarming.util;
 import com.binome.overweightfarming.blocks.CropFullBlock;
 import com.binome.overweightfarming.init.OFBlocks;
 import com.google.common.collect.Maps;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,81 +16,83 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.LinkedHashMap;
-import java.util.Objects;
+import java.util.Map;
 import java.util.Random;
 
-public class OverweightGrowthManager {
+public record OverweightGrowthManager(Random random) {
 
-    public static final LinkedHashMap<Block, Block> CROPS_TO_OVERGROWN = Util.make(Maps.newLinkedHashMap(), map -> {
-        map.put(Blocks.CARROTS, OFBlocks.OVERWEIGHT_CARROT.get());
-        map.put(Blocks.POTATOES, OFBlocks.OVERWEIGHT_POTATO.get());
-        map.put(Blocks.COCOA, OFBlocks.OVERWEIGHT_COCOA.get());
-        map.put(Blocks.BEETROOTS, OFBlocks.OVERWEIGHT_BEETROOT.get());
-        map.put(getCompatBlock("farmersdelight", "cabbages"), OFBlocks.OVERWEIGHT_CABBAGE.get());
-        map.put(getCompatBlock("farmersdelight", "onions"), OFBlocks.OVERWEIGHT_ONION.get());
-        map.put(getCompatBlock("hedgehog", "kiwi_vines"), OFBlocks.OVERWEIGHT_KIWI.get());
-        map.put(getCompatBlock("snowyspirit", "ginger"), OFBlocks.OVERWEIGHT_GINGER.get());
-    });
-
-    @Nullable
-    private static Block getCompatBlock(String modid, String name) {
-        return ForgeRegistries.BLOCKS.getValue(new ResourceLocation(modid, name));
+    public Map<Block, Pair<OverweightType, Block>> getOverweightMap() {
+        return Util.make(Maps.newHashMap(), map -> {
+            map.put(Blocks.CARROTS, Pair.of(OverweightType.SPROUT, OFBlocks.OVERWEIGHT_CARROT.get()));
+            Block second = this.random.nextInt(20) == 0 ? OFBlocks.OVERWEIGHT_POISONOUS_POTATO.get() : OFBlocks.OVERWEIGHT_POTATO.get();
+            map.put(Blocks.POTATOES, Pair.of(OverweightType.DEFAULT, second));
+            map.put(Blocks.BEETROOTS, Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_BEETROOT.get()));
+            map.put(Blocks.COCOA, Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_COCOA.get()));
+            map.put(getCompatBlock("farmersdelight", "cabbages"), Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_CABBAGE.get()));
+            map.put(getCompatBlock("farmersdelight", "onions"), Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_ONION.get()));
+            map.put(getCompatBlock("hedgehog", "kiwi_vines"), Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_KIWI.get()));
+            map.put(getCompatBlock("snowyspirit", "ginger"), Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_GINGER.get()));
+        });
     }
 
-    public static void overweightGrowth(Random random, BlockState state, ServerLevel world, BlockPos blockPos, Block cropBlock) {
-        growOverweightCrop(random, state, world, blockPos, cropBlock);
-    }
-
-    public static void growOverweightCrop(Random random, BlockState state, ServerLevel world, BlockPos blockPos, Block cropBlock) {
-        if (state.is(Blocks.CARROTS)) {
-            growCarrotStem(world, blockPos, random);
-        } else if (state.is(Blocks.COCOA)) {
-            world.setBlock(blockPos, OFBlocks.OVERWEIGHT_COCOA.get().defaultBlockState(), 2);
-        } else if (state.is(Blocks.POTATOES)) {
-            Block stemBlock = ((CropFullBlock) OverweightGrowthManager.CROPS_TO_OVERGROWN.get(cropBlock)).getStemBlock();
-            Block block = random.nextInt(5) == 0 ? OFBlocks.OVERWEIGHT_POISONOUS_POTATO.get() : OFBlocks.OVERWEIGHT_POTATO.get();
-            simpleOverweightGrowth(world, blockPos, block.defaultBlockState(), stemBlock.defaultBlockState());
-        } else if (state.is(Objects.requireNonNull(getCompatBlock("hedgehog", "kiwi_vines")))) {
-            setBlock(world, blockPos, OFBlocks.OVERWEIGHT_KIWI.get().defaultBlockState());
-        } else if (state.is(Objects.requireNonNull(getCompatBlock("farmersdelight", "onions")))) {
-            setBlock(world, blockPos, OFBlocks.OVERWEIGHT_ONION.get().defaultBlockState());
-            if (world.isEmptyBlock(blockPos.above()) && world.isEmptyBlock(blockPos.above(2))) {
-                DoublePlantBlock.placeAt(world, OFBlocks.ALLIUM_BUSH.get().defaultBlockState(), blockPos.above(), 2);
-            }
-        } else {
-            Block stemBlock = ((CropFullBlock) OverweightGrowthManager.CROPS_TO_OVERGROWN.get(cropBlock)).getStemBlock();
-            if (stemBlock != null) {
-                simpleOverweightGrowth(world, blockPos, OverweightGrowthManager.CROPS_TO_OVERGROWN.get(cropBlock).defaultBlockState(), stemBlock.defaultBlockState());
-            } else  {
-                world.setBlock(blockPos, OverweightGrowthManager.CROPS_TO_OVERGROWN.get(cropBlock).defaultBlockState(), 2);
+    public void growOverweightCrops(ServerLevel serverLevel, BlockPos blockPos, BlockState state, Random random) {
+        for (Block block : this.getOverweightMap().keySet()) {
+            if (state.is(block)) {
+                Pair<OverweightType, Block> pair = this.getOverweightMap().get(block);
+                OverweightType overweightType = pair.getFirst();
+                Block overweightBlock = pair.getSecond();
+                BlockState overweightState = overweightBlock.defaultBlockState();
+                Block stemBlock = ((CropFullBlock) overweightBlock).getStemBlock();
+                BlockState stemState = null;
+                if (stemBlock != null) stemState = stemBlock.defaultBlockState();
+                switch (overweightType) {
+                    case DEFAULT -> simpleOverweightGrowth(serverLevel, blockPos, overweightState, stemState);
+                    case SIMPLE -> setBlock(serverLevel, blockPos, overweightState);
+                    case SPROUT -> growCarrotStem(serverLevel, blockPos, random, overweightState, stemState);
+                }
             }
         }
     }
 
-    private static void simpleOverweightGrowth(ServerLevel world, BlockPos blockPos, BlockState overweightCrop, BlockState stemBlock) {
-        setBlock(world, blockPos, overweightCrop);
-        setBlock(world, blockPos.above(), stemBlock);
+    @Nullable
+    private Block getCompatBlock(String modid, String name) {
+        return ForgeRegistries.BLOCKS.getValue(new ResourceLocation(modid, name));
     }
 
-    public static void growCarrotStem(ServerLevel world, BlockPos blockPos, Random random) {
+    private void simpleOverweightGrowth(ServerLevel world, BlockPos blockPos, BlockState overweightCrop, BlockState stemBlock) {
+        this.setBlock(world, blockPos, overweightCrop);
+        if (stemBlock != null) {
+            if (stemBlock.getBlock() instanceof DoublePlantBlock) {
+                boolean flag = world.isEmptyBlock(blockPos.above()) && world.isEmptyBlock(blockPos.above(2));
+                if (!flag) return;
+                DoublePlantBlock.placeAt(world, stemBlock.getBlock().defaultBlockState(), blockPos.above(), 2);
+            } else {
+                this.setBlock(world, blockPos.above(), stemBlock);
+            }
+        }
+    }
+
+    private void growCarrotStem(ServerLevel world, BlockPos blockPos, Random random, BlockState blockState, BlockState stemState) {
         int height = random.nextBoolean() && random.nextInt(5) == 0 ? random.nextBoolean() && random.nextInt(10) == 0 ? 4 : 3 : 2;
         BlockPos startPos = blockPos.above();
         BlockPos.MutableBlockPos mutableBlockPos = startPos.mutable();
         for (int i = 0; i < height; i++) {
-            BlockState placeState = OFBlocks.OVERWEIGHT_CARROT.get().defaultBlockState();
-            if (i == 0)
-                placeState = OFBlocks.OVERWEIGHT_CARROT_STEM.get().defaultBlockState();
-            setBlock(world, mutableBlockPos, placeState);
+            BlockState placeState = blockState;
+            if (i == 0) {
+                if (stemState != null) {
+                    placeState = stemState;
+                }
+            }
+            this.setBlock(world, mutableBlockPos, placeState);
             mutableBlockPos.move(Direction.DOWN);
         }
     }
 
-    private static void setBlock(ServerLevel world, BlockPos blockPos, BlockState OVERWEIGHT_CARROT_STEM) {
-        for (Block cropBlock : CROPS_TO_OVERGROWN.keySet()) {
+    private void setBlock(ServerLevel world, BlockPos blockPos, BlockState overweightState) {
+        for (Block cropBlock : this.getOverweightMap().keySet()) {
             BlockState state = world.getBlockState(blockPos);
             if (state.isAir() || state.getBlock() == cropBlock || state.is(Blocks.FARMLAND) || state.is(Blocks.DIRT)) {
-                world.setBlock(blockPos, OVERWEIGHT_CARROT_STEM, 2);
+                world.setBlock(blockPos, overweightState, 2);
             }
         }
     }

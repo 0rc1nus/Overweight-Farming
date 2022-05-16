@@ -130,7 +130,7 @@ public class MobEvents {
                                 if (world instanceof ServerLevel serverLevel) {
                                     if (flag) {
                                         if (block == kiwiVines && state.getValue(BlockStateProperties.BERRIES)) {
-                                            OverweightGrowthManager.overweightGrowth(serverLevel.getRandom(), state, serverLevel, cropPos, kiwiVines);
+                                            validForOverweight = true;
                                         }
                                         if (state.hasProperty(CropBlock.AGE)) {
                                             if (block instanceof CropBlock crop) {
@@ -155,10 +155,11 @@ public class MobEvents {
                                             if (age == beetrootBlock.getMaxAge())
                                                 validForOverweight = true;
                                         }
+                                        OverweightGrowthManager manager = new OverweightGrowthManager(world.getRandom());
                                         if (validForOverweight) {
-                                            for (Block overgrowth : OverweightGrowthManager.CROPS_TO_OVERGROWN.keySet()) {
+                                            for (Block overgrowth : manager.getOverweightMap().keySet()) {
                                                 if (state.is(overgrowth)) {
-                                                    OverweightGrowthManager.overweightGrowth(serverLevel.getRandom(), state, serverLevel, cropPos, overgrowth);
+                                                    manager.growOverweightCrops(serverLevel, cropPos, state, serverLevel.getRandom());
                                                 }
                                             }
                                         }
