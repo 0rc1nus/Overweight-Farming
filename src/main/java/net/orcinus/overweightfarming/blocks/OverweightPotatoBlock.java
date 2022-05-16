@@ -17,12 +17,12 @@ public class OverweightPotatoBlock extends CropFullBlock {
     }
 
     @Override
-    public void onPlace(BlockState state, Level world, BlockPos pos, BlockState p_60569_, boolean p_60570_) {
+    public void onPlace(BlockState state, Level world, BlockPos pos, BlockState neighborState, boolean isClient) {
         world.scheduleTick(pos, this, 900);
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, Random p_60465_) {
+    public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
         BlockState belowState = world.getBlockState(pos.below());
         boolean flag = belowState.is(BlockTags.FIRE) || belowState.is(BlockTags.CAMPFIRES);
         if (this == OFBlocks.OVERWEIGHT_POTATO.get() && flag) {

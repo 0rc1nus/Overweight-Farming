@@ -16,7 +16,7 @@ public class MelonLandProvider implements ParticleProvider<SimpleParticleType> {
     }
 
     @Override
-    public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double p_106326_, double p_106327_, double p_106328_) {
+    public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
         DripParticle dripparticle = new DripParticle.DripLandParticle(world, x, y, z, Fluids.EMPTY);
         dripparticle.lifetime = (int)(128.0D / (Math.random() * 0.8D + 0.2D));
         dripparticle.setColor(0.62F, 0.0F, 0.1F);

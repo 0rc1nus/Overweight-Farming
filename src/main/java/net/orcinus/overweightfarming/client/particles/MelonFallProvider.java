@@ -16,7 +16,8 @@ public class MelonFallProvider implements ParticleProvider<SimpleParticleType> {
         this.sprite = set;
     }
 
-    public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double p_106326_, double p_106327_, double p_106328_) {
+    @Override
+    public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
         DripParticle dripparticle = new DripParticle.FallAndLandParticle(world, x, y, z, Fluids.EMPTY, OFParticleTypes.LANDING_MELON.get());
         dripparticle.gravity = 0.01F;
         dripparticle.setColor(0.67F, 0.04F, 0.05F);
