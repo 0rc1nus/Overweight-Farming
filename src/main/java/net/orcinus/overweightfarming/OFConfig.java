@@ -1,4 +1,4 @@
-package com.binome.overweightfarming;
+package net.orcinus.overweightfarming;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;

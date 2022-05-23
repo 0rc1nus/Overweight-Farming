@@ -1,9 +1,9 @@
-package com.binome.overweightfarming.util;
+package net.orcinus.overweightfarming.util;
 
-import com.binome.overweightfarming.OverweightFarming;
+import net.orcinus.overweightfarming.OverweightFarming;
 import
-com.binome.overweightfarming.blocks.CropFullBlock;
-import com.binome.overweightfarming.init.OFObjects;
+        net.orcinus.overweightfarming.blocks.CropFullBlock;
+import net.orcinus.overweightfarming.init.OFObjects;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

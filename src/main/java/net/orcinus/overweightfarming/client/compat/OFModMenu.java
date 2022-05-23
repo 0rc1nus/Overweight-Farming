@@ -1,6 +1,6 @@
-package com.binome.overweightfarming.client.compat;
+package net.orcinus.overweightfarming.client.compat;
 
-import com.binome.overweightfarming.OFConfig;
+import net.orcinus.overweightfarming.OFConfig;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.autoconfig.AutoConfig;

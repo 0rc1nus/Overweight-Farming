@@ -1,7 +1,7 @@
-package com.binome.overweightfarming;
+package net.orcinus.overweightfarming;
 
-import com.binome.overweightfarming.init.OFObjects;
-import com.binome.overweightfarming.util.EmeraldToItemOffer;
+import net.orcinus.overweightfarming.init.OFObjects;
+import net.orcinus.overweightfarming.util.EmeraldToItemOffer;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;

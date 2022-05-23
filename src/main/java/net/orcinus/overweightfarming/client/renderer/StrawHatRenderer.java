@@ -1,7 +1,7 @@
-package com.binome.overweightfarming.client.renderer;
+package net.orcinus.overweightfarming.client.renderer;
 
-import com.binome.overweightfarming.OverweightFarming;
-import com.binome.overweightfarming.client.model.StrawHatModel;
+import net.orcinus.overweightfarming.OverweightFarming;
+import net.orcinus.overweightfarming.client.model.StrawHatModel;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;

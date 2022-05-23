@@ -4,6 +4,7 @@
   "version": "${version}",
 
   "name": "Overweight Farming",
+  "icon": "assets/overweight_farming/icon.png",
   "description": "This mod enhances the farming system",
   "authors": [
     "Binome",
@@ -15,13 +16,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.binome.overweightfarming.OverweightFarming"
+      "net.orcinus.overweightfarming.OverweightFarming"
     ],
     "client": [
-      "com.binome.overweightfarming.OverweightFarmingClient"
+      "net.orcinus.overweightfarming.OverweightFarmingClient"
     ],
     "modmenu": [
-      "com.binome.overweightfarming.client.compat.OFModMenu"
+      "net.orcinus.overweightfarming.client.compat.OFModMenu"
     ]
   },
   "mixins": [

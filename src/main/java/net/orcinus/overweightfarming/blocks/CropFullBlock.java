@@ -1,4 +1,4 @@
-package com.binome.overweightfarming.blocks;
+package net.orcinus.overweightfarming.blocks;
 
 
 import net.minecraft.block.*;
@@ -11,17 +11,12 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class CropFullBlock extends CropBlock implements Fertilizable {
+public class CropFullBlock extends Block implements Fertilizable {
     private final Block stemBlock;
 
     public CropFullBlock(Block stemBlock, Settings properties) {
         super(properties);
         this.stemBlock = stemBlock;
-    }
-
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.fullCube();
     }
 
     public Block getStemBlock() {
@@ -32,7 +27,6 @@ public class CropFullBlock extends CropBlock implements Fertilizable {
     public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
         return !world.getBlockState(pos.up()).isOf(this.stemBlock);
     }
-
 
     @Override
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {

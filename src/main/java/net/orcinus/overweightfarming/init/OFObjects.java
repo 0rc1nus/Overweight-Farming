@@ -1,10 +1,10 @@
-package com.binome.overweightfarming.init;
+package net.orcinus.overweightfarming.init;
 
-import com.binome.overweightfarming.OverweightFarming;
-import com.binome.overweightfarming.blocks.CropFullBlock;
-import com.binome.overweightfarming.blocks.CropStemBlock;
-import com.binome.overweightfarming.blocks.OverweightOnionBlock;
-import com.binome.overweightfarming.items.StrawHatItem;
+import net.orcinus.overweightfarming.OverweightFarming;
+import net.orcinus.overweightfarming.blocks.CropFullBlock;
+import net.orcinus.overweightfarming.blocks.CropStemBlock;
+import net.orcinus.overweightfarming.blocks.OverweightOnionBlock;
+import net.orcinus.overweightfarming.items.StrawHatItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.loader.api.FabricLoader;

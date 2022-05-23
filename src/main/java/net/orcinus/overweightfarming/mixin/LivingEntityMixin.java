@@ -1,14 +1,18 @@
-package com.binome.overweightfarming.mixin;
+package net.orcinus.overweightfarming.mixin;
 
-import com.binome.overweightfarming.init.OFObjects;
-import com.binome.overweightfarming.util.OvergrowthHandler;
-import net.minecraft.block.*;
+import net.minecraft.block.BeetrootsBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.CropBlock;
+import net.minecraft.block.StemBlock;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.orcinus.overweightfarming.init.OFObjects;
+import net.orcinus.overweightfarming.util.OverweightGrowthManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -60,10 +64,11 @@ public abstract class LivingEntityMixin {
                                             if (age == beetrootBlock.getMaxAge())
                                                 validForOverweight = true;
                                         }
+                                        OverweightGrowthManager manager = new OverweightGrowthManager(world.getRandom());
                                         if (validForOverweight) {
-                                            for (Block overgrowth : OvergrowthHandler.CROPS_TO_OVERGROWN.keySet()) {
+                                            for (Block overgrowth : manager.getOverweightMap().keySet()) {
                                                 if (state.isOf(overgrowth)) {
-                                                    OvergrowthHandler.overweightGrowth(serverLevel.getRandom(), state, serverLevel, cropPos, overgrowth);
+                                                    manager.growOverweightCrops(serverLevel, cropPos, state, serverLevel.getRandom());
                                                 }
                                             }
                                         }
