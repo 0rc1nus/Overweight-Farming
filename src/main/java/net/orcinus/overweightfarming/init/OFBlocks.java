@@ -3,6 +3,7 @@ package net.orcinus.overweightfarming.init;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.blocks.CropFullBlock;
 import net.orcinus.overweightfarming.blocks.CropStemBlock;
+import net.orcinus.overweightfarming.blocks.OverweightCarrotBlock;
 import net.orcinus.overweightfarming.blocks.OverweightOnionBlock;
 import net.orcinus.overweightfarming.blocks.OverweightPotatoBlock;
 import net.orcinus.overweightfarming.blocks.PeeledMelonBlock;
@@ -34,7 +35,7 @@ public class OFBlocks {
     public static final RegistryObject<Block> OVERWEIGHT_POTATO_STEM = registerNoTabBlock("overweight_potato_stem", () -> new CropStemBlock(BlockBehaviour.Properties.of(Material.VEGETABLE).instabreak().noCollission().sound(SoundType.CROP)));
     public static final RegistryObject<Block> OVERWEIGHT_GINGER_STEM = registerNoTabBlock("overweight_ginger_stem", () -> new CropStemBlock(BlockBehaviour.Properties.of(Material.VEGETABLE).instabreak().noCollission().sound(SoundType.CROP)));
     public static final RegistryObject<Block> OVERWEIGHT_BEETROOT = registerBlock("overweight_beetroot_block", () -> new CropFullBlock(OVERWEIGHT_BEETROOT_STEM.get(), BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
-    public static final RegistryObject<Block> OVERWEIGHT_CARROT = registerBlock("overweight_carrot_block", () -> new CropFullBlock(OVERWEIGHT_CARROT_STEM.get(), BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
+    public static final RegistryObject<Block> OVERWEIGHT_CARROT = registerBlock("overweight_carrot_block", () -> new OverweightCarrotBlock(OVERWEIGHT_CARROT_STEM.get(), BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> OVERWEIGHT_COCOA = registerBlock("overweight_cocoa_block", () -> new Block(BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> OVERWEIGHT_POTATO = registerBlock("overweight_potato_block", () -> new OverweightPotatoBlock(OVERWEIGHT_POTATO_STEM.get(), BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> OVERWEIGHT_BAKED_POTATO = registerBlock("overweight_baked_potato_block", () -> new Block(BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
