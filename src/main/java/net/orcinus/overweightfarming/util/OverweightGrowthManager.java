@@ -1,5 +1,6 @@
 package net.orcinus.overweightfarming.util;
 
+import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.blocks.CropFullBlock;
 import net.orcinus.overweightfarming.init.OFObjects;
 import com.google.common.collect.Maps;
@@ -21,25 +22,28 @@ import java.util.Random;
 
 public record OverweightGrowthManager(Random random) {
 
-    public Map<Block, Pair<OverweightType, Block>> getOverweightMap() {
+    public Map<Block, Pair<Pair<Boolean, OverweightType>, Block>> getOverweightMap() {
         return Util.make(Maps.newHashMap(), map -> {
-            map.put(Blocks.CARROTS, Pair.of(OverweightType.SPROUT, OFObjects.OVERWEIGHT_CARROT));
-            map.put(Blocks.POTATOES, Pair.of(OverweightType.DEFAULT, OFObjects.OVERWEIGHT_POTATO));
-            map.put(Blocks.BEETROOTS, Pair.of(OverweightType.DEFAULT, OFObjects.OVERWEIGHT_BEETROOT));
-            map.put(Blocks.COCOA, Pair.of(OverweightType.SIMPLE, OFObjects.OVERWEIGHT_COCOA));
-            map.put(getCompatBlock("farmersdelight", "cabbages"), Pair.of(OverweightType.SIMPLE, OFObjects.OVERWEIGHT_CABBAGE));
-            map.put(getCompatBlock("farmersdelight", "onions"), Pair.of(OverweightType.DEFAULT, OFObjects.OVERWEIGHT_ONION));
-            map.put(getCompatBlock("bewitchment", "mandrake"), Pair.of(OverweightType.DEFAULT, OFObjects.OVERWEIGHT_MANDRAKE));
-            map.put(getCompatBlock("bewitchment", "garlic"), Pair.of(OverweightType.DEFAULT, OFObjects.OVERWEIGHT_GARLIC));
-            map.put(getCompatBlock("bwplus", "bloodroot"), Pair.of(OverweightType.DEFAULT, OFObjects.OVERWEIGHT_BLOODROOT));
+            map.put(Blocks.CARROTS, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightCarrot, OverweightType.SPROUT), OFObjects.OVERWEIGHT_CARROT));
+            map.put(Blocks.POTATOES, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightPotato, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_POTATO));
+            map.put(Blocks.BEETROOTS, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightBeetroot, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_BEETROOT));
+            map.put(Blocks.COCOA, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightCocoa, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_COCOA));
+            map.put(getCompatBlock("farmersdelight", "cabbages"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightCabbage, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_CABBAGE));
+            map.put(getCompatBlock("farmersdelight", "onions"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightOnion, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_ONION));
+            map.put(getCompatBlock("bewitchment", "mandrake"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightMandrake, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_MANDRAKE));
+            map.put(getCompatBlock("bewitchment", "garlic"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightGarlic, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_GARLIC));
+            map.put(getCompatBlock("bwplus", "bloodroot"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightBloodroot, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_BLOODROOT));
         });
     }
 
     public void growOverweightCrops(ServerWorld serverLevel, BlockPos blockPos, BlockState state, Random random) {
         for (Block block : this.getOverweightMap().keySet()) {
             if (state.isOf(block)) {
-                Pair<OverweightType, Block> pair = this.getOverweightMap().get(block);
-                OverweightType overweightType = pair.getFirst();
+                Pair<Pair<Boolean, OverweightType>, Block> pair = this.getOverweightMap().get(block);
+                Pair<Boolean, OverweightType> firstPair = pair.getFirst();
+                Boolean configValue = firstPair.getFirst();
+                if (!configValue) return;
+                OverweightType overweightType = firstPair.getSecond();
                 Block overweightBlock = pair.getSecond();
                 BlockState overweightState = overweightBlock.getDefaultState();
                 Block stemBlock = ((CropFullBlock) overweightBlock).getStemBlock();
