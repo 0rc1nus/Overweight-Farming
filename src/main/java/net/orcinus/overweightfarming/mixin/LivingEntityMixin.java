@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.orcinus.overweightfarming.init.OFObjects;
 import net.orcinus.overweightfarming.util.OvergrowthHandler;
-import net.orcinus.overweightfarming.util.OverweightGrowthManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -65,12 +64,10 @@ public abstract class LivingEntityMixin {
                                             if (age == beetrootBlock.getMaxAge())
                                                 validForOverweight = true;
                                         }
-                                        OverweightGrowthManager manager = new OverweightGrowthManager(world.getRandom());
                                         if (validForOverweight) {
                                             for (Block overgrowth : OvergrowthHandler.CROPS_TO_OVERGROWN.keySet()) {
                                                 if (state.isOf(overgrowth)) {
                                                     OvergrowthHandler.growOverweightCrop(serverLevel.getRandom(), state, serverLevel, cropPos, overgrowth);
-//                                                    manager.growOverweightCrops(serverLevel, cropPos, state, serverLevel.getRandom());
                                                 }
                                             }
                                         }
