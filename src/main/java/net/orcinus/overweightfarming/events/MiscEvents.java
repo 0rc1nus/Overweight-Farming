@@ -56,6 +56,7 @@ public class MiscEvents {
             .put(OFBlocks.OVERWEIGHT_KIWI.get(), OFBlocks.OVERWEIGHT_SLICED_KIWI.get())
             .put(OFBlocks.OVERWEIGHT_SLICED_KIWI.get(), OFBlocks.PEELED_OVERWEIGHT_KIWI.get())
             .put(OFBlocks.OVERWEIGHT_GINGER.get(), OFBlocks.PEELED_OVERWEIGHT_GINGER.get())
+            .put(OFBlocks.OVERWEIGHT_COCOA.get(), OFBlocks.PEELED_OVERWEIGHT_COCOA.get())
             .put(Blocks.MELON, OFBlocks.SEEDED_PEELED_MELON.get())
             .build());
     public static final Supplier<BiMap<Block, Block>> UNPEELABLES = Suppliers.memoize(() -> PEELABLES.get().inverse());
