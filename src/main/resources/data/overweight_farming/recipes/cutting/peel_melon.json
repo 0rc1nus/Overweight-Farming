@@ -1,0 +1,21 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:melon"
+    }
+  ],
+  "tool": {
+    "type": "farmersdelight:tool_action",
+    "action": "axe_dig"
+  },
+  "result": [
+    {
+      "item": "overweight_farming:seeded_peeled_melon"
+    },
+    {
+      "item": "overweight_farming:vegetable_peels"
+    }
+  ],
+  "sound": "minecraft:item.axe.strip"
+}

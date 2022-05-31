@@ -1,0 +1,22 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "overweight_farming:peeled_overweight_beetroot_block"
+    }
+  ],
+  "tool": {
+    "type": "farmersdelight:tool_action",
+    "action": "hoe_dig"
+  },
+  "result": [
+    {
+      "item": "minecraft:beetroot",
+      "count": 10
+    },
+    {
+      "item": "minecraft:beetroot_seeds",
+      "count": 10
+    }
+  ]
+}

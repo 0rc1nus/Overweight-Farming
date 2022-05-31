@@ -1,0 +1,18 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "overweight_farming:peeled_overweight_potato_block"
+    }
+  ],
+  "tool": {
+    "type": "farmersdelight:tool_action",
+    "action": "hoe_dig"
+  },
+  "result": [
+    {
+      "item": "minecraft:potato",
+      "count": 10
+    }
+  ]
+}

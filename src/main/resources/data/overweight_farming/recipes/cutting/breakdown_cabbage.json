@@ -1,0 +1,22 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "overweight_farming:overweight_cabbage_block"
+    }
+  ],
+  "tool": {
+    "type": "farmersdelight:tool_action",
+    "action": "hoe_dig"
+  },
+  "result": [
+    {
+      "item": "farmersdelight:cabbage",
+      "count": 10
+    },
+    {
+      "item": "farmersdelight:cabbage_seeds",
+      "count": 10
+    }
+  ]
+}
