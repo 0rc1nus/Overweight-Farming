@@ -1,18 +1,31 @@
 {
-  "type": "farmersdelight:cutting",
-  "ingredients": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "overweight_farming:overweight_onion_block"
-    }
-  ],
-  "tool": {
-    "type": "farmersdelight:tool_action",
-    "action": "hoe_dig"
-  },
-  "result": [
-    {
-      "item": "farmersdelight:onion",
-      "count": 10
+      "conditions": [
+        {
+          "modid": "farmersdelight",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "farmersdelight:cutting",
+        "ingredients": [
+          {
+            "item": "overweight_farming:overweight_onion_block"
+          }
+        ],
+        "tool": {
+          "type": "farmersdelight:tool_action",
+          "action": "hoe_dig"
+        },
+        "result": [
+          {
+            "item": "farmersdelight:onion",
+            "count": 10
+          }
+        ]
+      }
     }
   ]
 }
