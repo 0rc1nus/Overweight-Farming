@@ -3,9 +3,11 @@ loaderVersion="[39,)"
 license="All Rights Reserved"
 [[mods]]
 modId="overweight_farming"
-version="1.18.2-1.3.1-forge"
+version="1.18.2-1.3.2-forge"
 displayName="Overweight Farming"
+displayURL="https://discord.com/invite/sA858vGruu"
 authors="Binome, Orcinus"
+logoFile="overweight_farming_logo.png"
 description='''
 This mod enhances the farming system
 '''
