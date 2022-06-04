@@ -27,7 +27,7 @@ public class CropFullBlock extends Block implements BonemealableBlock {
 
     @Override
     public boolean isValidBonemealTarget(BlockGetter world, BlockPos blockPos, BlockState state, boolean isClient) {
-        return this == OFBlocks.OVERWEIGHT_CABBAGE.get() ? world.getBlockState(blockPos.below()).isAir() : !world.getBlockState(blockPos.above()).is(this.stemBlock);
+        return !world.getBlockState(blockPos.above()).is(this.stemBlock);
     }
 
     @Override
