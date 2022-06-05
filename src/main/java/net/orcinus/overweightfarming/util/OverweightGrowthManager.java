@@ -14,7 +14,9 @@ import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
+import net.orcinus.overweightfarming.blocks.OverweightCarrotBlock;
 import net.orcinus.overweightfarming.registry.OFObjects;
+import net.orcinus.overweightfarming.registry.OFTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -36,23 +38,29 @@ public record OverweightGrowthManager(Random random) {
         });
     }
 
+
+
+
     public void growOverweightCrops(ServerWorld serverLevel, BlockPos blockPos, BlockState state, Random random) {
         for (Block block : this.getOverweightMap().keySet()) {
             if (state.isOf(block)) {
+                if (!this.isNearOvergrowthObstacles(serverLevel, blockPos)) return;
                 Pair<Pair<Boolean, OverweightType>, Block> pair = this.getOverweightMap().get(block);
                 Pair<Boolean, OverweightType> firstPair = pair.getFirst();
                 Boolean configValue = firstPair.getFirst();
                 if (!configValue) return;
                 OverweightType overweightType = firstPair.getSecond();
                 Block overweightBlock = pair.getSecond();
-                BlockState overweightState = overweightBlock.getDefaultState();
-                Block stemBlock = ((CropFullBlock) overweightBlock).getStemBlock();
-                BlockState stemState = null;
-                if (stemBlock != null) stemState = stemBlock.getDefaultState();
-                switch (overweightType) {
-                    case DEFAULT -> simpleOverweightGrowth(serverLevel, blockPos, overweightState, stemState);
-                    case SIMPLE -> setBlock(serverLevel, blockPos, overweightState);
-                    case SPROUT -> growCarrotStem(serverLevel, blockPos, random, overweightState, stemState);
+                if (overweightBlock instanceof CropFullBlock cropFullBlock) {
+                    BlockState overweightState = cropFullBlock instanceof OverweightCarrotBlock carrotBlock ? carrotBlock.getDefaultState().with(OverweightCarrotBlock.FACING, Direction.UP) : cropFullBlock.getDefaultState();
+                    Block stemBlock = cropFullBlock.getStemBlock();
+                    BlockState stemState = null;
+                    if (stemBlock != null) stemState = stemBlock.getDefaultState();
+                    switch (overweightType) {
+                        case DEFAULT -> simpleOverweightGrowth(serverLevel, blockPos, overweightState, stemState);
+                        case SIMPLE -> setBlock(serverLevel, blockPos, overweightState);
+                        case SPROUT -> growCarrotStem(serverLevel, blockPos, random, overweightState, stemState);
+                    }
                 }
             }
         }
@@ -99,6 +107,20 @@ public record OverweightGrowthManager(Random random) {
                 world.setBlockState(blockPos, overweightState, 2);
             }
         }
+    }
+
+    private boolean isNearOvergrowthObstacles(ServerWorld world, BlockPos blockPos) {
+        boolean flag = true;
+        int radius = 10;
+        for (int x = -radius; x <= radius; x++) {
+            for (int z = -radius; z <= radius; z++) {
+                BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY(), blockPos.getZ() + z);
+                if (world.getBlockState(pos).isIn(OFTags.OVERWEIGHT_OBSTACLES)) {
+                    flag = false;
+                }
+            }
+        }
+        return flag;
     }
 
 }

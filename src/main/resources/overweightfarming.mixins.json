@@ -9,6 +9,8 @@
     "LivingEntityMixin"
   ],
   "client": [
+    "ContinuousFallingParticleMixin",
+    "DrippingParticleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

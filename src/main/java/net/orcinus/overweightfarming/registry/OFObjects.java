@@ -44,12 +44,11 @@ public class OFObjects {
 
 
     //BLOCKS
-    public static final Block ALLIUM_BUSH = register("allium_bush", new TallFlowerBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)),FabricLoader.getInstance().isModLoaded("farmersdelight"), gen());
+    public static final Block ALLIUM_BUSH = register("allium_bush", new TallFlowerBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)),true, gen());
     public static final Block OVERWEIGHT_BEETROOT = register("overweight_beetroot_block", new CropFullBlock(OVERWEIGHT_BEETROOT_STEM, FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly()),true, gen());
     public static final Block OVERWEIGHT_CARROT = register("overweight_carrot_block", new CropFullBlock(OVERWEIGHT_CARROT_STEM, FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly()),true, gen());
     public static final Block OVERWEIGHT_COCOA = register("overweight_cocoa_block", new Block(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly()),true, gen());
     public static final Block OVERWEIGHT_POTATO = register("overweight_potato_block", new CropFullBlock(OVERWEIGHT_POTATO_STEM, FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly()),true, gen());
-    //public static final Block ALLIUM_BUSH = register("allium_bush", new TallFlowerBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.CROP)), true, new Item.Settings().group(ItemGroup.DECORATIONS));
     public static final Block OVERWEIGHT_ONION = register("overweight_onion_block", new OverweightOnionBlock(ALLIUM_BUSH, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), FabricLoader.getInstance().isModLoaded("farmersdelight"), gen());
     public static final Block OVERWEIGHT_CABBAGE = register("overweight_cabbage_block", new CropFullBlock(null, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),FabricLoader.getInstance().isModLoaded("farmersdelight"), gen());
     public static final Block OVERWEIGHT_APPLE = register("overweight_apple_block", new OverweightAppleBlock(OVERWEIGHT_APPLE_STEM, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),true, gen());
@@ -59,7 +58,7 @@ public class OFObjects {
     public static final Block OVERWEIGHT_BLOODROOT = register("overweight_bloodroot_block", new CropFullBlock(OVERWEIGHT_BLOODROOT_STEM, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),FabricLoader.getInstance().isModLoaded("bwplus"), gen());
 
     public static final Block OVERWEIGHT_BAKED_POTATO = register("overweight_baked_potato_block", new Block(FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),true, gen());
-    public static final Block OVERWEIGHT_POISONOUS_POTATO = register("overweight_poisonous_potato_block", new CropFullBlock(null, FabricBlockSettings.copy(OVERWEIGHT_BAKED_POTATO)),false, gen());
+    public static final Block OVERWEIGHT_POISONOUS_POTATO = register("overweight_poisonous_potato_block", new CropFullBlock(null, FabricBlockSettings.copy(OVERWEIGHT_BAKED_POTATO)),true, gen());
     public static final Block OVERWEIGHT_NETHERWART = register("overweight_netherwart_block", new CropFullBlock(OVERWEIGHT_NETHERWART_STEM, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.NETHER_WART)), true, gen());
     public static final Block OVERWEIGHT_CABBAGE_STEM = register("overweight_cabbage_stem", new CropStemBlock(FabricBlockSettings.of(Material.PLANT).breakInstantly().noCollision().sounds(BlockSoundGroup.CROP)), false, gen());
     public static final Block VEGETABLE_COMPOST = register("vegetable_compost", new Block(FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.MOSS_BLOCK)),true, gen());
@@ -134,6 +133,9 @@ public class OFObjects {
         compostRegistry.add(ALLIUM_BUSH, 0.65f);
         compostRegistry.add(VEGETABLE_PEELS, 1.0f);
 
+        compostRegistry.add(OVERWEIGHT_BLOODROOT, 1.0f);
+        compostRegistry.add(OVERWEIGHT_MANDRAKE, 1.0f);
+        compostRegistry.add(OVERWEIGHT_GARLIC, 1.0f);
 
 
     }

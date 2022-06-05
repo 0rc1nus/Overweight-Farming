@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.client.particle.BlockLeakParticle;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.WaterSplashParticle;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
@@ -20,9 +19,15 @@ public class OFParticleTypes {
 
 
     public static void init() {
-
-
-        ParticleFactoryRegistry.getInstance().register(FALLING_MELON, s -> new BlockLeakParticle.DrippingObsidianTearFactory(s) {
+        ParticleFactoryRegistry.getInstance().register(LANDING_MELON, s -> new BlockLeakParticle.LandingHoneyFactory(s) {
+            @Override
+            public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+                BlockLeakParticle r = (BlockLeakParticle)super.createParticle(parameters, world, x, y, z, velocityX, velocityY, velocityZ);
+                r.setColor(0.67F, 0.04F, 0.05F);
+                return r;
+            }
+        });
+        ParticleFactoryRegistry.getInstance().register(FALLING_MELON, s -> new BlockLeakParticle.FallingWaterFactory(s) {
             @Override
             public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
                 BlockLeakParticle r = (BlockLeakParticle)super.createParticle(parameters, world, x, y, z, velocityX, velocityY, velocityZ);
@@ -31,15 +36,15 @@ public class OFParticleTypes {
                 return r;
             }
         });
-        ParticleFactoryRegistry.getInstance().register(DRIPPING_MELON, s -> new BlockLeakParticle.DrippingObsidianTearFactory(s) {
+        ParticleFactoryRegistry.getInstance().register(DRIPPING_MELON, s -> new BlockLeakParticle.DrippingWaterFactory(s) {
             @Override
             public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
                 BlockLeakParticle r = (BlockLeakParticle)super.createParticle(parameters, world, x, y, z, velocityX, velocityY, velocityZ);
-                r.setColor(1,1,1);
+                r.setColor(0.62F, 0.0F, 0.1F);
                 ((BlockLeakParticleDuck)r).setNextParticle(FALLING_MELON);
                 return r;
             }
         });
-        ParticleFactoryRegistry.getInstance().register(LANDING_MELON, WaterSplashParticle.SplashFactory::new);
+        //ParticleFactoryRegistry.getInstance().register(LANDING_MELON, WaterSplashParticle.SplashFactory::new);
     }
 }

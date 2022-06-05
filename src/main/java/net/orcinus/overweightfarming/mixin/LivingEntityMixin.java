@@ -1,7 +1,7 @@
 package net.orcinus.overweightfarming.mixin;
 
+import net.minecraft.state.property.Properties;
 import net.orcinus.overweightfarming.registry.OFObjects;
-import net.orcinus.overweightfarming.util.OvergrowthHandler;
 import net.minecraft.block.*;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -9,6 +9,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.orcinus.overweightfarming.util.OverweightGrowthManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,8 +22,8 @@ public abstract class LivingEntityMixin {
     private void OF$tick(CallbackInfo ci){
         LivingEntity livingEntity = ((LivingEntity) (Object) this);
         World world = livingEntity.getWorld();
-        if (!world.isClient) {
-            if (livingEntity.getEquippedStack(EquipmentSlot.HEAD).getItem().equals(OFObjects.STRAW_HAT)) {
+        if (!world.isClient()) {
+            if (livingEntity.getEquippedStack(EquipmentSlot.HEAD).isOf(OFObjects.STRAW_HAT)) {
                 int radius = 40;
                 for (int x = -radius; x <= radius; x++) {
                     for (int z = -radius; z <= radius; z++) {
@@ -30,13 +31,19 @@ public abstract class LivingEntityMixin {
                             BlockPos entityPosition = livingEntity.getBlockPos();
                             BlockPos cropPos = new BlockPos(entityPosition.getX() + x, entityPosition.getY() + y, entityPosition.getZ() + z);
                             BlockState state = world.getBlockState(cropPos);
-                            if (state.isIn(BlockTags.CROPS)) {
+                            String hedgehogModid = "hedgehog";
+                            Block kiwiVines = null;//TODO ForgeRegistries.BLOCKS.getValue(new ResourceLocation(hedgehogModid, "kiwi_vines"));
+                            boolean hedgehogFlag = false;//TODO ModList.get().isLoaded(hedgehogModid) && state.is(Objects.requireNonNull(kiwiVines));
+                            if (state.isIn(BlockTags.CROPS) || hedgehogFlag) {
                                 Block block = state.getBlock();
                                 float v = world.getRandom().nextFloat();
                                 boolean flag = v < 1.6540289E-4 && world.getRandom().nextBoolean();
                                 boolean validForOverweight = false;
                                 if (world instanceof ServerWorld serverLevel) {
                                     if (flag) {
+                                        if (block == kiwiVines && state.get(Properties.BERRIES)) {
+                                            validForOverweight = true;
+                                        }
                                         if (state.contains(CropBlock.AGE)) {
                                             if (block instanceof CropBlock crop) {
                                                 int age = state.get(CropBlock.AGE);
@@ -60,10 +67,11 @@ public abstract class LivingEntityMixin {
                                             if (age == beetrootBlock.getMaxAge())
                                                 validForOverweight = true;
                                         }
+                                        OverweightGrowthManager manager = new OverweightGrowthManager(world.getRandom());
                                         if (validForOverweight) {
-                                            for (Block overgrowth : OvergrowthHandler.CROPS_TO_OVERGROWN.keySet()) {
+                                            for (Block overgrowth : manager.getOverweightMap().keySet()) {
                                                 if (state.isOf(overgrowth)) {
-                                                    OvergrowthHandler.overweightGrowth(serverLevel.getRandom(), state, serverLevel, cropPos, overgrowth);
+                                                    manager.growOverweightCrops(serverLevel, cropPos, state, serverLevel.getRandom());
                                                 }
                                             }
                                         }
