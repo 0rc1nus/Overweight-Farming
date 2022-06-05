@@ -1,4 +1,4 @@
-package com.binome.overweightfarming.blocks;
+package net.orcinus.overweightfarming.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -10,8 +10,4 @@ public class NetherCropBlock extends CropFullBlock{
         super(stemBlock, properties);
     }
 
-    @Override
-    public void applyGrowth(World world, BlockPos pos, BlockState state) {
-        super.applyGrowth(world, pos, state);
-    }
 }

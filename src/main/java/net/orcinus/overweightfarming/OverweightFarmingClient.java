@@ -1,9 +1,9 @@
-package com.binome.overweightfarming;
+package net.orcinus.overweightfarming;
 
-import com.binome.overweightfarming.client.model.StrawHatModel;
-import com.binome.overweightfarming.client.renderer.StrawHatRenderer;
-import com.binome.overweightfarming.registry.OFObjects;
-import com.binome.overweightfarming.registry.OFParticleTypes;
+import net.orcinus.overweightfarming.client.model.StrawHatModel;
+import net.orcinus.overweightfarming.client.renderer.StrawHatRenderer;
+import net.orcinus.overweightfarming.registry.OFObjects;
+import net.orcinus.overweightfarming.registry.OFParticleTypes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;

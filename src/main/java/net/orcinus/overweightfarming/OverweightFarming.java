@@ -1,7 +1,5 @@
-package com.binome.overweightfarming;
+package net.orcinus.overweightfarming;
 
-import com.binome.overweightfarming.registry.OFObjects;
-import com.binome.overweightfarming.util.EmeraldToItemOffer;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
@@ -25,6 +23,9 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.event.GameEvent;
+import net.orcinus.overweightfarming.OFConfig;
+import net.orcinus.overweightfarming.registry.OFObjects;
+import net.orcinus.overweightfarming.util.EmeraldToItemOffer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,9 +1,5 @@
-package com.binome.overweightfarming.util;
+package net.orcinus.overweightfarming.util;
 
-import com.binome.overweightfarming.OverweightFarming;
-import
-com.binome.overweightfarming.blocks.CropFullBlock;
-import com.binome.overweightfarming.registry.OFObjects;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -14,6 +10,9 @@ import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
+import net.orcinus.overweightfarming.OverweightFarming;
+import net.orcinus.overweightfarming.blocks.CropFullBlock;
+import net.orcinus.overweightfarming.registry.OFObjects;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;

@@ -1,4 +1,4 @@
-package com.binome.overweightfarming.items;
+package net.orcinus.overweightfarming.items;
 
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;

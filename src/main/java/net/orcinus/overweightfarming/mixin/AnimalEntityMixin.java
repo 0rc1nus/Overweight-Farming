@@ -1,6 +1,6 @@
-package com.binome.overweightfarming.mixin;
+package net.orcinus.overweightfarming.mixin;
 
-import com.binome.overweightfarming.registry.OFObjects;
+import net.orcinus.overweightfarming.registry.OFObjects;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.passive.AnimalEntity;

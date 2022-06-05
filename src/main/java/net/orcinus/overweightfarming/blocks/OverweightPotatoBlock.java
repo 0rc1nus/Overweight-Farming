@@ -1,6 +1,5 @@
-package com.binome.overweightfarming.blocks;
+package net.orcinus.overweightfarming.blocks;
 
-import com.binome.overweightfarming.registry.OFObjects;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -9,11 +8,13 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.orcinus.overweightfarming.blocks.CropFullBlock;
+import net.orcinus.overweightfarming.registry.OFObjects;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class OverweightPotatoBlock extends CropFullBlock{
+public class OverweightPotatoBlock extends CropFullBlock {
     public OverweightPotatoBlock(Block stemBlock, Settings properties) {
         super(stemBlock, properties);
     }

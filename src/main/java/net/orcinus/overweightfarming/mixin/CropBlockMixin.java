@@ -1,6 +1,6 @@
-package com.binome.overweightfarming.mixin;
+package net.orcinus.overweightfarming.mixin;
 
-import com.binome.overweightfarming.util.OvergrowthHandler;
+import net.orcinus.overweightfarming.util.OvergrowthHandler;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;

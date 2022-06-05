@@ -1,4 +1,4 @@
-package com.binome.overweightfarming.blocks;
+package net.orcinus.overweightfarming.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

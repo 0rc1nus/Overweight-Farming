@@ -1,6 +1,6 @@
-package com.binome.overweightfarming.mixin;
+package net.orcinus.overweightfarming.mixin;
 
-import com.binome.overweightfarming.util.BlockLeakParticleDuck;
+import net.orcinus.overweightfarming.util.BlockLeakParticleDuck;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.ParticleEffect;

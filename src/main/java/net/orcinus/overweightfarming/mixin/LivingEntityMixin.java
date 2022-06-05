@@ -1,7 +1,7 @@
-package com.binome.overweightfarming.mixin;
+package net.orcinus.overweightfarming.mixin;
 
-import com.binome.overweightfarming.registry.OFObjects;
-import com.binome.overweightfarming.util.OvergrowthHandler;
+import net.orcinus.overweightfarming.registry.OFObjects;
+import net.orcinus.overweightfarming.util.OvergrowthHandler;
 import net.minecraft.block.*;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
