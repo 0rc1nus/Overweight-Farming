@@ -42,8 +42,12 @@ public class CropFullBlock extends Block implements BonemealableBlock {
         if (this.stemBlock != null && world.getBlockState(above).isAir()) {
             world.setBlock(above, stemBlock.defaultBlockState(), 2);
         }
-        if (world.isStateAtPosition(below, BlockBehaviour.BlockStateBase::isAir)) {
+        if (world.isStateAtPosition(below, BlockBehaviour.BlockStateBase::isAir) && this.shouldGrowRoots()) {
             world.setBlock(below, Blocks.HANGING_ROOTS.defaultBlockState(), 2);
         }
+    }
+
+    public boolean shouldGrowRoots() {
+        return true;
     }
 }
