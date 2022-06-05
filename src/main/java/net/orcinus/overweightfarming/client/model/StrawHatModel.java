@@ -1,6 +1,6 @@
-package com.binome.overweightfarming.client.model;
+package net.orcinus.overweightfarming.client.model;
 
-import com.binome.overweightfarming.OverweightFarming;
+import net.orcinus.overweightfarming.OverweightFarming;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;

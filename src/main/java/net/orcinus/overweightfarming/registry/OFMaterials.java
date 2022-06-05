@@ -1,4 +1,4 @@
-package com.binome.overweightfarming.registry;
+package net.orcinus.overweightfarming.registry;
 
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;

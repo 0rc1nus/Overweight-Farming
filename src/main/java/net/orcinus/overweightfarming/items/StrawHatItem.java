@@ -1,5 +1,4 @@
-package com.binome.overweightfarming.items;
-
+package net.orcinus.overweightfarming.items;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
@@ -12,15 +11,9 @@ import net.minecraft.sound.SoundEvents;
 public class StrawHatItem extends ArmorItem {
     public static final StrawHatMaterial MATERIAL = new StrawHatMaterial();
 
-
-
-
     public StrawHatItem(Settings properties) {
         super(MATERIAL, EquipmentSlot.HEAD, properties);
     }
-
-
-
 
     private static class StrawHatMaterial implements ArmorMaterial {
         @Override

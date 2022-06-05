@@ -1,9 +1,6 @@
-package com.binome.overweightfarming.registry;
+package net.orcinus.overweightfarming.registry;
 
-import com.binome.overweightfarming.OverweightFarming;
-import com.binome.overweightfarming.blocks.*;
 import com.binome.overweightfarming.items.MelonJuiceItem;
-import com.binome.overweightfarming.items.StrawHatItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
@@ -15,6 +12,12 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.orcinus.overweightfarming.OverweightFarming;
+import net.orcinus.overweightfarming.blocks.CropFullBlock;
+import net.orcinus.overweightfarming.blocks.CropStemBlock;
+import net.orcinus.overweightfarming.blocks.OverweightAppleBlock;
+import net.orcinus.overweightfarming.blocks.OverweightOnionBlock;
+import net.orcinus.overweightfarming.items.StrawHatItem;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

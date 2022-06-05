@@ -1,4 +1,4 @@
-package com.binome.overweightfarming.util;
+package net.orcinus.overweightfarming.util;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
