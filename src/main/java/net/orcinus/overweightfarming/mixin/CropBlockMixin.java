@@ -1,6 +1,5 @@
 package net.orcinus.overweightfarming.mixin;
 
-import net.orcinus.overweightfarming.util.OvergrowthHandler;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -16,9 +15,9 @@ import java.util.Random;
 public class CropBlockMixin {
     @Inject(method = "randomTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z"), cancellable = true)
     private void OF$randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci){
-        for (Block cropBlock : OvergrowthHandler.CROPS_TO_OVERGROWN.keySet()) {
+        OverweightGrowthManager manager = new OverweightGrowthManager(random);
+        for (Block cropBlock : manager.getOverweightMap().keySet()) {
             if (state.isOf(cropBlock)) {
-                OverweightGrowthManager manager = new OverweightGrowthManager(random);
                 boolean flag = state.contains(CropBlock.AGE) && state.get(CropBlock.AGE) < 7 && state.get(CropBlock.AGE) == 3;
                 boolean flag1 = state.contains(CocoaBlock.AGE) && state.get(CocoaBlock.AGE) == 1;
                 boolean flag2 = state.contains(BeetrootsBlock.AGE) && state.get(BeetrootsBlock.AGE) < BeetrootsBlock.MAX_AGE && state.get(BeetrootsBlock.AGE) > 1;

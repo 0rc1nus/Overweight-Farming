@@ -8,9 +8,7 @@ import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -93,18 +91,23 @@ public class OverweightFarming implements ModInitializer {
     }
 
     private ActionResult growBloodroot(PlayerEntity player, World world, Hand hand, BlockHitResult blockHitResult) {
-
-        if(FabricLoader.getInstance().isModLoaded("bwplus") && Registry.BLOCK.containsId(new Identifier("bwplus","bloodroot"))){
-            if(world.getBlockState(blockHitResult.getBlockPos()).isOf(Registry.BLOCK.get(new Identifier("bwplus","bloodroot")))){
+        Identifier identifier = new Identifier("bwplus","bloodroot");
+        if(FabricLoader.getInstance().isModLoaded("bwplus") && Registry.BLOCK.containsId(identifier)){
+            if(world.getBlockState(blockHitResult.getBlockPos()).isOf(Registry.BLOCK.get(identifier))){
                 if(player.getMainHandStack().getItem() instanceof BoneMealItem){
-                    player.getMainHandStack().decrement(1);
+                    if(!player.isCreative()){
+                        player.getMainHandStack().decrement(1);
+                    }
+
                     if (!world.isClient) {
                         world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, blockHitResult.getBlockPos(), 0);
                     }
+                    BoneMealItem.createParticles(world, blockHitResult.getBlockPos(), 8);
+
                     if(world.getRandom().nextFloat() > 0.75F){
-                        world.setBlockState(blockHitResult.getBlockPos(), OFObjects.OVERWEIGHT_BLOODROOT.getDefaultState(), 1);
-                        if(world.getBlockState(blockHitResult.getBlockPos().up()).isOf(Blocks.AIR) ){
-                            world.setBlockState(blockHitResult.getBlockPos().up(), OFObjects.OVERWEIGHT_BLOODROOT_STEM.getDefaultState(), 1);
+                        world.setBlockState(blockHitResult.getBlockPos(), OFObjects.OVERWEIGHT_BLOODROOT.getDefaultState(), Block.NOTIFY_ALL);
+                        if(world.getBlockState(blockHitResult.getBlockPos().up()).isAir()){
+                            world.setBlockState(blockHitResult.getBlockPos().up(), OFObjects.OVERWEIGHT_BLOODROOT_STEM.getDefaultState(), Block.NOTIFY_ALL);
                         }
                     }
                     return ActionResult.SUCCESS;
