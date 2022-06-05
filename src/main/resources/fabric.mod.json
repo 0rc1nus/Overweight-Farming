@@ -13,6 +13,7 @@
   "license": "All Rights Reserved",
 
   "environment": "*",
+  "accessWidener" : "overweightfarming.accesswidener",
   "entrypoints": {
     "main": [
       "com.binome.overweightfarming.OverweightFarming"

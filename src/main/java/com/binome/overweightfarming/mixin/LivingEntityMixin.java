@@ -1,6 +1,6 @@
 package com.binome.overweightfarming.mixin;
 
-import com.binome.overweightfarming.init.OFObjects;
+import com.binome.overweightfarming.registry.OFObjects;
 import com.binome.overweightfarming.util.OvergrowthHandler;
 import net.minecraft.block.*;
 import net.minecraft.entity.EquipmentSlot;

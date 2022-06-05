@@ -1,6 +1,6 @@
 package com.binome.overweightfarming.blocks;
 
-import com.binome.overweightfarming.init.OFObjects;
+import com.binome.overweightfarming.registry.OFObjects;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.FluidTags;

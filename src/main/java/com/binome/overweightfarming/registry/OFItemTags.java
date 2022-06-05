@@ -1,4 +1,4 @@
-package com.binome.overweightfarming.init;
+package com.binome.overweightfarming.registry;
 
 import com.binome.overweightfarming.OverweightFarming;
 import net.minecraft.item.Item;

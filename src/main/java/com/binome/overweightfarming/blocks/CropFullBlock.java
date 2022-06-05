@@ -50,4 +50,8 @@ public class CropFullBlock extends CropBlock implements Fertilizable {
             world.setBlockState(below, Blocks.HANGING_ROOTS.getDefaultState(), 2);
         }
     }
+
+    public boolean shouldGrowRoots() {
+        return true;
+    }
 }

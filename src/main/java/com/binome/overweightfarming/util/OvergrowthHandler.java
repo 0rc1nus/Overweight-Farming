@@ -3,7 +3,7 @@ package com.binome.overweightfarming.util;
 import com.binome.overweightfarming.OverweightFarming;
 import
 com.binome.overweightfarming.blocks.CropFullBlock;
-import com.binome.overweightfarming.init.OFObjects;
+import com.binome.overweightfarming.registry.OFObjects;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
