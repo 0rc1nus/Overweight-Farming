@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "overweight_farming:block/peeled_overweight_carrot_top",
+    "side": "overweight_farming:block/peeled_overweight_carrot_side"
+  }
+}

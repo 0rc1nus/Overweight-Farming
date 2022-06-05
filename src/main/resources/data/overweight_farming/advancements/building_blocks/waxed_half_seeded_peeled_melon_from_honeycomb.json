@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "overweight_farming:waxed_half_seeded_peeled_melon_from_honeycomb"
+    ]
+  },
+  "criteria": {
+    "has_half_seeded_peeled_melon": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "overweight_farming:half_seeded_peeled_melon"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "overweight_farming:waxed_half_seeded_peeled_melon_from_honeycomb"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_half_seeded_peeled_melon",
+      "has_the_recipe"
+    ]
+  ]
+}

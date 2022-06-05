@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "farmersdelight",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "farmersdelight:cutting",
+        "ingredients": [
+          {
+            "item": "overweight_farming:peeled_overweight_carrot_block"
+          }
+        ],
+        "tool": {
+          "type": "farmersdelight:tool_action",
+          "action": "hoe_dig"
+        },
+        "result": [
+          {
+            "item": "minecraft:carrot",
+            "count": 10
+          }
+        ]
+      }
+    }
+  ]
+}

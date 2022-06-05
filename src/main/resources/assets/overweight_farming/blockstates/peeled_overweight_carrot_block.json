@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "overweight_farming:block/peeled_overweight_carrot_block_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "overweight_farming:block/peeled_overweight_carrot_block"
+    },
+    "axis=z": {
+      "model": "overweight_farming:block/peeled_overweight_carrot_block_horizontal",
+      "x": 90
+    }
+  }
+}

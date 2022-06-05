@@ -1,5 +1,6 @@
 package net.orcinus.overweightfarming.registry;
 
+import net.orcinus.overweightfarming.blocks.*;
 import net.orcinus.overweightfarming.items.MelonJuiceItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -13,10 +14,6 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.orcinus.overweightfarming.OverweightFarming;
-import net.orcinus.overweightfarming.blocks.CropFullBlock;
-import net.orcinus.overweightfarming.blocks.CropStemBlock;
-import net.orcinus.overweightfarming.blocks.OverweightAppleBlock;
-import net.orcinus.overweightfarming.blocks.OverweightOnionBlock;
 import net.orcinus.overweightfarming.items.StrawHatItem;
 
 import java.util.LinkedHashMap;
@@ -69,12 +66,12 @@ public class OFObjects {
     public static final Block OVERWEIGHT_KIWI = register( "overweight_kiwi_block", new CropFullBlock(null, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), FabricLoader.getInstance().isModLoaded("hedgehog"), gen());
     public static final Block OVERWEIGHT_SLICED_KIWI = register( "overweight_sliced_kiwi_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_KIWI)), FabricLoader.getInstance().isModLoaded("hedgehog"), gen());
     public static final Block OVERWEIGHT_GINGER = register("overweight_ginger_block", new CropFullBlock(OVERWEIGHT_GINGER_STEM, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),FabricLoader.getInstance().isModLoaded("snowyspirit"), gen());
-    //TODO public static final Block SEEDED_PEELED_MELON = register("seeded_peeled_melon", new PeeledMelonBlock(PeeledMelonBlock.SeedState.SEEDED, FabricBlockSettings.copy(Blocks.MELON).sound(BlockSoundGroup.WET_GRASS)), CreativeModeTab.TAB_FOOD);
-    //TODO public static final Block HALF_SEEDED_PEELED_MELON = register("half_seeded_peeled_melon", new PeeledMelonBlock(PeeledMelonBlock.SeedState.HALF_SEEDED, FabricBlockSettings.copy(Blocks.MELON).sound(BlockSoundGroup.WET_GRASS)), CreativeModeTab.TAB_FOOD);
-    //TODO public static final Block SEEDLESS_PEELED_MELON = register("seedless_peeled_melon", new PeeledMelonBlock(PeeledMelonBlock.SeedState.SEEDLESS, FabricBlockSettings.copy(Blocks.MELON).sound(BlockSoundGroup.WET_GRASS)), CreativeModeTab.TAB_FOOD);
-    //TODO public static final Block WAXED_SEEDED_PEELED_MELON = register("waxed_seeded_peeled_melon", new Block(FabricBlockSettings.copy(SEEDED_PEELED_MELON.get())), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    //TODO public static final Block WAXED_HALF_SEEDED_PEELED_MELON = register("waxed_half_seeded_peeled_melon", new Block(FabricBlockSettings.copy(HALF_SEEDED_PEELED_MELON.get())), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    //TODO public static final Block WAXED_SEEDLESS_PEELED_MELON = register("waxed_seedless_peeled_melon", new Block(FabricBlockSettings.copy(SEEDLESS_PEELED_MELON.get())), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final Block SEEDED_PEELED_MELON = register("seeded_peeled_melon", new PeeledMelonBlock(PeeledMelonBlock.SeedState.SEEDED, FabricBlockSettings.copy(Blocks.MELON).sounds(BlockSoundGroup.WET_GRASS)), true, gen());
+    public static final Block HALF_SEEDED_PEELED_MELON = register("half_seeded_peeled_melon", new PeeledMelonBlock(PeeledMelonBlock.SeedState.HALF_SEEDED, FabricBlockSettings.copy(Blocks.MELON).sounds(BlockSoundGroup.WET_GRASS)), true,gen());
+    public static final Block SEEDLESS_PEELED_MELON = register("seedless_peeled_melon", new PeeledMelonBlock(PeeledMelonBlock.SeedState.SEEDLESS, FabricBlockSettings.copy(Blocks.MELON).sounds(BlockSoundGroup.WET_GRASS)),true,  gen());
+    public static final Block WAXED_SEEDED_PEELED_MELON = register("waxed_seeded_peeled_melon", new Block(FabricBlockSettings.copy(SEEDED_PEELED_MELON)), true, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
+    public static final Block WAXED_HALF_SEEDED_PEELED_MELON = register("waxed_half_seeded_peeled_melon", new Block(FabricBlockSettings.copy(HALF_SEEDED_PEELED_MELON)), true, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
+    public static final Block WAXED_SEEDLESS_PEELED_MELON = register("waxed_seedless_peeled_melon", new Block(FabricBlockSettings.copy(SEEDLESS_PEELED_MELON)), true, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
     public static final Block PEELED_OVERWEIGHT_BEETROOT = register("peeled_overweight_beetroot_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_BEETROOT)), true, gen());
     public static final Block PEELED_OVERWEIGHT_CARROT = register("peeled_overweight_carrot_block", new PillarBlock(FabricBlockSettings.copy(OVERWEIGHT_CARROT)),true, gen());
     public static final Block PEELED_OVERWEIGHT_POTATO = register("peeled_overweight_potato_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_POTATO)), true, gen());
@@ -87,17 +84,17 @@ public class OFObjects {
 
 
     //POTTED
-    public static final Block POTTED_OVERWEIGHT_BEETROOT = register("potted_overweight_beetroot", new FlowerPotBlock(OVERWEIGHT_BEETROOT, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque()), false, gen());
-    public static final Block POTTED_OVERWEIGHT_CARROT = register("potted_overweight_carrot", new FlowerPotBlock(OVERWEIGHT_CARROT, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque()), false, gen());
-    public static final Block POTTED_OVERWEIGHT_COCOA = register("potted_overweight_cocoa", new FlowerPotBlock(OVERWEIGHT_COCOA, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque()), false, gen());
-    public static final Block POTTED_OVERWEIGHT_POTATO = register("potted_overweight_potato", new FlowerPotBlock(OVERWEIGHT_POTATO, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque()), false, gen());
-    public static final Block POTTED_OVERWEIGHT_GINGER = register("potted_overweight_ginger", new FlowerPotBlock(OVERWEIGHT_GINGER, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque()), false, gen());
-    public static final Block POTTED_OVERWEIGHT_POISONOUS_POTATO = register("potted_overweight_poisonous_potato", new FlowerPotBlock(OVERWEIGHT_POISONOUS_POTATO, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque()), false, gen());
-    public static final Block POTTED_OVERWEIGHT_APPLE = register("potted_overweight_apple", new FlowerPotBlock(OVERWEIGHT_APPLE, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque()), false, gen());
-    public static final Block POTTED_OVERWEIGHT_GOLDEN_APPLE = register("potted_overweight_golden_apple", new FlowerPotBlock(OVERWEIGHT_GOLDEN_APPLE, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque()), false, gen());
-    public static final Block POTTED_OVERWEIGHT_KIWI = register("potted_overweight_kiwi", new FlowerPotBlock(OVERWEIGHT_KIWI, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque()), false, gen());
-    public static final Block POTTED_OVERWEIGHT_ONION = register("potted_overweight_onion", new FlowerPotBlock(OVERWEIGHT_ONION, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque()), false, gen());
-    public static final Block POTTED_OVERWEIGHT_CABBAGE = register("potted_overweight_cabbage", new FlowerPotBlock(OVERWEIGHT_CABBAGE, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque()), false, gen());
+    public static final Block POTTED_OVERWEIGHT_BEETROOT = register("potted_overweight_beetroot", new FlowerPotBlock(OVERWEIGHT_BEETROOT, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
+    public static final Block POTTED_OVERWEIGHT_CARROT = register("potted_overweight_carrot", new FlowerPotBlock(OVERWEIGHT_CARROT, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
+    public static final Block POTTED_OVERWEIGHT_COCOA = register("potted_overweight_cocoa", new FlowerPotBlock(OVERWEIGHT_COCOA, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
+    public static final Block POTTED_OVERWEIGHT_POTATO = register("potted_overweight_potato", new FlowerPotBlock(OVERWEIGHT_POTATO, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
+    public static final Block POTTED_OVERWEIGHT_GINGER = register("potted_overweight_ginger", new FlowerPotBlock(OVERWEIGHT_GINGER, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
+    public static final Block POTTED_OVERWEIGHT_POISONOUS_POTATO = register("potted_overweight_poisonous_potato", new FlowerPotBlock(OVERWEIGHT_POISONOUS_POTATO, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
+    public static final Block POTTED_OVERWEIGHT_APPLE = register("potted_overweight_apple", new FlowerPotBlock(OVERWEIGHT_APPLE, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
+    public static final Block POTTED_OVERWEIGHT_GOLDEN_APPLE = register("potted_overweight_golden_apple", new FlowerPotBlock(OVERWEIGHT_GOLDEN_APPLE, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
+    public static final Block POTTED_OVERWEIGHT_KIWI = register("potted_overweight_kiwi", new FlowerPotBlock(OVERWEIGHT_KIWI, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
+    public static final Block POTTED_OVERWEIGHT_ONION = register("potted_overweight_onion", new FlowerPotBlock(OVERWEIGHT_ONION, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
+    public static final Block POTTED_OVERWEIGHT_CABBAGE = register("potted_overweight_cabbage", new FlowerPotBlock(OVERWEIGHT_CABBAGE, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
 
 
     private static Item.Settings gen() {

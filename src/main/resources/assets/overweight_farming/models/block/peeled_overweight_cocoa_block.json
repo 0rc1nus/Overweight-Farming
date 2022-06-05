@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "overweight_farming:block/peeled_overweight_cocoa_top",
+    "bottom": "overweight_farming:block/peeled_overweight_cocoa_bottom",
+    "side": "overweight_farming:block/peeled_overweight_cocoa_side"
+  }
+}

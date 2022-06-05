@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "overweight_farming:vegetable_compost"
+    ]
+  },
+  "criteria": {
+    "has_vegetable_peels": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "overweight_farming:vegetable_peels"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "overweight_farming:vegetable_compost"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_vegetable_peels",
+      "has_the_recipe"
+    ]
+  ]
+}

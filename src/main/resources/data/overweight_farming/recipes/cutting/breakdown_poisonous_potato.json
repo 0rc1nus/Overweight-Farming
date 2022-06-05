@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "farmersdelight",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "farmersdelight:cutting",
+        "ingredients": [
+          {
+            "item": "overweight_farming:overweight_poisonous_potato_block"
+          }
+        ],
+        "tool": {
+          "type": "farmersdelight:tool_action",
+          "action": "hoe_dig"
+        },
+        "result": [
+          {
+            "item": "minecraft:poisonous_potato",
+            "count": 10
+          }
+        ]
+      }
+    }
+  ]
+}
