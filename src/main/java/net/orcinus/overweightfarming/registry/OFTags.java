@@ -8,5 +8,6 @@ import net.orcinus.overweightfarming.OverweightFarming;
 
 public class OFTags {
     public static final TagKey<Block> OVERWEIGHT_OBSTACLES = TagKey.of(Registry.BLOCK_KEY, new Identifier(OverweightFarming.MODID, "overweight_obstacles"));
+    public static final TagKey<Block> OVERWEIGHT_COMPAT = TagKey.of(Registry.BLOCK_KEY, new Identifier(OverweightFarming.MODID, "overweight_compat"));
 
 }
