@@ -38,7 +38,7 @@ public abstract class LivingEntityMixin {
                             if (state.isIn(BlockTags.CROPS) || state.isIn(OFTags.OVERWEIGHT_COMPAT)) {
                                 Block block = state.getBlock();
                                 float v = world.getRandom().nextFloat();
-                                boolean flag = v < 1.6540289E-4 && world.getRandom().nextBoolean();
+                                boolean flag = v < 1.5E-4 && world.getRandom().nextBoolean();
                                 boolean validForOverweight = false;
                                 if (world instanceof ServerWorld serverLevel) {
                                     if (flag) {
