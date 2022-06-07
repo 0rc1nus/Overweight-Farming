@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.DripstoneUtils;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.orcinus.overweightfarming.blocks.CropFullBlock;
 import net.orcinus.overweightfarming.blocks.OverweightCarrotBlock;
@@ -29,6 +30,7 @@ public record OverweightGrowthManager(Random random) {
             map.put(Blocks.POTATOES, Pair.of(OverweightType.DEFAULT, this.random.nextInt(20) == 0 ? OFBlocks.OVERWEIGHT_POISONOUS_POTATO.get() : OFBlocks.OVERWEIGHT_POTATO.get()));
             map.put(Blocks.BEETROOTS, Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_BEETROOT.get()));
             map.put(Blocks.COCOA, Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_COCOA.get()));
+            map.put(Blocks.NETHER_WART, Pair.of(OverweightType.INVERTED, OFBlocks.OVERWEIGHT_NETHERWART.get()));
             map.put(this.getCompatBlock("farmersdelight", "cabbages"), Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_CABBAGE.get()));
             map.put(this.getCompatBlock("farmersdelight", "onions"), Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_ONION.get()));
             map.put(this.getCompatBlock("hedgehog", "kiwi_vines"), Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_KIWI.get()));
@@ -49,13 +51,22 @@ public record OverweightGrowthManager(Random random) {
                     BlockState stemState = null;
                     if (stemBlock != null) stemState = stemBlock.defaultBlockState();
                     switch (overweightType) {
-                        case DEFAULT -> simpleOverweightGrowth(serverLevel, blockPos, overweightState, stemState);
-                        case SIMPLE -> setBlock(serverLevel, blockPos, overweightState);
-                        case SPROUT -> growCarrotStem(serverLevel, blockPos, random, overweightState, stemState);
+                        case DEFAULT -> this.simpleOverweightGrowth(serverLevel, blockPos, overweightState, stemState);
+                        case SIMPLE -> this.setBlock(serverLevel, blockPos, overweightState);
+                        case SPROUT -> this.sproutGrowth(serverLevel, blockPos, random, overweightState, stemState);
+                        case INVERTED -> this.invertedGrowth(serverLevel, blockPos, overweightState, stemState);
                     }
                 }
             }
         }
+    }
+
+    private void invertedGrowth(ServerLevel world, BlockPos blockPos, BlockState overweightState, BlockState stemState) {
+        if (!world.isStateAtPosition(blockPos.above(), DripstoneUtils::isEmptyOrWater)) {
+            return;
+        }
+        this.setBlock(world, blockPos.above(), overweightState);
+        this.setBlock(world, blockPos, stemState);
     }
 
     @Nullable
@@ -76,7 +87,7 @@ public record OverweightGrowthManager(Random random) {
         }
     }
 
-    private void growCarrotStem(ServerLevel world, BlockPos blockPos, Random random, BlockState blockState, BlockState stemState) {
+    private void sproutGrowth(ServerLevel world, BlockPos blockPos, Random random, BlockState blockState, BlockState stemState) {
         int height = random.nextBoolean() && random.nextInt(5) == 0 ? random.nextBoolean() && random.nextInt(10) == 0 ? 4 : 3 : 2;
         BlockPos startPos = blockPos.above();
         BlockPos.MutableBlockPos mutableBlockPos = startPos.mutable();

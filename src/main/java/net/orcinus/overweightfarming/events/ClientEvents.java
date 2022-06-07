@@ -36,6 +36,7 @@ public class ClientEvents {
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.OVERWEIGHT_CABBAGE_STEM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.OVERWEIGHT_APPLE_STEM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.OVERWEIGHT_GOLDEN_APPLE_STEM.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(OFBlocks.OVERWEIGHT_NETHERWART_STEM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_BEETROOT.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_CARROT.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_POTATO.get(), RenderType.cutout());

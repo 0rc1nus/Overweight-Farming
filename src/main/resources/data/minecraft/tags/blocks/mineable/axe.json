@@ -26,6 +26,7 @@
     "overweight_farming:overweight_baked_potato_block",
     "overweight_farming:overweight_poisonous_potato_block",
     "overweight_farming:overweight_apple_block",
-    "overweight_farming:overweight_golden_apple_block"
+    "overweight_farming:overweight_golden_apple_block",
+    "overweight_farming:overweight_nether_wart_block"
   ]
 }

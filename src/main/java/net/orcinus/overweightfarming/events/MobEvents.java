@@ -1,5 +1,7 @@
 package net.orcinus.overweightfarming.events;
 
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.NetherWartBlock;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.init.OFItems;
 import net.orcinus.overweightfarming.util.OFItemsForEmeralds;
@@ -122,7 +124,7 @@ public class MobEvents {
                             String hedgehogModid = "hedgehog";
                             Block kiwiVines = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(hedgehogModid, "kiwi_vines"));
                             boolean hedgehogFlag = ModList.get().isLoaded(hedgehogModid) && state.is(Objects.requireNonNull(kiwiVines));
-                            if (state.is(BlockTags.CROPS) || hedgehogFlag) {
+                            if (state.is(BlockTags.CROPS) || hedgehogFlag || state.is(Blocks.NETHER_WART)) {
                                 Block block = state.getBlock();
                                 float v = world.getRandom().nextFloat();
                                 boolean flag = v < 1.6540289E-4 && world.getRandom().nextBoolean();
@@ -147,13 +149,24 @@ public class MobEvents {
                                                 }
                                             }
                                         }
-                                        if (state.hasProperty(BeetrootBlock.AGE) && block instanceof BeetrootBlock beetrootBlock) {
-                                            int age = state.getValue(BeetrootBlock.AGE);
-                                            if (age < beetrootBlock.getMaxAge()) {
-                                                beetrootBlock.growCrops(serverLevel, cropPos, state);
+                                        if (state.hasProperty(BlockStateProperties.AGE_3)) {
+                                            if (block instanceof BeetrootBlock beetrootBlock){
+                                                int age = state.getValue(BeetrootBlock.AGE);
+                                                if (age < beetrootBlock.getMaxAge()) {
+                                                    beetrootBlock.growCrops(serverLevel, cropPos, state);
+                                                }
+                                                if (age == beetrootBlock.getMaxAge())
+                                                    validForOverweight = true;
                                             }
-                                            if (age == beetrootBlock.getMaxAge())
-                                                validForOverweight = true;
+                                            if (block instanceof NetherWartBlock) {
+                                                int age = state.getValue(BeetrootBlock.AGE);
+                                                if (age < NetherWartBlock.MAX_AGE) {
+                                                    state = state.setValue(NetherWartBlock.AGE, age + 1);
+                                                    world.setBlock(cropPos, state, 2);
+                                                }
+                                                if (age == NetherWartBlock.MAX_AGE)
+                                                    validForOverweight = true;
+                                            }
                                         }
                                         OverweightGrowthManager manager = new OverweightGrowthManager(world.getRandom());
                                         if (validForOverweight) {
