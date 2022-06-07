@@ -17,6 +17,7 @@ public class OFConfig implements ConfigData {
         public final boolean allowOverweightCarrot = true;
         public final boolean allowOverweightCocoa = true;
         public final boolean allowOverweightBeetroot = true;
+        public final boolean allowOverweightNetherWart = true;
     }
 
     public static class CompatCrops {
@@ -25,5 +26,6 @@ public class OFConfig implements ConfigData {
         public final boolean allowOverweightMandrake = true;
         public final boolean allowOverweightGarlic = true;
         public final boolean allowOverweightBloodroot = true;
+        public final boolean allowOverweightWeeds = true;
     }
 }

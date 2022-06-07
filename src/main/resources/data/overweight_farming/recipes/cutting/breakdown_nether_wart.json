@@ -1,0 +1,32 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "farmersdelight"
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "recipe": {
+        "type": "farmersdelight:cutting",
+        "ingredients": [
+          {
+            "item": "overweight_farming:overweight_nether_wart_block"
+          }
+        ],
+        "tool": {
+          "type": "farmersdelight:tool_action",
+          "action": "hoe_dig"
+        },
+        "result": [
+          {
+            "item": "minecraft:nether_wart",
+            "count": 10
+          }
+        ]
+      }
+    }
+  ]
+}

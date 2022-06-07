@@ -1,5 +1,6 @@
 package net.orcinus.overweightfarming.util;
 
+import net.minecraft.world.gen.feature.util.DripstoneHelper;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.blocks.CropFullBlock;
 import com.google.common.collect.Maps;
@@ -30,11 +31,13 @@ public record OverweightGrowthManager(Random random) {
             map.put(Blocks.POTATOES, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightPotato, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_POTATO));
             map.put(Blocks.BEETROOTS, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightBeetroot, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_BEETROOT));
             map.put(Blocks.COCOA, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightCocoa, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_COCOA));
+            map.put(Blocks.NETHER_WART, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightNetherWart, OverweightType.INVERTED), OFObjects.OVERWEIGHT_NETHERWART));
             map.put(getCompatBlock("farmersdelight", "cabbages"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightCabbage, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_CABBAGE));
             map.put(getCompatBlock("farmersdelight", "onions"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightOnion, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_ONION));
             map.put(getCompatBlock("bewitchment", "mandrake"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightMandrake, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_MANDRAKE));
             map.put(getCompatBlock("bewitchment", "garlic"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightGarlic, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_GARLIC));
             map.put(getCompatBlock("bwplus", "bloodroot"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightBloodroot, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_BLOODROOT));
+            map.put(getCompatBlock("immersive_weathering", "weeds"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightWeeds, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_WEED));
         });
     }
 
@@ -57,13 +60,22 @@ public record OverweightGrowthManager(Random random) {
                     BlockState stemState = null;
                     if (stemBlock != null) stemState = stemBlock.getDefaultState();
                     switch (overweightType) {
-                        case DEFAULT -> simpleOverweightGrowth(serverLevel, blockPos, overweightState, stemState);
-                        case SIMPLE -> setBlock(serverLevel, blockPos, overweightState);
-                        case SPROUT -> growCarrotStem(serverLevel, blockPos, random, overweightState, stemState);
+                        case DEFAULT -> this.simpleOverweightGrowth(serverLevel, blockPos, overweightState, stemState);
+                        case SIMPLE -> this.setBlock(serverLevel, blockPos, overweightState);
+                        case SPROUT -> this.sproutGrowth(serverLevel, blockPos, random, overweightState, stemState);
+                        case INVERTED -> this.invertedGrowth(serverLevel, blockPos, overweightState, stemState);
                     }
                 }
             }
         }
+    }
+
+    private void invertedGrowth(ServerWorld world, BlockPos blockPos, BlockState overweightState, BlockState stemState) {
+        if (!world.testBlockState(blockPos.up(), DripstoneHelper::canGenerate)) {
+            return;
+        }
+        this.setBlock(world, blockPos.up(), overweightState);
+        this.setBlock(world, blockPos, stemState);
     }
 
     @Nullable
@@ -76,7 +88,9 @@ public record OverweightGrowthManager(Random random) {
         if (stemBlock != null) {
             if (stemBlock.getBlock() instanceof TallPlantBlock) {
                 boolean flag = world.isAir(blockPos.up()) && world.isAir(blockPos.up(2));
-                if (!flag) return;
+                if (!flag) {
+                    return;
+                }
                 TallPlantBlock.placeAt(world, stemBlock.getBlock().getDefaultState(), blockPos.up(), 2);
             } else {
                 this.setBlock(world, blockPos.up(), stemBlock);
@@ -84,7 +98,7 @@ public record OverweightGrowthManager(Random random) {
         }
     }
 
-    private void growCarrotStem(ServerWorld world, BlockPos blockPos, Random random, BlockState blockState, BlockState stemState) {
+    private void sproutGrowth(ServerWorld world, BlockPos blockPos, Random random, BlockState blockState, BlockState stemState) {
         int height = random.nextBoolean() && random.nextInt(5) == 0 ? random.nextBoolean() && random.nextInt(10) == 0 ? 4 : 3 : 2;
         BlockPos startPos = blockPos.up();
         BlockPos.Mutable mutableBlockPos = startPos.mutableCopy();
@@ -100,7 +114,9 @@ public record OverweightGrowthManager(Random random) {
         }
     }
 
-    private void setBlock(ServerWorld world, BlockPos blockPos, BlockState overweightState) {
+
+
+    public void setBlock(ServerWorld world, BlockPos blockPos, BlockState overweightState) {
         for (Block cropBlock : this.getOverweightMap().keySet()) {
             BlockState state = world.getBlockState(blockPos);
             if (state.isAir() || state.getBlock() == cropBlock || state.isOf(Blocks.FARMLAND) || state.isOf(Blocks.DIRT)) {

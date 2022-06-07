@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "overweight_farming:block/overweight_nether_wart_top",
+    "bottom": "overweight_farming:block/overweight_nether_wart_bottom",
+    "side": "overweight_farming:block/overweight_nether_wart_side"
+  }
+}

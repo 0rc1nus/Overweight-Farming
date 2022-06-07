@@ -1,7 +1,10 @@
 package net.orcinus.overweightfarming;
 
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.orcinus.overweightfarming.client.model.StrawHatModel;
+import net.orcinus.overweightfarming.client.renderer.DandelionEntityRenderer;
 import net.orcinus.overweightfarming.client.renderer.StrawHatRenderer;
+import net.orcinus.overweightfarming.registry.OFEntityTypes;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import net.orcinus.overweightfarming.registry.OFParticleTypes;
 import net.fabricmc.api.ClientModInitializer;
@@ -36,9 +39,13 @@ public class OverweightFarmingClient implements ClientModInitializer {
                 OFObjects.POTTED_OVERWEIGHT_KIWI,
                 OFObjects.POTTED_OVERWEIGHT_ONION,
                 OFObjects.POTTED_OVERWEIGHT_POISONOUS_POTATO,
-                OFObjects.POTTED_OVERWEIGHT_POTATO
-        );
+                OFObjects.POTTED_OVERWEIGHT_POTATO,
 
+                OFObjects.OVERWEIGHT_NETHERWART_STEM
+        );
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), OFObjects.OVERWEIGHT_WEED);
+
+        EntityRendererRegistry.register(OFEntityTypes.DANDELION_FLUFF_ENTITY, DandelionEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(StrawHatModel.LAYER_LOCATION, StrawHatModel::createBodyLayer);
         ArmorRenderer.register(new StrawHatRenderer(null), OFObjects.STRAW_HAT);
     }

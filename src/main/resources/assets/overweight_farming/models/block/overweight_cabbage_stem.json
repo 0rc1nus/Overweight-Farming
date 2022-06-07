@@ -1,7 +1,7 @@
 {
 	"parent": "minecraft:block/cross",
 	"textures": {
-		"1": "overweight_farming:block/overweight_cabbage_stem_side",
+		"stem": "overweight_farming:block/overweight_cabbage_stem_side",
 		"cross": "overweight_farming:block/overweight_cabbage_stem",
 		"particle": "overweight_farming:block/overweight_cabbage_stem_side"
 	},
@@ -15,8 +15,8 @@
 				"east": {"uv": [0, 0, 16, 16], "texture": "#cross"},
 				"south": {"uv": [0, 0, 0, 16], "texture": "#cross"},
 				"west": {"uv": [0, 0, 16, 16], "texture": "#cross"},
-				"up": {"uv": [0, 0, 0, 16], "texture": "#missing"},
-				"down": {"uv": [0, 0, 0, 16], "texture": "#missing"}
+				"up": {"uv": [0, 0, 0, 16], "texture": "#cross"},
+				"down": {"uv": [0, 0, 0, 16], "texture": "#cross"}
 			}
 		},
 		{
@@ -28,8 +28,8 @@
 				"east": {"uv": [0, 0, 16, 16], "texture": "#cross"},
 				"south": {"uv": [0, 0, 0, 16], "texture": "#cross"},
 				"west": {"uv": [0, 0, 16, 16], "texture": "#cross"},
-				"up": {"uv": [0, 0, 0, 16], "texture": "#missing"},
-				"down": {"uv": [0, 0, 0, 16], "texture": "#missing"}
+				"up": {"uv": [0, 0, 0, 16], "texture": "#cross"},
+				"down": {"uv": [0, 0, 0, 16], "texture": "#cross"}
 			}
 		},
 		{
@@ -37,12 +37,12 @@
 			"to": [16, 1, -6],
 			"rotation": {"angle": -22.5, "axis": "x", "origin": [0, 0, 0]},
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"east": {"uv": [0, 0, 0, 16], "texture": "#missing"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"west": {"uv": [0, 0, 0, 16], "texture": "#missing"},
-				"up": {"uv": [0, 0, 16, 0], "texture": "#missing"},
-				"down": {"uv": [0, 0, 16, 0], "texture": "#missing"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#stem"},
+				"east": {"uv": [0, 0, 0, 16], "texture": "#stem"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#stem"},
+				"west": {"uv": [0, 0, 0, 16], "texture": "#stem"},
+				"up": {"uv": [0, 0, 16, 0], "texture": "#stem"},
+				"down": {"uv": [0, 0, 16, 0], "texture": "#stem"}
 			}
 		},
 		{
@@ -50,12 +50,12 @@
 			"to": [16, 7, 21],
 			"rotation": {"angle": 22.5, "axis": "x", "origin": [0, 0, 0]},
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"east": {"uv": [0, 0, 0, 16], "texture": "#missing"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"west": {"uv": [0, 0, 0, 16], "texture": "#missing"},
-				"up": {"uv": [0, 0, 16, 0], "texture": "#missing"},
-				"down": {"uv": [0, 0, 16, 0], "texture": "#missing"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#stem"},
+				"east": {"uv": [0, 0, 0, 16], "texture": "#stem"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#stem"},
+				"west": {"uv": [0, 0, 0, 16], "texture": "#stem"},
+				"up": {"uv": [0, 0, 16, 0], "texture": "#stem"},
+				"down": {"uv": [0, 0, 16, 0], "texture": "#stem"}
 			}
 		},
 		{
@@ -63,12 +63,12 @@
 			"to": [-6, 1, 16],
 			"rotation": {"angle": 22.5, "axis": "z", "origin": [0, 0, 0]},
 			"faces": {
-				"north": {"uv": [0, 0, 0, 16], "texture": "#missing"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"south": {"uv": [0, 0, 0, 16], "texture": "#missing"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"up": {"uv": [0, 0, 0, 16], "texture": "#missing"},
-				"down": {"uv": [0, 0, 0, 16], "texture": "#missing"}
+				"north": {"uv": [0, 0, 0, 16], "texture": "#stem"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#stem"},
+				"south": {"uv": [0, 0, 0, 16], "texture": "#stem"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#stem"},
+				"up": {"uv": [0, 0, 0, 16], "texture": "#stem"},
+				"down": {"uv": [0, 0, 0, 16], "texture": "#stem"}
 			}
 		},
 		{
@@ -76,12 +76,12 @@
 			"to": [21, 7, 16],
 			"rotation": {"angle": -22.5, "axis": "z", "origin": [0, 0, 0]},
 			"faces": {
-				"north": {"uv": [0, 0, 0, 16], "texture": "#missing"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"south": {"uv": [0, 0, 0, 16], "texture": "#missing"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "#1"},
-				"up": {"uv": [0, 0, 0, 16], "texture": "#missing"},
-				"down": {"uv": [0, 0, 0, 16], "texture": "#missing"}
+				"north": {"uv": [0, 0, 0, 16], "texture": "#stem"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#stem"},
+				"south": {"uv": [0, 0, 0, 16], "texture": "#stem"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#stem"},
+				"up": {"uv": [0, 0, 0, 16], "texture": "#stem"},
+				"down": {"uv": [0, 0, 0, 16], "texture": "#stem"}
 			}
 		}
 	]

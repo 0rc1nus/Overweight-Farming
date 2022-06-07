@@ -30,27 +30,24 @@ import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import net.minecraft.world.event.GameEvent;
+import net.orcinus.overweightfarming.registry.OFEntityTypes;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import net.orcinus.overweightfarming.util.EmeraldToItemOffer;
 import net.orcinus.overweightfarming.util.OFUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
 
 public class OverweightFarming implements ModInitializer {
-
-    public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "overweight_farming";
     public static OFConfig config;
-
-
 
     @Override
     public void onInitialize() {
         AutoConfig.register(OFConfig.class, GsonConfigSerializer::new);
         config = AutoConfig.getConfigHolder(OFConfig.class).getConfig();
+
         OFObjects.init();
+        OFEntityTypes.init();
 
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 5, factories -> {
             factories.add(new EmeraldToItemOffer(new ItemStack(OFObjects.STRAW_HAT), 20, 1, 12, 0.05F));

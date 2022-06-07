@@ -35,7 +35,7 @@ public abstract class LivingEntityMixin {
                             String hedgehogModid = "hedgehog";
                             Block kiwiVines = null;//TODO ForgeRegistries.BLOCKS.getValue(new ResourceLocation(hedgehogModid, "kiwi_vines"));
                             boolean hedgehogFlag = false;//TODO ModList.get().isLoaded(hedgehogModid) && state.is(Objects.requireNonNull(kiwiVines));
-                            if (state.isIn(BlockTags.CROPS) || state.isIn(OFTags.OVERWEIGHT_COMPAT)) {
+                            if (state.isIn(BlockTags.CROPS) || state.isIn(OFTags.OVERWEIGHT_COMPAT) || state.isOf(Blocks.NETHER_WART)) {
                                 Block block = state.getBlock();
                                 float v = world.getRandom().nextFloat();
                                 boolean flag = v < 1.5E-4 && world.getRandom().nextBoolean();
@@ -51,8 +51,9 @@ public abstract class LivingEntityMixin {
                                                 if (age < crop.getMaxAge()) {
                                                     crop.applyGrowth(serverLevel, cropPos, state);
                                                 }
-                                                if (age == crop.getMaxAge())
+                                                if (age == crop.getMaxAge()){
                                                     validForOverweight = true;
+                                                }
                                             } else if (block instanceof StemBlock) {
                                                 int age = state.get(StemBlock.AGE);
                                                 if (age < StemBlock.MAX_AGE) {
@@ -60,13 +61,22 @@ public abstract class LivingEntityMixin {
                                                 }
                                             }
                                         }
-                                        if (state.contains(BeetrootsBlock.AGE) && block instanceof BeetrootsBlock beetrootBlock) {
-                                            int age = state.get(BeetrootsBlock.AGE);
-                                            if (age < beetrootBlock.getMaxAge()) {
-                                                beetrootBlock.applyGrowth(serverLevel, cropPos, state);
+                                        if (state.contains(Properties.AGE_3)) {
+                                            if (block instanceof BeetrootsBlock beetrootBlock){
+                                                int age = state.get(BeetrootsBlock.AGE);
+                                                if (age < beetrootBlock.getMaxAge()) {
+                                                    beetrootBlock.applyGrowth(serverLevel, cropPos, state);
+                                                }
+                                                if (age == beetrootBlock.getMaxAge())
+                                                    validForOverweight = true;
                                             }
-                                            if (age == beetrootBlock.getMaxAge())
-                                                validForOverweight = true;
+                                            if (block instanceof NetherWartBlock) {
+                                                int age = state.get(BeetrootsBlock.AGE);
+                                                if (age < 3) {
+                                                    state = state.with(NetherWartBlock.AGE, age + 1);
+                                                    world.setBlockState(cropPos, state, 2);
+                                                }
+                                            }
                                         }
                                         OverweightGrowthManager manager = new OverweightGrowthManager(world.getRandom());
                                         if (validForOverweight) {

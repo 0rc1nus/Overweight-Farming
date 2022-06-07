@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class CropFullBlock extends Block implements Fertilizable {
-    private final Block stemBlock;
+    public final Block stemBlock;
 
     public CropFullBlock(Block stemBlock, Settings properties) {
         super(properties);

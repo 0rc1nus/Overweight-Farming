@@ -16,9 +16,13 @@ public class CropStemBlock extends PlantBlock {
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        Direction direction = Direction.UP;
+        Direction direction = this.getFacingDirection();
         BlockPos blockpos = pos.offset(direction.getOpposite());
         return world.getBlockState(blockpos).isSideSolidFullSquare(world, blockpos, direction);
+    }
+
+    public Direction getFacingDirection() {
+        return Direction.UP;
     }
 
     @Override
