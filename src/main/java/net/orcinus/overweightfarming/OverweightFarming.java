@@ -68,7 +68,7 @@ public class OverweightFarming implements ModInitializer {
                         stack.decrement(1);
                     }
                     pigEntity.lovePlayer(player);
-                    pigEntity.emitGameEvent(GameEvent.MOB_INTERACT, new BlockPos(pigEntity.getEyePos()));
+                    pigEntity.emitGameEvent(GameEvent.ENTITY_INTERACT, pigEntity);
                     return ActionResult.SUCCESS;
                 }
                 if (pigEntity.isBaby()) {
@@ -76,7 +76,7 @@ public class OverweightFarming implements ModInitializer {
                         stack.decrement(1);
                     }
                     pigEntity.growUp((int)((float)(-i / 20) * 0.1F), true);
-                    pigEntity.emitGameEvent(GameEvent.MOB_INTERACT, new BlockPos(pigEntity.getEyePos()));
+                    pigEntity.emitGameEvent(GameEvent.ENTITY_INTERACT, pigEntity);
                     player.swingHand(hand);
                 }
                 if (world.isClient()) {

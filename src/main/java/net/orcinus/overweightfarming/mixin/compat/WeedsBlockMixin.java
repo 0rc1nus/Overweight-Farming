@@ -1,6 +1,5 @@
 package net.orcinus.overweightfarming.mixin.compat;
 
-import com.ordana.immersive_weathering.registry.blocks.WeedsBlock;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -14,12 +13,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
-
-@Mixin(value = WeedsBlock.class, remap = false)
+//TODO wait for IW to update, REMEMBER TO ADD THE MIXIN BACK IN THE MIXIN.JSON
+//@Mixin(value = WeedsBlock.class, remap = false)
 public class WeedsBlockMixin extends CropBlock {
     protected WeedsBlockMixin(Settings settings) {
         super(settings);
-    }
+    /*
     @Inject(method = "randomTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z"), cancellable = true)
     private void OF$randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci){
         if (OverweightFarming.config.compatCrops.allowOverweightWeeds && state.contains(CropBlock.AGE) && state.get(CropBlock.AGE) == 3) {
@@ -32,5 +31,7 @@ public class WeedsBlockMixin extends CropBlock {
                 ci.cancel();
             }
         }
+
+     */
     }
 }

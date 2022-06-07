@@ -4,6 +4,7 @@ import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.orcinus.overweightfarming.registry.OFTags;
 import net.orcinus.overweightfarming.util.OverweightGrowthManager;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Random;
 
 @Mixin(CropBlock.class)
 public class CropBlockMixin {

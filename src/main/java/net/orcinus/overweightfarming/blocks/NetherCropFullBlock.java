@@ -4,9 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 
-import java.util.Random;
 
 public class NetherCropFullBlock extends CropFullBlock{
     public NetherCropFullBlock(Block stemBlock, Settings properties) {

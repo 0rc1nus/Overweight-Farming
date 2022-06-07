@@ -1,5 +1,6 @@
 package net.orcinus.overweightfarming.blocks;
 
+import net.minecraft.util.math.random.Random;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
@@ -10,7 +11,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
 import java.util.Iterator;
-import java.util.Random;
 
 public class OverweightOnionBlock extends CropFullBlock {
 

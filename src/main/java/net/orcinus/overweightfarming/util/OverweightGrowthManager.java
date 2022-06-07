@@ -1,5 +1,6 @@
 package net.orcinus.overweightfarming.util;
 
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.feature.util.DripstoneHelper;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.blocks.CropFullBlock;
@@ -21,7 +22,6 @@ import net.orcinus.overweightfarming.registry.OFTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-import java.util.Random;
 
 public record OverweightGrowthManager(Random random) {
 
