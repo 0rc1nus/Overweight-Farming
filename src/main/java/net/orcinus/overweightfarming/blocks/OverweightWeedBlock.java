@@ -28,7 +28,10 @@ import net.orcinus.overweightfarming.registry.OFEntityTypes;
 import net.orcinus.overweightfarming.util.TripleBlockHalf;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 
 public class OverweightWeedBlock extends CropFullBlock {
