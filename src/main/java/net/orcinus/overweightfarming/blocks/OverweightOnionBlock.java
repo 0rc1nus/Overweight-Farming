@@ -1,9 +1,9 @@
 package net.orcinus.overweightfarming.blocks;
 
-import net.orcinus.overweightfarming.init.OFBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -11,8 +11,7 @@ import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.IPlantable;
-
-import java.util.Random;
+import net.orcinus.overweightfarming.init.OFBlocks;
 
 public class OverweightOnionBlock extends CropFullBlock {
 
@@ -32,7 +31,7 @@ public class OverweightOnionBlock extends CropFullBlock {
     }
 
     @Override
-    public void performBonemeal(ServerLevel world, Random random, BlockPos blockPos, BlockState state) {
+    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos blockPos, BlockState state) {
         BlockPos above = blockPos.above();
         BlockPos below = blockPos.below();
         if (this.stemBlock != null && world.getBlockState(above).isAir() && world.getBlockState(blockPos.above(2)).isAir()) {

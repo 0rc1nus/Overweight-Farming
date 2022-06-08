@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class CropFullBlock extends Block implements BonemealableBlock {
     public final Block stemBlock;
@@ -31,12 +31,12 @@ public class CropFullBlock extends Block implements BonemealableBlock {
     }
 
     @Override
-    public boolean isBonemealSuccess(Level world, Random random, BlockPos blockPos, BlockState state) {
+    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos blockPos, BlockState state) {
         return true;
     }
 
     @Override
-    public void performBonemeal(ServerLevel world, Random random, BlockPos blockPos, BlockState state) {
+    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos blockPos, BlockState state) {
         BlockPos above = blockPos.above();
         BlockPos below = blockPos.below();
         if (this.stemBlock != null && world.getBlockState(above).isAir()) {

@@ -34,7 +34,6 @@ public class MelonJuiceItem extends Item {
             return new ItemStack(Items.GLASS_BOTTLE);
         } else {
             if (entity instanceof Player player && !((Player)entity).getAbilities().instabuild) {
-                world.gameEvent(entity, GameEvent.EAT, entity.eyeBlockPosition());
                 world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), entity.getEatingSound(stack), SoundSource.NEUTRAL, 1.0F, 1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.4F);
                 if (!player.getAbilities().instabuild) {
                     stack.shrink(1);

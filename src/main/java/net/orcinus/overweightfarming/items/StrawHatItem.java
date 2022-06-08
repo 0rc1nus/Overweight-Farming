@@ -53,7 +53,7 @@ public class StrawHatItem extends ArmorItem {
 
     @NotNull
     private static String getContents(ItemStack stack) {
-        return stack.getHoverName().getContents();
+        return stack.getHoverName().getString();
     }
 
     @Override

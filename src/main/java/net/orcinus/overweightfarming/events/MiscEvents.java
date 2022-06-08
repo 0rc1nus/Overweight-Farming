@@ -1,5 +1,6 @@
 package net.orcinus.overweightfarming.events;
 
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.init.OFBlocks;
@@ -132,7 +133,7 @@ public class MiscEvents {
         LevelAccessor level = event.getWorld();
         BlockPos blockPos = event.getPos();
         BlockState state = event.getState();
-        Random random = level.getRandom();
+        RandomSource random = level.getRandom();
         OverweightGrowthManager manager = new OverweightGrowthManager(random);
         if (level instanceof ServerLevel world) {
             for (Block cropBlock : manager.getOverweightMap().keySet()) {

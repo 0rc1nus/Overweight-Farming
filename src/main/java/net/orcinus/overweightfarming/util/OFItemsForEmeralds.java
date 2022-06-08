@@ -1,5 +1,6 @@
 package net.orcinus.overweightfarming.util;
 
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.Item;
@@ -37,7 +38,7 @@ public class OFItemsForEmeralds implements VillagerTrades.ItemListing {
 
     @Nullable
     @Override
-    public MerchantOffer getOffer(Entity entity, Random random) {
+    public MerchantOffer getOffer(Entity entity, RandomSource random) {
         return new MerchantOffer(new ItemStack(Items.EMERALD, this.emeraldCost), new ItemStack(this.itemStack.getItem(), this.numberOfItems), this.maxUses, this.villagerXp, this.priceMultiplier);
     }
 }

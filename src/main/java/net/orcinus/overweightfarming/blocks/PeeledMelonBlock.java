@@ -1,8 +1,5 @@
 package net.orcinus.overweightfarming.blocks;
 
-import net.orcinus.overweightfarming.init.OFBlocks;
-import net.orcinus.overweightfarming.init.OFItems;
-import net.orcinus.overweightfarming.init.OFParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -10,6 +7,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -21,8 +19,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import java.util.Random;
+import net.orcinus.overweightfarming.init.OFBlocks;
+import net.orcinus.overweightfarming.init.OFItems;
+import net.orcinus.overweightfarming.init.OFParticleTypes;
 
 public class PeeledMelonBlock extends Block {
     private final SeedState seedState;
@@ -33,7 +32,7 @@ public class PeeledMelonBlock extends Block {
     }
 
     @Override
-    public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         for(int i = 0; i < random.nextInt(1) + 1; ++i) {
             this.trySpawnDripParticles(world, pos, state);
         }

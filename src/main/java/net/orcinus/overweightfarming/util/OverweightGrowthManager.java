@@ -20,9 +20,9 @@ import net.orcinus.overweightfarming.init.OFBlocks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
-public record OverweightGrowthManager(Random random) {
+public record OverweightGrowthManager(RandomSource random) {
 
     public Map<Block, Pair<OverweightType, Block>> getOverweightMap() {
         return Util.make(Maps.newHashMap(), map -> {
@@ -30,7 +30,6 @@ public record OverweightGrowthManager(Random random) {
             map.put(Blocks.POTATOES, Pair.of(OverweightType.DEFAULT, this.random.nextInt(20) == 0 ? OFBlocks.OVERWEIGHT_POISONOUS_POTATO.get() : OFBlocks.OVERWEIGHT_POTATO.get()));
             map.put(Blocks.BEETROOTS, Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_BEETROOT.get()));
             map.put(Blocks.COCOA, Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_COCOA.get()));
-            map.put(Blocks.NETHER_WART, Pair.of(OverweightType.INVERTED, OFBlocks.OVERWEIGHT_NETHERWART.get()));
             map.put(this.getCompatBlock("farmersdelight", "cabbages"), Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_CABBAGE.get()));
             map.put(this.getCompatBlock("farmersdelight", "onions"), Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_ONION.get()));
             map.put(this.getCompatBlock("hedgehog", "kiwi_vines"), Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_KIWI.get()));
@@ -38,7 +37,7 @@ public record OverweightGrowthManager(Random random) {
         });
     }
 
-    public void growOverweightCrops(ServerLevel serverLevel, BlockPos blockPos, BlockState state, Random random) {
+    public void growOverweightCrops(ServerLevel serverLevel, BlockPos blockPos, BlockState state, RandomSource random) {
         for (Block block : this.getOverweightMap().keySet()) {
             if (state.is(block)) {
                 if (!this.isNearOvergrowthObstacles(serverLevel, blockPos)) return;
@@ -87,7 +86,7 @@ public record OverweightGrowthManager(Random random) {
         }
     }
 
-    private void sproutGrowth(ServerLevel world, BlockPos blockPos, Random random, BlockState blockState, BlockState stemState) {
+    private void sproutGrowth(ServerLevel world, BlockPos blockPos, RandomSource random, BlockState blockState, BlockState stemState) {
         int height = random.nextBoolean() && random.nextInt(5) == 0 ? random.nextBoolean() && random.nextInt(10) == 0 ? 4 : 3 : 2;
         BlockPos startPos = blockPos.above();
         BlockPos.MutableBlockPos mutableBlockPos = startPos.mutable();
