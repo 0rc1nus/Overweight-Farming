@@ -34,15 +34,6 @@ public class ClientEvents {
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.OVERWEIGHT_GINGER_STEM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.ALLIUM_BUSH.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.OVERWEIGHT_CABBAGE_STEM.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_BEETROOT.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_CARROT.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_POTATO.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_POISONOUS_POTATO.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_COCOA.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_CABBAGE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_KIWI.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_ONION.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_GINGER.get(), RenderType.cutout());
         event.enqueueWork(() -> ItemProperties.register(OFItems.STRAW_HAT.get(),
                 new ResourceLocation(OverweightFarming.MODID, "420"), (stack, world, entity, p_174628_) -> entity != null && StrawHatItem.is420(stack) ? 1.0F : 0.0F)
         );

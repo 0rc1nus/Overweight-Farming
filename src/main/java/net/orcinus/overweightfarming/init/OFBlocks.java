@@ -64,16 +64,6 @@ public class OFBlocks {
     public static final RegistryObject<Block> PEELED_OVERWEIGHT_KIWI = registerCompatBlock("hedgehog", "peeled_overweight_kiwi_block", () -> new Block(BlockBehaviour.Properties.copy(OVERWEIGHT_KIWI.get())), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> PEELED_OVERWEIGHT_GINGER = registerCompatBlock("snowyspirit", "peeled_overweight_ginger_block", () -> new Block(BlockBehaviour.Properties.copy(OVERWEIGHT_GINGER.get())), CreativeModeTab.TAB_FOOD);
 
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_BEETROOT = registerNoTabBlock("potted_overweight_beetroot", () -> new FlowerPotBlock(OVERWEIGHT_BEETROOT.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_CARROT = registerNoTabBlock("potted_overweight_carrot", () -> new FlowerPotBlock(OVERWEIGHT_CARROT.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_COCOA = registerNoTabBlock("potted_overweight_cocoa", () -> new FlowerPotBlock(OVERWEIGHT_COCOA.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_POTATO = registerNoTabBlock("potted_overweight_potato", () -> new FlowerPotBlock(OVERWEIGHT_POTATO.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_GINGER = registerNoTabBlock("potted_overweight_ginger", () -> new FlowerPotBlock(OVERWEIGHT_GINGER.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_POISONOUS_POTATO = registerNoTabBlock("potted_overweight_poisonous_potato", () -> new FlowerPotBlock(OVERWEIGHT_POISONOUS_POTATO.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_KIWI = registerNoTabBlock("potted_overweight_kiwi", () -> new FlowerPotBlock(OVERWEIGHT_KIWI.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_ONION = registerNoTabBlock("potted_overweight_onion", () -> new FlowerPotBlock(OVERWEIGHT_ONION.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_CABBAGE = registerNoTabBlock("potted_overweight_cabbage", () -> new FlowerPotBlock(OVERWEIGHT_CABBAGE.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> block, CreativeModeTab tab) {
         RegistryObject<B> blocks = BLOCKS.register(name, block);
         OFItems.ITEMS.register(name, () -> new BlockItem(blocks.get(), new Item.Properties().tab(tab)));
