@@ -1,6 +1,5 @@
 package net.orcinus.overweightfarming.data;
 
-import com.nhoryzon.mc.farmersdelight.FarmersDelightMod;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipesProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
@@ -16,7 +15,6 @@ import net.orcinus.overweightfarming.registry.OFObjects;
 import java.util.function.Consumer;
 
 public class OFRecipeProvider extends FabricRecipesProvider {
-    private static final ConditionJsonProvider FARMERS_DELIGHT_LOADED = DefaultResourceConditions.allModsLoaded(FarmersDelightMod.MOD_ID);
     public OFRecipeProvider(FabricDataGenerator dataGenerator) {
         super(dataGenerator);
     }

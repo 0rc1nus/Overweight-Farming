@@ -1,6 +1,5 @@
 package net.orcinus.overweightfarming.mixin;
 
-import net.minecraft.util.math.random.Random;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.EquipmentSlot;
@@ -13,6 +12,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Random;
 
 
 @Mixin(AnimalEntity.class)
