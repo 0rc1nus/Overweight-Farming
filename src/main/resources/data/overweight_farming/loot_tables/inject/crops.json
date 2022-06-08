@@ -1,0 +1,25 @@
+{
+  "type": "chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "uniform"
+              }
+            }
+          ],
+          "name": "overweight_farming:overweight_beetroot_block"
+        }
+      ]
+    }
+  ]
+}
