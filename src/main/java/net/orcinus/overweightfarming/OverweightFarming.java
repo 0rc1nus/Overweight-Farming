@@ -9,6 +9,7 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.advancement.criterion.Criteria;
@@ -22,6 +23,9 @@ import net.minecraft.item.AxeItem;
 import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTables;
+import net.minecraft.loot.entry.LootTableEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -60,6 +64,22 @@ public class OverweightFarming implements ModInitializer {
 
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 5, factories -> {
             factories.add(new EmeraldToItemOffer(new ItemStack(OFObjects.STRAW_HAT), 20, 1, 12, 0.05F));
+        });
+
+        LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, identifier, fabricLootSupplierBuilder, lootTableSetter) -> {
+            Identifier seeds = new Identifier(MODID, "inject/crops");
+            if (LootTables.VILLAGE_ARMORER_CHEST.equals(identifier)) {
+                fabricLootSupplierBuilder.withPool(LootPool.builder().with(LootTableEntry.builder(seeds).weight(1)).build());
+            }
+            if (LootTables.VILLAGE_BUTCHER_CHEST.equals(identifier)) {
+                fabricLootSupplierBuilder.withPool(LootPool.builder().with(LootTableEntry.builder(seeds).weight(1)).build());
+            }
+            if (LootTables.VILLAGE_FLETCHER_CHEST.equals(identifier)) {
+                fabricLootSupplierBuilder.withPool(LootPool.builder().with(LootTableEntry.builder(seeds).weight(1)).build());
+            }
+            if (LootTables.VILLAGE_CARTOGRAPHER_CHEST.equals(identifier)) {
+                fabricLootSupplierBuilder.withPool(LootPool.builder().with(LootTableEntry.builder(seeds).weight(1)).build());
+            }
         });
     }
 
