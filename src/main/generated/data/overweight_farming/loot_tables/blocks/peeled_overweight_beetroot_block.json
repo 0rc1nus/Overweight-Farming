@@ -1,8 +1,21 @@
 {
   "type": "minecraft:block",
+  "functions": [
+    {
+      "add": false,
+      "count": {
+        "type": "minecraft:uniform",
+        "max": 20.0,
+        "min": 6.0
+      },
+      "function": "minecraft:set_count"
+    },
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
@@ -26,10 +39,10 @@
             }
           ]
         }
-      ]
+      ],
+      "rolls": 1.0
     },
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
@@ -44,21 +57,8 @@
           ],
           "name": "minecraft:beetroot_seeds"
         }
-      ]
-    }
-  ],
-  "functions": [
-    {
-      "function": "minecraft:set_count",
-      "count": {
-        "type": "minecraft:uniform",
-        "min": 6.0,
-        "max": 20.0
-      },
-      "add": false
-    },
-    {
-      "function": "minecraft:explosion_decay"
+      ],
+      "rolls": 1.0
     }
   ]
 }
