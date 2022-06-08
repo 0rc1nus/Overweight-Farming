@@ -5,33 +5,19 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.data.server.BlockLootTableGenerator;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
-import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.condition.MatchToolLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.entry.LeafEntry;
-import net.minecraft.loot.entry.LootPoolEntry;
-import net.minecraft.loot.function.ApplyBonusLootFunction;
-import net.minecraft.loot.function.LimitCountLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
-import net.minecraft.loot.operator.BoundedIntUnaryOperator;
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-import net.minecraft.predicate.StatePredicate;
 import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.tag.BlockTags;
-import net.orcinus.overweightfarming.blocks.CropFullBlock;
 import net.orcinus.overweightfarming.blocks.PeeledMelonBlock;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import net.orcinus.overweightfarming.registry.OFTags;
-
-import java.util.Properties;
 
 public class OFBlockLootTableProvider extends FabricBlockLootTableProvider {
     public OFBlockLootTableProvider(FabricDataGenerator dataGenerator) {
