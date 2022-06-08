@@ -2,13 +2,8 @@ package net.orcinus.overweightfarming.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.Items;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.ItemTags;
-import net.orcinus.overweightfarming.blocks.CropFullBlock;
-import net.orcinus.overweightfarming.blocks.PeeledMelonBlock;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import net.orcinus.overweightfarming.registry.OFTags;
 

@@ -25,7 +25,6 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldEvents;
 import net.minecraft.world.WorldView;
 import net.orcinus.overweightfarming.registry.OFEntityTypes;
-import net.orcinus.overweightfarming.registry.OFObjects;
 import net.orcinus.overweightfarming.util.TripleBlockHalf;
 import org.jetbrains.annotations.Nullable;
 

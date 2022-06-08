@@ -1,22 +1,17 @@
 package net.orcinus.overweightfarming.data;
 
 import com.nhoryzon.mc.farmersdelight.FarmersDelightMod;
-import com.nhoryzon.mc.farmersdelight.registry.ItemsRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipesProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
-import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
-import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.util.Identifier;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.registry.OFObjects;
-import net.orcinus.overweightfarming.util.OverweightGrowthManager;
 
 import java.util.function.Consumer;
 

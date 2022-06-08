@@ -9,7 +9,7 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
-import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.advancement.criterion.Criteria;
@@ -45,6 +45,8 @@ import net.orcinus.overweightfarming.registry.OFObjects;
 import net.orcinus.overweightfarming.util.EmeraldToItemOffer;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
+
 
 public class OverweightFarming implements ModInitializer {
     public static final String MODID = "overweight_farming";
@@ -62,29 +64,35 @@ public class OverweightFarming implements ModInitializer {
         UseBlockCallback.EVENT.register(this::growBloodroot);
         UseEntityCallback.EVENT.register(this::interactPig);
 
+        registerLootTable();
+
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 5, factories -> {
             factories.add(new EmeraldToItemOffer(new ItemStack(OFObjects.STRAW_HAT), 20, 1, 12, 0.05F));
         });
 
-        /*
-        LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, identifier, fabricLootSupplierBuilder, lootTableSetter) -> {
-            Identifier seeds = new Identifier(MODID, "inject/crops");
-            if (LootTables.VILLAGE_ARMORER_CHEST.equals(identifier)) {
-                fabricLootSupplierBuilder.withPool(LootPool.builder().with(LootTableEntry.builder(seeds).weight(1)).build());
+
+    }
+    protected void registerLootTable() {
+    Set<Identifier> villageHouseChestsId = Set.of(
+            LootTables.VILLAGE_PLAINS_CHEST,
+            LootTables.VILLAGE_SAVANNA_HOUSE_CHEST,
+            LootTables.VILLAGE_SNOWY_HOUSE_CHEST,
+            LootTables.VILLAGE_TAIGA_HOUSE_CHEST,
+            LootTables.VILLAGE_DESERT_HOUSE_CHEST);
+
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            Identifier injectId = new Identifier(OverweightFarming.MODID, "inject/" + id.getPath());
+            if (villageHouseChestsId.contains(id)) {
+                tableBuilder.pool(LootPool.builder().with(LootTableEntry.builder(injectId).weight(1).quality(0)).build());
             }
-            if (LootTables.VILLAGE_BUTCHER_CHEST.equals(identifier)) {
-                fabricLootSupplierBuilder.withPool(LootPool.builder().with(LootTableEntry.builder(seeds).weight(1)).build());
-            }
-            if (LootTables.VILLAGE_FLETCHER_CHEST.equals(identifier)) {
-                fabricLootSupplierBuilder.withPool(LootPool.builder().with(LootTableEntry.builder(seeds).weight(1)).build());
-            }
-            if (LootTables.VILLAGE_CARTOGRAPHER_CHEST.equals(identifier)) {
-                fabricLootSupplierBuilder.withPool(LootPool.builder().with(LootTableEntry.builder(seeds).weight(1)).build());
+
+            if (LootTables.SHIPWRECK_SUPPLY_CHEST.equals(id)) {
+                tableBuilder.pool(LootPool.builder().with(LootTableEntry.builder(injectId).weight(1).quality(0)).build());
             }
         });
-
-         */
     }
+
+
 
     private ActionResult interactPig(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
         ItemStack stack = player.getStackInHand(hand);
