@@ -27,5 +27,7 @@ public class OFItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(Items.STONE_HOE)
                 .add(Items.IRON_HOE)
                 .add(Items.GOLDEN_HOE);
+
+
     }
 }
