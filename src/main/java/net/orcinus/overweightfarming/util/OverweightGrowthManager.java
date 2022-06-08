@@ -51,7 +51,9 @@ public record OverweightGrowthManager(Random random) {
                 Pair<Pair<Boolean, OverweightType>, Block> pair = this.getOverweightMap().get(block);
                 Pair<Boolean, OverweightType> firstPair = pair.getFirst();
                 Boolean configValue = firstPair.getFirst();
-                if (!configValue) return;
+                if (!configValue) {
+                    return;
+                }
                 OverweightType overweightType = firstPair.getSecond();
                 Block overweightBlock = pair.getSecond();
                 if (overweightBlock instanceof CropFullBlock cropFullBlock) {

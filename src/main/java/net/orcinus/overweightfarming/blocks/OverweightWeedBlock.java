@@ -20,7 +20,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldEvents;
@@ -29,17 +28,15 @@ import net.orcinus.overweightfarming.registry.OFEntityTypes;
 import net.orcinus.overweightfarming.util.TripleBlockHalf;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
-public class OverweightWeedBlock extends PlantBlock {
+public class OverweightWeedBlock extends CropFullBlock {
     public static final EnumProperty<TripleBlockHalf> HALF;
     public static final BooleanProperty FLUFF;
 
     public OverweightWeedBlock(AbstractBlock.Settings settings) {
-        super(settings);
+        super(null, settings);
         this.setDefaultState((this.stateManager.getDefaultState()).with(HALF, TripleBlockHalf.LOWER).with(FLUFF, false));
     }
 
@@ -211,13 +208,12 @@ public class OverweightWeedBlock extends PlantBlock {
         if (tripleBlockHalf == TripleBlockHalf.UPPER || tripleBlockHalf == TripleBlockHalf.MIDDLE) {
             BlockPos blockPos = pos.down();
             BlockState blockState = world.getBlockState(blockPos);
-            if (state.contains(HALF) && blockState.get(HALF) == TripleBlockHalf.LOWER || blockState.get(HALF) == TripleBlockHalf.MIDDLE) {
+            if (state.contains(HALF) && blockState.contains(HALF) && blockState.get(HALF) == TripleBlockHalf.LOWER || blockState.get(HALF) == TripleBlockHalf.MIDDLE) {
                 BlockState blockState2 = blockState.contains(Properties.WATERLOGGED) && blockState.get(Properties.WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState();
                 world.setBlockState(blockPos, blockState2, Block.NOTIFY_ALL | Block.SKIP_DROPS);
                 world.syncWorldEvent(player, WorldEvents.BLOCK_BROKEN, blockPos, Block.getRawIdFromState(blockState));
             }
         }
-
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
