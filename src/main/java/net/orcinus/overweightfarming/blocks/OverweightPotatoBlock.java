@@ -8,7 +8,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.orcinus.overweightfarming.blocks.CropFullBlock;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import org.jetbrains.annotations.Nullable;
 

@@ -20,8 +20,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class OFObjects {
-    private static final Map<Block, Identifier> BLOCKS = new LinkedHashMap<>();
-    private static final Map<Item, Identifier> ITEMS = new LinkedHashMap<>();
+    public static final Map<Block, Identifier> BLOCKS = new LinkedHashMap<>();
+    public static final Map<Item, Identifier> ITEMS = new LinkedHashMap<>();
 
     //ITEMS
     public static final Item STRAW_HAT = register("straw_hat", new StrawHatItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(1)));

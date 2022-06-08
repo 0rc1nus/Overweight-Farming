@@ -12,7 +12,33 @@ group = project.maven_group
 
 loom {
     accessWidenerPath = file("src/main/resources/overweightfarming.accesswidener")
+
+    runs {
+        datagen {
+            server()
+
+            name = "Data Generation"
+            runDir = "build/datagen"
+
+            vmArg("-Dfabric-api.datagen")
+            vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
+        }
+    }
 }
+
+assemble.dependsOn(runDatagen)
+
+sourceSets {
+    main {
+        resources {
+            srcDirs += [
+                    "src/main/generated"
+            ]
+        }
+    }
+}
+
+
 
 repositories {
     maven {
@@ -74,8 +100,9 @@ dependencies {
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     modImplementation "curse.maven:immersive-weathering-fabric-571035:${project.iw_version}"
-    /*
     modImplementation "curse.maven:farmers-delight-482834:${project.farmers_delight_version}"
+    /*
+modImplementation "curse.maven:farmers-delight-482834:${project.farmers_delight_version}"
 
     modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
     include "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"

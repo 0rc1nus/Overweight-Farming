@@ -22,6 +22,9 @@
     "client": [
       "net.orcinus.overweightfarming.OverweightFarmingClient"
     ],
+    "fabric-datagen": [
+      "net.orcinus.overweightfarming.data.OFDataGen"
+    ],
     "modmenu": [
       "net.orcinus.overweightfarming.client.compat.OFModMenu"
     ]

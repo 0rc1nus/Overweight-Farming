@@ -1,5 +1,9 @@
 package net.orcinus.overweightfarming;
 
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -8,7 +12,9 @@ import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,7 +39,6 @@ import net.minecraft.world.event.GameEvent;
 import net.orcinus.overweightfarming.registry.OFEntityTypes;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import net.orcinus.overweightfarming.util.EmeraldToItemOffer;
-import net.orcinus.overweightfarming.util.OFUtils;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -49,13 +54,13 @@ public class OverweightFarming implements ModInitializer {
         OFObjects.init();
         OFEntityTypes.init();
 
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 5, factories -> {
-            factories.add(new EmeraldToItemOffer(new ItemStack(OFObjects.STRAW_HAT), 20, 1, 12, 0.05F));
-        });
-
         UseBlockCallback.EVENT.register(this::stripMelon);
         UseBlockCallback.EVENT.register(this::growBloodroot);
         UseEntityCallback.EVENT.register(this::interactPig);
+
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 5, factories -> {
+            factories.add(new EmeraldToItemOffer(new ItemStack(OFObjects.STRAW_HAT), 20, 1, 12, 0.05F));
+        });
     }
 
     private ActionResult interactPig(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
@@ -122,32 +127,32 @@ public class OverweightFarming implements ModInitializer {
         BlockPos blockPos = blockHitResult.getBlockPos();
 
         if (stack.getItem() instanceof AxeItem) {
-            for (Block block : OFUtils.WAX_OFF_BY_BLOCK.get().keySet()) {
+            for (Block block : WAX_OFF_BY_BLOCK.get().keySet()) {
                 if (state.isOf(block)) {
                     if (player instanceof ServerPlayerEntity serverPlayer) {
                         Criteria.ITEM_USED_ON_BLOCK.trigger(serverPlayer, blockPos, stack);
                     }
                     stack.damage(1, player, p -> p.sendToolBreakStatus(hand));
                     world.playSound(null, blockPos, SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    world.setBlockState(blockPos, OFUtils.WAX_OFF_BY_BLOCK.get().get(block).getDefaultState());
+                    world.setBlockState(blockPos, WAX_OFF_BY_BLOCK.get().get(block).getDefaultState());
                     world.syncWorldEvent(player, 3004, blockPos, 0);
                     player.swingHand(hand);
                 }
             }
 
 
-            for (Block block : OFUtils.PEELABLES.get().keySet()) {
+            for (Block block : PEELABLES.get().keySet()) {
                 if (state.isOf(block)) {
                     stack.damage(1, player, p -> p.sendToolBreakStatus(hand));
                     world.playSound(null, blockPos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     Block.dropStack(world, blockPos, new ItemStack(OFObjects.VEGETABLE_PEELS));
-                    world.setBlockState(blockPos, OFUtils.PEELABLES.get().get(block).getDefaultState());
+                    world.setBlockState(blockPos, PEELABLES.get().get(block).getDefaultState());
                     player.swingHand(hand);
                 }
             }
         }
         if (stack.getItem() == Items.HONEYCOMB) {
-            for (Block block : OFUtils.WAXABLES.get().keySet()) {
+            for (Block block : WAXABLES.get().keySet()) {
                 if (state.isOf(block)) {
                     if (player instanceof ServerPlayerEntity serverPlayer) {
                         Criteria.ITEM_USED_ON_BLOCK.trigger(serverPlayer, blockPos, stack);
@@ -156,7 +161,7 @@ public class OverweightFarming implements ModInitializer {
                         stack.decrement(1);
                     }
                     world.playSound(null, blockPos, SoundEvents.ITEM_HONEYCOMB_WAX_ON, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    world.setBlockState(blockPos, OFUtils.WAXABLES.get().get(block).getDefaultState());
+                    world.setBlockState(blockPos, WAXABLES.get().get(block).getDefaultState());
                     world.syncWorldEvent(player, 3003, blockPos, 0);
                     return ActionResult.success(world.isClient());
                 }
@@ -164,13 +169,13 @@ public class OverweightFarming implements ModInitializer {
         }
 
         if (stack.getItem() == OFObjects.VEGETABLE_PEELS) {
-            for (Block block : OFUtils.UNPEELABLES.get().keySet()) {
+            for (Block block : UNPEELABLES.get().keySet()) {
                 if (state.isOf(block)) {
                     if (!player.getAbilities().creativeMode){
                         stack.decrement(1);
                     }
                     world.playSound(null, blockPos, SoundEvents.ENTITY_GLOW_ITEM_FRAME_ADD_ITEM, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    world.setBlockState(blockPos, OFUtils.UNPEELABLES.get().get(block).getDefaultState());
+                    world.setBlockState(blockPos, UNPEELABLES.get().get(block).getDefaultState());
                     return ActionResult.success(true);
                 }
             }
@@ -178,4 +183,26 @@ public class OverweightFarming implements ModInitializer {
 
         return ActionResult.PASS;
     }
+
+    public static final Supplier<BiMap<Block, Block>> WAXABLES = Suppliers.memoize(() -> ImmutableBiMap.<Block, Block>builder()
+            .put(OFObjects.SEEDED_PEELED_MELON, OFObjects.WAXED_SEEDED_PEELED_MELON)
+            .put(OFObjects.HALF_SEEDED_PEELED_MELON, OFObjects.WAXED_HALF_SEEDED_PEELED_MELON)
+            .put(OFObjects.SEEDLESS_PEELED_MELON, OFObjects.WAXED_SEEDLESS_PEELED_MELON)
+            .build());
+
+
+    public static final Supplier<BiMap<Block, Block>> WAX_OFF_BY_BLOCK = Suppliers.memoize(() -> WAXABLES.get().inverse());
+    public static final Supplier<BiMap<Block, Block>> PEELABLES = Suppliers.memoize(() -> ImmutableBiMap.<Block, Block>builder()
+            .put(OFObjects.OVERWEIGHT_BEETROOT, OFObjects.PEELED_OVERWEIGHT_BEETROOT)
+            .put(OFObjects.OVERWEIGHT_CARROT, OFObjects.PEELED_OVERWEIGHT_CARROT)
+            .put(OFObjects.OVERWEIGHT_POTATO, OFObjects.PEELED_OVERWEIGHT_POTATO)
+            .put(OFObjects.OVERWEIGHT_ONION, OFObjects.PEELED_OVERWEIGHT_ONION)
+            .put(OFObjects.OVERWEIGHT_KIWI, OFObjects.OVERWEIGHT_SLICED_KIWI)
+            .put(OFObjects.OVERWEIGHT_SLICED_KIWI, OFObjects.PEELED_OVERWEIGHT_KIWI)
+            .put(OFObjects.OVERWEIGHT_GINGER, OFObjects.PEELED_OVERWEIGHT_GINGER)
+            .put(OFObjects.OVERWEIGHT_COCOA, OFObjects.PEELED_OVERWEIGHT_COCOA)
+            .put(Blocks.MELON, OFObjects.SEEDED_PEELED_MELON)
+            .build());
+    public static final Supplier<BiMap<Block, Block>> UNPEELABLES = Suppliers.memoize(() -> PEELABLES.get().inverse());
+
 }
