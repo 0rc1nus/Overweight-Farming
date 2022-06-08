@@ -20,6 +20,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.*;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldEvents;
@@ -28,7 +29,9 @@ import net.orcinus.overweightfarming.registry.OFEntityTypes;
 import net.orcinus.overweightfarming.util.TripleBlockHalf;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class OverweightWeedBlock extends CropFullBlock {
