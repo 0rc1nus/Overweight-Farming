@@ -1,37 +1,30 @@
 {
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "overweight_farming:peeled_overweight_beetroot_block"
+    }
+  ],
+  "tool": {
+    "type": "farmersdelight:tool",
+    "tag": "fabric:tools/hoes"
+  },
+  "result": [
+    {
+      "item": "minecraft:beetroot",
+      "count": 10
+    },
+    {
+      "item": "minecraft:beetroot_seeds",
+      "count": 10
+    }
+  ],
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",
       "values": [
         "farmersdelight"
       ]
-    }
-  ],
-
-  "recipes": [
-    {
-      "recipe": {
-        "type": "farmersdelight:cutting",
-        "ingredients": [
-          {
-            "item": "overweight_farming:peeled_overweight_beetroot_block"
-          }
-        ],
-        "tool": {
-          "type": "farmersdelight:tool_action",
-          "action": "hoe_dig"
-        },
-        "result": [
-          {
-            "item": "minecraft:beetroot",
-            "count": 10
-          },
-          {
-            "item": "minecraft:beetroot_seeds",
-            "count": 10
-          }
-        ]
-      }
     }
   ]
 }

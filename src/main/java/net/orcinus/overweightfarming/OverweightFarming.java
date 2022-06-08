@@ -66,6 +66,7 @@ public class OverweightFarming implements ModInitializer {
             factories.add(new EmeraldToItemOffer(new ItemStack(OFObjects.STRAW_HAT), 20, 1, 12, 0.05F));
         });
 
+        /*
         LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, identifier, fabricLootSupplierBuilder, lootTableSetter) -> {
             Identifier seeds = new Identifier(MODID, "inject/crops");
             if (LootTables.VILLAGE_ARMORER_CHEST.equals(identifier)) {
@@ -81,6 +82,8 @@ public class OverweightFarming implements ModInitializer {
                 fabricLootSupplierBuilder.withPool(LootPool.builder().with(LootTableEntry.builder(seeds).weight(1)).build());
             }
         });
+
+         */
     }
 
     private ActionResult interactPig(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {

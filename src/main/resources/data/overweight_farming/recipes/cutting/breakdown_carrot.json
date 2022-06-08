@@ -7,26 +7,20 @@
       ]
     }
   ],
-  "recipes": [
+  "type": "farmersdelight:cutting",
+  "ingredients": [
     {
-      "recipe": {
-        "type": "farmersdelight:cutting",
-        "ingredients": [
-          {
-            "item": "overweight_farming:overweight_carrot_block"
-          }
-        ],
-        "tool": {
-          "type": "farmersdelight:tool_action",
-          "action": "hoe_dig"
-        },
-        "result": [
-          {
-            "item": "minecraft:carrot",
-            "count": 10
-          }
-        ]
-      }
+      "item": "overweight_farming:overweight_carrot_block"
+    }
+  ],
+  "tool": {
+    "type": "farmersdelight:tool",
+    "tag": "fabric:tools/hoes"
+  },
+  "result": [
+    {
+      "item": "minecraft:carrot",
+      "count": 10
     }
   ]
 }

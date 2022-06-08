@@ -7,29 +7,23 @@
       ]
     }
   ],
-  "recipes": [
+  "type": "farmersdelight:cutting",
+  "ingredients": [
     {
-      "recipe": {
-        "type": "farmersdelight:cutting",
-        "ingredients": [
-          {
-            "item": "overweight_farming:overweight_onion_block"
-          }
-        ],
-        "tool": {
-          "type": "farmersdelight:tool_action",
-          "action": "axe_dig"
-        },
-        "result": [
-          {
-            "item": "overweight_farming:peeled_overweight_onion_block"
-          },
-          {
-            "item": "overweight_farming:vegetable_peels"
-          }
-        ],
-        "sound": "minecraft:item.axe.strip"
-      }
+      "item": "overweight_farming:overweight_onion_block"
     }
-  ]
+  ],
+  "tool": {
+    "type": "farmersdelight:tool",
+    "tag": "fabric:tools/axes"
+  },
+  "result": [
+    {
+      "item": "overweight_farming:peeled_overweight_onion_block"
+    },
+    {
+      "item": "overweight_farming:vegetable_peels"
+    }
+  ],
+  "sound": "minecraft:item.axe.strip"
 }
