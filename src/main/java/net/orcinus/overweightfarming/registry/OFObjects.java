@@ -79,7 +79,7 @@ public class OFObjects {
     public static final Block PEELED_OVERWEIGHT_KIWI = register( "peeled_overweight_kiwi_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_KIWI)), FabricLoader.getInstance().isModLoaded("hedgehog"), gen());
     public static final Block PEELED_OVERWEIGHT_GINGER = register("peeled_overweight_ginger_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_GINGER)), FabricLoader.getInstance().isModLoaded("snowyspirit"), gen());
 
-    public static final Block OVERWEIGHT_WEED = register("overweight_weed_block", new OverweightWeedBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).nonOpaque()),true, gen());
+    public static final Block OVERWEIGHT_WEED = register("overweight_weed_block", new OverweightWeedBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).nonOpaque()),false, gen());
 
 
     //POTTED
