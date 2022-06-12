@@ -1,6 +1,8 @@
 package net.orcinus.overweightfarming.mixin;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.property.Properties;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import net.minecraft.block.*;
@@ -32,6 +34,7 @@ public abstract class LivingEntityMixin {
         World world = livingEntity.getWorld();
         if (!world.isClient()) {
             if (livingEntity.getEquippedStack(EquipmentSlot.HEAD).isOf(OFObjects.STRAW_HAT)) {
+                ItemStack strawHat = livingEntity.getEquippedStack(EquipmentSlot.HEAD);
                 int radius = 40;
                 for (int x = -radius; x <= radius; x++) {
                     for (int z = -radius; z <= radius; z++) {
@@ -88,7 +91,14 @@ public abstract class LivingEntityMixin {
                                         if (validForOverweight) {
                                             for (Block overgrowth : manager.getOverweightMap().keySet()) {
                                                 if (state.isOf(overgrowth)) {
-                                                    manager.growOverweightCrops(serverLevel, cropPos, state, serverLevel.getRandom());
+                                                    if(livingEntity instanceof PlayerEntity playerEntity){
+                                                        if(!playerEntity.getItemCooldownManager().isCoolingDown(strawHat.getItem())){
+                                                            manager.growOverweightCrops(serverLevel, cropPos, state, serverLevel.getRandom());
+                                                            playerEntity.getItemCooldownManager().set(strawHat.getItem(), 20 * 30);
+                                                        }
+                                                    }else{
+                                                        manager.growOverweightCrops(serverLevel, cropPos, state, serverLevel.getRandom());
+                                                    }
                                                 }
                                             }
                                         }
