@@ -20,7 +20,7 @@ public abstract class DrippingParticleMixin extends Particle implements BlockLea
     private ParticleEffect moddedNextParticle;
 
     @Inject(method = "updateAge()V", at = @At("HEAD"), cancellable = true)
-    private void spawnCustomNextParticle(CallbackInfo ci) {
+    private void OF$spawnCustomNextParticle(CallbackInfo ci) {
         if(moddedNextParticle != null && this.maxAge - 1 <= 0) {
             this.markDead();
             this.world.addParticle(this.moddedNextParticle, this.x, this.y, this.z, 0.0D, 0.0D, 0.0D);
