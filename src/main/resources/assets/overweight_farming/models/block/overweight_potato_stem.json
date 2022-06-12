@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "overweight_farming:block/overweight_potato_stem"
-  }
-}
