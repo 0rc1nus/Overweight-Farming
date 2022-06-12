@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/orientable_vertical",
+  "textures": {
+    "front": "minecraft:block/overweight_sliced_kiwi_block_front",
+    "side": "minecraft:block/peeled_overweight_kiwi_block"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "fluff=false,half=lower": {
+      "model": "overweight_farming:block/overweight_weed_block_stem"
+    },
+    "fluff=false,half=middle": {
+      "model": "overweight_farming:block/overweight_weed_block_stem"
+    },
+    "fluff=false,half=upper": {
+      "model": "overweight_farming:block/overweight_weed_block_flower"
+    },
+    "fluff=true,half=lower": {
+      "model": "overweight_farming:block/overweight_weed_block_fluff"
+    },
+    "fluff=true,half=middle": {
+      "model": "overweight_farming:block/overweight_weed_block_fluff"
+    },
+    "fluff=true,half=upper": {
+      "model": "overweight_farming:block/overweight_weed_block_fluff"
+    }
+  }
+}

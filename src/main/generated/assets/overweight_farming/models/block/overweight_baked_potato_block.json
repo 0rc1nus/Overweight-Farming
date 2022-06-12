@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "overweight_farming:block/overweight_baked_potato_block_top",
+    "north": "overweight_farming:block/overweight_baked_potato_block_north_south",
+    "south": "overweight_farming:block/overweight_baked_potato_block_north_south",
+    "east": "overweight_farming:block/overweight_baked_potato_block_east_west",
+    "west": "overweight_farming:block/overweight_baked_potato_block_east_west",
+    "up": "overweight_farming:block/overweight_baked_potato_block_top",
+    "down": "overweight_farming:block/overweight_baked_potato_block_bottom"
+  }
+}
