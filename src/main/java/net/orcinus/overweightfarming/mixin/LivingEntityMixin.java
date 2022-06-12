@@ -1,6 +1,8 @@
 package net.orcinus.overweightfarming.mixin;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.property.Properties;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import net.minecraft.block.*;
@@ -13,6 +15,7 @@ import net.minecraft.world.World;
 import net.orcinus.overweightfarming.registry.OFTags;
 import net.orcinus.overweightfarming.util.OverweightGrowthManager;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -22,12 +25,15 @@ import java.util.Objects;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
+    @Shadow protected abstract void initDataTracker();
+
     @Inject(method = "tick", at = @At("HEAD"))
     private void OF$tick(CallbackInfo ci){
         LivingEntity livingEntity = ((LivingEntity) (Object) this);
         World world = livingEntity.getWorld();
         if (!world.isClient()) {
             if (livingEntity.getEquippedStack(EquipmentSlot.HEAD).isOf(OFObjects.STRAW_HAT)) {
+                ItemStack strawHat = livingEntity.getEquippedStack(EquipmentSlot.HEAD);
                 int radius = 40;
                 for (int x = -radius; x <= radius; x++) {
                     for (int z = -radius; z <= radius; z++) {
@@ -84,7 +90,14 @@ public abstract class LivingEntityMixin {
                                         if (validForOverweight) {
                                             for (Block overgrowth : manager.getOverweightMap().keySet()) {
                                                 if (state.isOf(overgrowth)) {
-                                                    manager.growOverweightCrops(serverLevel, cropPos, state, serverLevel.getRandom());
+                                                    if(livingEntity instanceof PlayerEntity playerEntity){
+                                                        if(!playerEntity.getItemCooldownManager().isCoolingDown(strawHat.getItem())){
+                                                            manager.growOverweightCrops(serverLevel, cropPos, state, serverLevel.getRandom());
+                                                            playerEntity.getItemCooldownManager().set(strawHat.getItem(), 20 * 30);
+                                                        }
+                                                    }else{
+                                                        manager.growOverweightCrops(serverLevel, cropPos, state, serverLevel.getRandom());
+                                                    }
                                                 }
                                             }
                                         }
