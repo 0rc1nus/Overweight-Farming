@@ -29,11 +29,11 @@
                   "add": false
                 }
               ],
-              "name": "minecraft:potato"
+              "name": "hedgehog:kiwi"
             },
             {
               "type": "minecraft:item",
-              "name": "overweight_farming:peeled_overweight_potato_block"
+              "name": "overweight_farming:overweight_sliced_kiwi_block"
             }
           ]
         }
@@ -43,6 +43,14 @@
   "functions": [
     {
       "function": "minecraft:explosion_decay"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "orcinus"
+      ]
     }
   ]
 }

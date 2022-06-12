@@ -70,7 +70,6 @@ public class OverweightFarming implements ModInitializer {
             factories.add(new EmeraldToItemOffer(new ItemStack(OFObjects.STRAW_HAT), 20, 1, 12, 0.05F));
         });
 
-
     }
     protected void registerLootTable() {
     Set<Identifier> villageHouseChestsId = Set.of(

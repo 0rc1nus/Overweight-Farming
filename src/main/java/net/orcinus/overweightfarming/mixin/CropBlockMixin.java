@@ -1,5 +1,6 @@
 package net.orcinus.overweightfarming.mixin;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
@@ -26,9 +27,9 @@ public class CropBlockMixin {
                 boolean flag2 = state.contains(BeetrootsBlock.AGE) && state.get(BeetrootsBlock.AGE) < BeetrootsBlock.MAX_AGE && state.get(BeetrootsBlock.AGE) > 1;
                 boolean flag5 = state.isIn(OFTags.OVERWEIGHT_COMPAT) && state.contains(Properties.AGE_3) && state.get(Properties.AGE_3) < 3 && state.get(Properties.AGE_3) > 1;
                 //boolean flag4 = state.contains(BWCropBlock.AGE) && state.get(BWCropBlock.AGE) < BWCropBlock.MAX_AGE && state.get(BWCropBlock.AGE) > 1;
-                //TODO boolean flag3 = FabricLoader.getInstance().isModLoaded("hedgehog") && state.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("hedgehog", "kiwi_vines")) && state.getValue(BlockStateProperties.BERRIES);
+                boolean flag3 = FabricLoader.getInstance().isModLoaded("orcinus") && state.getBlock() == manager.getCompatBlock("hedgehog", "kiwi_vines") && state.get(Properties.BERRIES);
 
-                if (flag || flag1 || flag2 || flag5) {
+                if (flag || flag1 || flag2 || flag5 || flag3) {
                     float chance = world.isNight() && world.getMoonPhase() == 0 ? 0.0010538863F : 3.4290552E-4F;
                     if (random.nextFloat() < chance) {
                         manager.growOverweightCrops(world, pos, state, random);

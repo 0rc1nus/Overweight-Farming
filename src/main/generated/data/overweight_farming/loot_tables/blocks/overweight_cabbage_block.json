@@ -29,13 +29,31 @@
                   "add": false
                 }
               ],
-              "name": "minecraft:potato"
+              "name": "farmersdelight:cabbage"
             },
             {
               "type": "minecraft:item",
-              "name": "overweight_farming:peeled_overweight_potato_block"
+              "name": "overweight_farming:overweight_cabbage_block"
             }
           ]
+        }
+      ]
+    },
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "tag": "overweight_farming:overweight_harvestables"
+              }
+            }
+          ],
+          "name": "farmersdelight:cabbage_seeds"
         }
       ]
     }
@@ -43,6 +61,14 @@
   "functions": [
     {
       "function": "minecraft:explosion_decay"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "farmersdelight"
+      ]
     }
   ]
 }

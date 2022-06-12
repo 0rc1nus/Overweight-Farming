@@ -31,13 +31,15 @@ public record OverweightGrowthManager(Random random) {
             map.put(Blocks.POTATOES, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightPotato, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_POTATO));
             map.put(Blocks.BEETROOTS, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightBeetroot, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_BEETROOT));
             map.put(Blocks.COCOA, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightCocoa, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_COCOA));
-            map.put(Blocks.NETHER_WART, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightNetherWart, OverweightType.INVERTED), OFObjects.OVERWEIGHT_NETHERWART));
+            //TODO map.put(Blocks.NETHER_WART, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightNetherWart, OverweightType.INVERTED), OFObjects.OVERWEIGHT_NETHERWART));
             map.put(getCompatBlock("farmersdelight", "cabbages"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightCabbage, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_CABBAGE));
             map.put(getCompatBlock("farmersdelight", "onions"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightOnion, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_ONION));
             map.put(getCompatBlock("bewitchment", "mandrake"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightMandrake, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_MANDRAKE));
             map.put(getCompatBlock("bewitchment", "garlic"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightGarlic, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_GARLIC));
             map.put(getCompatBlock("bwplus", "bloodroot"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightBloodroot, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_BLOODROOT));
             map.put(getCompatBlock("immersive_weathering", "weeds"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightWeeds, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_WEED));
+            map.put(getCompatBlock("hedgehog", "kiwi_vines"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightWeeds, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_GINGER));
+
         });
     }
 
@@ -81,7 +83,7 @@ public record OverweightGrowthManager(Random random) {
     }
 
     @Nullable
-    private Block getCompatBlock(String modid, String name) {
+    public Block getCompatBlock(String modid, String name) {
         return Registry.BLOCK.get(new Identifier(modid, name));
     }
 
