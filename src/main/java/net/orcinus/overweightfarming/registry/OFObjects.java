@@ -62,8 +62,8 @@ public class OFObjects {
     public static final Block OVERWEIGHT_NETHERWART = register("overweight_nether_wart_block", new NetherCropFullBlock(OVERWEIGHT_NETHERWART_STEM, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.NETHER_WART)), true, gen());
     public static final Block OVERWEIGHT_CABBAGE_STEM = register("overweight_cabbage_stem", new CropStemBlock(FabricBlockSettings.of(Material.PLANT).breakInstantly().noCollision().sounds(BlockSoundGroup.CROP)), false, gen());
     public static final Block VEGETABLE_COMPOST = register("vegetable_compost", new Block(FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.MOSS_BLOCK)),true, gen());
-    public static final Block OVERWEIGHT_KIWI = register( "overweight_kiwi_block", new CropFullBlock(null, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), FabricLoader.getInstance().isModLoaded("hedgehog"), gen());
-    public static final Block OVERWEIGHT_SLICED_KIWI = register( "overweight_sliced_kiwi_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_KIWI)), FabricLoader.getInstance().isModLoaded("hedgehog"), gen());
+    public static final Block OVERWEIGHT_KIWI = register( "overweight_kiwi_block", new CropFullBlock(null, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), FabricLoader.getInstance().isModLoaded("orcinus"), gen());
+    public static final Block OVERWEIGHT_SLICED_KIWI = register( "overweight_sliced_kiwi_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_KIWI)), FabricLoader.getInstance().isModLoaded("orcinus"), gen());
     public static final Block OVERWEIGHT_GINGER = register("overweight_ginger_block", new CropFullBlock(OVERWEIGHT_GINGER_STEM, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),FabricLoader.getInstance().isModLoaded("snowyspirit"), gen());
     public static final Block SEEDED_PEELED_MELON = register("seeded_peeled_melon", new PeeledMelonBlock(PeeledMelonBlock.SeedState.SEEDED, FabricBlockSettings.copy(Blocks.MELON).sounds(BlockSoundGroup.WET_GRASS)), true, gen());
     public static final Block HALF_SEEDED_PEELED_MELON = register("half_seeded_peeled_melon", new PeeledMelonBlock(PeeledMelonBlock.SeedState.HALF_SEEDED, FabricBlockSettings.copy(Blocks.MELON).sounds(BlockSoundGroup.WET_GRASS)), true,gen());
@@ -76,10 +76,11 @@ public class OFObjects {
     public static final Block PEELED_OVERWEIGHT_POTATO = register("peeled_overweight_potato_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_POTATO)), true, gen());
     public static final Block PEELED_OVERWEIGHT_COCOA = register("peeled_overweight_cocoa_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_COCOA)), true, gen());
     public static final Block PEELED_OVERWEIGHT_ONION = register("peeled_overweight_onion_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_ONION)), FabricLoader.getInstance().isModLoaded("farmersdelight"), gen());
-    public static final Block PEELED_OVERWEIGHT_KIWI = register( "peeled_overweight_kiwi_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_KIWI)), FabricLoader.getInstance().isModLoaded("hedgehog"), gen());
+    public static final Block PEELED_OVERWEIGHT_KIWI = register( "peeled_overweight_kiwi_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_KIWI)), FabricLoader.getInstance().isModLoaded("orcinus"), gen());
     public static final Block PEELED_OVERWEIGHT_GINGER = register("peeled_overweight_ginger_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_GINGER)), FabricLoader.getInstance().isModLoaded("snowyspirit"), gen());
 
     public static final Block OVERWEIGHT_WEED = register("overweight_weed_block", new OverweightWeedBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).nonOpaque()),false, gen());
+
 
 
     //POTTED

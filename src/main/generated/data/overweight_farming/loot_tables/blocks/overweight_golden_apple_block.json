@@ -2,15 +2,6 @@
   "type": "minecraft:block",
   "functions": [
     {
-      "add": false,
-      "count": {
-        "type": "minecraft:uniform",
-        "max": 20.0,
-        "min": 6.0
-      },
-      "function": "minecraft:set_count"
-    },
-    {
       "function": "minecraft:explosion_decay"
     }
   ],
@@ -29,6 +20,17 @@
                   "predicate": {
                     "tag": "overweight_farming:overweight_harvestables"
                   }
+                }
+              ],
+              "functions": [
+                {
+                  "add": false,
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 20.0,
+                    "min": 6.0
+                  },
+                  "function": "minecraft:set_count"
                 }
               ],
               "name": "minecraft:golden_apple"

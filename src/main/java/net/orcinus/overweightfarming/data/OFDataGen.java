@@ -11,6 +11,7 @@ public class OFDataGen implements DataGeneratorEntrypoint {
         fabricDataGenerator.addProvider(OFBlockTagProvider::new);
         fabricDataGenerator.addProvider(OFRecipeProvider::new);
         fabricDataGenerator.addProvider(OFBlockLootTableProvider::new);
+        fabricDataGenerator.addProvider(OFCompatBlockLootTableProvider::new);
 
         OFBlockTagProvider blockTagProvider = fabricDataGenerator.addProvider(OFBlockTagProvider::new);
         fabricDataGenerator.addProvider(new OFItemTagProvider(fabricDataGenerator, blockTagProvider));

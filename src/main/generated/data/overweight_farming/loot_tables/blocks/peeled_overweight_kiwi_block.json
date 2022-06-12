@@ -1,5 +1,13 @@
 {
   "type": "minecraft:block",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "orcinus"
+      ]
+    }
+  ],
   "functions": [
     {
       "function": "minecraft:explosion_decay"
@@ -33,11 +41,11 @@
                   "function": "minecraft:set_count"
                 }
               ],
-              "name": "minecraft:potato"
+              "name": "minecraft:air"
             },
             {
               "type": "minecraft:item",
-              "name": "overweight_farming:peeled_overweight_potato_block"
+              "name": "minecraft:air"
             }
           ]
         }

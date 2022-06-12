@@ -1,5 +1,6 @@
 package net.orcinus.overweightfarming.mixin;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.state.property.Properties;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import net.minecraft.block.*;
@@ -15,6 +16,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Objects;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -32,10 +35,10 @@ public abstract class LivingEntityMixin {
                             BlockPos entityPosition = livingEntity.getBlockPos();
                             BlockPos cropPos = new BlockPos(entityPosition.getX() + x, entityPosition.getY() + y, entityPosition.getZ() + z);
                             BlockState state = world.getBlockState(cropPos);
-                            String hedgehogModid = "hedgehog";
-                            Block kiwiVines = null;//TODO ForgeRegistries.BLOCKS.getValue(new ResourceLocation(hedgehogModid, "kiwi_vines"));
-                            boolean hedgehogFlag = false;//TODO ModList.get().isLoaded(hedgehogModid) && state.is(Objects.requireNonNull(kiwiVines));
-                            if (state.isIn(BlockTags.CROPS) || state.isIn(OFTags.OVERWEIGHT_COMPAT) || state.isOf(Blocks.NETHER_WART)) {
+                            OverweightGrowthManager manager = new OverweightGrowthManager(world.getRandom());
+                            Block kiwiVines = manager.getCompatBlock("hedgehog", "kiwi_vines");//TODO ForgeRegistries.BLOCKS.getValue(new ResourceLocation(hedgehogs-fabricModid, "kiwi_vines"));
+                            boolean hedgehogFlag = FabricLoader.getInstance().isModLoaded("hedgehogs-fabric") && state.isOf(Objects.requireNonNull(kiwiVines));
+                            if (state.isIn(BlockTags.CROPS) || state.isIn(OFTags.OVERWEIGHT_COMPAT) || state.isOf(Blocks.NETHER_WART) || hedgehogFlag) {
                                 Block block = state.getBlock();
                                 float v = world.getRandom().nextFloat();
                                 boolean flag = v < 1.5E-4 && world.getRandom().nextBoolean();
@@ -78,7 +81,6 @@ public abstract class LivingEntityMixin {
                                                 }
                                             }
                                         }
-                                        OverweightGrowthManager manager = new OverweightGrowthManager(world.getRandom());
                                         if (validForOverweight) {
                                             for (Block overgrowth : manager.getOverweightMap().keySet()) {
                                                 if (state.isOf(overgrowth)) {
