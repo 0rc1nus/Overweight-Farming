@@ -38,7 +38,7 @@ public record OverweightGrowthManager(Random random) {
             map.put(getCompatBlock("bewitchment", "garlic"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightGarlic, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_GARLIC));
             map.put(getCompatBlock("bwplus", "bloodroot"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightBloodroot, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_BLOODROOT));
             map.put(getCompatBlock("immersive_weathering", "weeds"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightWeeds, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_WEED));
-            map.put(getCompatBlock("hedgehog", "kiwi_vines"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightWeeds, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_GINGER));
+            map.put(getCompatBlock("hedgehog", "kiwi_vines"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightWeeds, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_KIWI));
 
         });
     }
