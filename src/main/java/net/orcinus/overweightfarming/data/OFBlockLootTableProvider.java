@@ -2,8 +2,6 @@ package net.orcinus.overweightfarming.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
-import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.item.Item;
@@ -16,14 +14,9 @@ import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.orcinus.overweightfarming.blocks.PeeledMelonBlock;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import net.orcinus.overweightfarming.registry.OFTags;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.function.BiConsumer;
 
 public class OFBlockLootTableProvider extends FabricBlockLootTableProvider {
     public OFBlockLootTableProvider(FabricDataGenerator dataGenerator) {

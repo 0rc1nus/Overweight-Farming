@@ -1,17 +1,6 @@
 package net.orcinus.overweightfarming.mixin.compat;
 
 import net.minecraft.block.*;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.orcinus.overweightfarming.OverweightFarming;
-import net.orcinus.overweightfarming.blocks.OverweightWeedBlock;
-import net.orcinus.overweightfarming.registry.OFObjects;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Random;
 
 //TODO wait for IW to update, REMEMBER TO ADD THE MIXIN BACK IN THE MIXIN.JSON
 //@Mixin(value = WeedsBlock.class, remap = false)
