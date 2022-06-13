@@ -62,7 +62,7 @@ public class OverweightAppleBlock extends CropFullBlock implements LandingBlock,
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return !world.isClient() ? createTickerHelper(type, OFBlockEntityTypes.OVERWEIGHT_APPLE_BLOCK_ENTITY, OverweightAppleBlockEntity::tick) : null;
+        return (tickerWorld, pos, tickerState, blockEntity) -> OverweightAppleBlockEntity.tick(tickerWorld, pos, tickerState, (OverweightAppleBlockEntity) blockEntity);
     }
 
     public void spawnFallingBlock(BlockState state, World world, BlockPos pos) {
@@ -71,10 +71,7 @@ public class OverweightAppleBlock extends CropFullBlock implements LandingBlock,
         world.spawnEntity(fallingBlockEntity);
     }
 
-    @Nullable
-    protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> blockEntityType, BlockEntityType<E> blockEntityType1, BlockEntityTicker<? super E> ticker) {
-        return blockEntityType1 == blockEntityType ? (BlockEntityTicker<A>)ticker : null;
-    }
+
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
