@@ -39,7 +39,7 @@ public class OFObjects {
     public static final Block OVERWEIGHT_APPLE_STEM = register("overweight_apple_stem", new CropStemBlock(FabricBlockSettings.of(Material.PLANT).breakInstantly().noCollision().nonOpaque().sounds(BlockSoundGroup.CROP)), false, gen());
     public static final Block OVERWEIGHT_GOLDEN_APPLE_STEM = register("overweight_golden_apple_stem", new CropStemBlock(FabricBlockSettings.of(Material.PLANT).breakInstantly().noCollision().nonOpaque().sounds(BlockSoundGroup.CROP)), false, gen());
 
-    public static final Block OVERWEIGHT_NETHERWART_STEM = register("overweight_nether_wart_stem", new NetherCropStemBlock(FabricBlockSettings.of(Material.PLANT).breakInstantly().noCollision().sounds(BlockSoundGroup.NETHER_WART)), false, gen());
+    public static final Block OVERWEIGHT_NETHER_WART_STEM = register("overweight_nether_wart_stem", new NetherCropStemBlock(FabricBlockSettings.of(Material.PLANT).breakInstantly().noCollision().sounds(BlockSoundGroup.NETHER_WART)), false, gen());
     public static final Block OVERWEIGHT_GINGER_STEM = register("overweight_ginger_stem", new CropStemBlock(FabricBlockSettings.of(Material.PLANT).breakInstantly().noCollision().sounds(BlockSoundGroup.CROP)), false, gen());
 
 
@@ -47,19 +47,19 @@ public class OFObjects {
     public static final Block ALLIUM_BUSH = register("allium_bush", new TallFlowerBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)),true, gen());
     public static final Block OVERWEIGHT_BEETROOT = register("overweight_beetroot_block", new CropFullBlock(OVERWEIGHT_BEETROOT_STEM, FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly()),true, gen());
     public static final Block OVERWEIGHT_CARROT = register("overweight_carrot_block", new OverweightCarrotBlock(OVERWEIGHT_CARROT_STEM, FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly()),true, gen());
-    public static final Block OVERWEIGHT_COCOA = register("overweight_cocoa_block", new Block(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly()),true, gen());
+    public static final Block OVERWEIGHT_COCOA = register("overweight_cocoa_block", new OverweightCocoaBlock(null, FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly()),true, gen());
     public static final Block OVERWEIGHT_POTATO = register("overweight_potato_block", new OverweightPotatoBlock(OVERWEIGHT_POTATO_STEM, FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly()),true, gen());
     public static final Block OVERWEIGHT_ONION = register("overweight_onion_block", new OverweightOnionBlock(ALLIUM_BUSH, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), FabricLoader.getInstance().isModLoaded("farmersdelight"), gen());
     public static final Block OVERWEIGHT_CABBAGE = register("overweight_cabbage_block", new OverweightCabbageBlock(null, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),FabricLoader.getInstance().isModLoaded("farmersdelight"), gen());
-    public static final Block OVERWEIGHT_APPLE = register("overweight_apple_block", new OverweightAppleBlock(OVERWEIGHT_APPLE_STEM, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),true, gen());
-    public static final Block OVERWEIGHT_GOLDEN_APPLE = register("overweight_golden_apple_block", new OverweightAppleBlock(OVERWEIGHT_GOLDEN_APPLE_STEM, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), true, gen());
+    public static final Block OVERWEIGHT_APPLE = register("overweight_apple_block", new OverweightAppleBlock(false, OVERWEIGHT_APPLE_STEM, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),true, gen());
+    public static final Block OVERWEIGHT_GOLDEN_APPLE = register("overweight_golden_apple_block", new OverweightAppleBlock(true, OVERWEIGHT_GOLDEN_APPLE_STEM, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), true, gen());
     public static final Block OVERWEIGHT_MANDRAKE = register("overweight_mandrake_block", new CropFullBlock(OVERWEIGHT_MANDRAKE_STEM, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),FabricLoader.getInstance().isModLoaded("bewitchment"), gen());
     public static final Block OVERWEIGHT_GARLIC = register("overweight_garlic_block", new CropFullBlock(OVERWEIGHT_GARLIC_STEM, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),FabricLoader.getInstance().isModLoaded("bewitchment"), gen());
     public static final Block OVERWEIGHT_BLOODROOT = register("overweight_bloodroot_block", new CropFullBlock(OVERWEIGHT_BLOODROOT_STEM, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),FabricLoader.getInstance().isModLoaded("bwplus"), gen());
 
     public static final Block OVERWEIGHT_BAKED_POTATO = register("overweight_baked_potato_block", new Block(FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)),true, gen());
     public static final Block OVERWEIGHT_POISONOUS_POTATO = register("overweight_poisonous_potato_block", new CropFullBlock(null, FabricBlockSettings.copy(OVERWEIGHT_BAKED_POTATO)),true, gen());
-    public static final Block OVERWEIGHT_NETHERWART = register("overweight_nether_wart_block", new NetherCropFullBlock(OVERWEIGHT_NETHERWART_STEM, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.NETHER_WART)), true, gen());
+    public static final Block OVERWEIGHT_NETHER_WART = register("overweight_nether_wart_block", new NetherCropFullBlock(OVERWEIGHT_NETHER_WART_STEM, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.NETHER_WART)), true, gen());
     public static final Block OVERWEIGHT_CABBAGE_STEM = register("overweight_cabbage_stem", new CropStemBlock(FabricBlockSettings.of(Material.PLANT).breakInstantly().noCollision().sounds(BlockSoundGroup.CROP)), false, gen());
     public static final Block VEGETABLE_COMPOST = register("vegetable_compost", new Block(FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.MOSS_BLOCK)),true, gen());
     public static final Block OVERWEIGHT_KIWI = register( "overweight_kiwi_block", new CropFullBlock(null, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), FabricLoader.getInstance().isModLoaded("orcinus"), gen());
@@ -95,7 +95,8 @@ public class OFObjects {
     public static final Block POTTED_OVERWEIGHT_KIWI = register("potted_overweight_kiwi", new FlowerPotBlock(OVERWEIGHT_KIWI, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
     public static final Block POTTED_OVERWEIGHT_ONION = register("potted_overweight_onion", new FlowerPotBlock(OVERWEIGHT_ONION, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
     public static final Block POTTED_OVERWEIGHT_CABBAGE = register("potted_overweight_cabbage", new FlowerPotBlock(OVERWEIGHT_CABBAGE, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
-    public static final Block POTTED_OVERWEIGHT_NETHER_WART = register("potted_overweight_nether_wart", new FlowerPotBlock(OVERWEIGHT_NETHERWART, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque()), false, gen());
+    public static final Block POTTED_OVERWEIGHT_NETHER_WART = register("potted_overweight_nether_wart", new FlowerPotBlock(OVERWEIGHT_NETHER_WART, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque()), false, gen());
+
 
 
 

@@ -37,7 +37,7 @@ public class OFBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.addDrop(OFObjects.OVERWEIGHT_CARROT, overweightDrops(OFObjects.OVERWEIGHT_CARROT, Items.CARROT, null));
         this.addDrop(OFObjects.OVERWEIGHT_COCOA, overweightDrops(OFObjects.OVERWEIGHT_COCOA, Items.COCOA_BEANS, null));
         this.addDrop(OFObjects.OVERWEIGHT_GOLDEN_APPLE, overweightDrops(OFObjects.OVERWEIGHT_GOLDEN_APPLE, Items.GOLDEN_APPLE, null));
-        this.addDrop(OFObjects.OVERWEIGHT_NETHERWART, overweightDrops(OFObjects.OVERWEIGHT_NETHERWART, Items.NETHER_WART, null));
+        this.addDrop(OFObjects.OVERWEIGHT_NETHER_WART, overweightDrops(OFObjects.OVERWEIGHT_NETHER_WART, Items.NETHER_WART, null));
         this.addDrop(OFObjects.OVERWEIGHT_POISONOUS_POTATO, overweightDrops(OFObjects.OVERWEIGHT_POISONOUS_POTATO, Items.POISONOUS_POTATO, null));
         this.addDrop(OFObjects.OVERWEIGHT_POTATO, overweightDrops(OFObjects.OVERWEIGHT_POTATO, Items.POTATO, null));
 
@@ -50,7 +50,17 @@ public class OFBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.addDrop(OFObjects.WAXED_SEEDED_PEELED_MELON);
         this.addDrop(OFObjects.WAXED_SEEDLESS_PEELED_MELON);
 
-
+        this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_APPLE);
+        this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_BEETROOT);
+        this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_CABBAGE);
+        this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_CARROT);
+        this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_COCOA);
+        this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_GINGER);
+        this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_GOLDEN_APPLE);
+        this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_POISONOUS_POTATO);
+        this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_KIWI);
+        this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_NETHER_WART);
+        this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_ONION);
     }
 
 

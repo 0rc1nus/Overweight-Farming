@@ -1,6 +1,7 @@
 package net.orcinus.overweightfarming;
 
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.render.entity.FallingBlockEntityRenderer;
 import net.orcinus.overweightfarming.client.model.StrawHatModel;
 import net.orcinus.overweightfarming.client.renderer.DandelionEntityRenderer;
 import net.orcinus.overweightfarming.client.renderer.StrawHatRenderer;
@@ -28,6 +29,8 @@ public class OverweightFarmingClient implements ClientModInitializer {
                 OFObjects.OVERWEIGHT_BLOODROOT_STEM,
                 OFObjects.OVERWEIGHT_MANDRAKE_STEM,
                 OFObjects.OVERWEIGHT_GARLIC_STEM,
+                OFObjects.OVERWEIGHT_APPLE_STEM,
+                OFObjects.OVERWEIGHT_GOLDEN_APPLE_STEM,
 
                 OFObjects.POTTED_OVERWEIGHT_APPLE,
                 OFObjects.POTTED_OVERWEIGHT_BEETROOT,
@@ -40,11 +43,13 @@ public class OverweightFarmingClient implements ClientModInitializer {
                 OFObjects.POTTED_OVERWEIGHT_ONION,
                 OFObjects.POTTED_OVERWEIGHT_POISONOUS_POTATO,
                 OFObjects.POTTED_OVERWEIGHT_POTATO,
+                OFObjects.POTTED_OVERWEIGHT_NETHER_WART,
 
-                OFObjects.OVERWEIGHT_NETHERWART_STEM
+                OFObjects.OVERWEIGHT_NETHER_WART_STEM
         );
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), OFObjects.OVERWEIGHT_WEED);
 
+        EntityRendererRegistry.register(OFEntityTypes.OVERWEIGHT_APPLE_FALLING_BLOCK, FallingBlockEntityRenderer::new);
         EntityRendererRegistry.register(OFEntityTypes.DANDELION_FLUFF_ENTITY, DandelionEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(StrawHatModel.LAYER_LOCATION, StrawHatModel::createBodyLayer);
         ArmorRenderer.register(new StrawHatRenderer(null), OFObjects.STRAW_HAT);

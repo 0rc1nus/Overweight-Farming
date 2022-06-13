@@ -24,7 +24,8 @@ public class CropBlockMixin {
             if (state.isOf(cropBlock)) {
                 boolean flag = state.contains(CropBlock.AGE) && state.get(CropBlock.AGE) < 7 && state.get(CropBlock.AGE) == 3;
                 boolean flag1 = state.contains(CocoaBlock.AGE) && state.get(CocoaBlock.AGE) == 1;
-                boolean flag2 = state.contains(BeetrootsBlock.AGE) && state.get(BeetrootsBlock.AGE) < BeetrootsBlock.MAX_AGE && state.get(BeetrootsBlock.AGE) > 1;
+                boolean flag2 = (state.getBlock() instanceof BeetrootsBlock || state.getBlock() instanceof NetherWartBlock) && state.contains(Properties.AGE_3) &&
+                        state.get(Properties.AGE_3) < 3 && state.get(Properties.AGE_3) > 1;
                 boolean flag5 = state.isIn(OFTags.OVERWEIGHT_COMPAT) && state.contains(Properties.AGE_3) && state.get(Properties.AGE_3) < 3 && state.get(Properties.AGE_3) > 1;
                 boolean flag3 = FabricLoader.getInstance().isModLoaded("orcinus") && state.getBlock() == manager.getCompatBlock("hedgehog", "kiwi_vines") && state.get(Properties.BERRIES);
 

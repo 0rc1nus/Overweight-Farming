@@ -1,0 +1,6 @@
+{
+  "parent": "overweight_farming:block/overweight_pot",
+  "textures": {
+    "plant": "overweight_farming:block/potted_overweight_kiwi"
+  }
+}

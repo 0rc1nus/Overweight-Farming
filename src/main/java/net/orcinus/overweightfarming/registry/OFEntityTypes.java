@@ -12,6 +12,8 @@ import net.orcinus.overweightfarming.entities.DandelionFluffEntity;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import net.orcinus.overweightfarming.entities.OverweightAppleFallingBlockEntity;
+import net.minecraft.entity.EntityDimensions;
 public class OFEntityTypes {
     private static final Map<EntityType<?>, Identifier> ENTITY_TYPES = new LinkedHashMap<>();
 
@@ -22,6 +24,14 @@ public class OFEntityTypes {
             .dimensions(EntityType.ARROW.getDimensions())
             .build());
 
+    public static final EntityType<OverweightAppleFallingBlockEntity> OVERWEIGHT_APPLE_FALLING_BLOCK = register("overweight_apple_falling_block", FabricEntityTypeBuilder
+            .<OverweightAppleFallingBlockEntity>create()
+            .spawnGroup(SpawnGroup.MISC)
+            .entityFactory(OverweightAppleFallingBlockEntity::new)
+            .trackedUpdateRate(10)
+            .dimensions(EntityDimensions.fixed(0.98F, 0.98F))
+            .trackedUpdateRate(20)
+            .build());
     private static <T extends Entity> EntityType<T> register(String name, EntityType<T> type) {
         ENTITY_TYPES.put(type, new Identifier(OverweightFarming.MODID, name));
         return type;

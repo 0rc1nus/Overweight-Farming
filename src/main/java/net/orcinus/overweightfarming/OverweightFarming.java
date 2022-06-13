@@ -44,6 +44,7 @@ import net.orcinus.overweightfarming.registry.OFEntityTypes;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import net.orcinus.overweightfarming.util.EmeraldToItemOffer;
 import org.jetbrains.annotations.Nullable;
+import net.orcinus.overweightfarming.registry.OFBlockEntityTypes;
 
 import java.util.Set;
 
@@ -59,6 +60,7 @@ public class OverweightFarming implements ModInitializer {
 
         OFObjects.init();
         OFEntityTypes.init();
+        OFBlockEntityTypes.init();
 
         UseBlockCallback.EVENT.register(this::stripMelon);
         UseBlockCallback.EVENT.register(this::growBloodroot);

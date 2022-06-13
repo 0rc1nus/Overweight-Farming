@@ -21,6 +21,14 @@ import static net.minecraft.data.client.TexturedModel.makeFactory;
 public class OFModelProvider extends FabricModelProvider {
     public static final Model TEMPLATE_OVERWEIGHT_POT_MODEL = block("overweight_pot", TextureKey.PLANT);
     public static final TexturedModel.Factory TEMPLATE_OVERWEIGHT_POT = makeFactory(TextureMap::plant, TEMPLATE_OVERWEIGHT_POT_MODEL);
+    public static final Model TEMPLATE_OVERWEIGHT_CABBAGE_POT_MODEL = block("overweight_cabbage_pot", TextureKey.PLANT);
+    public static final TexturedModel.Factory TEMPLATE_OVERWEIGHT_CABBAGE_POT = makeFactory(TextureMap::plant, TEMPLATE_OVERWEIGHT_CABBAGE_POT_MODEL);
+    public static final Model TEMPLATE_OVERWEIGHT_NETHER_WART_POT_MODEL = block("overweight_nether_wart_pot", TextureKey.PLANT);
+    public static final TexturedModel.Factory TEMPLATE_OVERWEIGHT_NETHER_WART_POT = makeFactory(TextureMap::plant, TEMPLATE_OVERWEIGHT_NETHER_WART_POT_MODEL);
+    public static final Model TEMPLATE_OVERWEIGHT_ONION_POT_MODEL = block("overweight_onion_pot", TextureKey.PLANT);
+    public static final TexturedModel.Factory TEMPLATE_OVERWEIGHT_ONION_POT = makeFactory(TextureMap::plant, TEMPLATE_OVERWEIGHT_ONION_POT_MODEL);
+
+    public static final Model ORIENTABLE_VERTICAL = block("orientable_vertical", TextureKey.FRONT, TextureKey.SIDE);
     public OFModelProvider(FabricDataGenerator dataGenerator) {
         super(dataGenerator);
     }
@@ -41,13 +49,12 @@ public class OFModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerTintableCross(OFObjects.OVERWEIGHT_GINGER_STEM, BlockStateModelGenerator.TintType.TINTED);
         blockStateModelGenerator.registerTintableCross(OFObjects.OVERWEIGHT_GOLDEN_APPLE_STEM, BlockStateModelGenerator.TintType.TINTED);
         blockStateModelGenerator.registerTintableCross(OFObjects.OVERWEIGHT_MANDRAKE_STEM, BlockStateModelGenerator.TintType.TINTED);
-        blockStateModelGenerator.registerTintableCross(OFObjects.OVERWEIGHT_NETHERWART_STEM, BlockStateModelGenerator.TintType.TINTED);
+        blockStateModelGenerator.registerTintableCross(OFObjects.OVERWEIGHT_NETHER_WART_STEM, BlockStateModelGenerator.TintType.TINTED);
         blockStateModelGenerator.registerTintableCross(OFObjects.OVERWEIGHT_POTATO_STEM, BlockStateModelGenerator.TintType.TINTED);
 
         //MISC
         blockStateModelGenerator.registerSimpleCubeAll(OFObjects.OVERWEIGHT_KIWI);
         blockStateModelGenerator.registerCubeAllModelTexturePool(OFObjects.VEGETABLE_COMPOST);
-        blockStateModelGenerator.registerSingleton(OFObjects.OVERWEIGHT_COCOA, TexturedModel.CUBE_BOTTOM_TOP);
         blockStateModelGenerator.registerDoubleBlock(OFObjects.ALLIUM_BUSH, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerSingleton(OFObjects.OVERWEIGHT_BAKED_POTATO, bakedPotatoMap(OFObjects.OVERWEIGHT_BAKED_POTATO), Models.CUBE);
         registerTripleBlock(blockStateModelGenerator.blockStateCollector, OFObjects.OVERWEIGHT_WEED,
@@ -55,6 +62,10 @@ public class OFModelProvider extends FabricModelProvider {
                 getSubId(OFObjects.OVERWEIGHT_WEED, "_stem"),
                 getSubId(OFObjects.OVERWEIGHT_WEED, "_stem")
         );
+        blockStateModelGenerator.registerSimpleCubeAll(OFObjects.WAXED_SEEDLESS_PEELED_MELON);
+        blockStateModelGenerator.registerSimpleCubeAll(OFObjects.WAXED_SEEDED_PEELED_MELON);
+        blockStateModelGenerator.registerSimpleCubeAll(OFObjects.WAXED_HALF_SEEDED_PEELED_MELON);
+
         //PEELED
         blockStateModelGenerator.registerCubeAllModelTexturePool(OFObjects.PEELED_OVERWEIGHT_BEETROOT);
         blockStateModelGenerator.registerSingleton(OFObjects.PEELED_OVERWEIGHT_CARROT, TexturedModel.CUBE_BOTTOM_TOP);
@@ -69,15 +80,17 @@ public class OFModelProvider extends FabricModelProvider {
         //POTS
         registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_APPLE);
         registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_BEETROOT);
-        registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_CABBAGE);
         registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_CARROT);
         registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_COCOA);
         registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_GINGER);
         registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_GOLDEN_APPLE);
-        registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_NETHER_WART);
-        registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_ONION);
         registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_POISONOUS_POTATO);
         registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_POTATO);
+
+        registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_KIWI);
+        registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_NETHER_WART);
+        registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_CABBAGE);
+        registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_ONION);
 
         String kiwiBlockFront = "block/overweight_sliced_kiwi_block_front";
         registerSliced(blockStateModelGenerator, OFObjects.PEELED_OVERWEIGHT_KIWI,"block/peeled_overweight_kiwi_block",kiwiBlockFront);
@@ -92,13 +105,24 @@ public class OFModelProvider extends FabricModelProvider {
     }
 
     public final void registerSliced(BlockStateModelGenerator blockStateModelGenerator, Block block, String sideIdentifier, String frontIdentifier) {
-        TextureMap textureMap = (new TextureMap()).put(TextureKey.SIDE, new Identifier(sideIdentifier)).put(TextureKey.FRONT, new Identifier(frontIdentifier));
-        Identifier identifier = Models.ORIENTABLE_VERTICAL.upload(block, textureMap, blockStateModelGenerator.modelCollector);
+        TextureMap textureMap = (new TextureMap()).put(TextureKey.SIDE, new Identifier(OverweightFarming.MODID, sideIdentifier)).put(TextureKey.FRONT, new Identifier(OverweightFarming.MODID, frontIdentifier));
+        Identifier identifier = ORIENTABLE_VERTICAL.upload(block, textureMap, blockStateModelGenerator.modelCollector);
         blockStateModelGenerator.blockStateCollector.accept(createSingletonBlockState(block, identifier));
     }
 
     public final void registerPot(BlockStateModelGenerator blockStateModelGenerator, Block potted) {
-        Identifier identifier = TEMPLATE_OVERWEIGHT_POT.upload(potted, blockStateModelGenerator.modelCollector);
+        Identifier identifier;
+        if(potted.getDefaultState().isOf(OFObjects.POTTED_OVERWEIGHT_ONION)){
+            identifier = TEMPLATE_OVERWEIGHT_ONION_POT.upload(potted, blockStateModelGenerator.modelCollector);
+        }else if(potted.getDefaultState().isOf(OFObjects.POTTED_OVERWEIGHT_CABBAGE)){
+            identifier = TEMPLATE_OVERWEIGHT_CABBAGE_POT.upload(potted, blockStateModelGenerator.modelCollector);
+        }else if(potted.getDefaultState().isOf(OFObjects.POTTED_OVERWEIGHT_NETHER_WART)){
+            identifier = TEMPLATE_OVERWEIGHT_NETHER_WART_POT.upload(potted, blockStateModelGenerator.modelCollector);
+        }else{
+            identifier = TEMPLATE_OVERWEIGHT_POT.upload(potted, blockStateModelGenerator.modelCollector);
+        }
+
+
         blockStateModelGenerator.blockStateCollector.accept(createSingletonBlockState(potted, identifier));
     }
 
