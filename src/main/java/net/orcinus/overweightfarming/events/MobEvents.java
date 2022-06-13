@@ -19,6 +19,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
@@ -28,9 +29,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.block.StemBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -41,6 +44,8 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.orcinus.overweightfarming.OverweightFarming;
+import net.orcinus.overweightfarming.blocks.OverweightAppleBlock;
+import net.orcinus.overweightfarming.init.OFBlocks;
 import net.orcinus.overweightfarming.init.OFItems;
 import net.orcinus.overweightfarming.util.OFItemsForEmeralds;
 import net.orcinus.overweightfarming.util.OverweightGrowthManager;
@@ -119,7 +124,7 @@ public class MobEvents {
                             String hedgehogModid = "hedgehog";
                             Block kiwiVines = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(hedgehogModid, "kiwi_vines"));
                             boolean hedgehogFlag = ModList.get().isLoaded(hedgehogModid) && state.is(Objects.requireNonNull(kiwiVines));
-                            if (state.is(BlockTags.CROPS) || hedgehogFlag) {
+                            if (state.is(BlockTags.CROPS) || hedgehogFlag || state.getBlock() instanceof NetherWartBlock) {
                                 Block block = state.getBlock();
                                 float v = world.getRandom().nextFloat();
                                 boolean flag = v < 1.6540289E-4 && world.getRandom().nextBoolean();
@@ -144,13 +149,22 @@ public class MobEvents {
                                                 }
                                             }
                                         }
-                                        if (state.hasProperty(BlockStateProperties.AGE_3)) {
+                                        boolean asda = state.hasProperty(BlockStateProperties.AGE_3);
+                                        if (asda) {
                                             if (block instanceof BeetrootBlock beetrootBlock){
                                                 int age = state.getValue(BeetrootBlock.AGE);
                                                 if (age < beetrootBlock.getMaxAge()) {
                                                     beetrootBlock.growCrops(serverLevel, cropPos, state);
                                                 }
                                                 if (age == beetrootBlock.getMaxAge())
+                                                    validForOverweight = true;
+                                            }
+                                            if (block instanceof NetherWartBlock) {
+                                                int age = state.getValue(NetherWartBlock.AGE);
+                                                if (age < NetherWartBlock.MAX_AGE) {
+                                                    world.setBlock(cropPos, state.setValue(NetherWartBlock.AGE, state.getValue(NetherWartBlock.AGE) + 1), 2);
+                                                }
+                                                if (age == NetherWartBlock.MAX_AGE)
                                                     validForOverweight = true;
                                             }
                                         }

@@ -1,6 +1,7 @@
 package net.orcinus.overweightfarming.events;
 
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.init.OFBlocks;
@@ -140,7 +141,7 @@ public class MiscEvents {
                 if (state.is(cropBlock)) {
                     boolean flag = state.hasProperty(CropBlock.AGE) && state.getValue(CropBlock.AGE) < 7 && state.getValue(CropBlock.AGE) == 3;
                     boolean flag1 = state.hasProperty(CocoaBlock.AGE) && state.getValue(CocoaBlock.AGE) == 1;
-                    boolean flag2 = state.hasProperty(BeetrootBlock.AGE) && state.getValue(BeetrootBlock.AGE) < BeetrootBlock.MAX_AGE && state.getValue(BeetrootBlock.AGE) > 1;
+                    boolean flag2 = (state.getBlock() instanceof BeetrootBlock || state.getBlock() instanceof NetherWartBlock) && state.hasProperty(BlockStateProperties.AGE_3) && state.getValue(BlockStateProperties.AGE_3) < 3 && state.getValue(BlockStateProperties.AGE_3) > 1;
                     boolean flag3 = ModList.get().isLoaded("hedgehog") && state.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("hedgehog", "kiwi_vines")) && state.getValue(BlockStateProperties.BERRIES);
                     if (flag || flag1 || flag2 || flag3) {
                         float chance = world.isNight() && world.getMoonPhase() == 0 ? 0.0010538863F : 3.4290552E-4F;

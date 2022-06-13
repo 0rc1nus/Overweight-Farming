@@ -8,8 +8,4 @@ public class OverweightCabbageBlock extends CropFullBlock {
         super(stemBlock, properties);
     }
 
-    @Override
-    public boolean shouldGrowRoots() {
-        return false;
-    }
 }

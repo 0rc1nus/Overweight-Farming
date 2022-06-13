@@ -30,6 +30,7 @@ public record OverweightGrowthManager(RandomSource random) {
             map.put(Blocks.POTATOES, Pair.of(OverweightType.DEFAULT, this.random.nextInt(20) == 0 ? OFBlocks.OVERWEIGHT_POISONOUS_POTATO.get() : OFBlocks.OVERWEIGHT_POTATO.get()));
             map.put(Blocks.BEETROOTS, Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_BEETROOT.get()));
             map.put(Blocks.COCOA, Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_COCOA.get()));
+            map.put(Blocks.NETHER_WART, Pair.of(OverweightType.INVERTED, OFBlocks.OVERWEIGHT_NETHER_WART.get()));
             map.put(this.getCompatBlock("farmersdelight", "cabbages"), Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_CABBAGE.get()));
             map.put(this.getCompatBlock("farmersdelight", "onions"), Pair.of(OverweightType.DEFAULT, OFBlocks.OVERWEIGHT_ONION.get()));
             map.put(this.getCompatBlock("hedgehog", "kiwi_vines"), Pair.of(OverweightType.SIMPLE, OFBlocks.OVERWEIGHT_KIWI.get()));
