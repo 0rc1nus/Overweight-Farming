@@ -15,16 +15,18 @@ public class OverweightAppleBlockEntity extends BlockEntity {
         super(OFBlockEntityTypes.OVERWEIGHT_APPLE_BLOCK_ENTITY, pos, state);
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, OverweightAppleBlockEntity te) {
-        boolean flag = world.getRandom().nextInt(20) == 0;
-        if (flag) {
-            for (int i = 1; i < world.getHeight(); i++) {
-                if (!world.getBlockState(pos.down(i)).isAir()) {
-                    break;
-                }
-                for (PlayerEntity player : world.getNonSpectatingEntities(PlayerEntity.class, new Box(pos.down(i)))) {
-                    if (player != null) {
-                        ((OverweightAppleBlock)state.getBlock()).spawnFallingBlock(state, world, pos);
+    public static void tick(World world, BlockPos pos, BlockState state, OverweightAppleBlockEntity overweightAppleBlockEntity) {
+        if (world != null && !world.isClient()) {
+            boolean flag = world.getRandom().nextInt(20) == 0;
+            if (flag) {
+                for (int i = 1; i < world.getHeight(); i++) {
+                    if (!world.getBlockState(pos.down(i)).isAir()) {
+                        break;
+                    }
+                    for (PlayerEntity player : world.getNonSpectatingEntities(PlayerEntity.class, new Box(pos.down(i)))) {
+                        if (player != null) {
+                            ((OverweightAppleBlock)state.getBlock()).spawnFallingBlock(state, world, pos);
+                        }
                     }
                 }
             }
