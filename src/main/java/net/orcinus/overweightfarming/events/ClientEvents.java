@@ -1,11 +1,13 @@
 package net.orcinus.overweightfarming.events;
 
+import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.client.models.StrawHatModel;
 import net.orcinus.overweightfarming.client.particles.MelonHangProvider;
 import net.orcinus.overweightfarming.client.particles.MelonFallProvider;
 import net.orcinus.overweightfarming.client.particles.MelonLandProvider;
 import net.orcinus.overweightfarming.init.OFBlocks;
+import net.orcinus.overweightfarming.init.OFEntityTypes;
 import net.orcinus.overweightfarming.init.OFItems;
 import net.orcinus.overweightfarming.init.OFModelLayers;
 import net.orcinus.overweightfarming.init.OFParticleTypes;
@@ -34,20 +36,21 @@ public class ClientEvents {
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.OVERWEIGHT_GINGER_STEM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.ALLIUM_BUSH.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.OVERWEIGHT_CABBAGE_STEM.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(OFBlocks.OVERWEIGHT_NETHER_WART_STEM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.OVERWEIGHT_APPLE_STEM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.OVERWEIGHT_GOLDEN_APPLE_STEM.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.OVERWEIGHT_NETHERWART_STEM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_BEETROOT.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_CARROT.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_POTATO.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_POISONOUS_POTATO.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_COCOA.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_CABBAGE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_KIWI.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_ONION.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_APPLE.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_GOLDEN_APPLE.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_CARROT.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_COCOA.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_CABBAGE.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_ONION.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_NETHER_WART.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_GINGER.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_KIWI.get(), RenderType.cutout());
         event.enqueueWork(() -> ItemProperties.register(OFItems.STRAW_HAT.get(),
                 new ResourceLocation(OverweightFarming.MODID, "420"), (stack, world, entity, p_174628_) -> entity != null && StrawHatItem.is420(stack) ? 1.0F : 0.0F)
         );
@@ -56,6 +59,11 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerEntityLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(OFModelLayers.STRAW_HAT, StrawHatModel::createBodyLayer);
+    }
+
+    @SubscribeEvent
+    public static void registerRenderer(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(OFEntityTypes.OVERWEIGHT_APPLE_FALLING_BLOCK.get(), FallingBlockRenderer::new);
     }
 
     @SubscribeEvent

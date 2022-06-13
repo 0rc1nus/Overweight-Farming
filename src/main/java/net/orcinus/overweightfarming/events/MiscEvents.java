@@ -1,10 +1,5 @@
 package net.orcinus.overweightfarming.events;
 
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.orcinus.overweightfarming.OverweightFarming;
-import net.orcinus.overweightfarming.init.OFBlocks;
-import net.orcinus.overweightfarming.init.OFItems;
-import net.orcinus.overweightfarming.util.OverweightGrowthManager;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
@@ -28,6 +23,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CocoaBlock;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -37,6 +33,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.orcinus.overweightfarming.OverweightFarming;
+import net.orcinus.overweightfarming.init.OFBlocks;
+import net.orcinus.overweightfarming.init.OFItems;
+import net.orcinus.overweightfarming.util.OverweightGrowthManager;
 
 import java.util.Random;
 import java.util.function.Supplier;
@@ -139,7 +139,7 @@ public class MiscEvents {
                 if (state.is(cropBlock)) {
                     boolean flag = state.hasProperty(CropBlock.AGE) && state.getValue(CropBlock.AGE) < 7 && state.getValue(CropBlock.AGE) == 3;
                     boolean flag1 = state.hasProperty(CocoaBlock.AGE) && state.getValue(CocoaBlock.AGE) == 1;
-                    boolean flag2 = state.hasProperty(BeetrootBlock.AGE) && state.getValue(BeetrootBlock.AGE) < BeetrootBlock.MAX_AGE && state.getValue(BeetrootBlock.AGE) > 1;
+                    boolean flag2 = (state.getBlock() instanceof BeetrootBlock || state.getBlock() instanceof NetherWartBlock) && state.hasProperty(BlockStateProperties.AGE_3) && state.getValue(BlockStateProperties.AGE_3) < 3 && state.getValue(BlockStateProperties.AGE_3) > 1;
                     boolean flag3 = ModList.get().isLoaded("hedgehog") && state.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("hedgehog", "kiwi_vines")) && state.getValue(BlockStateProperties.BERRIES);
                     if (flag || flag1 || flag2 || flag3) {
                         float chance = world.isNight() && world.getMoonPhase() == 0 ? 0.0010538863F : 3.4290552E-4F;

@@ -1,11 +1,5 @@
 package net.orcinus.overweightfarming.events;
 
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.NetherWartBlock;
-import net.orcinus.overweightfarming.OverweightFarming;
-import net.orcinus.overweightfarming.init.OFItems;
-import net.orcinus.overweightfarming.util.OFItemsForEmeralds;
-import net.orcinus.overweightfarming.util.OverweightGrowthManager;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -33,10 +27,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.block.StemBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -46,6 +40,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.orcinus.overweightfarming.OverweightFarming;
+import net.orcinus.overweightfarming.init.OFItems;
+import net.orcinus.overweightfarming.util.OFItemsForEmeralds;
+import net.orcinus.overweightfarming.util.OverweightGrowthManager;
 
 import java.util.List;
 import java.util.Objects;
@@ -81,7 +79,6 @@ public class MobEvents {
                         stack.shrink(1);
                     }
                     pig.setInLove(player);
-                    pig.gameEvent(GameEvent.MOB_INTERACT, pig.eyeBlockPosition());
                     event.setCancellationResult(InteractionResult.SUCCESS);
                 }
 
@@ -90,7 +87,6 @@ public class MobEvents {
                         stack.shrink(1);
                     }
                     pig.ageUp((int)((float)(-i / 20) * 0.1F), true);
-                    pig.gameEvent(GameEvent.MOB_INTERACT, pig.eyeBlockPosition());
                     player.swing(hand);
                 }
 
@@ -124,7 +120,7 @@ public class MobEvents {
                             String hedgehogModid = "hedgehog";
                             Block kiwiVines = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(hedgehogModid, "kiwi_vines"));
                             boolean hedgehogFlag = ModList.get().isLoaded(hedgehogModid) && state.is(Objects.requireNonNull(kiwiVines));
-                            if (state.is(BlockTags.CROPS) || hedgehogFlag || state.is(Blocks.NETHER_WART)) {
+                            if (state.is(BlockTags.CROPS) || hedgehogFlag || state.getBlock() instanceof NetherWartBlock) {
                                 Block block = state.getBlock();
                                 float v = world.getRandom().nextFloat();
                                 boolean flag = v < 1.6540289E-4 && world.getRandom().nextBoolean();
@@ -149,7 +145,8 @@ public class MobEvents {
                                                 }
                                             }
                                         }
-                                        if (state.hasProperty(BlockStateProperties.AGE_3)) {
+                                        boolean asda = state.hasProperty(BlockStateProperties.AGE_3);
+                                        if (asda) {
                                             if (block instanceof BeetrootBlock beetrootBlock){
                                                 int age = state.getValue(BeetrootBlock.AGE);
                                                 if (age < beetrootBlock.getMaxAge()) {
@@ -159,10 +156,9 @@ public class MobEvents {
                                                     validForOverweight = true;
                                             }
                                             if (block instanceof NetherWartBlock) {
-                                                int age = state.getValue(BeetrootBlock.AGE);
+                                                int age = state.getValue(NetherWartBlock.AGE);
                                                 if (age < NetherWartBlock.MAX_AGE) {
-                                                    state = state.setValue(NetherWartBlock.AGE, age + 1);
-                                                    world.setBlock(cropPos, state, 2);
+                                                    world.setBlock(cropPos, state.setValue(NetherWartBlock.AGE, state.getValue(NetherWartBlock.AGE) + 1), 2);
                                                 }
                                                 if (age == NetherWartBlock.MAX_AGE)
                                                     validForOverweight = true;

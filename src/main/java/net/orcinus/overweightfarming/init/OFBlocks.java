@@ -1,22 +1,11 @@
 package net.orcinus.overweightfarming.init;
 
-import net.minecraft.world.level.block.FlowerPotBlock;
-import net.orcinus.overweightfarming.OverweightFarming;
-import net.orcinus.overweightfarming.blocks.CropFullBlock;
-import net.orcinus.overweightfarming.blocks.CropStemBlock;
-import net.orcinus.overweightfarming.blocks.NetherCropFullBlock;
-import net.orcinus.overweightfarming.blocks.NetherCropStemBlock;
-import net.orcinus.overweightfarming.blocks.OverweightAppleBlock;
-import net.orcinus.overweightfarming.blocks.OverweightCabbageBlock;
-import net.orcinus.overweightfarming.blocks.OverweightCarrotBlock;
-import net.orcinus.overweightfarming.blocks.OverweightOnionBlock;
-import net.orcinus.overweightfarming.blocks.OverweightPotatoBlock;
-import net.orcinus.overweightfarming.blocks.PeeledMelonBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.TallFlowerBlock;
@@ -27,6 +16,18 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.orcinus.overweightfarming.OverweightFarming;
+import net.orcinus.overweightfarming.blocks.CropFullBlock;
+import net.orcinus.overweightfarming.blocks.CropStemBlock;
+import net.orcinus.overweightfarming.blocks.NetherCropFullBlock;
+import net.orcinus.overweightfarming.blocks.NetherCropStemBlock;
+import net.orcinus.overweightfarming.blocks.OverweightAppleBlock;
+import net.orcinus.overweightfarming.blocks.OverweightCabbageBlock;
+import net.orcinus.overweightfarming.blocks.OverweightCarrotBlock;
+import net.orcinus.overweightfarming.blocks.OverweightCocoaBlock;
+import net.orcinus.overweightfarming.blocks.OverweightOnionBlock;
+import net.orcinus.overweightfarming.blocks.OverweightPotatoBlock;
+import net.orcinus.overweightfarming.blocks.PeeledMelonBlock;
 
 import java.util.function.Supplier;
 
@@ -38,15 +39,19 @@ public class OFBlocks {
     public static final RegistryObject<Block> OVERWEIGHT_BEETROOT_STEM = registerNoTabBlock("overweight_beetroot_stem", () -> new CropStemBlock(BlockBehaviour.Properties.of(Material.VEGETABLE).instabreak().noCollission().sound(SoundType.CROP)));
     public static final RegistryObject<Block> OVERWEIGHT_CARROT_STEM = registerNoTabBlock("overweight_carrot_stem", () -> new CropStemBlock(BlockBehaviour.Properties.of(Material.VEGETABLE).instabreak().noCollission().sound(SoundType.CROP)));
     public static final RegistryObject<Block> OVERWEIGHT_POTATO_STEM = registerNoTabBlock("overweight_potato_stem", () -> new CropStemBlock(BlockBehaviour.Properties.of(Material.VEGETABLE).instabreak().noCollission().sound(SoundType.CROP)));
-    public static final RegistryObject<Block> OVERWEIGHT_NETHERWART_STEM = registerNoTabBlock("overweight_nether_wart_stem", () -> new NetherCropStemBlock(BlockBehaviour.Properties.of(Material.VEGETABLE).instabreak().noCollission().sound(SoundType.NETHER_WART)));
     public static final RegistryObject<Block> OVERWEIGHT_GINGER_STEM = registerNoTabBlock("overweight_ginger_stem", () -> new CropStemBlock(BlockBehaviour.Properties.of(Material.VEGETABLE).instabreak().noCollission().sound(SoundType.CROP)));
+    public static final RegistryObject<Block> OVERWEIGHT_NETHER_WART_STEM = registerNoTabBlock("overweight_nether_wart_stem", () -> new NetherCropStemBlock(BlockBehaviour.Properties.of(Material.VEGETABLE).instabreak().noCollission().sound(SoundType.NETHER_WART)));
+    public static final RegistryObject<Block> OVERWEIGHT_APPLE_STEM = registerNoTabBlock("overweight_apple_stem", () -> new CropStemBlock(BlockBehaviour.Properties.of(Material.VEGETABLE).instabreak().noCollission().sound(SoundType.CROP)));
+    public static final RegistryObject<Block> OVERWEIGHT_GOLDEN_APPLE_STEM = registerNoTabBlock("overweight_golden_apple_stem", () -> new CropStemBlock(BlockBehaviour.Properties.of(Material.VEGETABLE).instabreak().noCollission().sound(SoundType.CROP)));
     public static final RegistryObject<Block> OVERWEIGHT_BEETROOT = registerBlock("overweight_beetroot_block", () -> new CropFullBlock(OVERWEIGHT_BEETROOT_STEM.get(), BlockBehaviour.Properties.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> OVERWEIGHT_CARROT = registerBlock("overweight_carrot_block", () -> new OverweightCarrotBlock(OVERWEIGHT_CARROT_STEM.get(), BlockBehaviour.Properties.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
-    public static final RegistryObject<Block> OVERWEIGHT_COCOA = registerBlock("overweight_cocoa_block", () -> new CropFullBlock(null, BlockBehaviour.Properties.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
+    public static final RegistryObject<Block> OVERWEIGHT_COCOA = registerBlock("overweight_cocoa_block", () -> new OverweightCocoaBlock(null, BlockBehaviour.Properties.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> OVERWEIGHT_POTATO = registerBlock("overweight_potato_block", () -> new OverweightPotatoBlock(OVERWEIGHT_POTATO_STEM.get(), BlockBehaviour.Properties.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> OVERWEIGHT_BAKED_POTATO = registerBlock("overweight_baked_potato_block", () -> new Block(BlockBehaviour.Properties.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
+    public static final RegistryObject<Block> OVERWEIGHT_NETHER_WART = registerBlock("overweight_nether_wart_block", () -> new NetherCropFullBlock(OVERWEIGHT_NETHER_WART_STEM.get(), BlockBehaviour.Properties.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> OVERWEIGHT_POISONOUS_POTATO = registerBlock("overweight_poisonous_potato_block", () -> new CropFullBlock(null, BlockBehaviour.Properties.copy(OVERWEIGHT_BAKED_POTATO.get())), CreativeModeTab.TAB_FOOD);
-    public static final RegistryObject<Block> OVERWEIGHT_NETHERWART = registerBlock("overweight_nether_wart_block", () -> new NetherCropFullBlock(OVERWEIGHT_NETHERWART_STEM.get(), BlockBehaviour.Properties.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sound(SoundType.NETHER_WART)), CreativeModeTab.TAB_FOOD);
+    public static final RegistryObject<Block> OVERWEIGHT_APPLE = registerBlock("overweight_apple_block", () -> new OverweightAppleBlock(false, OVERWEIGHT_APPLE_STEM.get(), BlockBehaviour.Properties.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
+    public static final RegistryObject<Block> OVERWEIGHT_GOLDEN_APPLE = registerBlock("overweight_golden_apple_block", () -> new OverweightAppleBlock(true, OVERWEIGHT_GOLDEN_APPLE_STEM.get(), BlockBehaviour.Properties.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> ALLIUM_BUSH = registerCompatBlock("farmersdelight", "allium_bush", () -> new TallFlowerBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS)), CreativeModeTab.TAB_DECORATIONS);
     public static final RegistryObject<Block> OVERWEIGHT_CABBAGE_STEM = registerNoTabBlock("overweight_cabbage_stem", () -> new CropStemBlock(BlockBehaviour.Properties.of(Material.VEGETABLE).instabreak().noCollission().sound(SoundType.CROP)));
     public static final RegistryObject<Block> VEGETABLE_COMPOST = registerBlock("vegetable_compost", () -> new Block(BlockBehaviour.Properties.of(Material.PLANT).strength(1.0F).sound(SoundType.MOSS)), CreativeModeTab.TAB_MISC);
@@ -68,24 +73,18 @@ public class OFBlocks {
     public static final RegistryObject<Block> PEELED_OVERWEIGHT_ONION = registerCompatBlock("farmersdelight", "peeled_overweight_onion_block", () -> new Block(BlockBehaviour.Properties.copy(OVERWEIGHT_ONION.get())), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> PEELED_OVERWEIGHT_KIWI = registerCompatBlock("hedgehog", "peeled_overweight_kiwi_block", () -> new Block(BlockBehaviour.Properties.copy(OVERWEIGHT_KIWI.get())), CreativeModeTab.TAB_FOOD);
     public static final RegistryObject<Block> PEELED_OVERWEIGHT_GINGER = registerCompatBlock("snowyspirit", "peeled_overweight_ginger_block", () -> new Block(BlockBehaviour.Properties.copy(OVERWEIGHT_GINGER.get())), CreativeModeTab.TAB_FOOD);
-
-    public static final RegistryObject<Block> OVERWEIGHT_APPLE_STEM = registerNoTabBlock("overweight_apple_stem", () -> new CropStemBlock(BlockBehaviour.Properties.of(Material.VEGETABLE).instabreak().noCollission().sound(SoundType.CROP)));
-    public static final RegistryObject<Block> OVERWEIGHT_APPLE = registerBlock("overweight_apple_block", () -> new OverweightAppleBlock(OVERWEIGHT_APPLE_STEM.get(), BlockBehaviour.Properties.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
-    public static final RegistryObject<Block> OVERWEIGHT_GOLDEN_APPLE_STEM = registerNoTabBlock("overweight_golden_apple_stem", () -> new CropStemBlock(BlockBehaviour.Properties.of(Material.VEGETABLE).instabreak().noCollission().sound(SoundType.CROP)));
-    public static final RegistryObject<Block> OVERWEIGHT_GOLDEN_APPLE = registerBlock("overweight_golden_apple_block", () -> new OverweightAppleBlock(OVERWEIGHT_GOLDEN_APPLE_STEM.get(), BlockBehaviour.Properties.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sound(SoundType.CROP)), CreativeModeTab.TAB_FOOD);
-
     public static final RegistryObject<Block> POTTED_OVERWEIGHT_BEETROOT = registerNoTabBlock("potted_overweight_beetroot", () -> new FlowerPotBlock(OVERWEIGHT_BEETROOT.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
     public static final RegistryObject<Block> POTTED_OVERWEIGHT_CARROT = registerNoTabBlock("potted_overweight_carrot", () -> new FlowerPotBlock(OVERWEIGHT_CARROT.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_COCOA = registerNoTabBlock("potted_overweight_cocoa", () -> new FlowerPotBlock(OVERWEIGHT_COCOA.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
     public static final RegistryObject<Block> POTTED_OVERWEIGHT_POTATO = registerNoTabBlock("potted_overweight_potato", () -> new FlowerPotBlock(OVERWEIGHT_POTATO.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_GINGER = registerNoTabBlock("potted_overweight_ginger", () -> new FlowerPotBlock(OVERWEIGHT_GINGER.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_POISONOUS_POTATO = registerNoTabBlock("potted_overweight_poisonous_potato", () -> new FlowerPotBlock(OVERWEIGHT_POISONOUS_POTATO.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> POTTED_OVERWEIGHT_COCOA = registerNoTabBlock("potted_overweight_cocoa", () -> new FlowerPotBlock(OVERWEIGHT_COCOA.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
     public static final RegistryObject<Block> POTTED_OVERWEIGHT_APPLE = registerNoTabBlock("potted_overweight_apple", () -> new FlowerPotBlock(OVERWEIGHT_APPLE.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
     public static final RegistryObject<Block> POTTED_OVERWEIGHT_GOLDEN_APPLE = registerNoTabBlock("potted_overweight_golden_apple", () -> new FlowerPotBlock(OVERWEIGHT_GOLDEN_APPLE.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_KIWI = registerNoTabBlock("potted_overweight_kiwi", () -> new FlowerPotBlock(OVERWEIGHT_KIWI.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
     public static final RegistryObject<Block> POTTED_OVERWEIGHT_ONION = registerNoTabBlock("potted_overweight_onion", () -> new FlowerPotBlock(OVERWEIGHT_ONION.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
     public static final RegistryObject<Block> POTTED_OVERWEIGHT_CABBAGE = registerNoTabBlock("potted_overweight_cabbage", () -> new FlowerPotBlock(OVERWEIGHT_CABBAGE.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OVERWEIGHT_NETHER_WART = registerNoTabBlock("potted_overweight_nether_wart", () -> new FlowerPotBlock(OVERWEIGHT_NETHERWART.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> POTTED_OVERWEIGHT_GINGER = registerNoTabBlock("potted_overweight_ginger", () -> new FlowerPotBlock(OVERWEIGHT_GINGER.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> POTTED_OVERWEIGHT_KIWI = registerNoTabBlock("potted_overweight_kiwi", () -> new FlowerPotBlock(OVERWEIGHT_KIWI.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> POTTED_OVERWEIGHT_POISONOUS_POTATO = registerNoTabBlock("potted_overweight_poisonous_potato", () -> new FlowerPotBlock(OVERWEIGHT_POISONOUS_POTATO.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
+    public static final RegistryObject<Block> POTTED_OVERWEIGHT_NETHER_WART = registerNoTabBlock("potted_overweight_nether_wart", () -> new FlowerPotBlock(OVERWEIGHT_NETHER_WART.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
 
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> block, CreativeModeTab tab) {
         RegistryObject<B> blocks = BLOCKS.register(name, block);

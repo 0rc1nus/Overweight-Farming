@@ -2,7 +2,9 @@ package net.orcinus.overweightfarming;
 
 import net.orcinus.overweightfarming.events.MiscEvents;
 import net.orcinus.overweightfarming.events.MobEvents;
+import net.orcinus.overweightfarming.init.OFBlockEntityTypes;
 import net.orcinus.overweightfarming.init.OFBlocks;
+import net.orcinus.overweightfarming.init.OFEntityTypes;
 import net.orcinus.overweightfarming.init.OFItems;
 import net.orcinus.overweightfarming.init.OFParticleTypes;
 import net.orcinus.overweightfarming.init.OFVanillaIntegration;
@@ -25,6 +27,8 @@ public class OverweightFarming {
         modEventBus.addListener(this::setup);
 
         OFBlocks.BLOCKS.register(modEventBus);
+        OFBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
+        OFEntityTypes.ENTITY_TYPES.register(modEventBus);
         OFItems.ITEMS.register(modEventBus);
         OFParticleTypes.PARTICLE_TYPES.register(modEventBus);
 

@@ -1,6 +1,5 @@
 package net.orcinus.overweightfarming.blocks;
 
-import net.orcinus.overweightfarming.init.OFBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockGetter;

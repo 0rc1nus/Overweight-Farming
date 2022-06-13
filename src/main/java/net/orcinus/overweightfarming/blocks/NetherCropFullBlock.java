@@ -15,16 +15,13 @@ public class NetherCropFullBlock extends CropFullBlock {
     }
 
     @Override
-    public void performBonemeal(ServerLevel world, Random random, BlockPos blockPos, BlockState state) {
-        if (world.isStateAtPosition(blockPos.above(), BlockStateBase::isAir)) {
-            world.setBlock(blockPos.above(), this.defaultBlockState(), 2);
-            world.setBlock(blockPos, this.stemBlock.defaultBlockState(), 2);
-        }
+    public boolean isValidBonemealTarget(BlockGetter world, BlockPos blockPos, BlockState state, boolean isClient) {
+        return !world.getBlockState(blockPos.below()).is(this.stemBlock) && world.getBlockState(blockPos.above()).isAir();
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter world, BlockPos blockPos, BlockState state, boolean isClient) {
-        return !world.getBlockState(blockPos.below()).is(this.stemBlock);
+    public void performBonemeal(ServerLevel world, Random random, BlockPos blockPos, BlockState state) {
+        world.setBlock(blockPos, this.stemBlock.defaultBlockState(), 2);
+        world.setBlock(blockPos.above(), this.defaultBlockState(), 2);
     }
-
 }
