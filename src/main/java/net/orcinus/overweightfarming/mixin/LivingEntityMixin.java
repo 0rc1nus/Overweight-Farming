@@ -28,6 +28,8 @@ public abstract class LivingEntityMixin {
 
     @Shadow public abstract Random getRandom();
 
+    @Shadow protected abstract void initDataTracker();
+
     @Inject(method = "tick", at = @At("HEAD"))
     private void OF$tick(CallbackInfo ci){
         LivingEntity livingEntity = ((LivingEntity) (Object) this);
@@ -45,7 +47,7 @@ public abstract class LivingEntityMixin {
                             OverweightGrowthManager manager = new OverweightGrowthManager(world.getRandom());
                             Block kiwiVines = manager.getCompatBlock("hedgehog", "kiwi_vines");//TODO ForgeRegistries.BLOCKS.getValue(new ResourceLocation(hedgehogs-fabricModid, "kiwi_vines"));
                             boolean hedgehogFlag = FabricLoader.getInstance().isModLoaded("hedgehogs-fabric") && state.isOf(Objects.requireNonNull(kiwiVines));
-                            if (state.isIn(BlockTags.CROPS) || state.isIn(OFTags.OVERWEIGHT_COMPAT) || state.isOf(Blocks.NETHER_WART) || hedgehogFlag) {
+                            if (state.isIn(BlockTags.CROPS) || state.isIn(OFTags.OVERWEIGHT_COMPAT) || state.getBlock() instanceof NetherWartBlock|| hedgehogFlag) {
                                 Block block = state.getBlock();
                                 float v = world.getRandom().nextFloat();
                                 boolean flag = v < 1.5E-4 && world.getRandom().nextBoolean();
@@ -81,10 +83,9 @@ public abstract class LivingEntityMixin {
                                                     validForOverweight = true;
                                             }
                                             if (block instanceof NetherWartBlock) {
-                                                int age = state.get(BeetrootsBlock.AGE);
+                                                int age = state.get(NetherWartBlock.AGE);
                                                 if (age < 3) {
-                                                    state = state.with(NetherWartBlock.AGE, age + 1);
-                                                    world.setBlockState(cropPos, state, 2);
+                                                    world.setBlockState(cropPos, state.with(NetherWartBlock.AGE, state.get(NetherWartBlock.AGE) + 1), 2);
                                                 }
                                             }
                                         }

@@ -27,5 +27,6 @@ public class OFConfig implements ConfigData {
         public final boolean allowOverweightGarlic = true;
         public final boolean allowOverweightBloodroot = true;
         public final boolean allowOverweightWeeds = true;
+        public final boolean allowOverweightKiwi = true;
     }
 }

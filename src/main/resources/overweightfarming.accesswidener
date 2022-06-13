@@ -3,4 +3,7 @@ accessible class net/minecraft/client/particle/BlockLeakParticle
 accessible class net/minecraft/client/particle/BlockLeakParticle$ContinuousFalling
 accessible class net/minecraft/data/client/BlockStateModelGenerator$TintType
 accessible method net/minecraft/data/client/TexturedModel makeFactory (Ljava/util/function/Function;Lnet/minecraft/data/client/Model;)Lnet/minecraft/data/client/TexturedModel$Factory;
-
+accessible method net/minecraft/block/BlockWithEntity checkType (Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityTicker;)Lnet/minecraft/block/entity/BlockEntityTicker;
+accessible field net/minecraft/entity/FallingBlockEntity destroyedOnLanding Z
+accessible field net/minecraft/entity/FallingBlockEntity block Lnet/minecraft/block/BlockState;
+accessible field net/minecraft/entity/FallingBlockEntity fallHurtMax I

@@ -40,6 +40,7 @@ import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import net.minecraft.world.event.GameEvent;
+import net.orcinus.overweightfarming.registry.OFBlockEntityTypes;
 import net.orcinus.overweightfarming.registry.OFEntityTypes;
 import net.orcinus.overweightfarming.registry.OFObjects;
 import net.orcinus.overweightfarming.util.EmeraldToItemOffer;
@@ -59,6 +60,8 @@ public class OverweightFarming implements ModInitializer {
 
         OFObjects.init();
         OFEntityTypes.init();
+        OFBlockEntityTypes.init();
+
 
         UseBlockCallback.EVENT.register(this::stripMelon);
         UseBlockCallback.EVENT.register(this::growBloodroot);

@@ -16,14 +16,12 @@ public class NetherCropFullBlock extends CropFullBlock{
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        if (world.testBlockState(pos.up(), AbstractBlockState::isAir)) {
-            world.setBlockState(pos.up(), this.getDefaultState(), 2);
-            world.setBlockState(pos, this.stemBlock.getDefaultState(), 2);
-        }
+        world.setBlockState(pos.up(), this.getDefaultState(), Block.NOTIFY_LISTENERS);
+        world.setBlockState(pos, this.stemBlock.getDefaultState(), Block.NOTIFY_LISTENERS);
     }
 
     @Override
     public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-        return !world.getBlockState(pos.down()).isOf(this.stemBlock);
+        return !world.getBlockState(pos.down()).isOf(this.stemBlock) && world.getBlockState(pos.up()).isAir();
     }
 }
