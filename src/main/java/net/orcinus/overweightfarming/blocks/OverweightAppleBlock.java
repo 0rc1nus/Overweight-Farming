@@ -8,10 +8,12 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.FallingBlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
@@ -20,6 +22,8 @@ import net.orcinus.overweightfarming.blockentities.OverweightAppleBlockEntity;
 import net.orcinus.overweightfarming.entities.OverweightAppleFallingBlockEntity;
 import net.orcinus.overweightfarming.registry.OFBlockEntityTypes;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class OverweightAppleBlock extends CropFullBlock implements LandingBlock, BlockEntityProvider {
     private final boolean isGolden;
@@ -62,7 +66,7 @@ public class OverweightAppleBlock extends CropFullBlock implements LandingBlock,
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return (tickerWorld, pos, tickerState, blockEntity) -> OverweightAppleBlockEntity.tick(tickerWorld, pos, tickerState, (OverweightAppleBlockEntity) blockEntity);
+        return !world.isClient() ? createTickerHelper(type, OFBlockEntityTypes.OVERWEIGHT_APPLE_BLOCK_ENTITY, OverweightAppleBlockEntity::tick) : null;
     }
 
     public void spawnFallingBlock(BlockState state, World world, BlockPos pos) {
@@ -71,8 +75,10 @@ public class OverweightAppleBlock extends CropFullBlock implements LandingBlock,
         world.spawnEntity(fallingBlockEntity);
     }
 
-
-
+    @Nullable
+    protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> thisBlockEntityType, BlockEntityType<E> compareBlockEntityType, BlockEntityTicker<? super E> ticker) {
+        return compareBlockEntityType == thisBlockEntityType ? (BlockEntityTicker<A>)ticker : null;
+    }
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockState aboveState = world.getBlockState(pos.up());
@@ -80,5 +86,6 @@ public class OverweightAppleBlock extends CropFullBlock implements LandingBlock,
         if (!(aboveState.isIn(BlockTags.LEAVES) || aboveState.isIn(BlockTags.LOGS)) && isFree(belowState) && pos.getY() >= world.getBottomY()) {
             spawnFallingBlock(state, world, pos);
         }
+
     }
 }
