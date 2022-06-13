@@ -17,7 +17,7 @@ public class OverweightAppleBlockEntity extends BlockEntity {
     public static void tick(World world, BlockPos pos, BlockState state, OverweightAppleBlockEntity te) {
         boolean flag = world.getRandom().nextInt(20) == 0;
         if (flag) {
-            for (int i = 1; i < Integer.MAX_VALUE; i++) {
+            for (int i = 1; i < world.getHeight(); i++) {
                 if (!world.getBlockState(pos.down(i)).isAir()) {
                     break;
                 }
