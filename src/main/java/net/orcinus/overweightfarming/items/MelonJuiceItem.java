@@ -27,7 +27,6 @@ public class MelonJuiceItem extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity entity) {
-        world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_BURP, SoundSource.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
         if (entity instanceof ServerPlayer serverplayer) {
             CriteriaTriggers.CONSUME_ITEM.trigger(serverplayer, stack);
             serverplayer.awardStat(Stats.ITEM_USED.get(this));
@@ -35,19 +34,23 @@ public class MelonJuiceItem extends Item {
         if (stack.isEmpty()) {
             return new ItemStack(Items.GLASS_BOTTLE);
         } else {
-            if (entity instanceof Player player && !((Player)entity).getAbilities().instabuild) {
-                world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), entity.getEatingSound(stack), SoundSource.NEUTRAL, 1.0F, 1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.4F);
+            if (entity instanceof Player player) {
+                world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BURP, SoundSource.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
                 if (!player.getAbilities().instabuild) {
-                    stack.shrink(1);
-                }
-                entity.gameEvent(GameEvent.EAT);
-                if (!world.isClientSide()) {
-                    player.heal(2.0F);
-                    player.getFoodData().eat(3, 0.6F);
-                }
-                ItemStack itemstack = new ItemStack(Items.GLASS_BOTTLE);
-                if (!player.getInventory().add(itemstack)) {
-                    player.drop(itemstack, false);
+                    entity.gameEvent(GameEvent.EAT);
+                    world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), entity.getEatingSound(stack), SoundSource.NEUTRAL, 1.0F, 1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.4F);
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(1);
+                    }
+                    entity.gameEvent(GameEvent.EAT);
+                    if (!world.isClientSide()) {
+                        player.heal(2.0F);
+                        player.getFoodData().eat(3, 0.6F);
+                    }
+                    ItemStack itemstack = new ItemStack(Items.GLASS_BOTTLE);
+                    if (!player.getInventory().add(itemstack)) {
+                        player.drop(itemstack, false);
+                    }
                 }
             }
 
