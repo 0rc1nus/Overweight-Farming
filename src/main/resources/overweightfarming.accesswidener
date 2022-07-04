@@ -7,3 +7,6 @@ accessible method net/minecraft/block/BlockWithEntity checkType (Lnet/minecraft/
 accessible field net/minecraft/entity/FallingBlockEntity destroyedOnLanding Z
 accessible field net/minecraft/entity/FallingBlockEntity block Lnet/minecraft/block/BlockState;
 accessible field net/minecraft/entity/FallingBlockEntity fallHurtMax I
+accessible class net/minecraft/block/entity/BlockEntityType$BlockEntityFactory
+accessible field net/minecraft/world/gen/feature/TreeFeatureConfig decorators Ljava/util/List;
+accessible method net/minecraft/world/gen/treedecorator/TreeDecoratorType <init> (Lcom/mojang/serialization/Codec;)V

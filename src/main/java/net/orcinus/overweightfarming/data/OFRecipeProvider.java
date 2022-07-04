@@ -8,7 +8,7 @@ import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.orcinus.overweightfarming.OverweightFarming;
-import net.orcinus.overweightfarming.registry.OFObjects;
+import net.orcinus.overweightfarming.common.registry.OFObjects;
 
 import java.util.function.Consumer;
 

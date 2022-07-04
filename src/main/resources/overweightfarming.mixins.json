@@ -7,7 +7,8 @@
   "mixins": [
     "AnimalEntityMixin",
     "CropBlockMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "TreeFeatureConfigMixin"
   ],
   "client": [
     "ContinuousFallingParticleMixin",

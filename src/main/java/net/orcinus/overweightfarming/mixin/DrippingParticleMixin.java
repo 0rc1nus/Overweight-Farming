@@ -3,7 +3,7 @@ package net.orcinus.overweightfarming.mixin;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.ParticleEffect;
-import net.orcinus.overweightfarming.util.BlockLeakParticleDuck;
+import net.orcinus.overweightfarming.common.util.BlockLeakParticleDuck;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

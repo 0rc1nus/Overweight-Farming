@@ -1,7 +1,7 @@
 package net.orcinus.overweightfarming.mixin;
 
 import net.minecraft.client.particle.BlockLeakParticle;
-import net.orcinus.overweightfarming.util.BlockLeakParticleDuck;
+import net.orcinus.overweightfarming.common.util.BlockLeakParticleDuck;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.ParticleEffect;

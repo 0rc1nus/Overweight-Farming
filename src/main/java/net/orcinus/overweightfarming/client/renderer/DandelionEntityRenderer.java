@@ -9,7 +9,7 @@ import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
-import net.orcinus.overweightfarming.entities.DandelionFluffEntity;
+import net.orcinus.overweightfarming.common.entities.DandelionFluffEntity;
 
 public class DandelionEntityRenderer extends EntityRenderer<DandelionFluffEntity> {
     private static final Identifier TEXTURE = new Identifier("textures/items/wheat.png");

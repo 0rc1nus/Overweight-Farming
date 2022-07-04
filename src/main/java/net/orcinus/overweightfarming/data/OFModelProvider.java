@@ -6,10 +6,10 @@ import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.util.Identifier;
 import net.orcinus.overweightfarming.OverweightFarming;
-import net.orcinus.overweightfarming.blocks.CropFullBlock;
-import net.orcinus.overweightfarming.blocks.OverweightWeedBlock;
-import net.orcinus.overweightfarming.registry.OFObjects;
-import net.orcinus.overweightfarming.util.TripleBlockHalf;
+import net.orcinus.overweightfarming.common.blocks.CropFullBlock;
+import net.orcinus.overweightfarming.common.blocks.OverweightWeedBlock;
+import net.orcinus.overweightfarming.common.registry.OFObjects;
+import net.orcinus.overweightfarming.common.util.TripleBlockHalf;
 
 import java.util.Optional;
 import java.util.function.Consumer;

@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.loot.LootTable;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.orcinus.overweightfarming.registry.OFObjects;
+import net.orcinus.overweightfarming.common.registry.OFObjects;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;

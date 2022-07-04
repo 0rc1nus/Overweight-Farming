@@ -1,7 +1,7 @@
 package net.orcinus.overweightfarming.mixin;
 
 import net.minecraft.util.math.random.Random;
-import net.orcinus.overweightfarming.registry.OFObjects;
+import net.orcinus.overweightfarming.common.registry.OFObjects;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.passive.AnimalEntity;

@@ -14,9 +14,9 @@ import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.predicate.item.ItemPredicate;
-import net.orcinus.overweightfarming.blocks.PeeledMelonBlock;
-import net.orcinus.overweightfarming.registry.OFObjects;
-import net.orcinus.overweightfarming.registry.OFTags;
+import net.orcinus.overweightfarming.common.blocks.PeeledMelonBlock;
+import net.orcinus.overweightfarming.common.registry.OFObjects;
+import net.orcinus.overweightfarming.common.registry.OFTags;
 
 public class OFBlockLootTableProvider extends FabricBlockLootTableProvider {
     public OFBlockLootTableProvider(FabricDataGenerator dataGenerator) {
