@@ -41,9 +41,9 @@ public class OFBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .addOptional(new Identifier("bwplus","bloodroot"))
                 .addOptional(new Identifier("immersive_weathering","weeds"));
 
-        getOrCreateTagBuilder(OFTags.OVERWEIGHT_APPLE_LOGS)
-                .add(Blocks.OAK_LOG)
-                .add(Blocks.DARK_OAK_LOG);
+        getOrCreateTagBuilder(OFTags.OVERWEIGHT_APPLE_LEAVES)
+                .add(Blocks.OAK_LEAVES)
+                .add(Blocks.DARK_OAK_LEAVES);
 
     }
 }

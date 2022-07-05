@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:oak_log",
-    "minecraft:dark_oak_log"
+    "minecraft:oak_leaves",
+    "minecraft:dark_oak_leaves"
   ]
 }

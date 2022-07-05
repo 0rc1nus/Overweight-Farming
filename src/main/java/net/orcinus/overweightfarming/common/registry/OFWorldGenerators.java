@@ -2,9 +2,6 @@ package net.orcinus.overweightfarming.common.registry;
 
 import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
-import net.minecraft.block.Block;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.LocalRandom;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.*;
@@ -23,18 +20,18 @@ public class OFWorldGenerators {
             if (config.decorators.stream().anyMatch(decorator -> decorator instanceof ITreeFeatureConfig) || !(config.trunkProvider instanceof SimpleBlockStateProvider)) {
                 return;
             }
-            Block log = config.trunkProvider.getBlockState(new LocalRandom(0), BlockPos.ORIGIN).getBlock();
-            if (log.getDefaultState().isIn(OFTags.OVERWEIGHT_APPLE_LOGS)) {//Add check for log tag
-                TreeDecorator decorator = new AppleTreeDecorator(0.05F);
-                ((ITreeFeatureConfig) config).addDecorator(decorator);
-            }
+            TreeDecorator decorator = new AppleTreeDecorator(0.005F, 0.1F);
+            ((ITreeFeatureConfig) config).addDecorator(decorator);
         }
     }
 
     public static void init(){
+
         RegistryEntryAddedCallback.event(BuiltinRegistries.CONFIGURED_FEATURE).register((rawId, id, object) -> {
             addAppleTrees(object);
         });
+
+
         DynamicRegistrySetupCallback.EVENT.register(registryManager -> {
             Registry<ConfiguredFeature<?, ?>> registry = registryManager.getManaged(Registry.CONFIGURED_FEATURE_KEY);
             RegistryEntryAddedCallback.event(registry).register((rawId, id, object) -> {
