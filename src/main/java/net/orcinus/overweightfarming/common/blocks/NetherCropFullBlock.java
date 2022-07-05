@@ -8,7 +8,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 
 
-public class NetherCropFullBlock extends CropFullBlock{
+public class NetherCropFullBlock extends CropFullBlock {
     public NetherCropFullBlock(Block stemBlock, Settings properties) {
         super(stemBlock, properties);
     }

@@ -14,18 +14,16 @@ import java.util.Map;
 public class OFBlockEntityTypes {
     private static final Map<BlockEntityType<?>, Identifier> BLOCK_ENTITY_TYPES = new LinkedHashMap<>();
 
-    public static final BlockEntityType<OverweightAppleBlockEntity> OVERWEIGHT_APPLE_BLOCK_ENTITY = register("overweight_apple", FabricBlockEntityTypeBuilder
-            .create(OverweightAppleBlockEntity::new, OFObjects.OVERWEIGHT_APPLE, OFObjects.OVERWEIGHT_GOLDEN_APPLE).build(null));
-
-
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type) {
         BLOCK_ENTITY_TYPES.put(type, new Identifier(OverweightFarming.MODID, name));
         return type;
-    }
-
-
+    }    public static final BlockEntityType<OverweightAppleBlockEntity> OVERWEIGHT_APPLE_BLOCK_ENTITY = register("overweight_apple", FabricBlockEntityTypeBuilder
+            .create(OverweightAppleBlockEntity::new, OFObjects.OVERWEIGHT_APPLE, OFObjects.OVERWEIGHT_GOLDEN_APPLE).build(null));
 
     public static void init() {
         BLOCK_ENTITY_TYPES.keySet().forEach(blockEntityType -> Registry.register(Registry.BLOCK_ENTITY_TYPE, BLOCK_ENTITY_TYPES.get(blockEntityType), blockEntityType));
     }
+
+
+
 }

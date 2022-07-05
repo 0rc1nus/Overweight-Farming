@@ -41,9 +41,9 @@ public class AppleTreeDecorator extends TreeDecorator {
     public void generate(Generator generator) {
         Random random = generator.getRandom();
         int height = generator.getLogPositions().size();
-        if ((random.nextFloat() < this.smallTreeProbability) || ((random.nextFloat() < this.largeTreeProbability) && height >  6)) {
+        if ((random.nextFloat() < this.smallTreeProbability) || ((random.nextFloat() < this.largeTreeProbability) && height > 6)) {
             List<BlockPos> list = generator.getLeavesPositions();
-            if(!list.isEmpty()){
+            if (!list.isEmpty()) {
                 List<BlockPos> list3 = list.stream()
                         .filter((pos) -> generator.isAir(pos.down()) && generator.isAir(pos.down(2)) && generator.isAir(pos.down(3)) && generator.getWorld()
                                 .testBlockState(pos, state -> state.isIn(OFTags.OVERWEIGHT_APPLE_LEAVES)))
@@ -52,7 +52,7 @@ public class AppleTreeDecorator extends TreeDecorator {
                     Collections.shuffle(list3);
                     Optional<BlockPos> optional = list3.stream().findFirst();
                     if (optional.isPresent()) {
-                        generator.replace(optional.get().down(),  OFObjects.OVERWEIGHT_APPLE_STEM.getDefaultState());
+                        generator.replace(optional.get().down(), OFObjects.OVERWEIGHT_APPLE_STEM.getDefaultState());
                         generator.replace(optional.get().down().down(), OFObjects.OVERWEIGHT_APPLE.getDefaultState());
                     }
                 }

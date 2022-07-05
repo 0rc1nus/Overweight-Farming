@@ -34,7 +34,7 @@ public class DandelionFluffEntity extends PersistentProjectileEntity {
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
-        nbt.putShort("life", (short)this.life);
+        nbt.putShort("life", (short) this.life);
     }
 
     @Override

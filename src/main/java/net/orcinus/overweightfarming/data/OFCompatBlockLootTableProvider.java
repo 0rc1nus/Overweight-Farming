@@ -18,6 +18,7 @@ public class OFCompatBlockLootTableProvider extends FabricBlockLootTableProvider
     private static final ConditionJsonProvider HEDGEHOG_LOADED = DefaultResourceConditions.allModsLoaded("orcinus");
     private static final ConditionJsonProvider BEWITCHMENT_LOADED = DefaultResourceConditions.allModsLoaded("bewitchment");
     private static final ConditionJsonProvider BEWITCHMENT_PLUS_LOADED = DefaultResourceConditions.allModsLoaded("bwplus");
+
     public OFCompatBlockLootTableProvider(FabricDataGenerator dataGenerator) {
         super(dataGenerator);
     }
@@ -73,8 +74,6 @@ public class OFCompatBlockLootTableProvider extends FabricBlockLootTableProvider
     public Item getCompatItem(String modid, String name) {
         return Registry.ITEM.get(new Identifier(modid, name));
     }
-
-
 
 
 }

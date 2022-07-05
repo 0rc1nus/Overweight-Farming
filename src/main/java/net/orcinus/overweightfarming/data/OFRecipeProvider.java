@@ -17,10 +17,14 @@ public class OFRecipeProvider extends FabricRecipeProvider {
         super(dataGenerator);
     }
 
+    public static Identifier asResource(String path) {
+        return new Identifier(OverweightFarming.MODID, path);
+    }
+
     @Override
     protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
         ShapedRecipeJsonBuilder.create(OFObjects.VEGETABLE_COMPOST)
-                .input('X' ,OFObjects.VEGETABLE_PEELS)
+                .input('X', OFObjects.VEGETABLE_PEELS)
                 .pattern("XXX")
                 .pattern("XXX")
                 .pattern("XXX");
@@ -35,14 +39,10 @@ public class OFRecipeProvider extends FabricRecipeProvider {
         ShapelessRecipeJsonBuilder.create(OFObjects.WAXED_SEEDLESS_PEELED_MELON, 1)
                 .input(Items.HONEYCOMB).input(OFObjects.SEEDLESS_PEELED_MELON).group("waxed_peeled_melon");
         ShapedRecipeJsonBuilder.create(OFObjects.OVERWEIGHT_GOLDEN_APPLE)
-                .input('X' ,Items.GOLD_BLOCK)
-                .input('#' ,OFObjects.OVERWEIGHT_APPLE)
+                .input('X', Items.GOLD_BLOCK)
+                .input('#', OFObjects.OVERWEIGHT_APPLE)
                 .pattern("XXX")
                 .pattern("X#X")
                 .pattern("XXX");
-    }
-
-    public static Identifier asResource(String path) {
-        return new Identifier(OverweightFarming.MODID, path);
     }
 }

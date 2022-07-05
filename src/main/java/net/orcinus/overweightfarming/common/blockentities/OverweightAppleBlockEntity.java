@@ -27,7 +27,7 @@ public class OverweightAppleBlockEntity extends BlockEntity {
                 }
                 Optional<PlayerEntity> playerEntityOptional = world.getNonSpectatingEntities(PlayerEntity.class, new Box(pos.down(i))).stream().findAny();
                 if (playerEntityOptional.isPresent() && gate) {
-                    ((OverweightAppleBlock)state.getBlock()).spawnFallingBlock(state, world, pos);
+                    ((OverweightAppleBlock) state.getBlock()).spawnFallingBlock(state, world, pos);
                     gate = false;
                 }
             }

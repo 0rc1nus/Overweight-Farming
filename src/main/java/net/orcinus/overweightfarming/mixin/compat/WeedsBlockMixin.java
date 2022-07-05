@@ -1,6 +1,6 @@
 package net.orcinus.overweightfarming.mixin.compat;
 
-import net.minecraft.block.*;
+import net.minecraft.block.CropBlock;
 
 //TODO wait for IW to update, REMEMBER TO ADD THE MIXIN BACK IN THE MIXIN.JSON
 //@Mixin(value = WeedsBlock.class, remap = false)

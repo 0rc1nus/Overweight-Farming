@@ -4,18 +4,18 @@ import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsage;
+import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
 
 public class MelonJuiceItem extends Item {
 
@@ -32,35 +32,21 @@ public class MelonJuiceItem extends Item {
         if (!world.isClient) {
             user.removeStatusEffect(StatusEffects.POISON);
         }
-
         if (stack.isEmpty()) {
             return new ItemStack(Items.GLASS_BOTTLE);
         } else {
-            if (user instanceof PlayerEntity player && !player.getAbilities().creativeMode) {
-                world.emitGameEvent(player, GameEvent.EAT, new BlockPos(player.getEyePos()));
-                world.playSound(null, user.getX(), player.getY(), player.getZ(), player.getEatSound(stack), SoundCategory.NEUTRAL, 1.0F, 1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.4F);
-                stack.decrement(1);
-                player.emitGameEvent(GameEvent.EAT);
-                if (!world.isClient()) {
-                    player.heal(2.0F);
-                    player.getHungerManager().add(3, 0.6F);
-                }
-                ItemStack itemstack = new ItemStack(Items.GLASS_BOTTLE);
-                if (!player.getInventory().insertStack(itemstack)) {
-                    player.dropItem(itemstack, false);
-                }
-
+            if (user instanceof PlayerEntity playerEntity && !((PlayerEntity) user).getAbilities().creativeMode) {
                 ItemStack itemStack = new ItemStack(Items.GLASS_BOTTLE);
-                PlayerEntity playerEntity = (PlayerEntity)user;
                 if (!playerEntity.getInventory().insertStack(itemStack)) {
                     playerEntity.dropItem(itemStack, false);
                 }
+                if (!world.isClient()) {
+                    playerEntity.heal(2);
+                }
             }
-
             return stack;
         }
     }
-
 
 
     public int getMaxUseTime(ItemStack stack) {

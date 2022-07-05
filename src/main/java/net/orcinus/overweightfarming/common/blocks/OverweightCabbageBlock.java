@@ -2,7 +2,7 @@ package net.orcinus.overweightfarming.common.blocks;
 
 import net.minecraft.block.Block;
 
-public class OverweightCabbageBlock extends CropFullBlock{
+public class OverweightCabbageBlock extends CropFullBlock {
     public OverweightCabbageBlock(Block stemBlock, Settings properties) {
         super(stemBlock, properties);
     }
@@ -11,4 +11,5 @@ public class OverweightCabbageBlock extends CropFullBlock{
     public boolean shouldGrowRoots() {
         return false;
     }
+
 }

@@ -16,6 +16,7 @@ import java.util.function.Predicate;
 
 public class OverweightAppleFallingBlockEntity extends FallingBlockEntity {
     private boolean isGolden;
+
     public OverweightAppleFallingBlockEntity(EntityType<? extends OverweightAppleFallingBlockEntity> entityType, World world) {
         super(entityType, world);
         this.fallHurtMax = 40;
@@ -43,7 +44,7 @@ public class OverweightAppleFallingBlockEntity extends FallingBlockEntity {
         Predicate<Entity> predicate = EntityPredicates.EXCEPT_SPECTATOR;
         DamageSource damagesource = DamageSource.FALLING_BLOCK;
         int value = this.isGolden ? 2 : 1;
-        float f = (float)Math.min(MathHelper.floor((float)i * 1 * value), 2 * value);
+        float f = (float) Math.min(MathHelper.floor((float) i * 1 * value), 2 * value);
         this.world.getOtherEntities(this, this.getBoundingBox(), predicate).forEach((entity) -> {
             if (entity instanceof LivingEntity) {
                 this.dropItem = false;

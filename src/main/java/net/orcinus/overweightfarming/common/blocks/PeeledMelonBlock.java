@@ -25,6 +25,7 @@ import net.orcinus.overweightfarming.common.registry.OFParticleTypes;
 
 public class PeeledMelonBlock extends Block {
     private final SeedState seedState;
+
     public PeeledMelonBlock(SeedState seedState, Settings properties) {
         super(properties);
         this.seedState = seedState;
@@ -33,7 +34,7 @@ public class PeeledMelonBlock extends Block {
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         super.randomDisplayTick(state, world, pos, random);
-        for(int i = 0; i < random.nextInt(1) + 1; ++i) {
+        for (int i = 0; i < random.nextInt(1) + 1; ++i) {
             this.trySpawnDripParticles(world, pos, state);
         }
     }
@@ -45,14 +46,14 @@ public class PeeledMelonBlock extends Block {
             if (d0 >= 1.0D && !state.isIn(BlockTags.IMPERMEABLE)) {
                 double d1 = voxelshape.getMin(Direction.Axis.Y);
                 if (d1 > 0.0D) {
-                    this.spawnParticle(world, pos, voxelshape, (double)pos.getY() + d1 - 0.05D);
+                    this.spawnParticle(world, pos, voxelshape, (double) pos.getY() + d1 - 0.05D);
                 } else {
                     BlockPos blockpos = pos.down();
                     BlockState blockstate = world.getBlockState(blockpos);
                     VoxelShape voxelshape1 = blockstate.getCollisionShape(world, blockpos);
                     double d2 = voxelshape1.getMax(Direction.Axis.Y);
                     if ((d2 < 1.0D || !blockstate.isFullCube(world, blockpos)) && blockstate.getFluidState().isEmpty()) {
-                        this.spawnParticle(world, pos, voxelshape, (double)pos.getY() - 0.05D);
+                        this.spawnParticle(world, pos, voxelshape, (double) pos.getY() - 0.05D);
                     }
                 }
             }
@@ -61,7 +62,7 @@ public class PeeledMelonBlock extends Block {
     }
 
     private void spawnParticle(World world, BlockPos pos, VoxelShape shape, double y) {
-        this.spawnFluidParticle(world, (double)pos.getX() + shape.getMin(Direction.Axis.X), (double)pos.getX() + shape.getMax(Direction.Axis.X), (double)pos.getZ() + shape.getMin(Direction.Axis.Z), (double)pos.getZ() + shape.getMax(Direction.Axis.Z), y);
+        this.spawnFluidParticle(world, (double) pos.getX() + shape.getMin(Direction.Axis.X), (double) pos.getX() + shape.getMax(Direction.Axis.X), (double) pos.getZ() + shape.getMin(Direction.Axis.Z), (double) pos.getZ() + shape.getMax(Direction.Axis.Z), y);
     }
 
     private void spawnFluidParticle(World world, double minX, double maxX, double minZ, double maxZ, double y) {

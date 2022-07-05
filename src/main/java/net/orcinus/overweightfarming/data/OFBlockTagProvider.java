@@ -19,11 +19,11 @@ public class OFBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void generateTags() {
         //Vanilla Tags
-        for(Block block : OFObjects.BLOCKS.keySet().stream().filter(block -> block instanceof CropFullBlock).toList()){
+        for (Block block : OFObjects.BLOCKS.keySet().stream().filter(block -> block instanceof CropFullBlock).toList()) {
             getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(block);
             getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(block);
         }
-        for(Block block : OFObjects.BLOCKS.keySet().stream().filter(block -> block instanceof PeeledMelonBlock).toList()){
+        for (Block block : OFObjects.BLOCKS.keySet().stream().filter(block -> block instanceof PeeledMelonBlock).toList()) {
             getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(block);
             getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(block);
         }
@@ -36,10 +36,10 @@ public class OFBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(OFTags.OVERWEIGHT_OBSTACLES).add(Blocks.WITHER_ROSE).add(Blocks.POTTED_WITHER_ROSE);
 
         getOrCreateTagBuilder(OFTags.OVERWEIGHT_COMPAT)
-                .addOptional(new Identifier("bewitchment","garlic"))
-                .addOptional(new Identifier("bewitchment","mandrake"))
-                .addOptional(new Identifier("bwplus","bloodroot"))
-                .addOptional(new Identifier("immersive_weathering","weeds"));
+                .addOptional(new Identifier("bewitchment", "garlic"))
+                .addOptional(new Identifier("bewitchment", "mandrake"))
+                .addOptional(new Identifier("bwplus", "bloodroot"))
+                .addOptional(new Identifier("immersive_weathering", "weeds"));
 
         getOrCreateTagBuilder(OFTags.OVERWEIGHT_APPLE_LEAVES)
                 .add(Blocks.OAK_LEAVES)

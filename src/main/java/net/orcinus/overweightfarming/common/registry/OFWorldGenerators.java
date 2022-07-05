@@ -4,7 +4,9 @@ import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
@@ -20,12 +22,12 @@ public class OFWorldGenerators {
             if (config.decorators.stream().anyMatch(decorator -> decorator instanceof ITreeFeatureConfig) || !(config.trunkProvider instanceof SimpleBlockStateProvider)) {
                 return;
             }
-            TreeDecorator decorator = new AppleTreeDecorator(0.005F, 0.1F);
-            ((ITreeFeatureConfig) config).addDecorator(decorator);
+            TreeDecorator decorator = new AppleTreeDecorator(0.0025F, 0.1F);
+            ((ITreeFeatureConfig) config).OFAddDecorator(decorator);
         }
     }
 
-    public static void init(){
+    public static void init() {
 
         RegistryEntryAddedCallback.event(BuiltinRegistries.CONFIGURED_FEATURE).register((rawId, id, object) -> {
             addAppleTrees(object);

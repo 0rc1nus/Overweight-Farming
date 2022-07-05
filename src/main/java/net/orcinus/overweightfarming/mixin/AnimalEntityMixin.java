@@ -1,7 +1,5 @@
 package net.orcinus.overweightfarming.mixin;
 
-import net.minecraft.util.math.random.Random;
-import net.orcinus.overweightfarming.common.registry.OFObjects;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -9,6 +7,8 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
+import net.minecraft.util.math.random.Random;
+import net.orcinus.overweightfarming.common.registry.OFObjects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class AnimalEntityMixin {
 
     @Inject(method = "breed", at = @At("HEAD"))
-    private void OF$breed(ServerWorld world, AnimalEntity other, CallbackInfo ci){
+    private void OF$breed(ServerWorld world, AnimalEntity other, CallbackInfo ci) {
         AnimalEntity animalEntity = ((AnimalEntity) (Object) this);
         PassiveEntity passiveEntity = animalEntity.createChild(world, other);
         ServerPlayerEntity player = other.getLovingPlayer();

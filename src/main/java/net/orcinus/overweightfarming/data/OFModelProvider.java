@@ -29,13 +29,22 @@ public class OFModelProvider extends FabricModelProvider {
     public static final TexturedModel.Factory TEMPLATE_OVERWEIGHT_ONION_POT = makeFactory(TextureMap::plant, TEMPLATE_OVERWEIGHT_ONION_POT_MODEL);
 
     public static final Model ORIENTABLE_VERTICAL = block("orientable_vertical", TextureKey.FRONT, TextureKey.SIDE);
+
     public OFModelProvider(FabricDataGenerator dataGenerator) {
         super(dataGenerator);
     }
 
+    public static TextureMap bakedPotatoMap(Block block) {
+        return (new TextureMap()).put(TextureKey.PARTICLE, getSubId(block, "_top")).put(TextureKey.DOWN, getSubId(block, "_bottom")).put(TextureKey.UP, getSubId(block, "_top")).put(TextureKey.NORTH, getSubId(block, "_north_south")).put(TextureKey.EAST, getSubId(block, "_east_west")).put(TextureKey.SOUTH, getSubId(block, "_north_south")).put(TextureKey.WEST, getSubId(block, "_east_west"));
+    }
+
+    private static Model block(String parent, TextureKey... requiredTextureKeys) {
+        return new Model(Optional.of(new Identifier(OverweightFarming.MODID, "block/" + parent)), Optional.empty(), requiredTextureKeys);
+    }
+
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        for(Block block : OFObjects.BLOCKS.keySet().stream().filter(block -> block instanceof CropFullBlock && !block.getDefaultState().isOf(OFObjects.OVERWEIGHT_WEED) && !block.getDefaultState().isOf(OFObjects.OVERWEIGHT_KIWI) && !block.getDefaultState().isOf(OFObjects.OVERWEIGHT_SLICED_KIWI) && !block.getDefaultState().isOf(OFObjects.PEELED_OVERWEIGHT_KIWI)).toList()){
+        for (Block block : OFObjects.BLOCKS.keySet().stream().filter(block -> block instanceof CropFullBlock && !block.getDefaultState().isOf(OFObjects.OVERWEIGHT_WEED) && !block.getDefaultState().isOf(OFObjects.OVERWEIGHT_KIWI) && !block.getDefaultState().isOf(OFObjects.OVERWEIGHT_SLICED_KIWI) && !block.getDefaultState().isOf(OFObjects.PEELED_OVERWEIGHT_KIWI)).toList()) {
             blockStateModelGenerator.registerSingleton(block, TexturedModel.CUBE_BOTTOM_TOP);
         }
 
@@ -93,8 +102,8 @@ public class OFModelProvider extends FabricModelProvider {
         registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_ONION);
 
         String kiwiBlockFront = "block/overweight_sliced_kiwi_block_front";
-        registerSliced(blockStateModelGenerator, OFObjects.PEELED_OVERWEIGHT_KIWI,"block/peeled_overweight_kiwi_block",kiwiBlockFront);
-        registerSliced(blockStateModelGenerator, OFObjects.OVERWEIGHT_SLICED_KIWI,"block/overweight_kiwi_block",kiwiBlockFront);
+        registerSliced(blockStateModelGenerator, OFObjects.PEELED_OVERWEIGHT_KIWI, "block/peeled_overweight_kiwi_block", kiwiBlockFront);
+        registerSliced(blockStateModelGenerator, OFObjects.OVERWEIGHT_SLICED_KIWI, "block/overweight_kiwi_block", kiwiBlockFront);
     }
 
     @Override
@@ -112,13 +121,13 @@ public class OFModelProvider extends FabricModelProvider {
 
     public final void registerPot(BlockStateModelGenerator blockStateModelGenerator, Block potted) {
         Identifier identifier;
-        if(potted.getDefaultState().isOf(OFObjects.POTTED_OVERWEIGHT_ONION)){
+        if (potted.getDefaultState().isOf(OFObjects.POTTED_OVERWEIGHT_ONION)) {
             identifier = TEMPLATE_OVERWEIGHT_ONION_POT.upload(potted, blockStateModelGenerator.modelCollector);
-        }else if(potted.getDefaultState().isOf(OFObjects.POTTED_OVERWEIGHT_CABBAGE)){
+        } else if (potted.getDefaultState().isOf(OFObjects.POTTED_OVERWEIGHT_CABBAGE)) {
             identifier = TEMPLATE_OVERWEIGHT_CABBAGE_POT.upload(potted, blockStateModelGenerator.modelCollector);
-        }else if(potted.getDefaultState().isOf(OFObjects.POTTED_OVERWEIGHT_NETHER_WART)){
+        } else if (potted.getDefaultState().isOf(OFObjects.POTTED_OVERWEIGHT_NETHER_WART)) {
             identifier = TEMPLATE_OVERWEIGHT_NETHER_WART_POT.upload(potted, blockStateModelGenerator.modelCollector);
-        }else{
+        } else {
             identifier = TEMPLATE_OVERWEIGHT_POT.upload(potted, blockStateModelGenerator.modelCollector);
         }
 
@@ -126,18 +135,8 @@ public class OFModelProvider extends FabricModelProvider {
         blockStateModelGenerator.blockStateCollector.accept(createSingletonBlockState(potted, identifier));
     }
 
-    public final void registerTripleBlock(Consumer<BlockStateSupplier> blockStateCollector, Block block, Identifier upperHalfModelId, Identifier middleHalfModelId , Identifier lowerHalfModelId) {
+    public final void registerTripleBlock(Consumer<BlockStateSupplier> blockStateCollector, Block block, Identifier upperHalfModelId, Identifier middleHalfModelId, Identifier lowerHalfModelId) {
         var fluffId = getSubId(OFObjects.OVERWEIGHT_WEED, "_fluff");
-        blockStateCollector.accept(VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(TripleBlockHalf.TRIPLE_BLOCK_HALF, OverweightWeedBlock.FLUFF).register(TripleBlockHalf.LOWER, false, BlockStateVariant.create().put(VariantSettings.MODEL, lowerHalfModelId)).register(TripleBlockHalf.MIDDLE, false, BlockStateVariant.create().put(VariantSettings.MODEL, middleHalfModelId)).register(TripleBlockHalf.UPPER,false, BlockStateVariant.create().put(VariantSettings.MODEL, upperHalfModelId)).register(TripleBlockHalf.LOWER, true, BlockStateVariant.create().put(VariantSettings.MODEL, fluffId)).register(TripleBlockHalf.MIDDLE, true, BlockStateVariant.create().put(VariantSettings.MODEL, fluffId)).register(TripleBlockHalf.UPPER,true, BlockStateVariant.create().put(VariantSettings.MODEL, fluffId))));
-    }
-
-
-    public static TextureMap bakedPotatoMap(Block block) {
-        return (new TextureMap()).put(TextureKey.PARTICLE, getSubId(block, "_top")).put(TextureKey.DOWN, getSubId(block, "_bottom")).put(TextureKey.UP, getSubId(block, "_top")).put(TextureKey.NORTH, getSubId(block, "_north_south")).put(TextureKey.EAST, getSubId(block, "_east_west")).put(TextureKey.SOUTH, getSubId(block, "_north_south")).put(TextureKey.WEST, getSubId(block, "_east_west"));
-    }
-
-
-    private static Model block(String parent, TextureKey... requiredTextureKeys) {
-        return new Model(Optional.of(new Identifier(OverweightFarming.MODID, "block/" + parent)), Optional.empty(), requiredTextureKeys);
+        blockStateCollector.accept(VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(TripleBlockHalf.TRIPLE_BLOCK_HALF, OverweightWeedBlock.FLUFF).register(TripleBlockHalf.LOWER, false, BlockStateVariant.create().put(VariantSettings.MODEL, lowerHalfModelId)).register(TripleBlockHalf.MIDDLE, false, BlockStateVariant.create().put(VariantSettings.MODEL, middleHalfModelId)).register(TripleBlockHalf.UPPER, false, BlockStateVariant.create().put(VariantSettings.MODEL, upperHalfModelId)).register(TripleBlockHalf.LOWER, true, BlockStateVariant.create().put(VariantSettings.MODEL, fluffId)).register(TripleBlockHalf.MIDDLE, true, BlockStateVariant.create().put(VariantSettings.MODEL, fluffId)).register(TripleBlockHalf.UPPER, true, BlockStateVariant.create().put(VariantSettings.MODEL, fluffId))));
     }
 }

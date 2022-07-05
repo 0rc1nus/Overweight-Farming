@@ -5,6 +5,8 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.FallingBlockEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
@@ -21,14 +23,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class OverweightAppleBlock extends CropFullBlock implements LandingBlock, BlockEntityProvider {
     private final boolean isGolden;
+
     public OverweightAppleBlock(boolean isGolden, Block stemBlock, Settings properties) {
         super(stemBlock, properties);
         this.isGolden = isGolden;
-    }
-
-    @Override
-    public boolean shouldGrowRoots() {
-        return false;
     }
 
     public static boolean isFree(BlockState state) {
@@ -36,10 +34,28 @@ public class OverweightAppleBlock extends CropFullBlock implements LandingBlock,
         return state.isAir() || state.isIn(BlockTags.FIRE) || material.isLiquid() || material.isReplaceable();
     }
 
+    @Nullable
+    protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> thisBlockEntityType, BlockEntityType<E> compareBlockEntityType, BlockEntityTicker<? super E> ticker) {
+        return compareBlockEntityType == thisBlockEntityType ? (BlockEntityTicker<A>) ticker : null;
+    }
+
+    @Override
+    public boolean shouldGrowRoots() {
+        return false;
+    }
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        super.onPlaced(world, pos, state, placer, itemStack);
+        if (world.testBlockState(pos.up(), AbstractBlockState::isAir)) {
+            world.setBlockState(pos.up(), this.stemBlock.getDefaultState());
+        }
+    }
 
     public void onDestroyedOnLanding(World world, BlockPos pos, FallingBlockEntity fallingBlockEntity) {
         LandingBlock.super.onDestroyedOnLanding(world, pos, fallingBlockEntity);
     }
+
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
@@ -64,15 +80,11 @@ public class OverweightAppleBlock extends CropFullBlock implements LandingBlock,
     }
 
     public void spawnFallingBlock(BlockState state, World world, BlockPos pos) {
-        OverweightAppleFallingBlockEntity fallingBlockEntity = new OverweightAppleFallingBlockEntity(this.isGolden, world, (double)pos.getX() + 0.5D, pos.getY(), (double)pos.getZ() + 0.5D, state.contains(Properties.WATERLOGGED) ? state.with(Properties.WATERLOGGED, false) : state);
+        OverweightAppleFallingBlockEntity fallingBlockEntity = new OverweightAppleFallingBlockEntity(this.isGolden, world, (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, state.contains(Properties.WATERLOGGED) ? state.with(Properties.WATERLOGGED, false) : state);
         world.setBlockState(pos, state.getFluidState().getBlockState(), Block.NOTIFY_ALL);
         world.spawnEntity(fallingBlockEntity);
     }
 
-    @Nullable
-    protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> thisBlockEntityType, BlockEntityType<E> compareBlockEntityType, BlockEntityTicker<? super E> ticker) {
-        return compareBlockEntityType == thisBlockEntityType ? (BlockEntityTicker<A>)ticker : null;
-    }
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BlockState aboveState = world.getBlockState(pos.up());

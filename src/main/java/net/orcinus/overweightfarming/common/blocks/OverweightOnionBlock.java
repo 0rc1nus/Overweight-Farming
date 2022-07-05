@@ -1,14 +1,14 @@
 package net.orcinus.overweightfarming.common.blocks;
 
-import net.minecraft.util.math.random.Random;
-import net.orcinus.overweightfarming.common.registry.OFObjects;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
+import net.orcinus.overweightfarming.common.registry.OFObjects;
 
 import java.util.Iterator;
 
@@ -50,7 +50,7 @@ public class OverweightOnionBlock extends CropFullBlock {
             direction = var4.next();
             BlockState blockState = world.getBlockState(pos.offset(direction));
             material = blockState.getMaterial();
-        } while(!material.isSolid() && !world.getFluidState(pos.offset(direction)).isIn(FluidTags.LAVA));
+        } while (!material.isSolid() && !world.getFluidState(pos.offset(direction)).isIn(FluidTags.LAVA));
 
         return false;
     }

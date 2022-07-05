@@ -1,6 +1,5 @@
 package net.orcinus.overweightfarming;
 
-import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
@@ -9,8 +8,6 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
-import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
@@ -23,9 +20,6 @@ import net.minecraft.item.AxeItem;
 import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTables;
-import net.minecraft.loot.entry.LootTableEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -36,22 +30,35 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import net.minecraft.world.event.GameEvent;
-import net.orcinus.overweightfarming.common.registry.OFEntityTypes;
-import net.orcinus.overweightfarming.common.registry.OFObjects;
-import net.orcinus.overweightfarming.common.registry.OFWorldGenerators;
-import net.orcinus.overweightfarming.common.util.EmeraldToItemOffer;
+import net.orcinus.overweightfarming.common.registry.*;
 import org.jetbrains.annotations.Nullable;
-import net.orcinus.overweightfarming.common.registry.OFBlockEntityTypes;
 
-import java.util.Set;
+import java.util.function.Supplier;
 
 
 public class OverweightFarming implements ModInitializer {
     public static final String MODID = "overweight_farming";
+    public static final Supplier<BiMap<Block, Block>> WAXABLES = Suppliers.memoize(() -> ImmutableBiMap.<Block, Block>builder()
+            .put(OFObjects.SEEDED_PEELED_MELON, OFObjects.WAXED_SEEDED_PEELED_MELON)
+            .put(OFObjects.HALF_SEEDED_PEELED_MELON, OFObjects.WAXED_HALF_SEEDED_PEELED_MELON)
+            .put(OFObjects.SEEDLESS_PEELED_MELON, OFObjects.WAXED_SEEDLESS_PEELED_MELON)
+            .build());
+    public static final Supplier<BiMap<Block, Block>> WAX_OFF_BY_BLOCK = Suppliers.memoize(() -> WAXABLES.get().inverse());
+    public static final Supplier<BiMap<Block, Block>> PEELABLES = Suppliers.memoize(() -> ImmutableBiMap.<Block, Block>builder()
+            .put(OFObjects.OVERWEIGHT_BEETROOT, OFObjects.PEELED_OVERWEIGHT_BEETROOT)
+            .put(OFObjects.OVERWEIGHT_CARROT, OFObjects.PEELED_OVERWEIGHT_CARROT)
+            .put(OFObjects.OVERWEIGHT_POTATO, OFObjects.PEELED_OVERWEIGHT_POTATO)
+            .put(OFObjects.OVERWEIGHT_ONION, OFObjects.PEELED_OVERWEIGHT_ONION)
+            .put(OFObjects.OVERWEIGHT_KIWI, OFObjects.OVERWEIGHT_SLICED_KIWI)
+            .put(OFObjects.OVERWEIGHT_SLICED_KIWI, OFObjects.PEELED_OVERWEIGHT_KIWI)
+            .put(OFObjects.OVERWEIGHT_GINGER, OFObjects.PEELED_OVERWEIGHT_GINGER)
+            .put(OFObjects.OVERWEIGHT_COCOA, OFObjects.PEELED_OVERWEIGHT_COCOA)
+            .put(Blocks.MELON, OFObjects.SEEDED_PEELED_MELON)
+            .build());
+    public static final Supplier<BiMap<Block, Block>> UNPEELABLES = Suppliers.memoize(() -> PEELABLES.get().inverse());
     public static OFConfig config;
 
     @Override
@@ -63,40 +70,13 @@ public class OverweightFarming implements ModInitializer {
         OFEntityTypes.init();
         OFBlockEntityTypes.init();
         OFWorldGenerators.init();
+        OFLootTables.init();
+        OFTrades.init();
 
         UseBlockCallback.EVENT.register(this::stripMelon);
         UseBlockCallback.EVENT.register(this::growBloodroot);
         UseEntityCallback.EVENT.register(this::interactPig);
-
-        registerLootTable();
-
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 5, factories -> {
-            factories.add(new EmeraldToItemOffer(new ItemStack(OFObjects.STRAW_HAT), 20, 1, 12, 0.05F));
-        });
-
-
     }
-    protected void registerLootTable() {
-    Set<Identifier> villageHouseChestsId = Set.of(
-            LootTables.VILLAGE_PLAINS_CHEST,
-            LootTables.VILLAGE_SAVANNA_HOUSE_CHEST,
-            LootTables.VILLAGE_SNOWY_HOUSE_CHEST,
-            LootTables.VILLAGE_TAIGA_HOUSE_CHEST,
-            LootTables.VILLAGE_DESERT_HOUSE_CHEST);
-
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            Identifier injectId = new Identifier(OverweightFarming.MODID, "inject/" + id.getPath());
-            if (villageHouseChestsId.contains(id)) {
-                tableBuilder.pool(LootPool.builder().with(LootTableEntry.builder(injectId).weight(1).quality(0)).build());
-            }
-
-            if (LootTables.SHIPWRECK_SUPPLY_CHEST.equals(id)) {
-                tableBuilder.pool(LootPool.builder().with(LootTableEntry.builder(injectId).weight(1).quality(0)).build());
-            }
-        });
-    }
-
-
 
     private ActionResult interactPig(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {
         ItemStack stack = player.getStackInHand(hand);
@@ -115,7 +95,7 @@ public class OverweightFarming implements ModInitializer {
                     if (!player.getAbilities().creativeMode) {
                         stack.decrement(1);
                     }
-                    pigEntity.growUp((int)((float)(-i / 20) * 0.1F), true);
+                    pigEntity.growUp((int) ((float) (-i / 20) * 0.1F), true);
                     pigEntity.emitGameEvent(GameEvent.ENTITY_INTERACT, pigEntity);
                     player.swingHand(hand);
                 }
@@ -128,11 +108,11 @@ public class OverweightFarming implements ModInitializer {
     }
 
     private ActionResult growBloodroot(PlayerEntity player, World world, Hand hand, BlockHitResult blockHitResult) {
-        Identifier identifier = new Identifier("bwplus","bloodroot");
-        if(FabricLoader.getInstance().isModLoaded("bwplus") && Registry.BLOCK.containsId(identifier)){
-            if(world.getBlockState(blockHitResult.getBlockPos()).isOf(Registry.BLOCK.get(identifier))){
-                if(player.getMainHandStack().getItem() instanceof BoneMealItem){
-                    if(!player.isCreative()){
+        Identifier identifier = new Identifier("bwplus", "bloodroot");
+        if (FabricLoader.getInstance().isModLoaded("bwplus") && Registry.BLOCK.containsId(identifier)) {
+            if (world.getBlockState(blockHitResult.getBlockPos()).isOf(Registry.BLOCK.get(identifier))) {
+                if (player.getMainHandStack().getItem() instanceof BoneMealItem) {
+                    if (!player.isCreative()) {
                         player.getMainHandStack().decrement(1);
                     }
 
@@ -141,9 +121,9 @@ public class OverweightFarming implements ModInitializer {
                     }
                     BoneMealItem.createParticles(world, blockHitResult.getBlockPos(), 8);
 
-                    if(world.getRandom().nextFloat() > 0.75F){
+                    if (world.getRandom().nextFloat() > 0.75F) {
                         world.setBlockState(blockHitResult.getBlockPos(), OFObjects.OVERWEIGHT_BLOODROOT.getDefaultState(), Block.NOTIFY_ALL);
-                        if(world.getBlockState(blockHitResult.getBlockPos().up()).isAir()){
+                        if (world.getBlockState(blockHitResult.getBlockPos().up()).isAir()) {
                             world.setBlockState(blockHitResult.getBlockPos().up(), OFObjects.OVERWEIGHT_BLOODROOT_STEM.getDefaultState(), Block.NOTIFY_ALL);
                         }
                     }
@@ -206,7 +186,7 @@ public class OverweightFarming implements ModInitializer {
         if (stack.getItem() == OFObjects.VEGETABLE_PEELS) {
             for (Block block : UNPEELABLES.get().keySet()) {
                 if (state.isOf(block)) {
-                    if (!player.getAbilities().creativeMode){
+                    if (!player.getAbilities().creativeMode) {
                         stack.decrement(1);
                     }
                     world.playSound(null, blockPos, SoundEvents.ENTITY_GLOW_ITEM_FRAME_ADD_ITEM, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -218,26 +198,5 @@ public class OverweightFarming implements ModInitializer {
 
         return ActionResult.PASS;
     }
-
-    public static final Supplier<BiMap<Block, Block>> WAXABLES = Suppliers.memoize(() -> ImmutableBiMap.<Block, Block>builder()
-            .put(OFObjects.SEEDED_PEELED_MELON, OFObjects.WAXED_SEEDED_PEELED_MELON)
-            .put(OFObjects.HALF_SEEDED_PEELED_MELON, OFObjects.WAXED_HALF_SEEDED_PEELED_MELON)
-            .put(OFObjects.SEEDLESS_PEELED_MELON, OFObjects.WAXED_SEEDLESS_PEELED_MELON)
-            .build());
-
-
-    public static final Supplier<BiMap<Block, Block>> WAX_OFF_BY_BLOCK = Suppliers.memoize(() -> WAXABLES.get().inverse());
-    public static final Supplier<BiMap<Block, Block>> PEELABLES = Suppliers.memoize(() -> ImmutableBiMap.<Block, Block>builder()
-            .put(OFObjects.OVERWEIGHT_BEETROOT, OFObjects.PEELED_OVERWEIGHT_BEETROOT)
-            .put(OFObjects.OVERWEIGHT_CARROT, OFObjects.PEELED_OVERWEIGHT_CARROT)
-            .put(OFObjects.OVERWEIGHT_POTATO, OFObjects.PEELED_OVERWEIGHT_POTATO)
-            .put(OFObjects.OVERWEIGHT_ONION, OFObjects.PEELED_OVERWEIGHT_ONION)
-            .put(OFObjects.OVERWEIGHT_KIWI, OFObjects.OVERWEIGHT_SLICED_KIWI)
-            .put(OFObjects.OVERWEIGHT_SLICED_KIWI, OFObjects.PEELED_OVERWEIGHT_KIWI)
-            .put(OFObjects.OVERWEIGHT_GINGER, OFObjects.PEELED_OVERWEIGHT_GINGER)
-            .put(OFObjects.OVERWEIGHT_COCOA, OFObjects.PEELED_OVERWEIGHT_COCOA)
-            .put(Blocks.MELON, OFObjects.SEEDED_PEELED_MELON)
-            .build());
-    public static final Supplier<BiMap<Block, Block>> UNPEELABLES = Suppliers.memoize(() -> PEELABLES.get().inverse());
 
 }

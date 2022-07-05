@@ -1,6 +1,11 @@
 package net.orcinus.overweightfarming;
 
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.FallingBlockEntityRenderer;
 import net.orcinus.overweightfarming.client.model.StrawHatModel;
 import net.orcinus.overweightfarming.client.renderer.DandelionEntityRenderer;
@@ -8,11 +13,6 @@ import net.orcinus.overweightfarming.client.renderer.StrawHatRenderer;
 import net.orcinus.overweightfarming.common.registry.OFEntityTypes;
 import net.orcinus.overweightfarming.common.registry.OFObjects;
 import net.orcinus.overweightfarming.common.registry.OFParticleTypes;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.minecraft.client.render.RenderLayer;
 
 public class OverweightFarmingClient implements ClientModInitializer {
 

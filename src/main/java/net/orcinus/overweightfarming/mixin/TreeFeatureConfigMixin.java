@@ -20,7 +20,7 @@ public class TreeFeatureConfigMixin implements ITreeFeatureConfig {
     public List<TreeDecorator> decorators;
 
     @Override
-    public void addDecorator(TreeDecorator decorator) {
+    public void OFAddDecorator(TreeDecorator decorator) {
         this.decorators = new ImmutableList.Builder<TreeDecorator>().addAll(this.decorators).add(decorator).build();
     }
 }
