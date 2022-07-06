@@ -118,6 +118,7 @@ public class OFObjects {
     public static void init() {
         BLOCKS.keySet().forEach(block -> Registry.register(Registry.BLOCK, BLOCKS.get(block), block));
         ITEMS.keySet().forEach(item -> Registry.register(Registry.ITEM, ITEMS.get(item), item));
+
         CompostingChanceRegistry compostRegistry = CompostingChanceRegistry.INSTANCE;
         compostRegistry.add(OVERWEIGHT_BEETROOT, 1.0f);
         compostRegistry.add(OVERWEIGHT_CARROT, 1.0f);
@@ -125,21 +126,26 @@ public class OFObjects {
         compostRegistry.add(OVERWEIGHT_POTATO, 1.0f);
         compostRegistry.add(OVERWEIGHT_BAKED_POTATO, 1.0f);
         compostRegistry.add(OVERWEIGHT_POISONOUS_POTATO, 1.0f);
-        compostRegistry.add(OVERWEIGHT_ONION, 1.0f);
-        compostRegistry.add(OVERWEIGHT_CABBAGE, 1.0f);
         compostRegistry.add(PEELED_OVERWEIGHT_BEETROOT, 1.0f);
         compostRegistry.add(PEELED_OVERWEIGHT_CARROT, 1.0f);
         compostRegistry.add(PEELED_OVERWEIGHT_POTATO, 1.0f);
-        compostRegistry.add(PEELED_OVERWEIGHT_ONION, 1.0f);
         compostRegistry.add(VEGETABLE_COMPOST, 1.0f);
         compostRegistry.add(ALLIUM_BUSH, 0.65f);
         compostRegistry.add(VEGETABLE_PEELS, 1.0f);
 
-        compostRegistry.add(OVERWEIGHT_BLOODROOT, 1.0f);
-        compostRegistry.add(OVERWEIGHT_MANDRAKE, 1.0f);
-        compostRegistry.add(OVERWEIGHT_GARLIC, 1.0f);
+        if(FabricLoader.getInstance().isModLoaded("farmersdelight")){
+            compostRegistry.add(OVERWEIGHT_ONION, 1.0f);
+            compostRegistry.add(OVERWEIGHT_CABBAGE, 1.0f);
+            compostRegistry.add(PEELED_OVERWEIGHT_ONION, 1.0f);
+        }
+        if(FabricLoader.getInstance().isModLoaded("bewitchment")){
+            compostRegistry.add(OVERWEIGHT_MANDRAKE, 1.0f);
+            compostRegistry.add(OVERWEIGHT_GARLIC, 1.0f);
+            if(FabricLoader.getInstance().isModLoaded("bwplus")){
+                compostRegistry.add(OVERWEIGHT_BLOODROOT, 1.0f);
 
-
+            }
+        }
     }
 
 }
