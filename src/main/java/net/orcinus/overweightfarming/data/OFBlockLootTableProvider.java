@@ -2,7 +2,8 @@ package net.orcinus.overweightfarming.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.TallPlantBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -14,18 +15,31 @@ import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.predicate.item.ItemPredicate;
-import net.orcinus.overweightfarming.blocks.PeeledMelonBlock;
-import net.orcinus.overweightfarming.registry.OFObjects;
-import net.orcinus.overweightfarming.registry.OFTags;
+import net.orcinus.overweightfarming.common.blocks.PeeledMelonBlock;
+import net.orcinus.overweightfarming.common.registry.OFObjects;
+import net.orcinus.overweightfarming.common.registry.OFTags;
 
 public class OFBlockLootTableProvider extends FabricBlockLootTableProvider {
     public OFBlockLootTableProvider(FabricDataGenerator dataGenerator) {
         super(dataGenerator);
     }
 
+    public static LootTable.Builder overweightDrops(Block crop, Item product, Item seeds) {
+        LootCondition.Builder conditionalBuilder = MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag((OFTags.OVERWEIGHT_HARVESTABLES)));
+        LootTable.Builder builder = applyExplosionDecay(crop, LootTable.builder()
+                .pool(LootPool.builder().with(ItemEntry.builder(product)
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(6.0F, 20.0F)))
+                        .conditionally(conditionalBuilder).alternatively(ItemEntry.builder(crop))))
+        );
+        if (seeds != null) {
+            builder.pool(LootPool.builder().with(ItemEntry.builder(seeds).conditionally(conditionalBuilder)));
+        }
+        return builder;
+    }
+
     @Override
     protected void generateBlockLootTables() {
-        for(Block block : OFObjects.BLOCKS.keySet().stream().filter(block -> block instanceof PeeledMelonBlock).toList()){
+        for (Block block : OFObjects.BLOCKS.keySet().stream().filter(block -> block instanceof PeeledMelonBlock).toList()) {
             this.addDrop(block);
         }
         this.addDrop(OFObjects.VEGETABLE_COMPOST);
@@ -61,22 +75,6 @@ public class OFBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_KIWI);
         this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_NETHER_WART);
         this.addPottedPlantDrop(OFObjects.POTTED_OVERWEIGHT_ONION);
-
-    }
-
-
-
-    public static LootTable.Builder overweightDrops(Block crop, Item product, Item seeds) {
-        LootCondition.Builder conditionalBuilder = MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag((OFTags.OVERWEIGHT_HARVESTABLES)));
-        LootTable.Builder builder = applyExplosionDecay(crop, LootTable.builder()
-                .pool(LootPool.builder().with(ItemEntry.builder(product)
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(6.0F, 20.0F)))
-                        .conditionally(conditionalBuilder).alternatively(ItemEntry.builder(crop))))
-        );
-        if(seeds != null){
-            builder.pool(LootPool.builder().with(ItemEntry.builder(seeds).conditionally(conditionalBuilder)));
-        }
-        return builder;
     }
 
 }

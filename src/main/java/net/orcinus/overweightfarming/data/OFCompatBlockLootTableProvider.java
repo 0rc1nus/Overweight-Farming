@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.loot.LootTable;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.orcinus.overweightfarming.registry.OFObjects;
+import net.orcinus.overweightfarming.common.registry.OFObjects;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;
@@ -16,13 +16,16 @@ import java.util.function.BiConsumer;
 public class OFCompatBlockLootTableProvider extends FabricBlockLootTableProvider {
     private static final ConditionJsonProvider FARMERSDELIGHT_LOADED = DefaultResourceConditions.allModsLoaded("farmersdelight");
     private static final ConditionJsonProvider HEDGEHOG_LOADED = DefaultResourceConditions.allModsLoaded("orcinus");
+    private static final ConditionJsonProvider BEWITCHMENT_LOADED = DefaultResourceConditions.allModsLoaded("bewitchment");
+    private static final ConditionJsonProvider BEWITCHMENT_PLUS_LOADED = DefaultResourceConditions.allModsLoaded("bwplus");
+
     public OFCompatBlockLootTableProvider(FabricDataGenerator dataGenerator) {
         super(dataGenerator);
     }
 
     @Override
     protected void generateBlockLootTables() {
-   }
+    }
 
     @Override
     public void accept(BiConsumer<Identifier, LootTable.Builder> biConsumer) {
@@ -51,15 +54,26 @@ public class OFCompatBlockLootTableProvider extends FabricBlockLootTableProvider
                 OFObjects.OVERWEIGHT_SLICED_KIWI.getLootTableId(),
                 OFBlockLootTableProvider.overweightDrops(OFObjects.OVERWEIGHT_SLICED_KIWI, getCompatItem("hedgehog", "kiwi"), null)
         );
+
+        withConditions(biConsumer, BEWITCHMENT_LOADED).accept(
+                OFObjects.OVERWEIGHT_MANDRAKE.getLootTableId(),
+                OFBlockLootTableProvider.overweightDrops(OFObjects.OVERWEIGHT_MANDRAKE, getCompatItem("bewitchment", "mandrake_root"), getCompatItem("bewitchment", "mandrake_seeds"))
+        );
+        withConditions(biConsumer, BEWITCHMENT_LOADED).accept(
+                OFObjects.OVERWEIGHT_GARLIC.getLootTableId(),
+                OFBlockLootTableProvider.overweightDrops(OFObjects.OVERWEIGHT_GARLIC, getCompatItem("bewitchment", "garlic"), null)
+        );
+        withConditions(biConsumer, BEWITCHMENT_PLUS_LOADED).accept(
+                OFObjects.OVERWEIGHT_BLOODROOT.getLootTableId(),
+                OFBlockLootTableProvider.overweightDrops(OFObjects.OVERWEIGHT_BLOODROOT, getCompatItem("bwplus", "bloodroot_item"), null)
+        );
     }
 
-    
+
     @Nullable
     public Item getCompatItem(String modid, String name) {
         return Registry.ITEM.get(new Identifier(modid, name));
     }
-
-
 
 
 }

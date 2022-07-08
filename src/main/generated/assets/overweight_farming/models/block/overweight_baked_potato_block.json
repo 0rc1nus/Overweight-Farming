@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "particle": "overweight_farming:block/overweight_baked_potato_block_top",
-    "north": "overweight_farming:block/overweight_baked_potato_block_north_south",
-    "south": "overweight_farming:block/overweight_baked_potato_block_north_south",
+    "down": "overweight_farming:block/overweight_baked_potato_block_bottom",
     "east": "overweight_farming:block/overweight_baked_potato_block_east_west",
-    "west": "overweight_farming:block/overweight_baked_potato_block_east_west",
+    "north": "overweight_farming:block/overweight_baked_potato_block_north_south",
+    "particle": "overweight_farming:block/overweight_baked_potato_block_top",
+    "south": "overweight_farming:block/overweight_baked_potato_block_north_south",
     "up": "overweight_farming:block/overweight_baked_potato_block_top",
-    "down": "overweight_farming:block/overweight_baked_potato_block_bottom"
+    "west": "overweight_farming:block/overweight_baked_potato_block_east_west"
   }
 }

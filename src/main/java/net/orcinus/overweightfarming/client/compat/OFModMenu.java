@@ -1,12 +1,12 @@
 package net.orcinus.overweightfarming.client.compat;
 
-import net.orcinus.overweightfarming.OFConfig;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.Screen;
+import net.orcinus.overweightfarming.OFConfig;
 
 @Environment(EnvType.CLIENT)
 public class OFModMenu implements ModMenuApi {

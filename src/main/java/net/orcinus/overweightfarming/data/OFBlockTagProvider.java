@@ -6,10 +6,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Identifier;
-import net.orcinus.overweightfarming.blocks.CropFullBlock;
-import net.orcinus.overweightfarming.blocks.PeeledMelonBlock;
-import net.orcinus.overweightfarming.registry.OFObjects;
-import net.orcinus.overweightfarming.registry.OFTags;
+import net.orcinus.overweightfarming.common.blocks.CropFullBlock;
+import net.orcinus.overweightfarming.common.blocks.PeeledMelonBlock;
+import net.orcinus.overweightfarming.common.registry.OFObjects;
+import net.orcinus.overweightfarming.common.registry.OFTags;
 
 public class OFBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     public OFBlockTagProvider(FabricDataGenerator dataGenerator) {
@@ -19,11 +19,11 @@ public class OFBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void generateTags() {
         //Vanilla Tags
-        for(Block block : OFObjects.BLOCKS.keySet().stream().filter(block -> block instanceof CropFullBlock).toList()){
+        for (Block block : OFObjects.BLOCKS.keySet().stream().filter(block -> block instanceof CropFullBlock).toList()) {
             getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(block);
             getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(block);
         }
-        for(Block block : OFObjects.BLOCKS.keySet().stream().filter(block -> block instanceof PeeledMelonBlock).toList()){
+        for (Block block : OFObjects.BLOCKS.keySet().stream().filter(block -> block instanceof PeeledMelonBlock).toList()) {
             getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(block);
             getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(block);
         }
@@ -33,13 +33,17 @@ public class OFBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.REPLACEABLE_PLANTS).add(OFObjects.ALLIUM_BUSH);
         getOrCreateTagBuilder(BlockTags.TALL_FLOWERS).add(OFObjects.ALLIUM_BUSH);
 
-        getOrCreateTagBuilder(OFTags.OVERWEIGHT_OBSTACLES).add(Blocks.WITHER_ROSE);
-        getOrCreateTagBuilder(OFTags.OVERWEIGHT_OBSTACLES).add(Blocks.POTTED_WITHER_ROSE);
+        getOrCreateTagBuilder(OFTags.OVERWEIGHT_OBSTACLES).add(Blocks.WITHER_ROSE).add(Blocks.POTTED_WITHER_ROSE);
 
-        getOrCreateTagBuilder(OFTags.OVERWEIGHT_COMPAT).addOptional(new Identifier("bewitchment","garlic"));
-        getOrCreateTagBuilder(OFTags.OVERWEIGHT_COMPAT).addOptional(new Identifier("bewitchment","mandrake"));
-        getOrCreateTagBuilder(OFTags.OVERWEIGHT_COMPAT).addOptional(new Identifier("bwplus","bloodroot"));
-        getOrCreateTagBuilder(OFTags.OVERWEIGHT_COMPAT).addOptional(new Identifier("immersive_weathering","weeds"));
+        getOrCreateTagBuilder(OFTags.OVERWEIGHT_COMPAT)
+                .addOptional(new Identifier("bewitchment", "garlic"))
+                .addOptional(new Identifier("bewitchment", "mandrake"))
+                .addOptional(new Identifier("bwplus", "bloodroot"))
+                .addOptional(new Identifier("immersive_weathering", "weeds"));
+
+        getOrCreateTagBuilder(OFTags.OVERWEIGHT_APPLE_LEAVES)
+                .add(Blocks.OAK_LEAVES)
+                .add(Blocks.DARK_OAK_LEAVES);
 
     }
 }

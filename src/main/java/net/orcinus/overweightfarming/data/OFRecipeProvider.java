@@ -1,26 +1,30 @@
 package net.orcinus.overweightfarming.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipesProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.orcinus.overweightfarming.OverweightFarming;
-import net.orcinus.overweightfarming.registry.OFObjects;
+import net.orcinus.overweightfarming.common.registry.OFObjects;
 
 import java.util.function.Consumer;
 
-public class OFRecipeProvider extends FabricRecipesProvider {
+public class OFRecipeProvider extends FabricRecipeProvider {
     public OFRecipeProvider(FabricDataGenerator dataGenerator) {
         super(dataGenerator);
+    }
+
+    public static Identifier asResource(String path) {
+        return new Identifier(OverweightFarming.MODID, path);
     }
 
     @Override
     protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
         ShapedRecipeJsonBuilder.create(OFObjects.VEGETABLE_COMPOST)
-                .input('X' ,OFObjects.VEGETABLE_PEELS)
+                .input('X', OFObjects.VEGETABLE_PEELS)
                 .pattern("XXX")
                 .pattern("XXX")
                 .pattern("XXX");
@@ -35,14 +39,10 @@ public class OFRecipeProvider extends FabricRecipesProvider {
         ShapelessRecipeJsonBuilder.create(OFObjects.WAXED_SEEDLESS_PEELED_MELON, 1)
                 .input(Items.HONEYCOMB).input(OFObjects.SEEDLESS_PEELED_MELON).group("waxed_peeled_melon");
         ShapedRecipeJsonBuilder.create(OFObjects.OVERWEIGHT_GOLDEN_APPLE)
-                .input('X' ,Items.GOLD_BLOCK)
-                .input('#' ,OFObjects.OVERWEIGHT_APPLE)
+                .input('X', Items.GOLD_BLOCK)
+                .input('#', OFObjects.OVERWEIGHT_APPLE)
                 .pattern("XXX")
                 .pattern("X#X")
                 .pattern("XXX");
-    }
-
-    public static Identifier asResource(String path) {
-        return new Identifier(OverweightFarming.MODID, path);
     }
 }

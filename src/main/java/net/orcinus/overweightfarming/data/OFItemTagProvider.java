@@ -4,8 +4,8 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.Items;
 import net.minecraft.tag.ItemTags;
-import net.orcinus.overweightfarming.registry.OFObjects;
-import net.orcinus.overweightfarming.registry.OFTags;
+import net.orcinus.overweightfarming.common.registry.OFObjects;
+import net.orcinus.overweightfarming.common.registry.OFTags;
 
 public class OFItemTagProvider extends FabricTagProvider.ItemTagProvider {
     public OFItemTagProvider(FabricDataGenerator dataGenerator, BlockTagProvider blockTagProvider) {
