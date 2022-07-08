@@ -1,20 +1,8 @@
 {
   "type": "minecraft:block",
-  "fabric:load_conditions": [
-    {
-      "condition": "fabric:all_mods_loaded",
-      "values": [
-        "bewitchment"
-      ]
-    }
-  ],
-  "functions": [
-    {
-      "function": "minecraft:explosion_decay"
-    }
-  ],
   "pools": [
     {
+      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
@@ -32,13 +20,13 @@
               ],
               "functions": [
                 {
-                  "add": false,
+                  "function": "minecraft:set_count",
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 20.0,
-                    "min": 6.0
+                    "min": 6.0,
+                    "max": 20.0
                   },
-                  "function": "minecraft:set_count"
+                  "add": false
                 }
               ],
               "name": "minecraft:air"
@@ -49,10 +37,10 @@
             }
           ]
         }
-      ],
-      "rolls": 1.0
+      ]
     },
     {
+      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
@@ -67,8 +55,20 @@
           ],
           "name": "minecraft:air"
         }
-      ],
-      "rolls": 1.0
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "bewitchment"
+      ]
     }
   ]
 }

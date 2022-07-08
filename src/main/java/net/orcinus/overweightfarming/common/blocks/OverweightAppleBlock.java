@@ -12,7 +12,6 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.orcinus.overweightfarming.common.blockentities.OverweightAppleBlockEntity;
@@ -20,6 +19,8 @@ import net.orcinus.overweightfarming.common.entities.OverweightAppleFallingBlock
 import net.orcinus.overweightfarming.common.registry.OFBlockEntityTypes;
 import net.orcinus.overweightfarming.common.registry.OFObjects;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Random;
 
 public class OverweightAppleBlock extends CropFullBlock implements LandingBlock, BlockEntityProvider {
     private final boolean isGolden;

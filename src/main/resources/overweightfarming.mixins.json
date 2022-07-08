@@ -8,7 +8,8 @@
     "AnimalEntityMixin",
     "CropBlockMixin",
     "LivingEntityMixin",
-    "TreeFeatureConfigMixin"
+    "TreeFeatureConfigMixin",
+    "compat.WeedsBlockMixin"
   ],
   "client": [
     "ContinuousFallingParticleMixin",
