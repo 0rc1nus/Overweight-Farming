@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
-@Mixin(value = WeedsBlock.class, remap = false)
+@Mixin(value = WeedsBlock.class)
 public class WeedsBlockMixin extends CropBlock {
     protected WeedsBlockMixin(Settings settings) {
         super(settings);

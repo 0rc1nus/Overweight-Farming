@@ -103,6 +103,7 @@ dependencies {
     modImplementation "curse.maven:immersive-weathering-fabric-571035:${project.iw_version}"
     modImplementation "curse.maven:farmers-delight-482834:${project.farmers_delight_version}"
     modImplementation "curse.maven:hedgehogs-fabric-573406:${project.hedgehogs_version}"
+    modImplementation "curse.maven:immersive-weathering-fabric-571035:${project.bm_version}"
 
     //modImplementation "curse.maven:immersive-weathering-fabric-571035:${project.iw_version}"
     /*
