@@ -67,7 +67,7 @@ public class OFObjects {
     public static final Block PEELED_OVERWEIGHT_GINGER = register("peeled_overweight_ginger_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_GINGER)), FabricLoader.getInstance().isModLoaded("snowyspirit"), gen());
     public static final Block POTTED_OVERWEIGHT_GINGER = register("potted_overweight_ginger", new FlowerPotBlock(OVERWEIGHT_GINGER, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
     //BLOCKS
-    public static final Block ALLIUM_BUSH = register("allium_bush", new TallFlowerBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), true, gen());
+    public static final Block ALLIUM_BUSH = register("allium_bush", new TallFlowerBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), true, new Item.Settings().group(ItemGroup.DECORATIONS));
     public static final Block OVERWEIGHT_ONION = register("overweight_onion_block", new OverweightOnionBlock(ALLIUM_BUSH, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), FabricLoader.getInstance().isModLoaded("farmersdelight"), gen());
     public static final Block PEELED_OVERWEIGHT_ONION = register("peeled_overweight_onion_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_ONION)), FabricLoader.getInstance().isModLoaded("farmersdelight"), gen());
     public static final Block POTTED_OVERWEIGHT_ONION = register("potted_overweight_onion", new FlowerPotBlock(OVERWEIGHT_ONION, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());

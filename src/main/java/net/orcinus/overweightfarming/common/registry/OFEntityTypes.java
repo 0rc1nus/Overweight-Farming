@@ -8,7 +8,6 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.orcinus.overweightfarming.OverweightFarming;
-import net.orcinus.overweightfarming.common.entities.DandelionFluffEntity;
 import net.orcinus.overweightfarming.common.entities.OverweightAppleFallingBlockEntity;
 
 import java.util.LinkedHashMap;
@@ -16,13 +15,6 @@ import java.util.Map;
 
 public class OFEntityTypes {
     private static final Map<EntityType<?>, Identifier> ENTITY_TYPES = new LinkedHashMap<>();
-
-    public static final EntityType<DandelionFluffEntity> DANDELION_FLUFF_ENTITY = register("dandelion_fluff", FabricEntityTypeBuilder
-            .<DandelionFluffEntity>create()
-            .spawnGroup(SpawnGroup.MISC)
-            .entityFactory(DandelionFluffEntity::new)
-            .dimensions(EntityType.ARROW.getDimensions())
-            .build());
 
     public static final EntityType<OverweightAppleFallingBlockEntity> OVERWEIGHT_APPLE_FALLING_BLOCK = register("overweight_apple_falling_block", FabricEntityTypeBuilder
             .<OverweightAppleFallingBlockEntity>create()

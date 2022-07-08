@@ -1,5 +1,6 @@
 package net.orcinus.overweightfarming.common.blocks;
 
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -28,7 +29,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldEvents;
 import net.minecraft.world.WorldView;
+import net.orcinus.overweightfarming.common.networking.s2c.S2CFluffPacket;
 import net.orcinus.overweightfarming.common.registry.OFEntityTypes;
+import net.orcinus.overweightfarming.common.registry.OFParticleTypes;
 import net.orcinus.overweightfarming.common.util.TripleBlockHalf;
 import org.jetbrains.annotations.Nullable;
 
@@ -115,12 +118,31 @@ public class OverweightWeedBlock extends CropFullBlock {
                 BlockPos blockPosNormalized = pos.add(new Vec3i(0.5F, 0.5F, 0.5F));
                 double distance = blockPosNormalized.getSquaredDistance(entity.getPos());
                 if (distance < 0.75D) {
+                    summonFluffParticle( world, pos, entity);
                     world.breakBlock(pos, false);
-                    var dandelionEntity = OFEntityTypes.DANDELION_FLUFF_ENTITY.create(world);
-                    //TODO add properties to entity
-                    world.spawnEntity(dandelionEntity);
                 }
             }
+        }
+    }
+
+
+
+    @Override
+    public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
+        world.addParticle(
+                OFParticleTypes.FLUFF,
+                pos.getX() + 0.5 + world.getRandom().nextGaussian() * 5,
+                pos.getY() + 0.5 + world.getRandom().nextGaussian() * 5,
+                pos.getZ() + 0.5 + world.getRandom().nextGaussian() * 5,
+                0f, 0f, 0f);
+        super.onBroken(world, pos, state);
+    }
+
+    private void summonFluffParticle(World world, BlockPos pos, Entity entity){
+        if(world instanceof ServerWorld serverWorld && entity instanceof PlayerEntity player){
+            PlayerLookup.tracking(serverWorld, pos).forEach(trackingPlayer -> {
+                S2CFluffPacket.send(pos, player);
+            });
         }
     }
 

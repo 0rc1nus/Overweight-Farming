@@ -3,7 +3,9 @@ package net.orcinus.overweightfarming.data;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.data.client.*;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.common.blocks.CropFullBlock;
@@ -13,6 +15,7 @@ import net.orcinus.overweightfarming.common.util.TripleBlockHalf;
 
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static net.minecraft.data.client.BlockStateModelGenerator.createSingletonBlockState;
 import static net.minecraft.data.client.TextureMap.getSubId;
@@ -66,11 +69,6 @@ public class OFModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerCubeAllModelTexturePool(OFObjects.VEGETABLE_COMPOST);
         blockStateModelGenerator.registerDoubleBlock(OFObjects.ALLIUM_BUSH, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerSingleton(OFObjects.OVERWEIGHT_BAKED_POTATO, bakedPotatoMap(OFObjects.OVERWEIGHT_BAKED_POTATO), Models.CUBE);
-        registerTripleBlock(blockStateModelGenerator.blockStateCollector, OFObjects.OVERWEIGHT_WEED,
-                getSubId(OFObjects.OVERWEIGHT_WEED, "_flower"),
-                getSubId(OFObjects.OVERWEIGHT_WEED, "_stem"),
-                getSubId(OFObjects.OVERWEIGHT_WEED, "_stem")
-        );
         blockStateModelGenerator.registerSimpleCubeAll(OFObjects.WAXED_SEEDLESS_PEELED_MELON);
         blockStateModelGenerator.registerSimpleCubeAll(OFObjects.WAXED_SEEDED_PEELED_MELON);
         blockStateModelGenerator.registerSimpleCubeAll(OFObjects.WAXED_HALF_SEEDED_PEELED_MELON);
@@ -133,10 +131,5 @@ public class OFModelProvider extends FabricModelProvider {
 
 
         blockStateModelGenerator.blockStateCollector.accept(createSingletonBlockState(potted, identifier));
-    }
-
-    public final void registerTripleBlock(Consumer<BlockStateSupplier> blockStateCollector, Block block, Identifier upperHalfModelId, Identifier middleHalfModelId, Identifier lowerHalfModelId) {
-        var fluffId = getSubId(OFObjects.OVERWEIGHT_WEED, "_fluff");
-        blockStateCollector.accept(VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(TripleBlockHalf.TRIPLE_BLOCK_HALF, OverweightWeedBlock.FLUFF).register(TripleBlockHalf.LOWER, false, BlockStateVariant.create().put(VariantSettings.MODEL, lowerHalfModelId)).register(TripleBlockHalf.MIDDLE, false, BlockStateVariant.create().put(VariantSettings.MODEL, middleHalfModelId)).register(TripleBlockHalf.UPPER, false, BlockStateVariant.create().put(VariantSettings.MODEL, upperHalfModelId)).register(TripleBlockHalf.LOWER, true, BlockStateVariant.create().put(VariantSettings.MODEL, fluffId)).register(TripleBlockHalf.MIDDLE, true, BlockStateVariant.create().put(VariantSettings.MODEL, fluffId)).register(TripleBlockHalf.UPPER, true, BlockStateVariant.create().put(VariantSettings.MODEL, fluffId))));
     }
 }

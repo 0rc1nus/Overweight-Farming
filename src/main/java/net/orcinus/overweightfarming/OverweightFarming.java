@@ -8,6 +8,7 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
@@ -33,6 +34,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import net.minecraft.world.event.GameEvent;
+import net.orcinus.overweightfarming.common.networking.c2s.C2SFluffPacket;
 import net.orcinus.overweightfarming.common.registry.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -76,6 +78,8 @@ public class OverweightFarming implements ModInitializer {
         UseBlockCallback.EVENT.register(this::stripMelon);
         UseBlockCallback.EVENT.register(this::growBloodroot);
         UseEntityCallback.EVENT.register(this::interactPig);
+
+        ServerPlayNetworking.registerGlobalReceiver(C2SFluffPacket.ID, C2SFluffPacket::handle);
     }
 
     private ActionResult interactPig(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult entityHitResult) {

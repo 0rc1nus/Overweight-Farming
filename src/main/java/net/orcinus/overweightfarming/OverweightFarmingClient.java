@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.FallingBlockEntityRenderer;
 import net.orcinus.overweightfarming.client.model.StrawHatModel;
-import net.orcinus.overweightfarming.client.renderer.DandelionEntityRenderer;
 import net.orcinus.overweightfarming.client.renderer.StrawHatRenderer;
 import net.orcinus.overweightfarming.common.registry.OFEntityTypes;
 import net.orcinus.overweightfarming.common.registry.OFObjects;
@@ -50,7 +49,6 @@ public class OverweightFarmingClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), OFObjects.OVERWEIGHT_WEED);
 
         EntityRendererRegistry.register(OFEntityTypes.OVERWEIGHT_APPLE_FALLING_BLOCK, FallingBlockEntityRenderer::new);
-        EntityRendererRegistry.register(OFEntityTypes.DANDELION_FLUFF_ENTITY, DandelionEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(StrawHatModel.LAYER_LOCATION, StrawHatModel::createBodyLayer);
         ArmorRenderer.register(new StrawHatRenderer(null), OFObjects.STRAW_HAT);
     }

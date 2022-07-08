@@ -22,7 +22,7 @@ public class OFWorldGenerators {
             if (config.decorators.stream().anyMatch(decorator -> decorator instanceof ITreeFeatureConfig) || !(config.trunkProvider instanceof SimpleBlockStateProvider)) {
                 return;
             }
-            TreeDecorator decorator = new AppleTreeDecorator(0.0025F, 0.1F);
+            TreeDecorator decorator = new AppleTreeDecorator(0.00001F, 0.05F);
             ((ITreeFeatureConfig) config).OFAddDecorator(decorator);
         }
     }
