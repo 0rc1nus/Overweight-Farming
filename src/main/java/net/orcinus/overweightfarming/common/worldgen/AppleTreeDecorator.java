@@ -31,7 +31,6 @@ public class AppleTreeDecorator extends TreeDecorator {
         this.largeTreeProbability = largeTreeProbability;
     }
 
-
     @Override
     protected TreeDecoratorType<?> getType() {
         return OFWorldGenerators.APPLE;

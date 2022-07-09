@@ -1,5 +1,6 @@
 package net.orcinus.overweightfarming.mixin.compat;
 
+//import com.ordana.immersive_weathering.registry.blocks.WeedsBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
@@ -14,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//@Mixin(value = WeedsBlock.class, remap = false)
+//@Mixin(value = WeedsBlock.class)
 //TODO When IW DOESNT CRASH
 public class WeedsBlockMixin extends CropBlock {
     protected WeedsBlockMixin(Settings settings) {
@@ -36,4 +37,6 @@ public class WeedsBlockMixin extends CropBlock {
     }
 
  */
+
+
 }

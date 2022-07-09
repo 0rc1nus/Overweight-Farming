@@ -6,8 +6,10 @@
   "minVersion": "0.8",
   "mixins": [
     "AnimalEntityMixin",
+    "ConfiguredFeatureUtilMixin",
     "CropBlockMixin",
     "LivingEntityMixin",
+    "TreeDecoratorTypeInvoker",
     "TreeFeatureConfigMixin"
   ],
   "client": [
