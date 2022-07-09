@@ -6,8 +6,10 @@
   "minVersion": "0.8",
   "mixins": [
     "AnimalEntityMixin",
+    "ConfiguredFeaturesMixin",
     "CropBlockMixin",
     "LivingEntityMixin",
+    "TreeDecoratorTypeInvoker",
     "TreeFeatureConfigMixin",
     "compat.WeedsBlockMixin"
   ],
