@@ -1,40 +1,21 @@
 {
   "variants": {
-    "age=0,half=lower,fluff=false": {
+    "half=lower,fluff=false": {
       "model": "overweight_farming:block/overweight_weed_stem"
     },
-    "age=0,half=middle,fluff=false": {
+    "half=middle,fluff=false": {
       "model": "overweight_farming:block/overweight_weed_stem"
     },
-    "age=0,half=upper,fluff=false": {
+    "half=upper,fluff=false": {
       "model": "overweight_farming:block/overweight_weed_flower"
     },
-    "age=0,half=lower,fluff=true": {
+    "half=lower,fluff=true": {
       "model": "overweight_farming:block/overweight_weed_fluff_block"
     },
-    "age=0,half=middle,fluff=true": {
+    "half=middle,fluff=true": {
       "model": "overweight_farming:block/overweight_weed_fluff_block"
     },
-    "age=0,half=upper,fluff=true": {
-      "model": "overweight_farming:block/overweight_weed_fluff_block"
-    },
-
-    "age=1,half=lower,fluff=false": {
-      "model": "overweight_farming:block/overweight_weed_stem"
-    },
-    "age=1,half=middle,fluff=false": {
-      "model": "overweight_farming:block/overweight_weed_stem"
-    },
-    "age=1,half=upper,fluff=false": {
-      "model": "overweight_farming:block/overweight_weed_flower"
-    },
-    "age=1,half=lower,fluff=true": {
-      "model": "overweight_farming:block/overweight_weed_fluff_block"
-    },
-    "age=1,half=middle,fluff=true": {
-      "model": "overweight_farming:block/overweight_weed_fluff_block"
-    },
-    "age=1,half=upper,fluff=true": {
+    "half=upper,fluff=true": {
       "model": "overweight_farming:block/overweight_weed_fluff_block"
     }
   }

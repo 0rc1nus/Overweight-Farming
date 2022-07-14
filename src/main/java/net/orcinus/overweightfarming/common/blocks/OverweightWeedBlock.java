@@ -50,7 +50,7 @@ public class OverweightWeedBlock extends CropFullBlock {
 
     public OverweightWeedBlock(AbstractBlock.Settings settings) {
         super(null, settings);
-        this.setDefaultState((this.stateManager.getDefaultState()).with(HALF, TripleBlockHalf.LOWER).with(FLUFF, false).with(AGE, 1));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(HALF, TripleBlockHalf.LOWER).with(FLUFF, false));
     }
 
     public static BlockState withWaterloggedState(WorldView world, BlockPos pos, BlockState state) {

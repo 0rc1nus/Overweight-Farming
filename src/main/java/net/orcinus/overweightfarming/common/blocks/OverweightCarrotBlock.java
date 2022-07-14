@@ -16,7 +16,7 @@ public class OverweightCarrotBlock extends CropFullBlock {
 
     public OverweightCarrotBlock(Block stemBlock, Settings properties) {
         super(stemBlock, properties);
-        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.NORTH).with(AGE, 1)));
+        this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.NORTH)));
     }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {

@@ -17,15 +17,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 
-public class CropFullBlock extends CropBlock implements Fertilizable {
+public class CropFullBlock extends PlantBlock implements Fertilizable {
     public final Block stemBlock;
-    public static final IntProperty AGE = Properties.AGE_1;
     private static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
 
     public CropFullBlock(Block stemBlock, Settings properties) {
         super(properties);
         this.stemBlock = stemBlock;
-        this.setDefaultState(this.stateManager.getDefaultState().with(this.getAgeProperty(), 0));
+        this.setDefaultState(this.stateManager.getDefaultState());
     }
 
     public Block getStemBlock() {
@@ -72,60 +71,16 @@ public class CropFullBlock extends CropBlock implements Fertilizable {
         return SHAPE;
     }
 
-    @Nullable
-    @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(AGE, 1);
-    }
 
     @Override
     public boolean hasRandomTicks(BlockState state) {
         return false;
     }
 
-    @Override
-    public IntProperty getAgeProperty() {
-        return AGE;
-    }
-
-    @Override
-    public boolean isMature(BlockState state) {
-        return true;
-    }
-
-    @Override
-    protected int getGrowthAmount(World world) {
-        return 0;
-    }
-
-    @Override
-    public void applyGrowth(World world, BlockPos pos, BlockState state) {
-        //NOOP
-    }
-
-    @Override
-    protected int getAge(BlockState state) {
-        return state.get(this.getAgeProperty());
-    }
-
-    @Override
-    public int getMaxAge() {
-        return 1;
-    }
-
-    @Override
-    public BlockState withAge(int age) {
-        return this.getDefaultState().with(this.getAgeProperty(), age);
-    }
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         //NOOP
-    }
-
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(AGE);
     }
 
     public boolean shouldGrowRoots() {
