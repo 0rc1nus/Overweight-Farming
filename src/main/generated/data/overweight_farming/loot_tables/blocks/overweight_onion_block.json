@@ -41,11 +41,11 @@
                   "function": "minecraft:set_count"
                 }
               ],
-              "name": "minecraft:air"
+              "name": "farmersdelight:onion"
             },
             {
               "type": "minecraft:item",
-              "name": "minecraft:air"
+              "name": "overweight_farming:overweight_onion_block"
             }
           ]
         }

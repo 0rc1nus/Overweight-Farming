@@ -1,6 +1,8 @@
 package net.orcinus.overweightfarming.common.registry;
 
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.minecraft.block.entity.BannerPattern;
+import net.minecraft.client.gui.screen.ingame.LoomScreen;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.entry.LootTableEntry;
@@ -10,6 +12,7 @@ import net.orcinus.overweightfarming.OverweightFarming;
 import java.util.Set;
 
 public class OFLootTables {
+
     public static void init() {
         Set<Identifier> villageHouseChestsId = Set.of(
                 LootTables.VILLAGE_PLAINS_CHEST,

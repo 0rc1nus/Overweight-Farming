@@ -2,6 +2,7 @@ package net.orcinus.overweightfarming.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.data.client.*;
@@ -73,6 +74,7 @@ public class OFModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(OFObjects.WAXED_SEEDED_PEELED_MELON);
         blockStateModelGenerator.registerSimpleCubeAll(OFObjects.WAXED_HALF_SEEDED_PEELED_MELON);
 
+
         //PEELED
         blockStateModelGenerator.registerCubeAllModelTexturePool(OFObjects.PEELED_OVERWEIGHT_BEETROOT);
         blockStateModelGenerator.registerSingleton(OFObjects.PEELED_OVERWEIGHT_CARROT, TexturedModel.CUBE_BOTTOM_TOP);
@@ -83,6 +85,7 @@ public class OFModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerCubeAllModelTexturePool(OFObjects.SEEDED_PEELED_MELON);
         blockStateModelGenerator.registerCubeAllModelTexturePool(OFObjects.SEEDLESS_PEELED_MELON);
         blockStateModelGenerator.registerCubeAllModelTexturePool(OFObjects.HALF_SEEDED_PEELED_MELON);
+
 
         //POTS
         registerPot(blockStateModelGenerator, OFObjects.POTTED_OVERWEIGHT_APPLE);

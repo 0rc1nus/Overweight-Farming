@@ -101,9 +101,9 @@ dependencies {
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     //modImplementation "curse.maven:immersive-weathering-fabric-571035:${project.iw_version}"
-    /*
-    modImplementation "curse.maven:farmers-delight-482834:${project.farmers_delight_version}"
 
+    modImplementation "curse.maven:farmers-delight-482834:${project.farmers_delight_version}"
+/*
     modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
     include "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
     modImplementation "com.jamieswhiteshirt:reach-entity-attributes:${project.reach_version}"

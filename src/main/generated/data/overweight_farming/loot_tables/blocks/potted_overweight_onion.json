@@ -26,7 +26,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "overweight_farming:overweight_onion_block"
         }
       ],
       "rolls": 1.0
