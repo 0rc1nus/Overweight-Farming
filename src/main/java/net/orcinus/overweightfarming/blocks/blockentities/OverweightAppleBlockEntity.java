@@ -17,14 +17,16 @@ public class OverweightAppleBlockEntity extends BlockEntity {
 
     public static void tick(Level world, BlockPos pos, BlockState state, OverweightAppleBlockEntity te) {
         boolean flag = world.getRandom().nextInt(20) == 0;
+        boolean gate = true;
         if (flag) {
-            for (int i = 1; i < Integer.MAX_VALUE; i++) {
+            for (int i = 1; i < world.getHeight(); i++) {
                 if (!world.getBlockState(pos.below(i)).isAir()) {
                     break;
                 }
                 for (Player player : world.getEntitiesOfClass(Player.class, new AABB(pos.below(i)))) {
-                    if (player != null) {
+                    if (player != null && gate) {
                         ((OverweightAppleBlock)state.getBlock()).spawnFallingBlock(state, world, pos);
+                        gate = false;
                     }
                 }
             }

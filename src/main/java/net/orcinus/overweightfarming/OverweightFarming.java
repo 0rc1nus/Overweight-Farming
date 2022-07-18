@@ -7,6 +7,7 @@ import net.orcinus.overweightfarming.init.OFBlocks;
 import net.orcinus.overweightfarming.init.OFEntityTypes;
 import net.orcinus.overweightfarming.init.OFItems;
 import net.orcinus.overweightfarming.init.OFParticleTypes;
+import net.orcinus.overweightfarming.init.OFTreeDecoratorTypes;
 import net.orcinus.overweightfarming.init.OFVanillaIntegration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -31,6 +32,7 @@ public class OverweightFarming {
         OFEntityTypes.ENTITY_TYPES.register(modEventBus);
         OFItems.ITEMS.register(modEventBus);
         OFParticleTypes.PARTICLE_TYPES.register(modEventBus);
+        OFTreeDecoratorTypes.TREE_DECORATORS.register(modEventBus);
 
         IEventBus eventBus = MinecraftForge.EVENT_BUS;
         eventBus.register(this);
