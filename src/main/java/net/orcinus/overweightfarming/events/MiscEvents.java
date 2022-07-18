@@ -1,12 +1,5 @@
 package net.orcinus.overweightfarming.events;
 
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.NetherWartBlock;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.orcinus.overweightfarming.OverweightFarming;
-import net.orcinus.overweightfarming.init.OFBlocks;
-import net.orcinus.overweightfarming.init.OFItems;
-import net.orcinus.overweightfarming.util.OverweightGrowthManager;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
@@ -17,6 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -30,17 +24,21 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CocoaBlock;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.orcinus.overweightfarming.OverweightFarming;
+import net.orcinus.overweightfarming.init.OFBlocks;
+import net.orcinus.overweightfarming.init.OFItems;
+import net.orcinus.overweightfarming.util.OverweightGrowthManager;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = OverweightFarming.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -67,10 +65,10 @@ public class MiscEvents {
     @SubscribeEvent
     public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         ItemStack stack = event.getItemStack();
-        Level world = event.getWorld();
+        Level world = event.getLevel();
         BlockPos blockPos = event.getPos();
         BlockState state = world.getBlockState(blockPos);
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         InteractionHand hand = event.getHand();
         if (stack.getItem() instanceof AxeItem) {
             for (Block block : WAX_OFF_BY_BLOCK.get().keySet()) {
@@ -131,7 +129,7 @@ public class MiscEvents {
 
     @SubscribeEvent
     public void onCropsGrow(BlockEvent.CropGrowEvent.Pre event) {
-        LevelAccessor level = event.getWorld();
+        LevelAccessor level = event.getLevel();
         BlockPos blockPos = event.getPos();
         BlockState state = event.getState();
         RandomSource random = level.getRandom();

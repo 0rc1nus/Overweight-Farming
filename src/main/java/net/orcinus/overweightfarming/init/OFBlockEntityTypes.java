@@ -11,7 +11,7 @@ import net.orcinus.overweightfarming.blocks.blockentities.OverweightAppleBlockEn
 @Mod.EventBusSubscriber(modid = OverweightFarming.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class OFBlockEntityTypes {
 
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, OverweightFarming.MODID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, OverweightFarming.MODID);
 
     public static final RegistryObject<BlockEntityType<OverweightAppleBlockEntity>> OVERWEIGHT_APPLE = BLOCK_ENTITY_TYPES.register("overweight_apple", () -> BlockEntityType.Builder.of(OverweightAppleBlockEntity::new, OFBlocks.OVERWEIGHT_APPLE.get(), OFBlocks.OVERWEIGHT_GOLDEN_APPLE.get()).build(null));
 

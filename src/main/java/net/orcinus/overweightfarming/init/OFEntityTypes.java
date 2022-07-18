@@ -13,7 +13,7 @@ import net.orcinus.overweightfarming.entities.OverweightAppleFallingBlockEntity;
 @Mod.EventBusSubscriber(modid = OverweightFarming.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class OFEntityTypes {
 
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, OverweightFarming.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, OverweightFarming.MODID);
 
     public static final RegistryObject<EntityType<OverweightAppleFallingBlockEntity>> OVERWEIGHT_APPLE_FALLING_BLOCK = ENTITY_TYPES.register("overweight_apple_falling_block", () -> EntityType.Builder.<OverweightAppleFallingBlockEntity>of(OverweightAppleFallingBlockEntity::new, MobCategory.MISC).sized(0.98F, 0.98F).clientTrackingRange(10).updateInterval(20).build("overweight_apple_falling_block"));
 

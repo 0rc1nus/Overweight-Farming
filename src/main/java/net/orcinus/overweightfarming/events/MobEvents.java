@@ -19,7 +19,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Pig;
-import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
@@ -33,8 +32,7 @@ import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.block.StemBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -44,8 +42,6 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.orcinus.overweightfarming.OverweightFarming;
-import net.orcinus.overweightfarming.blocks.OverweightAppleBlock;
-import net.orcinus.overweightfarming.init.OFBlocks;
 import net.orcinus.overweightfarming.init.OFItems;
 import net.orcinus.overweightfarming.util.OFItemsForEmeralds;
 import net.orcinus.overweightfarming.util.OverweightGrowthManager;
@@ -71,7 +67,7 @@ public class MobEvents {
     @SubscribeEvent
     public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
         Entity entity = event.getTarget();
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         InteractionHand hand = event.getHand();
         ItemStack stack = player.getItemInHand(hand);
         if (entity instanceof Pig pig) {
@@ -102,15 +98,15 @@ public class MobEvents {
     }
 
     @SubscribeEvent
-    public void onEntityJoinWorld(EntityJoinWorldEvent event) {
+    public void onEntityJoinWorld(EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof Pig pig) {
             pig.goalSelector.addGoal(4, new TemptGoal(pig, 1.2D, Ingredient.of(OFItems.VEGETABLE_PEELS.get()), false));
         }
     }
 
     @SubscribeEvent
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         Level world = entity.level;
         if (!world.isClientSide()) {
             if (entity.getItemBySlot(EquipmentSlot.HEAD).is(OFItems.STRAW_HAT.get())) {
