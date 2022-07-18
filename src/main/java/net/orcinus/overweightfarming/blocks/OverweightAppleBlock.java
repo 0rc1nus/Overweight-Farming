@@ -5,10 +5,13 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.Fallable;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -20,6 +23,7 @@ import net.minecraft.world.level.material.Material;
 import net.orcinus.overweightfarming.blocks.blockentities.OverweightAppleBlockEntity;
 import net.orcinus.overweightfarming.entities.OverweightAppleFallingBlockEntity;
 import net.orcinus.overweightfarming.init.OFBlockEntityTypes;
+import net.orcinus.overweightfarming.init.OFBlocks;
 import org.jetbrains.annotations.Nullable;
 
 public class OverweightAppleBlock extends CropFullBlock implements Fallable, EntityBlock {
@@ -36,11 +40,19 @@ public class OverweightAppleBlock extends CropFullBlock implements Fallable, Ent
     }
 
     @Override
+    public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity livingEntity, ItemStack stack) {
+        super.setPlacedBy(world, pos, state, livingEntity, stack);
+        if (world.isStateAtPosition(pos.above(), BlockStateBase::isAir)) {
+            world.setBlock(pos.above(), this.stemBlock.defaultBlockState(), 3);
+        }
+    }
+
+    @Override
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource p_221127_) {
         BlockState aboveState = world.getBlockState(pos.above());
         BlockState belowState = world.getBlockState(pos.below());
-        if (!(aboveState.is(BlockTags.LEAVES) || aboveState.is(BlockTags.LOGS)) && isFree(belowState) && pos.getY() >= world.getMinBuildHeight()) {
-            spawnFallingBlock(state, world, pos);
+        if (!(aboveState.is(BlockTags.LEAVES) || aboveState.is(BlockTags.LOGS) || aboveState.is(OFBlocks.OVERWEIGHT_APPLE_STEM.get()) || aboveState.is(OFBlocks.OVERWEIGHT_GOLDEN_APPLE_STEM.get())) && isFree(belowState) && pos.getY() >= world.getMinBuildHeight()) {
+            this.spawnFallingBlock(state, world, pos);
         }
     }
 
@@ -64,6 +76,11 @@ public class OverweightAppleBlock extends CropFullBlock implements Fallable, Ent
     public BlockState updateShape(BlockState state, Direction direction, BlockState p_60543_, LevelAccessor world, BlockPos pos, BlockPos p_60546_) {
         world.scheduleTick(pos, this, 2);
         return super.updateShape(state, direction, p_60543_, world, pos, p_60546_);
+    }
+
+    @Override
+    public boolean shouldGrowRoots() {
+        return false;
     }
 
     @Nullable
