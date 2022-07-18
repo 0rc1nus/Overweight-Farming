@@ -15,7 +15,7 @@ public class OFVanillaIntegration {
         registerCompostable(1.0F, OFBlocks.OVERWEIGHT_ONION.get().asItem());
         registerCompostable(1.0F, OFBlocks.OVERWEIGHT_CABBAGE.get().asItem());
         registerCompostable(1.0F, OFBlocks.OVERWEIGHT_APPLE.get().asItem());
-        registerCompostable(2.0F, OFBlocks.OVERWEIGHT_GOLDEN_APPLE.get().asItem());
+        registerCompostable(1.0F, OFBlocks.OVERWEIGHT_GOLDEN_APPLE.get().asItem());
         registerCompostable(0.65F, OFBlocks.SEEDED_PEELED_MELON.get().asItem());
         registerCompostable(0.65F, OFBlocks.HALF_SEEDED_PEELED_MELON.get().asItem());
         registerCompostable(0.65F, OFBlocks.SEEDLESS_PEELED_MELON.get().asItem());
