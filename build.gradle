@@ -84,6 +84,10 @@ repositories {
 
      */
     maven {
+        name = "cloth config"
+        url = "https://maven.shedaniel.me/"
+    }
+    maven {
         name = "Mod Menu"
         url =  "https://maven.terraformersmc.com/releases"
     }
@@ -103,6 +107,11 @@ dependencies {
     modImplementation "curse.maven:farmers-delight-482834:${project.farmers_delight_version}"
     modImplementation "curse.maven:hedgehogs-fabric-573406:${project.hedgehogs_version}"
     modImplementation "curse.maven:immersive-weathering-fabric-571035:${project.bm_version}"
+
+
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
 
     //modImplementation "curse.maven:immersive-weathering-fabric-571035:${project.iw_version}"
     /*
