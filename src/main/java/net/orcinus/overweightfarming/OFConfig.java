@@ -7,10 +7,17 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 @Config(name = OverweightFarming.MODID)
 public class OFConfig implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject
+    public World world = new World();
+
+    @ConfigEntry.Gui.CollapsibleObject
     public Crops crops = new Crops();
 
     @ConfigEntry.Gui.CollapsibleObject
     public CompatCrops compatCrops = new CompatCrops();
+
+    public static class World {
+        public final int overweightAppleWeight = 100;
+    }
 
     public static class Crops {
         public final boolean allowOverweightPotato = true;
