@@ -15,7 +15,7 @@ public class OFConfig implements ConfigData {
     public World world = new World();
 
     public static class World{
-        public final int overweightAppleWeight = 100;
+        public final int overweightApplePercent = 100;
     }
 
     public static class Crops {
