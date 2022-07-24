@@ -3,6 +3,7 @@ package net.orcinus.overweightfarming.mixin;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.*;
+import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.common.worldgen.AppleTreeDecorator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,7 +17,9 @@ public class ConfiguredFeaturesMixin {
     @Inject(method = "register(Ljava/lang/String;Lnet/minecraft/world/gen/feature/Feature;Lnet/minecraft/world/gen/feature/FeatureConfig;)Lnet/minecraft/util/registry/RegistryEntry;", at = @At("HEAD"))
     private static <FC extends FeatureConfig, F extends Feature<FC>> void register(String id, F feature, FC featureConfig, CallbackInfoReturnable<RegistryEntry<ConfiguredFeature<FC, ?>>> cir) {
         if (featureConfig instanceof TreeFeatureConfig) {
-            ((TreeFeatureConfig) featureConfig).decorators.add(new AppleTreeDecorator( 0.00001f, 0.05f));
+            ((TreeFeatureConfig) featureConfig).decorators.add(
+                    new AppleTreeDecorator( 0.000001f * (OverweightFarming.config.world.overweightAppleWeight), 0.025f * (OverweightFarming.config.world.overweightAppleWeight))
+            );
         }
     }
 }

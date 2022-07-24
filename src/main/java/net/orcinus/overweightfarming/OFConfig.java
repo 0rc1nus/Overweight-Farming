@@ -11,6 +11,12 @@ public class OFConfig implements ConfigData {
 
     @ConfigEntry.Gui.CollapsibleObject
     public CompatCrops compatCrops = new CompatCrops();
+    @ConfigEntry.Gui.CollapsibleObject
+    public World world = new World();
+
+    public static class World{
+        public final int overweightAppleWeight = 100;
+    }
 
     public static class Crops {
         public final boolean allowOverweightPotato = true;
