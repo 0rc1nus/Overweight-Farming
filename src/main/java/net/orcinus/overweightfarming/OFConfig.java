@@ -1,39 +1,26 @@
 package net.orcinus.overweightfarming;
 
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
-@Config(name = OverweightFarming.MODID)
-public class OFConfig implements ConfigData {
-    @ConfigEntry.Gui.CollapsibleObject
-    public World world = new World();
+import eu.midnightdust.lib.config.MidnightConfig;
 
-    @ConfigEntry.Gui.CollapsibleObject
-    public Crops crops = new Crops();
+public class OFConfig extends MidnightConfig {
 
-    @ConfigEntry.Gui.CollapsibleObject
-    public CompatCrops compatCrops = new CompatCrops();
+    @Entry public static final int overweightApplePercent = 100;
 
-    public static class World {
-        public final int overweightApplePercent = 100;
-    }
 
-    public static class Crops {
-        public final boolean allowOverweightPotato = true;
-        public final boolean allowOverweightCarrot = true;
-        public final boolean allowOverweightCocoa = true;
-        public final boolean allowOverweightBeetroot = true;
-        public final boolean allowOverweightNetherWart = true;
-    }
+    @Entry public static final boolean allowOverweightPotato = true;
+    @Entry public static final boolean allowOverweightCarrot = true;
+    @Entry public static final boolean allowOverweightCocoa = true;
+    @Entry public static final boolean allowOverweightBeetroot = true;
+    @Entry public static final boolean allowOverweightNetherWart = true;
 
-    public static class CompatCrops {
-        public final boolean allowOverweightCabbage = true;
-        public final boolean allowOverweightOnion = true;
-        public final boolean allowOverweightMandrake = true;
-        public final boolean allowOverweightGarlic = true;
-        public final boolean allowOverweightBloodroot = true;
-        public final boolean allowOverweightWeeds = true;
-        public final boolean allowOverweightKiwi = true;
-    }
+
+    @Entry public static final boolean allowOverweightCabbage = true;
+    @Entry public static final boolean allowOverweightOnion = true;
+    @Entry public static final boolean allowOverweightMandrake = true;
+    @Entry public static final boolean allowOverweightGarlic = true;
+    @Entry public static final boolean allowOverweightBloodroot = true;
+    @Entry public static final boolean allowOverweightWeeds = true;
+    @Entry public static final boolean allowOverweightKiwi = true;
+
 }

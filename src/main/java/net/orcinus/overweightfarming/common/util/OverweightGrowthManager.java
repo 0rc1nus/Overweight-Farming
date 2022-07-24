@@ -14,6 +14,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.util.DripstoneHelper;
+import net.orcinus.overweightfarming.OFConfig;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.common.blocks.CropFullBlock;
 import net.orcinus.overweightfarming.common.blocks.OverweightCarrotBlock;
@@ -27,18 +28,18 @@ public record OverweightGrowthManager(Random random) {
 
     public Map<Block, Pair<Pair<Boolean, OverweightType>, Block>> getOverweightMap() {
         return Util.make(Maps.newHashMap(), map -> {
-            map.put(Blocks.CARROTS, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightCarrot, OverweightType.SPROUT), OFObjects.OVERWEIGHT_CARROT));
-            map.put(Blocks.POTATOES, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightPotato, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_POTATO));
-            map.put(Blocks.BEETROOTS, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightBeetroot, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_BEETROOT));
-            map.put(Blocks.COCOA, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightCocoa, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_COCOA));
-            map.put(Blocks.NETHER_WART, Pair.of(Pair.of(OverweightFarming.config.crops.allowOverweightNetherWart, OverweightType.INVERTED), OFObjects.OVERWEIGHT_NETHER_WART));
-            map.put(getCompatBlock("farmersdelight", "cabbages"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightCabbage, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_CABBAGE));
-            map.put(getCompatBlock("farmersdelight", "onions"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightOnion, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_ONION));
-            map.put(getCompatBlock("bewitchment", "mandrake"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightMandrake, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_MANDRAKE));
-            map.put(getCompatBlock("bewitchment", "garlic"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightGarlic, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_GARLIC));
-            map.put(getCompatBlock("bwplus", "bloodroot"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightBloodroot, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_BLOODROOT));
-            map.put(getCompatBlock("immersive_weathering", "weeds"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightWeeds, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_WEED));
-            map.put(getCompatBlock("hedgehog", "kiwi_vines"), Pair.of(Pair.of(OverweightFarming.config.compatCrops.allowOverweightKiwi, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_KIWI));
+            map.put(Blocks.CARROTS, Pair.of(Pair.of(OFConfig.allowOverweightCarrot, OverweightType.SPROUT), OFObjects.OVERWEIGHT_CARROT));
+            map.put(Blocks.POTATOES, Pair.of(Pair.of(OFConfig.allowOverweightPotato, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_POTATO));
+            map.put(Blocks.BEETROOTS, Pair.of(Pair.of(OFConfig.allowOverweightBeetroot, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_BEETROOT));
+            map.put(Blocks.COCOA, Pair.of(Pair.of(OFConfig.allowOverweightCocoa, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_COCOA));
+            map.put(Blocks.NETHER_WART, Pair.of(Pair.of(OFConfig.allowOverweightNetherWart, OverweightType.INVERTED), OFObjects.OVERWEIGHT_NETHER_WART));
+            map.put(getCompatBlock("farmersdelight", "cabbages"), Pair.of(Pair.of(OFConfig.allowOverweightCabbage, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_CABBAGE));
+            map.put(getCompatBlock("farmersdelight", "onions"), Pair.of(Pair.of(OFConfig.allowOverweightOnion, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_ONION));
+            map.put(getCompatBlock("bewitchment", "mandrake"), Pair.of(Pair.of(OFConfig.allowOverweightMandrake, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_MANDRAKE));
+            map.put(getCompatBlock("bewitchment", "garlic"), Pair.of(Pair.of(OFConfig.allowOverweightGarlic, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_GARLIC));
+            map.put(getCompatBlock("bwplus", "bloodroot"), Pair.of(Pair.of(OFConfig.allowOverweightBloodroot, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_BLOODROOT));
+            map.put(getCompatBlock("immersive_weathering", "weeds"), Pair.of(Pair.of(OFConfig.allowOverweightWeeds, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_WEED));
+            map.put(getCompatBlock("hedgehog", "kiwi_vines"), Pair.of(Pair.of(OFConfig.allowOverweightKiwi, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_KIWI));
 
 
         });

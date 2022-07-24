@@ -19,7 +19,7 @@ public class ConfiguredFeatureUtilMixin {
     private static <FC extends FeatureConfig, F extends Feature<FC>> void register(String id, F feature, FC featureConfig, CallbackInfoReturnable<RegistryEntry<ConfiguredFeature<FC, ?>>> cir) {
         if (featureConfig instanceof TreeFeatureConfig) {
             ((TreeFeatureConfig) featureConfig).decorators.add(
-                    new AppleTreeDecorator( 0.000001f * (float)(OverweightFarming.config.world.overweightApplePercent / 100), 0.025f * (float)(OverweightFarming.config.world.overweightApplePercent / 100))
+                    new AppleTreeDecorator( 0.000001f * (float)(OFConfig.overweightApplePercent / 100), 0.025f * (float)(OFConfig.overweightApplePercent / 100))
             );
         }
     }

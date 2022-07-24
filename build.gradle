@@ -87,6 +87,11 @@ repositories {
         name = "Mod Menu"
         url =  "https://maven.terraformersmc.com/releases"
     }
+
+    maven {
+        name "modrinth"
+        url "https://api.modrinth.com/maven"
+    }
 }
 
 dependencies {
@@ -94,14 +99,11 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
 
-    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-
+    modImplementation "maven.modrinth:midnightlib:${midnightlib_version}"
+    include "maven.modrinth:midnightlib:${midnightlib_version}"
     //modImplementation "curse.maven:immersive-weathering-fabric-571035:${project.iw_version}"
-
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     modImplementation "curse.maven:farmers-delight-482834:${project.farmers_delight_version}"
 /*
     modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"

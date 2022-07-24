@@ -3,8 +3,7 @@ package net.orcinus.overweightfarming;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
+import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
@@ -61,13 +60,11 @@ public class OverweightFarming implements ModInitializer {
             .put(Blocks.MELON, OFObjects.SEEDED_PEELED_MELON)
             .build());
     public static final Supplier<BiMap<Block, Block>> UNPEELABLES = Suppliers.memoize(() -> PEELABLES.get().inverse());
-    public static OFConfig config;
+
 
     @Override
     public void onInitialize() {
-        AutoConfig.register(OFConfig.class, GsonConfigSerializer::new);
-        config = AutoConfig.getConfigHolder(OFConfig.class).getConfig();
-
+        MidnightConfig.init(MODID, OFConfig.class);
         OFObjects.init();
         OFEntityTypes.init();
         OFBlockEntityTypes.init();
