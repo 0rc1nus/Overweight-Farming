@@ -38,6 +38,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             arg "-mixin.config=overweightfarming.mixins.json"
+            args "-mixin.config=galenacapes.forge.mixins.json"
 
             mods {
                 overweightfarming {
