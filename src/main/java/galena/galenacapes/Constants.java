@@ -31,12 +31,6 @@ public class Constants {
     public static final List<String> OFPatreons = List.of( // Overweight Farming Cape
 
     );
-    public static final List<String> GPatreonsBlue = List.of( // Blue Galosphere Cape
-
-    );
-    public static final List<String> GPatreonsYellow = List.of( // Yellow Galosphere Cape
-
-    );
     public static final List<String> CPatreons = List.of( // Cooperative Cape
             "Axeceros"
     );
