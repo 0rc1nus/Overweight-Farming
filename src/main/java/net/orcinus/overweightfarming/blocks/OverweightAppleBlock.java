@@ -40,14 +40,6 @@ public class OverweightAppleBlock extends CropFullBlock implements Fallable, Ent
     }
 
     @Override
-    public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity livingEntity, ItemStack stack) {
-        super.setPlacedBy(world, pos, state, livingEntity, stack);
-        if (world.isStateAtPosition(pos.above(), BlockStateBase::isAir)) {
-            world.setBlock(pos.above(), this.stemBlock.defaultBlockState(), 3);
-        }
-    }
-
-    @Override
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource p_221127_) {
         BlockState aboveState = world.getBlockState(pos.above());
         BlockState belowState = world.getBlockState(pos.below());
@@ -62,20 +54,9 @@ public class OverweightAppleBlock extends CropFullBlock implements Fallable, Ent
         world.addFreshEntity(fallingblockentity);
     }
 
-    @Override
-    public void onBrokenAfterFall(Level world, BlockPos pos, FallingBlockEntity fallingBlock) {
-        Fallable.super.onBrokenAfterFall(world, pos, fallingBlock);
-    }
-
     public static boolean isFree(BlockState state) {
         Material material = state.getMaterial();
         return state.isAir() || state.is(BlockTags.FIRE) || material.isLiquid() || material.isReplaceable();
-    }
-
-    @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState p_60543_, LevelAccessor world, BlockPos pos, BlockPos p_60546_) {
-        world.scheduleTick(pos, this, 2);
-        return super.updateShape(state, direction, p_60543_, world, pos, p_60546_);
     }
 
     @Override

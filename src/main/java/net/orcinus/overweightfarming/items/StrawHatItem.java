@@ -1,5 +1,7 @@
 package net.orcinus.overweightfarming.items;
 
+import com.google.common.collect.Lists;
+import net.minecraft.Util;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -18,6 +20,7 @@ import net.orcinus.overweightfarming.client.models.StrawHatModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.LinkedList;
 import java.util.function.Consumer;
 
 public class StrawHatItem extends ArmorItem {
@@ -26,6 +29,26 @@ public class StrawHatItem extends ArmorItem {
     private static final ResourceLocation TRANS_TEXTURE = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/trans_rights.png");
     private static final ResourceLocation STRAW_TEXTURE = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat_straw.png");
     private static final ResourceLocation TEXTURE_420 = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/420.png");
+    public static final LinkedList<String> LISTS = Util.make(Lists.newLinkedList(), list -> {
+        list.add("accessible_knowledge");
+        list.add("amogus");
+        list.add("atroxic");
+        list.add("birb");
+        list.add("black_hat");
+        list.add("convenient_cauldron");
+        list.add("delightful");
+        list.add("doset");
+        list.add("electrum_hat");
+        list.add("frog_tongue");
+        list.add("froggy_straw_hat");
+        list.add("lead_hat");
+        list.add("leadly_hat");
+        list.add("pebble_hat");
+        list.add("pirates");
+        list.add("potat");
+        list.add("silver_hat");
+        list.add("there_is_a_frog_on_your_head_yknow");
+    });
 
     public StrawHatItem(EquipmentSlot slot, Properties properties) {
         super(MATERIAL, slot, properties);
@@ -34,6 +57,11 @@ public class StrawHatItem extends ArmorItem {
     @Nullable
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+        for (String id : LISTS) {
+            String namingContent = id.replace('_', ' ');
+            if (!getContents(stack).equals(namingContent)) continue;
+            return getContents(stack).equals(namingContent) ? new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/" + id + ".png").toString() : TEXTURE.toString();
+        }
         return is420(stack) ? TEXTURE_420.toString() : isStraw(stack) ? STRAW_TEXTURE.toString() : isTrans(stack) ? TRANS_TEXTURE.toString() : TEXTURE.toString();
     }
 

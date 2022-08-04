@@ -20,9 +20,7 @@ public class OverweightAppleBlockEntity extends BlockEntity {
         boolean gate = true;
         if (flag) {
             for (int i = 1; i < world.getHeight(); i++) {
-                if (!world.getBlockState(pos.below(i)).isAir()) {
-                    break;
-                }
+                if (!world.getBlockState(pos.below(i)).isAir()) { break; }
                 for (Player player : world.getEntitiesOfClass(Player.class, new AABB(pos.below(i)))) {
                     if (player != null && gate) {
                         ((OverweightAppleBlock)state.getBlock()).spawnFallingBlock(state, world, pos);
