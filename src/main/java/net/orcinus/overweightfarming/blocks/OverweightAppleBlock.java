@@ -40,6 +40,12 @@ public class OverweightAppleBlock extends CropFullBlock implements Fallable, Ent
     }
 
     @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState p_51034_, LevelAccessor world, BlockPos blockPos, BlockPos p_51037_) {
+        world.scheduleTick(blockPos, this, 2);
+        return super.updateShape(state, direction, p_51034_, world, blockPos, p_51037_);
+    }
+
+    @Override
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource p_221127_) {
         BlockState aboveState = world.getBlockState(pos.above());
         BlockState belowState = world.getBlockState(pos.below());
