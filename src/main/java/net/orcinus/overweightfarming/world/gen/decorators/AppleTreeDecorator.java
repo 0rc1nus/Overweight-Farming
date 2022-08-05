@@ -43,10 +43,7 @@ public class AppleTreeDecorator extends TreeDecorator {
                 if (!list3.isEmpty()) {
                     Collections.shuffle(list3);
                     Optional<BlockPos> optional = list3.stream().findFirst();
-                    if (optional.isPresent()) {
-                        consumer.accept(optional.get().below(), OFBlocks.OVERWEIGHT_APPLE_STEM.get().defaultBlockState());
-                        consumer.accept(optional.get().below().below(), OFBlocks.OVERWEIGHT_APPLE.get().defaultBlockState());
-                    }
+                    optional.ifPresent(blockPos -> consumer.accept(blockPos.below(), OFBlocks.OVERWEIGHT_APPLE.get().defaultBlockState()));
                 }
             }
         }

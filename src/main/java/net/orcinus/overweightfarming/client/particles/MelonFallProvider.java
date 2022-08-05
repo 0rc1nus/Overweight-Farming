@@ -1,5 +1,7 @@
 package net.orcinus.overweightfarming.client.particles;
 
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.orcinus.overweightfarming.init.OFParticleTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.DripParticle;
@@ -9,6 +11,7 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.level.material.Fluids;
 
+@OnlyIn(Dist.CLIENT)
 public class MelonFallProvider implements ParticleProvider<SimpleParticleType> {
     protected final SpriteSet sprite;
 

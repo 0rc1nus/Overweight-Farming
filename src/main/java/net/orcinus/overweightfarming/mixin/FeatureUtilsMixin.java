@@ -18,7 +18,7 @@ public class FeatureUtilsMixin {
     @Inject(at = @At("HEAD"), method = "register(Ljava/lang/String;Lnet/minecraft/world/level/levelgen/feature/Feature;Lnet/minecraft/world/level/levelgen/feature/configurations/FeatureConfiguration;)Lnet/minecraft/core/Holder;")
     private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(String id, F feature, FC featureConfig, CallbackInfoReturnable<Holder<ConfiguredFeature<FC, ?>>> cir) {
         if (featureConfig instanceof TreeConfiguration treeConfiguration) {
-            treeConfiguration.decorators.add(new AppleTreeDecorator( 0.00001f, 0.05f));
+            treeConfiguration.decorators.add(new AppleTreeDecorator(1.0E-6F, 0.05f));
         }
     }
 

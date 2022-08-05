@@ -118,7 +118,9 @@ public record OverweightGrowthManager(Random random) {
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY(), blockPos.getZ() + z);
-                if (world.getBlockState(pos).is(OFBlockTags.OVERWEIGHT_OBSTACLES)) {
+                BlockState state = world.getBlockState(pos);
+                if (!state.is(OFBlockTags.OVERWEIGHT_OBSTACLES)) continue;
+                if (state.is(OFBlockTags.OVERWEIGHT_OBSTACLES)) {
                     flag = false;
                 }
             }

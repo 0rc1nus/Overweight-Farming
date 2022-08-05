@@ -4,9 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.FallingBlockEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -40,11 +37,9 @@ public class OverweightAppleBlock extends CropFullBlock implements Fallable, Ent
     }
 
     @Override
-    public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity livingEntity, ItemStack stack) {
-        super.setPlacedBy(world, pos, state, livingEntity, stack);
-        if (world.isStateAtPosition(pos.above(), BlockStateBase::isAir)) {
-            world.setBlock(pos.above(), this.stemBlock.defaultBlockState(), 3);
-        }
+    public BlockState updateShape(BlockState state, Direction direction, BlockState p_51034_, LevelAccessor world, BlockPos blockPos, BlockPos p_51037_) {
+        world.scheduleTick(blockPos, this, 2);
+        return super.updateShape(state, direction, p_51034_, world, blockPos, p_51037_);
     }
 
     @Override
@@ -62,20 +57,9 @@ public class OverweightAppleBlock extends CropFullBlock implements Fallable, Ent
         world.addFreshEntity(fallingblockentity);
     }
 
-    @Override
-    public void onBrokenAfterFall(Level world, BlockPos pos, FallingBlockEntity fallingBlock) {
-        Fallable.super.onBrokenAfterFall(world, pos, fallingBlock);
-    }
-
     public static boolean isFree(BlockState state) {
         Material material = state.getMaterial();
         return state.isAir() || state.is(BlockTags.FIRE) || material.isLiquid() || material.isReplaceable();
-    }
-
-    @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState p_60543_, LevelAccessor world, BlockPos pos, BlockPos p_60546_) {
-        world.scheduleTick(pos, this, 2);
-        return super.updateShape(state, direction, p_60543_, world, pos, p_60546_);
     }
 
     @Override
