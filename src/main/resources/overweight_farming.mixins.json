@@ -3,7 +3,7 @@
   "package": "net.orcinus.overweightfarming.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
-  "refmap": "overweightfarming.refmap.json",
+  "refmap": "overweight_farming.refmap.json",
   "mixins": [
     "FeatureUtilsMixin",
     "TreeConfigurationBuilderMixin"

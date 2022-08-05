@@ -17,20 +17,20 @@ import java.util.function.Predicate;
 public class OverweightAppleFallingBlockEntity extends FallingBlockEntity {
     private boolean isGolden;
 
-    public OverweightAppleFallingBlockEntity(EntityType<? extends OverweightAppleFallingBlockEntity> p_31950_, Level p_31951_) {
-        super(p_31950_, p_31951_);
+    public OverweightAppleFallingBlockEntity(EntityType<? extends OverweightAppleFallingBlockEntity> type, Level world) {
+        super(type, world);
     }
 
-    public OverweightAppleFallingBlockEntity(boolean isGolden, Level p_31953_, double p_31954_, double p_31955_, double p_31956_, BlockState p_31957_) {
-        this(OFEntityTypes.OVERWEIGHT_APPLE_FALLING_BLOCK.get(), p_31953_);
+    public OverweightAppleFallingBlockEntity(boolean isGolden, Level world, double x, double y, double z, BlockState blockState) {
+        this(OFEntityTypes.OVERWEIGHT_APPLE_FALLING_BLOCK.get(), world);
         this.isGolden = isGolden;
-        this.blockState = p_31957_;
+        this.blockState = blockState;
         this.blocksBuilding = true;
-        this.setPos(p_31954_, p_31955_, p_31956_);
+        this.setPos(x, y, z);
         this.setDeltaMovement(Vec3.ZERO);
-        this.xo = p_31954_;
-        this.yo = p_31955_;
-        this.zo = p_31956_;
+        this.xo = x;
+        this.yo = y;
+        this.zo = z;
         this.cancelDrop = false;
         this.dropItem = true;
         this.setStartPos(this.blockPosition());

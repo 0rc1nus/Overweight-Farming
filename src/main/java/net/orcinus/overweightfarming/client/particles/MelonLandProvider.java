@@ -7,7 +7,10 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class MelonLandProvider implements ParticleProvider<SimpleParticleType> {
     protected final SpriteSet sprite;
 

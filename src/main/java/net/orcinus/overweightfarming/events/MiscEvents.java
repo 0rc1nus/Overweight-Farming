@@ -5,6 +5,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CocoaBlock;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.NetherWartBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -35,6 +37,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.orcinus.overweightfarming.OverweightFarming;
+import net.orcinus.overweightfarming.blocks.OverweightCarrotBlock;
 import net.orcinus.overweightfarming.init.OFBlocks;
 import net.orcinus.overweightfarming.init.OFItems;
 import net.orcinus.overweightfarming.util.OverweightGrowthManager;
@@ -120,7 +123,8 @@ public class MiscEvents {
                     }
                     if (!player.getAbilities().instabuild) stack.shrink(1);
                     world.playSound(null, blockPos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
-                    world.setBlockAndUpdate(blockPos, UNPEELABLES.get().get(block).defaultBlockState());
+                    BlockState blockState = UNPEELABLES.get().get(block).defaultBlockState();
+                    world.setBlockAndUpdate(blockPos, blockState);
                     event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide));
                 }
             }
