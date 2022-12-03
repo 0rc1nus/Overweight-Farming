@@ -19,7 +19,7 @@ mixin {
     add sourceSets.main, "overweight_farming.refmap.json"
 }
 
-group = 'com'
+group = 'net.orcinus.overweight_farming'
 version = "${project.minecraft_version}-${project.mod_version}-forge"
 
 java {

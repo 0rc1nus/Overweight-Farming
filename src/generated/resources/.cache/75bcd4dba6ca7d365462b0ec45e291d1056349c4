@@ -1,0 +1,7 @@
+// 1.19	2022-12-03T20:38:54.6884354	Tags for minecraft:block
+1b66bf6a1dd004aedf34aaa926005d87dad9e15d data/minecraft/tags/blocks/mineable/axe.json
+a270fe2de08b3a4668ab8907b9fb4472637c7304 data/minecraft/tags/blocks/mineable/hoe.json
+a386cc504ee7f8393aa5efd9d1eae1986573e223 data/minecraft/tags/blocks/replaceable_plants.json
+a386cc504ee7f8393aa5efd9d1eae1986573e223 data/minecraft/tags/blocks/tall_flowers.json
+ba6ef28da1fcd146a5a73f41f83db71fb06d65f0 data/overweight_farming/tags/blocks/overweight_apple_leaves.json
+13222f512db653b7d19138237793949c121e1710 data/overweight_farming/tags/blocks/overweight_obstacles.json
