@@ -1,7 +1,6 @@
 package net.orcinus.overweightfarming.data;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,6 +19,7 @@ public class OFDataGenerator {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         dataGenerator.addProvider(event.includeServer(), new OFBlockTagsProvider(dataGenerator, existingFileHelper));
         dataGenerator.addProvider(event.includeServer(), new OFItemTagsProvider(dataGenerator, existingFileHelper));
+        dataGenerator.addProvider(event.includeServer(), new OFLootTableProvider(dataGenerator));
     }
 
 }
