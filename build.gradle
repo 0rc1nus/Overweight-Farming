@@ -94,6 +94,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:hedgehogs-561115:3989959")
     runtimeOnly fg.deobf("curse.maven:snowy-spirit-566142:4123441")
     runtimeOnly fg.deobf("curse.maven:selene-499980:4096609")
+    runtimeOnly fg.deobf("curse.maven:jei-238222:4128326")
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }
 
