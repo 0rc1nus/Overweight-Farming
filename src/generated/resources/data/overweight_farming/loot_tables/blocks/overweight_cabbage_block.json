@@ -73,7 +73,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:air"
+          "name": "farmersdelight:cabbage_seeds"
         }
       ],
       "rolls": 1.0

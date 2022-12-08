@@ -37,7 +37,7 @@ public class OFBlockLootTables extends BlockLoot {
         this.simpleOverweightCropDrop(OFBlocks.OVERWEIGHT_APPLE.get(), Items.APPLE);
         this.simpleOverweightCropDrop(OFBlocks.OVERWEIGHT_BAKED_POTATO.get(), Items.BAKED_POTATO);
         this.simpleOverweightSeededCropDrop(OFBlocks.OVERWEIGHT_BEETROOT.get(), Items.BEETROOT, Items.BEETROOT_SEEDS);
-        this.simpleOverweightSeededCropDrop(OFBlocks.OVERWEIGHT_CABBAGE.get(), Objects.requireNonNull(this.getCompatItem("farmersdelight", "cabbage")), Objects.requireNonNull(this.getCompatItem("farmersdelight", "beetroot_seeds")));
+        this.simpleOverweightSeededCropDrop(OFBlocks.OVERWEIGHT_CABBAGE.get(), Objects.requireNonNull(this.getCompatItem("farmersdelight", "cabbage")), Objects.requireNonNull(this.getCompatItem("farmersdelight", "cabbage_seeds")));
         this.simpleOverweightCropDrop(OFBlocks.OVERWEIGHT_CARROT.get(), Items.CARROT);
         this.simpleOverweightCropDrop(OFBlocks.OVERWEIGHT_COCOA.get(), Items.COCOA_BEANS);
         this.simpleOverweightCropDrop(OFBlocks.OVERWEIGHT_GINGER.get(), this.getCompatItem("snowyspirit", "ginger"));
