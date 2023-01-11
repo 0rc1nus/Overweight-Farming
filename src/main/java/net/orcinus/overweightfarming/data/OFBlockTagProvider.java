@@ -39,7 +39,9 @@ public class OFBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .addOptional(new Identifier("bewitchment", "garlic"))
                 .addOptional(new Identifier("bewitchment", "mandrake"))
                 .addOptional(new Identifier("bwplus", "bloodroot"))
-                .addOptional(new Identifier("immersive_weathering", "weeds"));
+                .addOptional(new Identifier("immersive_weathering", "weeds"))
+
+        ;
 
         getOrCreateTagBuilder(OFTags.OVERWEIGHT_APPLE_LEAVES)
                 .add(Blocks.OAK_LEAVES)

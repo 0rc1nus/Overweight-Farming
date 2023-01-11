@@ -1,8 +1,8 @@
-// 1.19	2022-07-14T15:58:01.548163288	Tags for minecraft:block
+// 1.19.2	2023-01-11T03:46:39.560961889	Tags for minecraft:block
+be9717308e2c8b7e6d3c38d5cf6a3d0ed2731d14 data/minecraft/tags/blocks/replaceable_plants.json
+208c5a8e396768ef376669581998d5158de4a5ac data/overweight_farming/tags/blocks/overweight_compat.json
+235dcf425f7487ae20bd6831a4f9ccf4e85b3cfe data/minecraft/tags/blocks/mineable/axe.json
+6139e6b7aca17398c9e0333d3ca8c335b5dabd87 data/minecraft/tags/blocks/mineable/hoe.json
+bc481a4d8678a746acda3aa1262cf0e020df8419 data/overweight_farming/tags/blocks/overweight_apple_leaves.json
 be9717308e2c8b7e6d3c38d5cf6a3d0ed2731d14 data/minecraft/tags/blocks/tall_flowers.json
 4ed47ef2db1b8d5f84d58445caf71664b93afdb5 data/overweight_farming/tags/blocks/overweight_obstacles.json
-8f2a7a2f8b014fd0e68cf2b6ad8bf79f9b84c4d1 data/minecraft/tags/blocks/mineable/hoe.json
-208c5a8e396768ef376669581998d5158de4a5ac data/overweight_farming/tags/blocks/overweight_compat.json
-e4adaafe3900102a090a7296650761e9b8db1c7d data/minecraft/tags/blocks/mineable/axe.json
-bc481a4d8678a746acda3aa1262cf0e020df8419 data/overweight_farming/tags/blocks/overweight_apple_leaves.json
-be9717308e2c8b7e6d3c38d5cf6a3d0ed2731d14 data/minecraft/tags/blocks/replaceable_plants.json

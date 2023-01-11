@@ -59,5 +59,8 @@
 
   "block.overweight_farming.overweight_mandrake_block": "Overweight Mandrake Block",
   "block.overweight_farming.overweight_garlic_block": "Overweight Garlic Block",
-  "block.overweight_farming.overweight_bloodroot_block": "Overweight Bloodroot Block"
+  "block.overweight_farming.overweight_bloodroot_block": "Overweight Bloodroot Block",
+
+  "block.overweight_farming.overweight_pommegranate": "Overweight Pomegranate Block",
+  "block.overweight_farming.overweight_ympe_fruit": "Overweight Ympe Fruit Block"
 }

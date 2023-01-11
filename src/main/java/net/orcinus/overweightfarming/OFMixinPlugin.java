@@ -21,7 +21,13 @@ public class OFMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return !mixinClassName.contains("WeedsBlockMixin") || FabricLoader.getInstance().isModLoaded("immersive_weathering");
+        if(mixinClassName.contains("WeedsBlockMixin")){
+            return FabricLoader.getInstance().isModLoaded("immersive_weathering");
+        }
+        if(mixinClassName.contains("PomegranateLeavesBlockMixin") || mixinClassName.contains("FruitBearingYmpeLogBlockMixin")){
+            return FabricLoader.getInstance().isModLoaded("aylyth");
+        }
+        return true;
     }
 
     @Override

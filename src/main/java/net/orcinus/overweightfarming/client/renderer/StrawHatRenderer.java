@@ -1,5 +1,6 @@
 package net.orcinus.overweightfarming.client.renderer;
 
+import com.google.common.collect.Lists;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -10,15 +11,40 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.client.model.StrawHatModel;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.LinkedList;
+
 public class StrawHatRenderer implements ArmorRenderer {
     private static final Identifier TEXTURE = new Identifier(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat.png");
-    private static final Identifier TRANS_TEXTURE = new Identifier(OverweightFarming.MODID, "textures/entity/straw_hat/trans_rights.png");
-    private static final Identifier STRAW_TEXTURE = new Identifier(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat_straw.png");
-    private static final Identifier TEXTURE_420 = new Identifier(OverweightFarming.MODID, "textures/entity/straw_hat/420.png");
+    public static final LinkedList<String> LISTS = Util.make(Lists.newLinkedList(), list -> {
+        list.add("accessible_knowledge");
+        list.add("amogus");
+        list.add("atroxic");
+        list.add("birb");
+        list.add("black_hat");
+        list.add("convenient_cauldron");
+        list.add("delightful");
+        list.add("doset");
+        list.add("electrum_hat");
+        list.add("frog_tongue");
+        list.add("froggy_straw_hat");
+        list.add("lead_hat");
+        list.add("leadly_hat");
+        list.add("pebble_hat");
+        list.add("pirates");
+        list.add("potat");
+        list.add("silver_hat");
+        list.add("there_is_a_frog_on_your_head_yknow");
+
+        list.add("trans_rights");
+        list.add("straw_hat_straw");
+        list.add("420");
+    });
+
     private static StrawHatModel<LivingEntity> armorModel;
     private final Item hatItem;
 
@@ -26,20 +52,18 @@ public class StrawHatRenderer implements ArmorRenderer {
         this.hatItem = hatItem;
     }
 
-    public static boolean is420(ItemStack stack) {
-        return getContents(stack).equals("420");
-    }
-
-    public static boolean isStraw(ItemStack stack) {
-        return getContents(stack).equals("Straw");
-    }
-
-    public static boolean isTrans(ItemStack stack) {
-        return getContents(stack).equals("Trans Rights");
-    }
-
     private static String getContents(ItemStack stack) {
         return stack.getName().getString();
+    }
+
+    public Identifier getArmorTexture(ItemStack stack) {
+        for (String id : LISTS) {
+            String namingContent = id.toLowerCase().replace('_', ' ');
+
+            if (!getContents(stack).equals(namingContent)) continue;
+            return getContents(stack).equals(namingContent) ? new Identifier(OverweightFarming.MODID, "textures/entity/straw_hat/" + id + ".png") : TEXTURE;
+        }
+        return TEXTURE;
     }
 
     @Override
@@ -50,7 +74,8 @@ public class StrawHatRenderer implements ArmorRenderer {
             contextModel.setAttributes(armorModel);
             armorModel.setVisible(false);
             armorModel.head.visible = slot == EquipmentSlot.HEAD;
-            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, armorModel, is420(stack) ? TEXTURE_420 : isStraw(stack) ? STRAW_TEXTURE : isTrans(stack) ? TRANS_TEXTURE : TEXTURE);
+
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, armorModel, getArmorTexture(stack));
         }
     }
 }

@@ -40,8 +40,6 @@ public record OverweightGrowthManager(Random random) {
             map.put(getCompatBlock("bwplus", "bloodroot"), Pair.of(Pair.of(OFConfig.allowOverweightBloodroot, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_BLOODROOT));
             map.put(getCompatBlock("immersive_weathering", "weeds"), Pair.of(Pair.of(OFConfig.allowOverweightWeeds, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_WEED));
             map.put(getCompatBlock("hedgehog", "kiwi_vines"), Pair.of(Pair.of(OFConfig.allowOverweightKiwi, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_KIWI));
-
-
         });
     }
 
@@ -134,7 +132,9 @@ public record OverweightGrowthManager(Random random) {
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 BlockPos pos = new BlockPos(blockPos.getX() + x, blockPos.getY(), blockPos.getZ() + z);
-                if (world.getBlockState(pos).isIn(OFTags.OVERWEIGHT_OBSTACLES)) {
+                BlockState state = world.getBlockState(pos);
+                if (!state.isIn(OFTags.OVERWEIGHT_OBSTACLES)) continue;
+                if (state.isIn(OFTags.OVERWEIGHT_OBSTACLES)) {
                     flag = false;
                 }
             }

@@ -18,6 +18,7 @@ public class OFCompatBlockLootTableProvider extends FabricBlockLootTableProvider
     private static final ConditionJsonProvider HEDGEHOG_LOADED = DefaultResourceConditions.allModsLoaded("orcinus");
     private static final ConditionJsonProvider BEWITCHMENT_LOADED = DefaultResourceConditions.allModsLoaded("bewitchment");
     private static final ConditionJsonProvider BEWITCHMENT_PLUS_LOADED = DefaultResourceConditions.allModsLoaded("bwplus");
+    private static final ConditionJsonProvider AYLYTH_LOADED = DefaultResourceConditions.allModsLoaded("aylyth");
 
     public OFCompatBlockLootTableProvider(FabricDataGenerator dataGenerator) {
         super(dataGenerator);
@@ -66,6 +67,14 @@ public class OFCompatBlockLootTableProvider extends FabricBlockLootTableProvider
         withConditions(biConsumer, BEWITCHMENT_PLUS_LOADED).accept(
                 OFObjects.OVERWEIGHT_BLOODROOT.getLootTableId(),
                 OFBlockLootTableProvider.overweightDrops(OFObjects.OVERWEIGHT_BLOODROOT, getCompatItem("bwplus", "bloodroot_item"), null)
+        );
+        withConditions(biConsumer, AYLYTH_LOADED).accept(
+                OFObjects.OVERWEIGHT_POMME.getLootTableId(),
+                OFBlockLootTableProvider.overweightDrops(OFObjects.OVERWEIGHT_POMME, getCompatItem("aylyth", "pomegranate"), null)
+        );
+        withConditions(biConsumer, AYLYTH_LOADED).accept(
+                OFObjects.OVERWEIGHT_YMPE.getLootTableId(),
+                OFBlockLootTableProvider.overweightDrops(OFObjects.OVERWEIGHT_YMPE, getCompatItem("aylyth", "ympe_fruit"), null)
         );
     }
 

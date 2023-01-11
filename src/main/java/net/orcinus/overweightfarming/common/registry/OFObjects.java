@@ -1,5 +1,6 @@
 package net.orcinus.overweightfarming.common.registry;
 
+import moriyashiine.aylyth.common.util.AylythUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
@@ -74,7 +75,7 @@ public class OFObjects {
     public static final Block OVERWEIGHT_COCOA = register("overweight_cocoa_block", new OverweightCocoaBlock(null, FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).breakInstantly()), true, gen());
     public static final Block PEELED_OVERWEIGHT_COCOA = register("peeled_overweight_cocoa_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_COCOA)), true, gen());
     public static final Block POTTED_OVERWEIGHT_COCOA = register("potted_overweight_cocoa", new FlowerPotBlock(OVERWEIGHT_COCOA, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
-    public static final Block OVERWEIGHT_CABBAGE = register("overweight_cabbage_block", new OverweightCabbageBlock(null, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), FabricLoader.getInstance().isModLoaded("farmersdelight"), gen());
+    public static final Block OVERWEIGHT_CABBAGE = register("overweight_cabbage_block", new CropFullBlock(null, FabricBlockSettings.of(Material.PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), FabricLoader.getInstance().isModLoaded("farmersdelight"), gen());
     public static final Block POTTED_OVERWEIGHT_CABBAGE = register("potted_overweight_cabbage", new FlowerPotBlock(OVERWEIGHT_CABBAGE, FabricBlockSettings.of(Material.DECORATION).breakInstantly()), false, gen());
     public static final Block OVERWEIGHT_BAKED_POTATO = register("overweight_baked_potato_block", new Block(FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), true, gen());
     public static final Block OVERWEIGHT_POISONOUS_POTATO = register("overweight_poisonous_potato_block", new CropFullBlock(null, FabricBlockSettings.copy(OVERWEIGHT_BAKED_POTATO)), true, gen());
@@ -92,6 +93,10 @@ public class OFObjects {
     public static final Block SEEDLESS_PEELED_MELON = register("seedless_peeled_melon", new PeeledMelonBlock(PeeledMelonBlock.SeedState.SEEDLESS, FabricBlockSettings.copy(Blocks.MELON).sounds(BlockSoundGroup.WET_GRASS)), true, gen());
     public static final Block WAXED_SEEDLESS_PEELED_MELON = register("waxed_seedless_peeled_melon", new Block(FabricBlockSettings.copy(SEEDLESS_PEELED_MELON)), true, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
     public static final Block OVERWEIGHT_WEED = register("overweight_weed_block", new OverweightWeedBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).nonOpaque()), false, gen());
+
+    public static final Block OVERWEIGHT_POMME = register("overweight_pommegranate", new OverweightAppleBlock(false, null, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), FabricLoader.getInstance().isModLoaded("aylyth"), gen());
+    public static final Block OVERWEIGHT_YMPE = register("overweight_ympe_fruit", new OverweightAppleBlock(false, null, FabricBlockSettings.of(OFMaterials.OVERWEIGHT_PLANT).strength(1.0F).sounds(BlockSoundGroup.CROP)), FabricLoader.getInstance().isModLoaded("aylyth"), gen());
+
 
     private static Item.Settings gen() {
         return new Item.Settings().group(ItemGroup.FOOD);

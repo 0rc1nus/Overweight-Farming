@@ -10,7 +10,9 @@
     "CropBlockMixin",
     "LivingEntityMixin",
     "TreeDecoratorTypeInvoker",
-    "TreeFeatureConfigMixin"
+    "TreeFeatureConfigMixin",
+    "compat.FruitBearingYmpeLogBlockMixin",
+    "compat.PomegranateLeavesBlockMixin"
   ],
   "client": [
     "ContinuousFallingParticleMixin",

@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.12-SNAPSHOT'
+    id 'fabric-loom' version '1.0-SNAPSHOT'
     id 'io.github.juuxel.loom-quiltflower' version '1.6.1'
     id 'maven-publish'
 }
@@ -51,7 +51,7 @@ repositories {
         name = "Farmers Delight, Bewitchment"
         url = "https://www.cursemaven.com"
     }
-    /*
+
 
     maven {
         name = "patchouli"
@@ -82,15 +82,26 @@ repositories {
         url = "https://maven.jamieswhiteshirt.com/libs-release"
     }
 
-     */
+
     maven {
         name = "Mod Menu"
         url =  "https://maven.terraformersmc.com/releases"
     }
-
+    maven {
+        name "terraform"
+        url "https://maven.terraformersmc.com"
+    }
     maven {
         name "modrinth"
         url "https://api.modrinth.com/maven"
+    }
+    maven {
+        name "geckolib"
+        url "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven"
+    }
+    maven {
+        name "cardinal components"
+        url "https://ladysnake.jfrog.io/artifactory/mods"
     }
 }
 
@@ -105,6 +116,25 @@ dependencies {
     //modImplementation "curse.maven:immersive-weathering-fabric-571035:${project.iw_version}"
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     modImplementation "curse.maven:farmers-delight-482834:${project.farmers_delight_version}"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cardinal_components_version}"
+    include "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cardinal_components_version}"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cardinal_components_version}"
+    include "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cardinal_components_version}"
+    modImplementation "local.maven:aylyth:${project.aylyth}"
+    modImplementation "software.bernie.geckolib:geckolib-fabric-${geckolib_version}"
+    modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${terraform_wood_api_version}"
+    include "com.terraformersmc.terraform-api:terraform-wood-api-v1:${terraform_wood_api_version}"
+    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+    modImplementation "com.jamieswhiteshirt:reach-entity-attributes:${project.reach_version}"
+    include "com.jamieswhiteshirt:reach-entity-attributes:${project.reach_version}"
+    modImplementation "io.github.ladysnake:PlayerAbilityLib:${pal_version}"
+    modImplementation "com.github.emilyploszaj:step-height-entity-attribute:${step_height_version}"
+    modImplementation "io.github.ladysnake:PlayerAbilityLib:${pal_version}"
+    include "io.github.ladysnake:PlayerAbilityLib:${pal_version}"
+    modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
+    modImplementation("com.github.virtuoel:pehkui:${project.pehkui_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
 /*
     modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
     include "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
