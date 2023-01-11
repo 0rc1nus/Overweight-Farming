@@ -1,7 +1,0 @@
-{
-  "type": "aylyth:leaf_pile",
-  "config": {
-    "block": "aylyth:oak_strewn_leaves",
-    "test_block": "minecraft:dark_oak_leaves"
-  }
-}

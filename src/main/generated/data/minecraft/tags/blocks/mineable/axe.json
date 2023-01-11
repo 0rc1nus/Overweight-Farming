@@ -1,16 +1,26 @@
 {
   "replace": false,
   "values": [
-    "#aylyth:woody_growths",
-    "aylyth:aylyth_bush",
-    "aylyth:antler_shoots",
-    "aylyth:gripweed",
-    "aylyth:nysian_grape_vine",
-    "aylyth:oak_seep",
-    "aylyth:spruce_seep",
-    "aylyth:dark_oak_seep",
-    "aylyth:ympe_seep",
-    "aylyth:seeping_wood",
-    "aylyth:seeping_wood_seep"
+    "overweight_farming:overweight_beetroot_block",
+    "overweight_farming:overweight_carrot_block",
+    "overweight_farming:overweight_potato_block",
+    "overweight_farming:overweight_mandrake_block",
+    "overweight_farming:overweight_garlic_block",
+    "overweight_farming:overweight_bloodroot_block",
+    "overweight_farming:overweight_apple_block",
+    "overweight_farming:overweight_golden_apple_block",
+    "overweight_farming:overweight_nether_wart_block",
+    "overweight_farming:overweight_ginger_block",
+    "overweight_farming:overweight_onion_block",
+    "overweight_farming:overweight_cocoa_block",
+    "overweight_farming:overweight_cabbage_block",
+    "overweight_farming:overweight_poisonous_potato_block",
+    "overweight_farming:overweight_kiwi_block",
+    "overweight_farming:overweight_weed_block",
+    "overweight_farming:overweight_pommegranate",
+    "overweight_farming:overweight_ympe_fruit",
+    "overweight_farming:seeded_peeled_melon",
+    "overweight_farming:half_seeded_peeled_melon",
+    "overweight_farming:seedless_peeled_melon"
   ]
 }

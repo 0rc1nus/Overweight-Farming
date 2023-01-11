@@ -17,12 +17,13 @@ import static moriyashiine.aylyth.common.block.PomegranateLeavesBlock.FRUITING;
 @Mixin(PomegranateLeavesBlock.class)
 public class PomegranateLeavesBlockMixin {
 
-    @Inject(method = "randomTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)Z"))
+    @Inject(method = "randomTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)Z"), cancellable = true)
     private void of$f(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci){
         float chance =  0.001F;
         if (random.nextFloat() < chance && world.isAir(pos.down()) && state.get(FRUITING) == 2) {
             world.setBlockState(pos, state.with(FRUITING, 0));
             world.setBlockState(pos.down(), OFObjects.OVERWEIGHT_POMME.getDefaultState());
+            ci.cancel();
         }
     }
 }

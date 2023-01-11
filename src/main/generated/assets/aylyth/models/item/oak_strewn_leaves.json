@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "aylyth:block/fallen_oak_leaves_01"
-  }
-}

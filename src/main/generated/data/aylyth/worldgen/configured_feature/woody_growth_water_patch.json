@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:random_patch",
-  "config": {
-    "feature": "aylyth:woody_growth_water_selector",
-    "tries": 4,
-    "xz_spread": 7,
-    "y_spread": 3
-  }
-}

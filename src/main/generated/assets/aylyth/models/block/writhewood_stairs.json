@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "aylyth:block/writhewood_planks",
-    "side": "aylyth:block/writhewood_planks",
-    "top": "aylyth:block/writhewood_planks"
-  }
-}

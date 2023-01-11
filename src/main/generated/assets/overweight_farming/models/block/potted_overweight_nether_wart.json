@@ -1,0 +1,6 @@
+{
+  "parent": "overweight_farming:block/overweight_nether_wart_pot",
+  "textures": {
+    "plant": "overweight_farming:block/potted_overweight_nether_wart"
+  }
+}

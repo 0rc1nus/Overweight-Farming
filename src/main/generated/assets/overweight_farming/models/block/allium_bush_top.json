@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "overweight_farming:block/allium_bush_top"
+  }
+}

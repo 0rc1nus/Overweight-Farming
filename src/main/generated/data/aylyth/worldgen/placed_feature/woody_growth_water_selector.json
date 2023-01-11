@@ -1,9 +1,0 @@
-{
-  "feature": "aylyth:woody_growth_water_selector",
-  "placement": [
-    {
-      "type": "minecraft:heightmap",
-      "heightmap": "OCEAN_FLOOR"
-    }
-  ]
-}

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "bewitchment:garlic",
+      "required": false
+    },
+    {
+      "id": "bewitchment:mandrake",
+      "required": false
+    },
+    {
+      "id": "bwplus:bloodroot",
+      "required": false
+    },
+    {
+      "id": "immersive_weathering:weeds",
+      "required": false
+    }
+  ]
+}

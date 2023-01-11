@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "aylyth:block/pomegranate_planks",
-    "side": "aylyth:block/pomegranate_planks",
-    "top": "aylyth:block/pomegranate_planks"
-  }
-}
