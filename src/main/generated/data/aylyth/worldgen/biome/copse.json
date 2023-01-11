@@ -1,0 +1,106 @@
+{
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "creature_spawn_probability": 0.5,
+  "downfall": 0.8,
+  "effects": {
+    "additions_sound": {
+      "sound": "aylyth:ambient.forest.additions",
+      "tick_chance": 0.005
+    },
+    "fog_color": 6710886,
+    "foliage_color": 6455096,
+    "grass_color": 11896891,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "particle": {
+      "options": {
+        "type": "minecraft:mycelium"
+      },
+      "probability": 0.025
+    },
+    "sky_color": 0,
+    "water_color": 4159204,
+    "water_fog_color": 329011
+  },
+  "features": [
+    [],
+    [
+      "aylyth:spring"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:ore_iron_upper",
+      "minecraft:ore_iron_middle",
+      "minecraft:ore_iron_small",
+      "minecraft:ore_copper"
+    ],
+    [],
+    [
+      "minecraft:spring_water"
+    ],
+    [
+      "aylyth:pomegranate_tree_placed",
+      "aylyth:bushes",
+      "minecraft:patch_tall_grass",
+      "aylyth:oak_strewn_leaves",
+      "aylyth:ympe_strewn_leaves",
+      "aylyth:aylythian_dark_oak",
+      "aylyth:copse_trees",
+      "minecraft:patch_grass_taiga",
+      "aylyth:aylyth_weeds",
+      "aylyth:red_mushroom_patch",
+      "aylyth:brown_mushroom_patch",
+      "aylyth:shelf_jack_o_lantern_mushroom_common_patch",
+      "aylyth:ghostcap_mushroom_patch",
+      "aylyth:ympe_seep"
+    ],
+    [
+      "minecraft:freeze_top_layer"
+    ]
+  ],
+  "precipitation": "rain",
+  "spawn_costs": {
+    "aylyth:aylythian": {
+      "charge": 2.0,
+      "energy_budget": 1.0
+    }
+  },
+  "spawners": {
+    "ambient": [
+      {
+        "type": "aylyth:pilot_light",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      }
+    ],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "aylyth:aylythian",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 20
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.7
+}

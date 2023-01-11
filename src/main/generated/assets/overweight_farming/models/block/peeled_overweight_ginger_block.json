@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "overweight_farming:block/peeled_overweight_ginger_block_bottom",
-    "side": "overweight_farming:block/peeled_overweight_ginger_block_side",
-    "top": "overweight_farming:block/peeled_overweight_ginger_block_top"
-  }
-}

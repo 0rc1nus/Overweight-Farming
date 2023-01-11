@@ -1,0 +1,7 @@
+{
+  "parent": "aylyth:block/leaf_pile_7",
+  "textures": {
+    "all": "aylyth:block/ympe_leaves",
+    "particle": "aylyth:block/ympe_leaves"
+  }
+}

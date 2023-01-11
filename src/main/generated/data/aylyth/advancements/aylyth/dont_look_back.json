@@ -1,0 +1,40 @@
+{
+  "parent": "aylyth:aylyth/root",
+  "criteria": {
+    "has_interacted_with_pilot_light": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aylyth:pilot_light"
+            }
+          }
+        ],
+        "item": {}
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "aylyth.advancements.aylyth.dont_look_back.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:soul_campfire"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "aylyth.advancements.aylyth.dont_look_back.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_interacted_with_pilot_light"
+    ]
+  ]
+}

@@ -1,3 +1,20 @@
-// 1.19.2	2023-01-11T03:46:39.542815987	Tags for minecraft:item
-be9717308e2c8b7e6d3c38d5cf6a3d0ed2731d14 data/minecraft/tags/items/tall_flowers.json
-3cb11e2582d01a407fde596271dcb48197f09f45 data/overweight_farming/tags/items/overweight_harvestables.json
+// 1.19.2	2023-01-11T04:26:27.316261912	Tags for minecraft:item
+1ef77776bdf22d80b2215087206a6f6b7463d1ff data/minecraft/tags/items/chest_boats.json
+048c25ba74cfa4423664cf4d1085c6c332b2fe32 data/minecraft/tags/items/wooden_slabs.json
+7e2ff68ea0ae68996fcd14b751947babc5f0a3f5 data/aylyth/tags/items/writhewood_logs.json
+4d199186246cc6afb5ca70dc7d07c5439d3053fd data/minecraft/tags/items/wooden_fences.json
+0f277524cfc26fefb37e519b179917aafa05b246 data/minecraft/tags/items/wooden_stairs.json
+1b8b147f0ea7e3aa29b3f46f3b8cdc46c938a95f data/minecraft/tags/items/leaves.json
+40548c100b913000d233ec42762c812ff5f0e7b6 data/aylyth/tags/items/ympe_logs.json
+169cd3663161cfff28e59211150ad10c59affc47 data/minecraft/tags/items/planks.json
+6d468d1b15a23fcf3beeadf9ec67f7332d77b9b3 data/minecraft/tags/items/wooden_doors.json
+e9f8f14ca79155b982906546e25f3218ff082535 data/aylyth/tags/items/ympe_foods.json
+b9f50de53426f914987241daebd8cd2c746a2b2a data/aylyth/tags/items/pomegranate_logs.json
+152caa67c305d043bab5721ac88952b440cab54d data/minecraft/tags/items/wooden_buttons.json
+a559b5f9c3b1802d67296ee3c4c8cd63d74ad0b7 data/minecraft/tags/items/wooden_trapdoors.json
+dc3292f4be803fd8217c284c0ef66258ea6c0d43 data/minecraft/tags/items/logs_that_burn.json
+685492f4f3486189f6ae14b665ff885697589a58 data/minecraft/tags/items/boats.json
+eabb5a0418ee712d1a217e06ffd7399948eeb15b data/minecraft/tags/items/wooden_pressure_plates.json
+ee816058b1df8e5105f0a2bd9f9c283fcffff8c9 data/minecraft/tags/items/signs.json
+a33129d28457b301451cba43e56bc71e81bc76a1 data/aylyth/tags/items/woody_growths.json
+671498fdd74e426e74623d250fab62fc4d1a5b7b data/minecraft/tags/items/saplings.json

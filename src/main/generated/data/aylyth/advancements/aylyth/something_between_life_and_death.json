@@ -1,0 +1,31 @@
+{
+  "parent": "aylyth:aylyth/root",
+  "criteria": {
+    "has_placed_soul_hearth": {
+      "conditions": {
+        "block": "aylyth:soul_hearth"
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "aylyth.advancements.aylyth.something_between_life_and_death.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aylyth:soul_hearth"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "aylyth.advancements.aylyth.something_between_life_and_death.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_placed_soul_hearth"
+    ]
+  ]
+}

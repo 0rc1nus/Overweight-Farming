@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "aylyth:block/pomegranate_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "aylyth:block/pomegranate_wood"
+    },
+    "axis=z": {
+      "model": "aylyth:block/pomegranate_wood",
+      "x": 90
+    }
+  }
+}

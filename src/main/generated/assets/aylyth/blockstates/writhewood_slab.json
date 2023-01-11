@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "aylyth:block/writhewood_slab"
+    },
+    "type=double": {
+      "model": "aylyth:block/writhewood_planks"
+    },
+    "type=top": {
+      "model": "aylyth:block/writhewood_slab_top"
+    }
+  }
+}

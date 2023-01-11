@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "aylyth:block/writhewood_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "aylyth:block/writhewood_log"
+    },
+    "axis=z": {
+      "model": "aylyth:block/writhewood_log_horizontal",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "minecraft:soul_campfire"
+    },
+    "H": {
+      "item": "aylyth:aylythian_heart"
+    },
+    "S": {
+      "item": "minecraft:polished_deepslate_slab"
+    },
+    "W": {
+      "item": "minecraft:polished_deepslate_wall"
+    }
+  },
+  "pattern": [
+    " S ",
+    "WCW",
+    "WHW"
+  ],
+  "result": {
+    "item": "aylyth:soul_hearth"
+  }
+}

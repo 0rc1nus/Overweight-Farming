@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "aylyth:block/stripped_pomegranate_log",
+    "side": "aylyth:block/stripped_pomegranate_log"
+  }
+}

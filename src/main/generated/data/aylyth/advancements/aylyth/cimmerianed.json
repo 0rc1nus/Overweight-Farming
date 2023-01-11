@@ -1,0 +1,34 @@
+{
+  "parent": "aylyth:aylyth/root",
+  "criteria": {
+    "has_cimmerian_effect": {
+      "conditions": {
+        "effects": {
+          "aylyth:cimmerian": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "aylyth.advancements.aylyth.cimmerianed.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"aylyth:cimmerian\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "aylyth.advancements.aylyth.cimmerianed.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_cimmerian_effect"
+    ]
+  ]
+}

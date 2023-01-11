@@ -1,0 +1,31 @@
+{
+  "parent": "aylyth:aylyth/meat_found",
+  "criteria": {
+    "has_placed_vital_thurible": {
+      "conditions": {
+        "block": "aylyth:vital_thurible"
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "aylyth.advancements.aylyth.flesh_increased_by_two.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "aylyth:vital_thurible"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "aylyth.advancements.aylyth.flesh_increased_by_two.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_placed_vital_thurible"
+    ]
+  ]
+}

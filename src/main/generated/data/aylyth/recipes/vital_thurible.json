@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "minecraft:soul_campfire"
+    },
+    "H": {
+      "item": "aylyth:aylythian_heart"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "P": {
+      "item": "minecraft:polished_deepslate_wall"
+    },
+    "S": {
+      "item": "minecraft:polished_deepslate_slab"
+    }
+  },
+  "pattern": [
+    "SHS",
+    "PNP",
+    "PCP"
+  ],
+  "result": {
+    "item": "aylyth:vital_thurible"
+  }
+}

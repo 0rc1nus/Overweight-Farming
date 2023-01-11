@@ -1,0 +1,57 @@
+{
+  "variants": {
+    "leaves=0": [
+      {
+        "model": "aylyth:block/fallen_ympe_leaves_01"
+      },
+      {
+        "model": "aylyth:block/fallen_ympe_leaves_01",
+        "y": 90
+      },
+      {
+        "model": "aylyth:block/fallen_ympe_leaves_01",
+        "y": 180
+      },
+      {
+        "model": "aylyth:block/fallen_ympe_leaves_01",
+        "y": 270
+      },
+      {
+        "model": "aylyth:block/fallen_ympe_leaves_02"
+      },
+      {
+        "model": "aylyth:block/fallen_ympe_leaves_02",
+        "y": 90
+      },
+      {
+        "model": "aylyth:block/fallen_ympe_leaves_02",
+        "y": 180
+      },
+      {
+        "model": "aylyth:block/fallen_ympe_leaves_02",
+        "y": 270
+      }
+    ],
+    "leaves=1": {
+      "model": "aylyth:block/ympe_leaves_pile_1"
+    },
+    "leaves=2": {
+      "model": "aylyth:block/ympe_leaves_pile_2"
+    },
+    "leaves=3": {
+      "model": "aylyth:block/ympe_leaves_pile_3"
+    },
+    "leaves=4": {
+      "model": "aylyth:block/ympe_leaves_pile_4"
+    },
+    "leaves=5": {
+      "model": "aylyth:block/ympe_leaves_pile_5"
+    },
+    "leaves=6": {
+      "model": "aylyth:block/ympe_leaves_pile_6"
+    },
+    "leaves=7": {
+      "model": "aylyth:block/ympe_leaves_pile_7"
+    }
+  }
+}

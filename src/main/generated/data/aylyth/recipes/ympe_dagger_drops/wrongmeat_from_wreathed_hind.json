@@ -1,0 +1,10 @@
+{
+  "type": "aylyth:ympe_dagger_drop",
+  "chance": 0.2,
+  "entity_type": "aylyth:wreathed_hind",
+  "max": 5,
+  "min": 3,
+  "result": {
+    "item": "aylyth:wrongmeat"
+  }
+}

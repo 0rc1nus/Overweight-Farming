@@ -1,0 +1,29 @@
+{
+  "parent": "aylyth:aylyth/laccus",
+  "criteria": {
+    "has_pledged": {
+      "conditions": {},
+      "trigger": "aylyth:hind_pledge"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "aylyth.advancements.aylyth.come_wayward_souls.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aylyth:nysian_grapes"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "aylyth.advancements.aylyth.come_wayward_souls.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_pledged"
+    ]
+  ]
+}

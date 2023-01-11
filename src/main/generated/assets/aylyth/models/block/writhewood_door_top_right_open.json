@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right_open",
+  "textures": {
+    "bottom": "aylyth:block/writhewood_door_bottom",
+    "top": "aylyth:block/writhewood_door_top"
+  }
+}

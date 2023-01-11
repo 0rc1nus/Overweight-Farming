@@ -1,0 +1,37 @@
+{
+  "parent": "aylyth:aylyth/life_at_a_cost",
+  "criteria": {
+    "has_coric_seed": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aylyth:coric_seed"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "aylyth.advancements.aylyth.manufactured_for_a_purpose.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "aylyth:coric_seed"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "aylyth.advancements.aylyth.manufactured_for_a_purpose.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_coric_seed"
+    ]
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "aylyth:block/leaf_pile_3",
+  "textures": {
+    "all": "minecraft:block/oak_leaves",
+    "particle": "minecraft:block/oak_leaves"
+  }
+}

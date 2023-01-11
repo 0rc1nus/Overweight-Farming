@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "aylyth:marigolds"
+    }
+  ],
+  "result": {
+    "item": "minecraft:orange_dye"
+  }
+}

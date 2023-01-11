@@ -1,0 +1,7 @@
+{
+  "parent": "aylyth:block/strewn_leaves_template",
+  "textures": {
+    "particle": "aylyth:block/fallen_oak_leaves_01",
+    "top": "aylyth:block/fallen_oak_leaves_02"
+  }
+}

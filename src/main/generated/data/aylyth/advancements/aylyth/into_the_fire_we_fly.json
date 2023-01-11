@@ -1,0 +1,37 @@
+{
+  "parent": "aylyth:aylyth/dont_look_back",
+  "criteria": {
+    "has_aylythian_heart": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aylyth:aylythian_heart"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "aylyth.advancements.aylyth.into_the_fire_we_fly.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aylyth:aylythian_heart"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "aylyth.advancements.aylyth.into_the_fire_we_fly.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_aylythian_heart"
+    ]
+  ]
+}

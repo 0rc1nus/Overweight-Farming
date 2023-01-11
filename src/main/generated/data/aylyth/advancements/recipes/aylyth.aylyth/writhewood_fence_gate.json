@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aylyth:writhewood_fence_gate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_writhewood_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aylyth:writhewood_planks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_writhewood_planks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aylyth:writhewood_fence_gate"
+    ]
+  }
+}

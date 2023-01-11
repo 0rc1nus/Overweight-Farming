@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "aylyth:writhewood_planks"
+    }
+  ],
+  "result": {
+    "item": "aylyth:writhewood_button"
+  }
+}

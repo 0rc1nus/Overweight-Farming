@@ -1,0 +1,37 @@
+{
+  "parent": "aylyth:aylyth/in_the_branches",
+  "criteria": {
+    "has_ympe_fruit": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aylyth:ympe_fruit"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "aylyth.advancements.aylyth.life_at_a_cost.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aylyth:ympe_fruit"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "aylyth.advancements.aylyth.life_at_a_cost.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_ympe_fruit"
+    ]
+  ]
+}

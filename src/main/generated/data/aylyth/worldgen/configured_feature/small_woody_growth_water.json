@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aylyth:small_woody_growth",
+        "Properties": {
+          "natural": "true",
+          "waterlogged": "true"
+        }
+      }
+    }
+  }
+}

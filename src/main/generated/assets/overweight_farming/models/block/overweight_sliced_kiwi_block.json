@@ -1,7 +1,0 @@
-{
-  "parent": "overweight_farming:block/orientable_vertical",
-  "textures": {
-    "front": "overweight_farming:block/overweight_sliced_kiwi_block_front",
-    "side": "overweight_farming:block/overweight_kiwi_block"
-  }
-}

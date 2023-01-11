@@ -1,0 +1,22 @@
+{
+  "type": "aylyth:seep",
+  "config": {
+    "placed_around_chance": 0.5,
+    "placed_around_state": {
+      "Name": "aylyth:marigolds"
+    },
+    "placed_around_tries": 5,
+    "seep_state": {
+      "Name": "aylyth:ympe_seep",
+      "Properties": {
+        "connection": "none"
+      }
+    },
+    "state": {
+      "Name": "aylyth:ympe_log",
+      "Properties": {
+        "axis": "y"
+      }
+    }
+  }
+}

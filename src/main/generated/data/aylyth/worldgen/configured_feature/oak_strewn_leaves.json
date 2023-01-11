@@ -1,0 +1,12 @@
+{
+  "type": "aylyth:strewn_leaves",
+  "config": {
+    "block": {
+      "Name": "aylyth:oak_strewn_leaves",
+      "Properties": {
+        "leaves": "0"
+      }
+    },
+    "test_block": "minecraft:dark_oak_leaves"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "parent": "aylyth:aylyth/root",
+  "criteria": {
+    "has_placed_girasol_sapling": {
+      "conditions": {
+        "block": "aylyth:girasol_sapling"
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "aylyth.advancements.aylyth.see_you_in_the_trees.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "aylyth:girasol_seed"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "aylyth.advancements.aylyth.see_you_in_the_trees.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_placed_girasol_sapling"
+    ]
+  ]
+}

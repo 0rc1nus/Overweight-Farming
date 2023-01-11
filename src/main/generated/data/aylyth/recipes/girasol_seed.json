@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "H": {
+      "item": "aylyth:aylythian_heart"
+    },
+    "S": [
+      {
+        "item": "minecraft:soul_sand"
+      },
+      {
+        "item": "minecraft:soul_soil"
+      }
+    ],
+    "Y": {
+      "item": "aylyth:ympe_sapling"
+    }
+  },
+  "pattern": [
+    "YHY",
+    "SES",
+    "YSY"
+  ],
+  "result": {
+    "item": "aylyth:girasol_seed"
+  }
+}

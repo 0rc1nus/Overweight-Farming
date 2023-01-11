@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "overweight_farming:block/overweight_pommegranate_bottom",
-    "side": "overweight_farming:block/overweight_pommegranate_side",
-    "top": "overweight_farming:block/overweight_pommegranate_top"
-  }
-}

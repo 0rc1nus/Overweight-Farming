@@ -1,0 +1,12 @@
+{
+  "feature": "aylyth:shelf_jack_o_lantern_mushrooms",
+  "placement": [
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    }
+  ]
+}

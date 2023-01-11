@@ -1,0 +1,37 @@
+{
+  "parent": "aylyth:aylyth/root",
+  "criteria": {
+    "has_nysian_grapes": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aylyth:nysian_grapes"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "aylyth.advancements.aylyth.laccus.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aylyth:nysian_grape_vine"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "aylyth.advancements.aylyth.laccus.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_nysian_grapes"
+    ]
+  ]
+}

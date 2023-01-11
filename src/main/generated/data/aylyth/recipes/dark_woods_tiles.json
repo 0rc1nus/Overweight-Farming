@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "W": {
+      "item": "aylyth:writhewood_planks"
+    },
+    "Y": {
+      "item": "aylyth:ympe_planks"
+    }
+  },
+  "pattern": [
+    "YW",
+    "WY"
+  ],
+  "result": {
+    "count": 8,
+    "item": "aylyth:dark_woods_tiles"
+  }
+}

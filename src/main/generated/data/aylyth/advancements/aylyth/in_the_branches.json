@@ -1,0 +1,38 @@
+{
+  "parent": "aylyth:aylyth/root",
+  "criteria": {
+    "has_ympe_infestation": {
+      "conditions": {
+        "stage": {
+          "type": "minecraft:uniform",
+          "value": {
+            "max_inclusive": 6,
+            "min_inclusive": 1
+          }
+        }
+      },
+      "trigger": "aylyth:ympe_infestation"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "aylyth.advancements.aylyth.in_the_branches.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "aylyth:ympe_dagger",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "aylyth.advancements.aylyth.in_the_branches.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_ympe_infestation"
+    ]
+  ]
+}

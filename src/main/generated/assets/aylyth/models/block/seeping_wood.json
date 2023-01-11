@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "aylyth:block/aylyth_bush_trunk",
+    "side": "aylyth:block/aylyth_bush_trunk"
+  }
+}

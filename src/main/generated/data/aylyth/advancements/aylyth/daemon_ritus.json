@@ -1,0 +1,30 @@
+{
+  "parent": "aylyth:aylyth/life_at_a_cost",
+  "criteria": {
+    "has_shucked": {
+      "conditions": {},
+      "trigger": "aylyth:shucking"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "aylyth.advancements.aylyth.daemon_ritus.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "aylyth:shucked_ympe_fruit",
+      "nbt": "{StoredEntity:1}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "aylyth.advancements.aylyth.daemon_ritus.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_shucked"
+    ]
+  ]
+}

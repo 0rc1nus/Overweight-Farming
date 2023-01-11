@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "aylyth:block/pomegranate_slab"
+    },
+    "type=double": {
+      "model": "aylyth:block/pomegranate_planks"
+    },
+    "type=top": {
+      "model": "aylyth:block/pomegranate_slab_top"
+    }
+  }
+}
