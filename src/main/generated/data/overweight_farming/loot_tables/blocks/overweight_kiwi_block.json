@@ -45,7 +45,7 @@
             },
             {
               "type": "minecraft:item",
-              "name": "minecraft:air"
+              "name": "overweight_farming:overweight_kiwi_block"
             }
           ]
         }
