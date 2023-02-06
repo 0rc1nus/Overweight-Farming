@@ -10,7 +10,7 @@
       "item": "minecraft:gold_block"
     },
     "X": {
-      "item": "minecraft:apple"
+      "item": "overweight_farming:overweight_apple_block"
     }
   },
   "result": {
