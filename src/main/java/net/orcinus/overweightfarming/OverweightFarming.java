@@ -1,5 +1,8 @@
 package net.orcinus.overweightfarming;
 
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
+import net.orcinus.overweightfarming.config.OFConfig;
 import net.orcinus.overweightfarming.events.MiscEvents;
 import net.orcinus.overweightfarming.events.MobEvents;
 import net.orcinus.overweightfarming.init.OFBlockEntityTypes;
@@ -25,6 +28,8 @@ public class OverweightFarming {
     public OverweightFarming() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::setup);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, OFConfig.COMMON);
 
         OFBlocks.BLOCKS.register(modEventBus);
         OFBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);

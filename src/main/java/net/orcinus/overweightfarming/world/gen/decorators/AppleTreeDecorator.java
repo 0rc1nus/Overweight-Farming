@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
+import net.orcinus.overweightfarming.config.OFConfig;
 import net.orcinus.overweightfarming.init.OFBlockTags;
 import net.orcinus.overweightfarming.init.OFBlocks;
 import net.orcinus.overweightfarming.init.OFTreeDecoratorTypes;
@@ -34,7 +35,10 @@ public class AppleTreeDecorator extends TreeDecorator {
     public void place(Context context) {
         RandomSource random = context.random();
         int height = context.logs().size();
-        if ((random.nextFloat() < this.smallTreeProbability) || ((random.nextFloat() < this.largeTreeProbability) && height > 6)) {
+        float configPercent = (float)(OFConfig.OVERWEIGHT_APPLE_PERCENT.get() / 100);
+        float smallTreeProbability = this.smallTreeProbability * configPercent;
+        float largeTreeProbability = this.largeTreeProbability * configPercent;
+        if ((random.nextFloat() < smallTreeProbability) || ((random.nextFloat() < largeTreeProbability) && height > 6)) {
             List<BlockPos> list = context.leaves();
             if (!list.isEmpty()) {
                 List<BlockPos> list3 = list.stream().filter((pos) -> context.isAir(pos.below()) && context.isAir(pos.below(2)) && context.isAir(pos.below(3)) && context.level().isStateAtPosition(pos, state -> state.is(OFBlockTags.OVERWEIGHT_APPLE_LEAVES))).collect(Collectors.toList());
