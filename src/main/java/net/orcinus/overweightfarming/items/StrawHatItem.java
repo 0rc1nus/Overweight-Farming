@@ -50,7 +50,7 @@ public class StrawHatItem extends ArmorItem {
         list.add("there_is_a_frog_on_your_head_yknow");
     });
 
-    public StrawHatItem(EquipmentSlot slot, Properties properties) {
+    public StrawHatItem(Type slot, Properties properties) {
         super(MATERIAL, slot, properties);
     }
 
@@ -93,13 +93,14 @@ public class StrawHatItem extends ArmorItem {
     }
 
     private static class StrawHatMaterial implements ArmorMaterial {
+
         @Override
-        public int getDurabilityForSlot(EquipmentSlot slot) {
+        public int getDurabilityForType(Type p_266807_) {
             return 5;
         }
 
         @Override
-        public int getDefenseForSlot(EquipmentSlot slot) {
+        public int getDefenseForType(Type p_267168_) {
             return 1;
         }
 

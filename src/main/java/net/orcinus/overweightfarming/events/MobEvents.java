@@ -73,7 +73,7 @@ public class MobEvents {
         if (entity instanceof Pig pig) {
             if (stack.getItem() == OFItems.VEGETABLE_PEELS.get()) {
                 int i = pig.getAge();
-                if (!pig.level.isClientSide && i == 0 && pig.canFallInLove()) {
+                if (!pig.level().isClientSide && i == 0 && pig.canFallInLove()) {
                     event.setCanceled(true);
                     if (!player.getAbilities().instabuild) {
                         stack.shrink(1);
@@ -90,7 +90,7 @@ public class MobEvents {
                     player.swing(hand);
                 }
 
-                if (pig.level.isClientSide) {
+                if (pig.level().isClientSide) {
                     event.setCancellationResult(InteractionResult.CONSUME);
                 }
             }
@@ -107,7 +107,7 @@ public class MobEvents {
     @SubscribeEvent
     public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
         LivingEntity entity = event.getEntity();
-        Level world = entity.level;
+        Level world = entity.level();
         if (!world.isClientSide()) {
             if (entity.getItemBySlot(EquipmentSlot.HEAD).is(OFItems.STRAW_HAT.get())) {
                 int radius = 40;
@@ -189,7 +189,7 @@ public class MobEvents {
         Mob mobB = event.getParentB();
         Player player = event.getCausedByPlayer();
         if (player != null && player.getItemBySlot(EquipmentSlot.HEAD).is(OFItems.STRAW_HAT.get()) && mob instanceof Animal) {
-            Level world = mob.getLevel();
+            Level world = mob.level();
             if (world instanceof ServerLevel level && mobA instanceof Animal animalParentA && mobB instanceof Animal animalParentB){
                 RandomSource random = world.getRandom();
                 int tries = 0;

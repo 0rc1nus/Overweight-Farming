@@ -1,8 +1,11 @@
 package net.orcinus.overweightfarming.data;
 
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -26,12 +29,17 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class OFBlockLootTables extends BlockLoot {
+public class OFBlockLootTables extends BlockLootSubProvider {
+
+    public OFBlockLootTables() {
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+    }
 
     @Override
-    protected void addTables() {
+    protected void generate() {
         this.add(OFBlocks.ALLIUM_BUSH.get(), (block) -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
         this.dropSelf(OFBlocks.HALF_SEEDED_PEELED_MELON.get());
         this.simpleOverweightCropDrop(OFBlocks.OVERWEIGHT_APPLE.get(), Items.APPLE);

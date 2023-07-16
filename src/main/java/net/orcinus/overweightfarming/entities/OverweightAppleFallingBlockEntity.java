@@ -2,6 +2,7 @@ package net.orcinus.overweightfarming.entities;
 
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
@@ -40,10 +41,10 @@ public class OverweightAppleFallingBlockEntity extends FallingBlockEntity {
     public boolean causeFallDamage(float p_149643_, float p_149644_, DamageSource p_149645_) {
         int i = Mth.ceil(p_149643_ - 1.0F);
         Predicate<Entity> predicate = EntitySelector.NO_SPECTATORS;
-        DamageSource damagesource = DamageSource.FALLING_BLOCK;
+        DamageSource damagesource = this.damageSources().fallingBlock(this);
         int value = this.isGolden ? 2 : 1;
         float f = (float)Math.min(Mth.floor((float)i * 1 * value), 2 * value);
-        this.level.getEntities(this, this.getBoundingBox(), predicate).forEach((entity) -> {
+        this.level().getEntities(this, this.getBoundingBox(), predicate).forEach((entity) -> {
             if (entity instanceof LivingEntity) {
                 this.dropItem = false;
                 entity.hurt(damagesource, f);

@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
@@ -26,7 +27,7 @@ public class OverweightOnionBlock extends CropFullBlock {
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter world, BlockPos blockPos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos blockPos, BlockState state, boolean isClient) {
         return world.getBlockState(blockPos.above()).isAir() && world.getBlockState(blockPos.above(2)).isAir();
     }
 

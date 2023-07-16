@@ -1,26 +1,29 @@
 package net.orcinus.overweightfarming.data;
 
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.init.OFBlockTags;
 import net.orcinus.overweightfarming.init.OFBlocks;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.CompletableFuture;
+
 public class OFBlockTagsProvider extends BlockTagsProvider {
 
-    public OFBlockTagsProvider(DataGenerator dataGenerator, @Nullable ExistingFileHelper existingFileHelper) {
-        super(dataGenerator, OverweightFarming.MODID, existingFileHelper);
+    public OFBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, OverweightFarming.MODID, existingFileHelper);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider provider) {
         this.tag(OFBlockTags.OVERWEIGHT_APPLE_LEAVES).add(Blocks.OAK_LEAVES, Blocks.DARK_OAK_LEAVES);
         this.tag(OFBlockTags.OVERWEIGHT_OBSTACLES).add(Blocks.WITHER_ROSE, Blocks.POTTED_WITHER_ROSE);
-        this.tag(BlockTags.REPLACEABLE_PLANTS).add(OFBlocks.ALLIUM_BUSH.get());
+        this.tag(BlockTags.REPLACEABLE).add(OFBlocks.ALLIUM_BUSH.get());
         this.tag(BlockTags.TALL_FLOWERS).add(OFBlocks.ALLIUM_BUSH.get());
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
                 OFBlocks.OVERWEIGHT_BEETROOT.get(),
