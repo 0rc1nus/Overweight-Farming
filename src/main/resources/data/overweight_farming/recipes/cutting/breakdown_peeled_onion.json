@@ -15,7 +15,7 @@
   ],
   "tool": {
     "type": "farmersdelight:tool",
-    "tag": "fabric:tools/hoes"
+    "tag": "c:hoes"
   },
   "result": [
     {
