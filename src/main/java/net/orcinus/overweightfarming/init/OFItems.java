@@ -1,19 +1,17 @@
 package net.orcinus.overweightfarming.init;
 
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Items;
-import net.orcinus.overweightfarming.OverweightFarming;
-import net.orcinus.overweightfarming.items.MelonJuiceItem;
-import net.orcinus.overweightfarming.items.StrawHatItem;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.orcinus.overweightfarming.OverweightFarming;
+import net.orcinus.overweightfarming.items.MelonJuiceItem;
+import net.orcinus.overweightfarming.items.StrawHatItem;
 
 @Mod.EventBusSubscriber(modid = OverweightFarming.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class OFItems {
