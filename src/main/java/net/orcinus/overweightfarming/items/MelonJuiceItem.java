@@ -19,7 +19,7 @@ public class MelonJuiceItem extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity entity) {
         super.finishUsingItem(stack, world, entity);
-        entity.heal(3);
+        entity.heal(2);
         if (stack.isEmpty()) {
             return new ItemStack(Items.GLASS_BOTTLE);
         } else {
