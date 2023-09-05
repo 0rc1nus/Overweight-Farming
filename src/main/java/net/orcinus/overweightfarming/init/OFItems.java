@@ -1,8 +1,10 @@
 package net.orcinus.overweightfarming.init;
 
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -17,7 +19,7 @@ public class OFItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OverweightFarming.MODID);
 
     public static final RegistryObject<Item> STRAW_HAT = ITEMS.register("straw_hat", () -> new StrawHatItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MELON_JUICE = ITEMS.register("melon_juice", () -> new MelonJuiceItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> MELON_JUICE = ITEMS.register("melon_juice", () -> new MelonJuiceItem(new Item.Properties().stacksTo(16).craftRemainder(Items.GLASS_BOTTLE).food(new FoodProperties.Builder().alwaysEat().nutrition(3).saturationMod(0.6F).build())));
     public static final RegistryObject<Item> VEGETABLE_PEELS = ITEMS.register("vegetable_peels", () -> new Item(new Item.Properties()));
 
 }
