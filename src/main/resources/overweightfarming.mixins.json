@@ -1,18 +1,14 @@
 {
   "required": true,
   "package": "net.orcinus.overweightfarming.mixin",
-  "plugin": "net.orcinus.overweightfarming.OFMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "minVersion": "0.8",
   "mixins": [
     "AnimalEntityMixin",
-    "ConfiguredFeatureUtilMixin",
+    "ConfiguredFeaturesMixin",
     "CropBlockMixin",
     "LivingEntityMixin",
-    "TreeDecoratorTypeInvoker",
-    "TreeFeatureConfigMixin",
-    "compat.FruitBearingYmpeLogBlockMixin",
-    "compat.PomegranateLeavesBlockMixin"
+    "TreeFeatureConfigMixin"
   ],
   "client": [
     "ContinuousFallingParticleMixin",

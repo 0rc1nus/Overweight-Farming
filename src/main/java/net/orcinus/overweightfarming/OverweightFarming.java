@@ -7,6 +7,7 @@ import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.advancement.criterion.Criteria;
@@ -16,20 +17,21 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.BoneMealItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import net.minecraft.world.event.GameEvent;
@@ -42,6 +44,13 @@ import java.util.function.Supplier;
 
 public class OverweightFarming implements ModInitializer {
     public static final String MODID = "overweight_farming";
+
+    public static Identifier id(String id) {
+        return new Identifier(MODID, id);
+    }
+
+    public static final RegistryKey<ItemGroup> ITEM_GROUP = RegistryKey.of(RegistryKeys.ITEM_GROUP, id(MODID));
+
     public static final Supplier<BiMap<Block, Block>> WAXABLES = Suppliers.memoize(() -> ImmutableBiMap.<Block, Block>builder()
             .put(OFObjects.SEEDED_PEELED_MELON, OFObjects.WAXED_SEEDED_PEELED_MELON)
             .put(OFObjects.HALF_SEEDED_PEELED_MELON, OFObjects.WAXED_HALF_SEEDED_PEELED_MELON)
@@ -72,8 +81,12 @@ public class OverweightFarming implements ModInitializer {
         OFLootTables.init();
         OFTrades.init();
 
+        Registry.register(Registries.ITEM_GROUP, ITEM_GROUP, FabricItemGroup.builder()
+                .icon(() -> new ItemStack(OFObjects.OVERWEIGHT_BEETROOT))
+                .displayName(Text.translatable(MODID + ".group.main"))
+                .build());
+
         UseBlockCallback.EVENT.register(this::stripMelon);
-        UseBlockCallback.EVENT.register(this::growBloodroot);
         UseEntityCallback.EVENT.register(this::interactPig);
 
         ServerPlayNetworking.registerGlobalReceiver(C2SFluffPacket.ID, C2SFluffPacket::handle);
@@ -104,35 +117,6 @@ public class OverweightFarming implements ModInitializer {
                     return ActionResult.PASS;
                 }
             }
-        }
-        return ActionResult.PASS;
-    }
-
-    private ActionResult growBloodroot(PlayerEntity player, World world, Hand hand, BlockHitResult blockHitResult) {
-        Identifier identifier = new Identifier("bwplus", "bloodroot");
-        if (FabricLoader.getInstance().isModLoaded("bwplus") && Registry.BLOCK.containsId(identifier)) {
-            if (world.getBlockState(blockHitResult.getBlockPos()).isOf(Registry.BLOCK.get(identifier))) {
-                if (player.getMainHandStack().getItem() instanceof BoneMealItem) {
-                    if (!player.isCreative()) {
-                        player.getMainHandStack().decrement(1);
-                    }
-
-                    if (!world.isClient) {
-                        world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, blockHitResult.getBlockPos(), 0);
-                    }
-                    BoneMealItem.createParticles(world, blockHitResult.getBlockPos(), 8);
-
-                    if (world.getRandom().nextFloat() > 0.75F) {
-                        world.setBlockState(blockHitResult.getBlockPos(), OFObjects.OVERWEIGHT_BLOODROOT.getDefaultState(), Block.NOTIFY_ALL);
-                        if (world.getBlockState(blockHitResult.getBlockPos().up()).isAir()) {
-                            world.setBlockState(blockHitResult.getBlockPos().up(), OFObjects.OVERWEIGHT_BLOODROOT_STEM.getDefaultState(), Block.NOTIFY_ALL);
-                        }
-                    }
-                    return ActionResult.SUCCESS;
-
-                }
-            }
-
         }
         return ActionResult.PASS;
     }

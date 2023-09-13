@@ -58,10 +58,6 @@ repositories {
         url = "https://maven.blamejared.com"
     }
     maven {
-        name = 'Ladysnake Mods'
-        url = 'https://ladysnake.jfrog.io/artifactory/mods'
-    }
-    maven {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
     }
@@ -100,8 +96,8 @@ repositories {
         url "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven"
     }
     maven {
-        name "cardinal components"
-        url "https://ladysnake.jfrog.io/artifactory/mods"
+        name = 'Ladysnake Mods'
+        url = 'https://maven.ladysnake.org/releases'
     }
 }
 
@@ -116,6 +112,7 @@ dependencies {
     //modImplementation "curse.maven:immersive-weathering-fabric-571035:${project.iw_version}"
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     modImplementation "curse.maven:farmers-delight-482834:${project.farmers_delight_version}"
+    /*
     modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cardinal_components_version}"
     include "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cardinal_components_version}"
     modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cardinal_components_version}"
@@ -135,6 +132,8 @@ dependencies {
     modCompileOnly("com.github.virtuoel:pehkui:${project.pehkui_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+
+     */
 /*
     modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
     include "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"

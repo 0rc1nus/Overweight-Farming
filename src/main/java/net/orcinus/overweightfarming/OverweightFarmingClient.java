@@ -25,7 +25,6 @@ public class OverweightFarmingClient implements ClientModInitializer {
                 OFObjects.OVERWEIGHT_BEETROOT_STEM,
                 OFObjects.OVERWEIGHT_CARROT_STEM,
                 OFObjects.OVERWEIGHT_POTATO_STEM,
-                OFObjects.OVERWEIGHT_BLOODROOT_STEM,
                 OFObjects.OVERWEIGHT_MANDRAKE_STEM,
                 OFObjects.OVERWEIGHT_GARLIC_STEM,
                 OFObjects.OVERWEIGHT_APPLE_STEM,

@@ -37,13 +37,13 @@ public class CropFullBlock extends PlantBlock implements Fertilizable {
     }
 
     @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-        return !world.getBlockState(pos.up()).isOf(this.stemBlock);
+    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
+        return true;
     }
 
     @Override
-    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return true;
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+        return !world.getBlockState(pos.up()).isOf(this.stemBlock);
     }
 
     @Override

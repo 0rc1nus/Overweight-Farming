@@ -6,6 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
+import net.orcinus.overweightfarming.OFConfig;
 import net.orcinus.overweightfarming.common.registry.OFObjects;
 import net.orcinus.overweightfarming.common.registry.OFTags;
 import net.orcinus.overweightfarming.common.registry.OFWorldGenerators;
@@ -40,20 +41,18 @@ public class AppleTreeDecorator extends TreeDecorator {
     public void generate(Generator generator) {
         Random random = generator.getRandom();
         int height = generator.getLogPositions().size();
-        if ((random.nextFloat() < this.smallTreeProbability) || ((random.nextFloat() < this.largeTreeProbability) && height > 6)) {
+        float configPercent = (float)(OFConfig.overweightApplePercent / 100);
+        float smallTreeProbability = this.smallTreeProbability * configPercent;
+        float largeTreeProbability = this.largeTreeProbability * configPercent;
+
+        if ((random.nextFloat() < smallTreeProbability) || ((random.nextFloat() < largeTreeProbability) && height > 6)) {
             List<BlockPos> list = generator.getLeavesPositions();
             if (!list.isEmpty()) {
-                List<BlockPos> list3 = list.stream()
-                        .filter((pos) -> generator.isAir(pos.down()) && generator.isAir(pos.down(2)) && generator.isAir(pos.down(3)) && generator.getWorld()
-                                .testBlockState(pos, state -> state.isIn(OFTags.OVERWEIGHT_APPLE_LEAVES)))
-                        .collect(Collectors.toList());
+                List<BlockPos> list3 = list.stream().filter((pos) -> generator.isAir(pos.down()) && generator.isAir(pos.down(2)) && generator.isAir(pos.down(3)) && generator.getWorld().testBlockState(pos, state -> state.isIn(OFTags.OVERWEIGHT_APPLE_LEAVES))).collect(Collectors.toList());
                 if (!list3.isEmpty()) {
                     Collections.shuffle(list3);
                     Optional<BlockPos> optional = list3.stream().findFirst();
-                    if (optional.isPresent()) {
-                        generator.replace(optional.get().down(), OFObjects.OVERWEIGHT_APPLE_STEM.getDefaultState());
-                        generator.replace(optional.get().down().down(), OFObjects.OVERWEIGHT_APPLE.getDefaultState());
-                    }
+                    optional.ifPresent(blockPos -> generator.replace(blockPos.down(), OFObjects.OVERWEIGHT_APPLE.getDefaultState()));
                 }
             }
         }

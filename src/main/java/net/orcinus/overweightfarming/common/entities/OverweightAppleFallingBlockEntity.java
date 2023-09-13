@@ -42,10 +42,10 @@ public class OverweightAppleFallingBlockEntity extends FallingBlockEntity {
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
         int i = MathHelper.ceil(fallDistance - 1.0F);
         Predicate<Entity> predicate = EntityPredicates.EXCEPT_SPECTATOR;
-        DamageSource damagesource = DamageSource.FALLING_BLOCK;
+        DamageSource damagesource = getWorld().getDamageSources().fallingBlock(null);
         int value = this.isGolden ? 2 : 1;
         float f = (float) Math.min(MathHelper.floor((float) i * 1 * value), 2 * value);
-        this.world.getOtherEntities(this, this.getBoundingBox(), predicate).forEach((entity) -> {
+        this.getWorld().getOtherEntities(this, this.getBoundingBox(), predicate).forEach((entity) -> {
             if (entity instanceof LivingEntity) {
                 this.dropItem = false;
                 entity.damage(damagesource, f);

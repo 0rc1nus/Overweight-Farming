@@ -1,0 +1,8 @@
+// 1.20.1	2023-09-13T17:50:17.28148376	Overweight Farming/Tags for minecraft:block
+be9717308e2c8b7e6d3c38d5cf6a3d0ed2731d14 data/minecraft/tags/blocks/tall_flowers.json
+4ed47ef2db1b8d5f84d58445caf71664b93afdb5 data/overweight_farming/tags/blocks/overweight_obstacles.json
+be9717308e2c8b7e6d3c38d5cf6a3d0ed2731d14 data/minecraft/tags/blocks/replaceable.json
+d958efb85f14813b10ebe50c5ff8f2e9fc579552 data/minecraft/tags/blocks/mineable/hoe.json
+208c5a8e396768ef376669581998d5158de4a5ac data/overweight_farming/tags/blocks/overweight_compat.json
+c979cb2517669d1a6a275eb29b19375a61c4861a data/minecraft/tags/blocks/mineable/axe.json
+bc481a4d8678a746acda3aa1262cf0e020df8419 data/overweight_farming/tags/blocks/overweight_apple_leaves.json

@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -19,7 +20,6 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -115,8 +115,9 @@ public class OverweightWeedBlock extends CropFullBlock {
         if (state.contains(FLUFF) && state.get(FLUFF)) {
             entity.slowMovement(state, new Vec3d(0.5D, 0.5D, 0.5D));
             if (!world.isClient) {
-                BlockPos blockPosNormalized = pos.add(new Vec3i(0.5F, 0.5F, 0.5F));
-                double distance = blockPosNormalized.getSquaredDistance(entity.getPos());
+                var vec = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
+                var blockPosNormalized = vec.add(new Vec3d(0.5F, 0.5F, 0.5F));
+                double distance = blockPosNormalized.squaredDistanceTo(entity.getPos());
                 if (distance < 0.75D) {
                     summonFluffParticle( world, pos, entity);
                     world.breakBlock(pos, false);
@@ -216,7 +217,7 @@ public class OverweightWeedBlock extends CropFullBlock {
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (!state.canPlaceAt(world, pos)) {
-            world.createAndScheduleBlockTick(pos, this, 1);
+            world.scheduleBlockTick(pos, this, 1);
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }

@@ -1,6 +1,7 @@
 package net.orcinus.overweightfarming.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
@@ -34,9 +35,10 @@ public class OFModelProvider extends FabricModelProvider {
 
     public static final Model ORIENTABLE_VERTICAL = block("orientable_vertical", TextureKey.FRONT, TextureKey.SIDE);
 
-    public OFModelProvider(FabricDataGenerator dataGenerator) {
-        super(dataGenerator);
+    public OFModelProvider(FabricDataOutput output) {
+        super(output);
     }
+
 
     public static TextureMap bakedPotatoMap(Block block) {
         return (new TextureMap()).put(TextureKey.PARTICLE, getSubId(block, "_top")).put(TextureKey.DOWN, getSubId(block, "_bottom")).put(TextureKey.UP, getSubId(block, "_top")).put(TextureKey.NORTH, getSubId(block, "_north_south")).put(TextureKey.EAST, getSubId(block, "_east_west")).put(TextureKey.SOUTH, getSubId(block, "_north_south")).put(TextureKey.WEST, getSubId(block, "_east_west"));
@@ -55,7 +57,6 @@ public class OFModelProvider extends FabricModelProvider {
         //STEMS
         blockStateModelGenerator.registerTintableCross(OFObjects.OVERWEIGHT_APPLE_STEM, BlockStateModelGenerator.TintType.TINTED);
         blockStateModelGenerator.registerTintableCross(OFObjects.OVERWEIGHT_BEETROOT_STEM, BlockStateModelGenerator.TintType.TINTED);
-        blockStateModelGenerator.registerTintableCross(OFObjects.OVERWEIGHT_BLOODROOT_STEM, BlockStateModelGenerator.TintType.TINTED);
         blockStateModelGenerator.registerTintableCross(OFObjects.OVERWEIGHT_CABBAGE_STEM, BlockStateModelGenerator.TintType.TINTED);
         blockStateModelGenerator.registerTintableCross(OFObjects.OVERWEIGHT_CARROT_STEM, BlockStateModelGenerator.TintType.TINTED);
         blockStateModelGenerator.registerTintableCross(OFObjects.OVERWEIGHT_GARLIC_STEM, BlockStateModelGenerator.TintType.TINTED);

@@ -36,17 +36,19 @@ public class StrawHatItem extends ArmorItem {
     });
 
     public StrawHatItem(Settings properties) {
-        super(MATERIAL, EquipmentSlot.HEAD, properties);
+        super(MATERIAL, Type.HELMET, properties);
     }
 
     private static class StrawHatMaterial implements ArmorMaterial {
+
+
         @Override
-        public int getDurability(EquipmentSlot slot) {
+        public int getDurability(Type type) {
             return 5;
         }
 
         @Override
-        public int getProtectionAmount(EquipmentSlot slot) {
+        public int getProtection(Type type) {
             return 1;
         }
 

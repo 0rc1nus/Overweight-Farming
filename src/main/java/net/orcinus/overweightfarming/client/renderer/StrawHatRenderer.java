@@ -71,7 +71,7 @@ public class StrawHatRenderer implements ArmorRenderer {
         if (armorModel == null) {
             armorModel = new StrawHatModel<>(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(StrawHatModel.LAYER_LOCATION));
         } else {
-            contextModel.setAttributes(armorModel);
+            contextModel.copyStateTo(armorModel);
             armorModel.setVisible(false);
             armorModel.head.visible = slot == EquipmentSlot.HEAD;
 

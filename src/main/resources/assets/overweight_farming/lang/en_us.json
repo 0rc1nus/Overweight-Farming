@@ -62,5 +62,7 @@
   "block.overweight_farming.overweight_bloodroot_block": "Overweight Bloodroot Block",
 
   "block.overweight_farming.overweight_pommegranate": "Overweight Pomegranate Block",
-  "block.overweight_farming.overweight_ympe_fruit": "Overweight Ympe Fruit Block"
+  "block.overweight_farming.overweight_ympe_fruit": "Overweight Ympe Fruit Block",
+
+  "overweight_farming.itemGroup.main": "Overweight Farming"
 }

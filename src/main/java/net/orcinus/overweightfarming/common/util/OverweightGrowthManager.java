@@ -6,16 +6,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.TallPlantBlock;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.util.DripstoneHelper;
 import net.orcinus.overweightfarming.OFConfig;
-import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.common.blocks.CropFullBlock;
 import net.orcinus.overweightfarming.common.blocks.OverweightCarrotBlock;
 import net.orcinus.overweightfarming.common.registry.OFObjects;
@@ -37,7 +36,6 @@ public record OverweightGrowthManager(Random random) {
             map.put(getCompatBlock("farmersdelight", "onions"), Pair.of(Pair.of(OFConfig.allowOverweightOnion, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_ONION));
             map.put(getCompatBlock("bewitchment", "mandrake"), Pair.of(Pair.of(OFConfig.allowOverweightMandrake, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_MANDRAKE));
             map.put(getCompatBlock("bewitchment", "garlic"), Pair.of(Pair.of(OFConfig.allowOverweightGarlic, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_GARLIC));
-            map.put(getCompatBlock("bwplus", "bloodroot"), Pair.of(Pair.of(OFConfig.allowOverweightBloodroot, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_BLOODROOT));
             map.put(getCompatBlock("immersive_weathering", "weeds"), Pair.of(Pair.of(OFConfig.allowOverweightWeeds, OverweightType.SIMPLE), OFObjects.OVERWEIGHT_WEED));
             map.put(getCompatBlock("hedgehog", "kiwi_vines"), Pair.of(Pair.of(OFConfig.allowOverweightKiwi, OverweightType.DEFAULT), OFObjects.OVERWEIGHT_KIWI));
         });
@@ -82,7 +80,7 @@ public record OverweightGrowthManager(Random random) {
 
     @Nullable
     public Block getCompatBlock(String modid, String name) {
-        return Registry.BLOCK.get(new Identifier(modid, name));
+        return Registries.BLOCK.get(new Identifier(modid, name));
     }
 
     private void simpleOverweightGrowth(ServerWorld world, BlockPos blockPos, BlockState overweightCrop, BlockState stemBlock) {

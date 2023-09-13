@@ -6,10 +6,12 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.render.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.*;
 import net.orcinus.overweightfarming.common.networking.c2s.C2SFluffPacket;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class FluffParticle extends SpriteBillboardParticle {
     private final SpriteProvider spriteProvider;
@@ -41,17 +43,17 @@ public class FluffParticle extends SpriteBillboardParticle {
         this.velocityZ *= 0.99D;
 
         this.prevAngle = this.angle;
-        if (this.onGround || this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+        if (this.onGround || this.world.getFluidState(new BlockPos((int)this.x, (int)this.y, (int)this.z)).isIn(FluidTags.WATER)) {
             this.velocityX = 0;
             this.velocityY = 0;
             this.velocityZ = 0;
-            C2SFluffPacket.send(new BlockPos(this.x, this.y, this.z));
+            C2SFluffPacket.send(new BlockPos((int)this.x, (int)this.y, (int)this.z));
             this.markDead();
         }
     }
 
     public BlockPos getTargetPosition() {
-        return new BlockPos(this.xTarget, this.yTarget + 0.5, this.zTarget);
+        return new BlockPos((int)this.xTarget, (int)(this.yTarget + 0.5), (int)this.zTarget);
     }
 
     private void selectBlockTarget() {
@@ -59,7 +61,7 @@ public class FluffParticle extends SpriteBillboardParticle {
         this.yTarget = this.y + random.nextGaussian() * 10;
         this.zTarget = this.z + random.nextGaussian() * 10;
 
-        BlockPos targetPos = new BlockPos(this.xTarget, this.yTarget, this.zTarget);
+        BlockPos targetPos = new BlockPos((int)this.xTarget, (int)this.yTarget, (int)this.zTarget);
         if (this.world.getBlockState(targetPos).isFullCube(world, targetPos)) {
             return;
         }
@@ -72,24 +74,24 @@ public class FluffParticle extends SpriteBillboardParticle {
         float f = (float) (MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
         float g = (float) (MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
         float h = (float) (MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-        Quaternion quaternion2;
+        Quaternionf quaternion2;
         if (this.angle == 0.0F) {
             quaternion2 = camera.getRotation();
         } else {
-            quaternion2 = new Quaternion(camera.getRotation());
+            quaternion2 = new Quaternionf(camera.getRotation());
             float i = MathHelper.lerp(tickDelta, this.prevAngle, this.angle);
-            quaternion2.hamiltonProduct(Vec3f.POSITIVE_Z.getRadialQuaternion(i));
+            quaternion2.mul(RotationAxis.POSITIVE_Z.rotation(i));
         }
 
-        Vec3f Vec3f = new Vec3f(-1.0F, -1.0F, 0.0F);
+        Vector3f Vec3f = new Vector3f(-1.0F, -1.0F, 0.0F);
         Vec3f.rotate(quaternion2);
-        Vec3f[] Vec3fs = new Vec3f[]{new Vec3f(-1.0F, -1.0F, 0.0F), new Vec3f(-1.0F, 1.0F, 0.0F), new Vec3f(1.0F, 1.0F, 0.0F), new Vec3f(1.0F, -1.0F, 0.0F)};
+        Vector3f[] Vec3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
         float j = this.getSize(tickDelta);
 
         for (int k = 0; k < 4; ++k) {
-            Vec3f Vec3f2 = Vec3fs[k];
+            Vector3f Vec3f2 = Vec3fs[k];
             Vec3f2.rotate(quaternion2);
-            Vec3f2.scale(j);
+            Vec3f2.mul(j);
             Vec3f2.add(f, g, h);
         }
 
@@ -99,10 +101,10 @@ public class FluffParticle extends SpriteBillboardParticle {
         float maxV = this.getMaxV();
         int l = 15728880;
 
-        vertexConsumer.vertex(Vec3fs[0].getX(), Vec3fs[0].getY(), Vec3fs[0].getZ()).texture(maxU, maxV).color(red, green, blue, alpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[1].getX(), Vec3fs[1].getY(), Vec3fs[1].getZ()).texture(maxU, minV).color(red, green, blue, alpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[2].getX(), Vec3fs[2].getY(), Vec3fs[2].getZ()).texture(minU, minV).color(red, green, blue, alpha).light(l).next();
-        vertexConsumer.vertex(Vec3fs[3].getX(), Vec3fs[3].getY(), Vec3fs[3].getZ()).texture(minU, maxV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[0].x(), Vec3fs[0].y(), Vec3fs[0].z()).texture(maxU, maxV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[1].x(), Vec3fs[1].y(), Vec3fs[1].z()).texture(maxU, minV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[2].x(), Vec3fs[2].y(), Vec3fs[2].z()).texture(minU, minV).color(red, green, blue, alpha).light(l).next();
+        vertexConsumer.vertex(Vec3fs[3].x(), Vec3fs[3].y(), Vec3fs[3].z()).texture(minU, maxV).color(red, green, blue, alpha).light(l).next();
     }
 
     @Override
