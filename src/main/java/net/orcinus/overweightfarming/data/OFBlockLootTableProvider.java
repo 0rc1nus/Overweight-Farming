@@ -32,8 +32,6 @@ public class OFBlockLootTableProvider extends FabricBlockLootTableProvider {
     private static final ConditionJsonProvider FARMERSDELIGHT_LOADED = DefaultResourceConditions.allModsLoaded("farmersdelight");
     private static final ConditionJsonProvider HEDGEHOG_LOADED = DefaultResourceConditions.allModsLoaded("orcinus");
     private static final ConditionJsonProvider BEWITCHMENT_LOADED = DefaultResourceConditions.allModsLoaded("bewitchment");
-    private static final ConditionJsonProvider BEWITCHMENT_PLUS_LOADED = DefaultResourceConditions.allModsLoaded("bwplus");
-    private static final ConditionJsonProvider AYLYTH_LOADED = DefaultResourceConditions.allModsLoaded("aylyth");
 
 
     public OFBlockLootTableProvider(FabricDataOutput dataOutput) {
@@ -42,25 +40,6 @@ public class OFBlockLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-
-    }
-
-    public LootTable.Builder overweightDrops(Block crop, Item product, Item seeds) {
-        LootCondition.Builder conditionalBuilder = MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag((OFTags.OVERWEIGHT_HARVESTABLES)));
-        LootTable.Builder builder = applyExplosionDecay(crop, LootTable.builder()
-                .pool(LootPool.builder().with(ItemEntry.builder(product)
-                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(6.0F, 20.0F)))
-                        .conditionally(conditionalBuilder).alternatively(ItemEntry.builder(crop))))
-        );
-        if (seeds != null) {
-            builder.pool(LootPool.builder().with(ItemEntry.builder(seeds).conditionally(conditionalBuilder)));
-        }
-        return builder;
-    }
-
-    @Override
-    public void accept(BiConsumer<Identifier, LootTable.Builder> biConsumer) {
-
         for (Block block : OFObjects.BLOCKS.keySet().stream().filter(block -> block instanceof PeeledMelonBlock).toList()) {
             this.addDrop(block);
         }
@@ -97,6 +76,24 @@ public class OFBlockLootTableProvider extends FabricBlockLootTableProvider {
         this.addPottedPlantDrops(OFObjects.POTTED_OVERWEIGHT_KIWI);
         this.addPottedPlantDrops(OFObjects.POTTED_OVERWEIGHT_NETHER_WART);
         this.addPottedPlantDrops(OFObjects.POTTED_OVERWEIGHT_ONION);
+    }
+
+    public LootTable.Builder overweightDrops(Block crop, Item product, Item seeds) {
+        LootCondition.Builder conditionalBuilder = MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag((OFTags.OVERWEIGHT_HARVESTABLES)));
+        LootTable.Builder builder = applyExplosionDecay(crop, LootTable.builder()
+                .pool(LootPool.builder().with(ItemEntry.builder(product)
+                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(6.0F, 20.0F)))
+                        .conditionally(conditionalBuilder).alternatively(ItemEntry.builder(crop))))
+        );
+        if (seeds != null) {
+            builder.pool(LootPool.builder().with(ItemEntry.builder(seeds).conditionally(conditionalBuilder)));
+        }
+        return builder;
+    }
+
+    @Override
+    public void accept(BiConsumer<Identifier, LootTable.Builder> biConsumer) {
+        super.accept(biConsumer);
 
         withConditions(biConsumer, FARMERSDELIGHT_LOADED).accept(
                 OFObjects.OVERWEIGHT_CABBAGE.getLootTableId(),
