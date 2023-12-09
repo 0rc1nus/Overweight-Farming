@@ -35,22 +35,4 @@ public class OverweightOnionBlock extends CropFullBlock {
             world.setBlockState(below, Blocks.HANGING_ROOTS.getDefaultState(), 2);
         }
     }
-
-
-    @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        Iterator<Direction> var4 = Direction.Type.HORIZONTAL.iterator();
-        Direction direction;
-        BlockState blockState;
-        do {
-            if (!var4.hasNext()) {
-                BlockState blockState2 = world.getBlockState(pos.down());
-                return (blockState2.isOf(OFObjects.ALLIUM_BUSH) && !world.getBlockState(pos.up()).isLiquid());
-            }
-            direction = var4.next();
-            blockState = world.getBlockState(pos.offset(direction));
-        } while (!blockState.isSolid() && !world.getFluidState(pos.offset(direction)).isIn(FluidTags.LAVA));
-
-        return false;
-    }
 }
