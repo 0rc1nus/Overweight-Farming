@@ -62,7 +62,7 @@ public interface OFObjects {
     Block OVERWEIGHT_GINGER = register("overweight_ginger_block", new CropFullBlock(OVERWEIGHT_GINGER_STEM, FabricBlockSettings.create().strength(1.0F).sounds(BlockSoundGroup.CROP)), true, gen());
     Block PEELED_OVERWEIGHT_GINGER = register("peeled_overweight_ginger_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_GINGER)), true, gen());
    //BLOCKS
-    Block ALLIUM_BUSH = register("allium_bush", new TallFlowerBlock(FabricBlockSettings.create().pistonBehavior(PistonBehavior.DESTROY).strength(1).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), true, new Item.Settings());
+    Block ALLIUM_BUSH = register("allium_bush", new AlliumBushBlock(FabricBlockSettings.create().pistonBehavior(PistonBehavior.DESTROY).strength(1).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS)), true, new Item.Settings());
     Block OVERWEIGHT_ONION = register("overweight_onion_block", new OverweightOnionBlock(ALLIUM_BUSH, FabricBlockSettings.create().pistonBehavior(PistonBehavior.DESTROY).strength(1).strength(1.0F).sounds(BlockSoundGroup.CROP)), true, gen());
     Block PEELED_OVERWEIGHT_ONION = register("peeled_overweight_onion_block", new Block(FabricBlockSettings.copy(OVERWEIGHT_ONION)), true, gen());
     Block OVERWEIGHT_COCOA = register("overweight_cocoa_block", new OverweightCocoaBlock(null, FabricBlockSettings.create().pistonBehavior(PistonBehavior.DESTROY).strength(1).sounds(BlockSoundGroup.CROP).breakInstantly()), true, gen());
