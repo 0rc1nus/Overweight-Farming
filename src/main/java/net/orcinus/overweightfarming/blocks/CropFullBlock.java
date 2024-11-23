@@ -33,6 +33,12 @@ public class CropFullBlock extends BushBlock implements BonemealableBlock {
         return SHAPE;
     }
 
+    @Override
+    public VoxelShape getBlockSupportShape(BlockState state, BlockGetter level, BlockPos pos) {
+        //fixes the issue where CropStemBlocks attached to CropFullBlocks cannot survive neighboring block updates
+        return getShape(state, level, pos, CollisionContext.empty());
+    }
+
     public Block getStemBlock() {
         return this.stemBlock;
     }
