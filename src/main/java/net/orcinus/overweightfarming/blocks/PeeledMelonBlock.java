@@ -9,7 +9,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -69,14 +69,13 @@ public class PeeledMelonBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult p_60508_) {
-        ItemStack stack = player.getItemInHand(hand);
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (seedState != SeedState.SEEDLESS) {
             Block finalBlock = this.seedState == SeedState.SEEDED ? OFBlocks.HALF_SEEDED_PEELED_MELON.get() : OFBlocks.SEEDLESS_PEELED_MELON.get();
             popResource(world, pos, new ItemStack(Items.MELON_SEEDS));
             world.setBlockAndUpdate(pos, finalBlock.defaultBlockState());
             world.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1.0F, 1.4F);
-            return InteractionResult.sidedSuccess(world.isClientSide());
+            return ItemInteractionResult.sidedSuccess(world.isClientSide());
         } else if (stack.getItem() == Items.GLASS_BOTTLE) {
             stack.shrink(1);
             if (stack.isEmpty()) {
@@ -92,9 +91,9 @@ public class PeeledMelonBlock extends Block {
                 }
                 player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
             }
-            return InteractionResult.sidedSuccess(world.isClientSide());
+            return ItemInteractionResult.sidedSuccess(world.isClientSide);
         } else {
-            return super.use(state, world, pos, player, hand, p_60508_);
+            return super.useItemOn(stack, state, world, pos, player, hand, hit);
         }
     }
 

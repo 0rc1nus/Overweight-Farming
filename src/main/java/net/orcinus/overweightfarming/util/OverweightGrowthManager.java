@@ -5,14 +5,15 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.DripstoneUtils;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.orcinus.overweightfarming.blocks.CropFullBlock;
 import net.orcinus.overweightfarming.blocks.OverweightCarrotBlock;
 import net.orcinus.overweightfarming.init.OFBlockTags;
@@ -20,7 +21,6 @@ import net.orcinus.overweightfarming.init.OFBlocks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-import net.minecraft.util.RandomSource;
 
 public record OverweightGrowthManager(RandomSource random) {
 
@@ -71,7 +71,7 @@ public record OverweightGrowthManager(RandomSource random) {
 
     @Nullable
     private Block getCompatBlock(String modid, String name) {
-        return ForgeRegistries.BLOCKS.getValue(new ResourceLocation(modid, name));
+        return BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(modid, name));
     }
 
     private void simpleOverweightGrowth(ServerLevel world, BlockPos blockPos, BlockState overweightCrop, BlockState stemBlock) {

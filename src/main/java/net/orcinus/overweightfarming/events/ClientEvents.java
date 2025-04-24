@@ -1,6 +1,5 @@
 package net.orcinus.overweightfarming.events;
 
-import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -8,24 +7,21 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.common.util.MutableHashedLinkedMap;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.level.block.Blocks;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.client.models.StrawHatModel;
 import net.orcinus.overweightfarming.client.particles.MelonFallProvider;
@@ -38,11 +34,7 @@ import net.orcinus.overweightfarming.init.OFModelLayers;
 import net.orcinus.overweightfarming.init.OFParticleTypes;
 import net.orcinus.overweightfarming.items.StrawHatItem;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-@Mod.EventBusSubscriber(modid = OverweightFarming.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = OverweightFarming.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvents {
 
     @SubscribeEvent
@@ -69,46 +61,50 @@ public class ClientEvents {
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_GINGER.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(OFBlocks.POTTED_OVERWEIGHT_KIWI.get(), RenderType.cutout());
         event.enqueueWork(() -> ItemProperties.register(OFItems.STRAW_HAT.get(),
-                new ResourceLocation(OverweightFarming.MODID, "420"), (stack, world, entity, p_174628_) -> entity != null && StrawHatItem.is420(stack) ? 1.0F : 0.0F)
+                OverweightFarming.id("420"), (stack, world, entity, p_174628_) -> entity != null && StrawHatItem.is420(stack) ? 1.0F : 0.0F)
         );
     }
 
     @SubscribeEvent
     public static void buildCreativeModeTabContents(BuildCreativeModeTabContentsEvent event) {
         ResourceKey<CreativeModeTab> tabKey = event.getTabKey();
-        MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries = event.getEntries();
-        if (tabKey == CreativeModeTabs.BUILDING_BLOCKS) {
-            put(entries, OFBlocks.WAXED_SEEDED_PEELED_MELON.get(), OFBlocks.WAXED_HALF_SEEDED_PEELED_MELON.get(), OFBlocks.WAXED_SEEDLESS_PEELED_MELON.get());
-        }
         if (tabKey == CreativeModeTabs.NATURAL_BLOCKS) {
-            entries.putAfter(new ItemStack(Items.ROSE_BUSH), new ItemStack(OFBlocks.ALLIUM_BUSH.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putBefore(new ItemStack(Items.MOSS_BLOCK), new ItemStack(OFBlocks.VEGETABLE_COMPOST.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        }
-        if (tabKey == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            entries.putBefore(new ItemStack(Items.SADDLE), new ItemStack(OFItems.STRAW_HAT.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(new ItemStack(Items.WARPED_FUNGUS_ON_A_STICK), new ItemStack(OFItems.VEGETABLE_PEELS.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        }
-        if (tabKey == CreativeModeTabs.FOOD_AND_DRINKS) {
-            for (RegistryObject<Block> block : OFBlocks.BLOCKS.getEntries()) {
+            event.insertAfter(new ItemStack(Blocks.MELON), new ItemStack(OFBlocks.SEEDED_PEELED_MELON.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.SEEDED_PEELED_MELON.get()), new ItemStack(OFBlocks.HALF_SEEDED_PEELED_MELON.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.HALF_SEEDED_PEELED_MELON.get()), new ItemStack(OFBlocks.SEEDLESS_PEELED_MELON.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.SEEDLESS_PEELED_MELON.get()), new ItemStack(OFBlocks.WAXED_SEEDED_PEELED_MELON.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.WAXED_SEEDED_PEELED_MELON.get()), new ItemStack(OFBlocks.WAXED_HALF_SEEDED_PEELED_MELON.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.WAXED_HALF_SEEDED_PEELED_MELON.get()), new ItemStack(OFBlocks.WAXED_SEEDLESS_PEELED_MELON.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
+            event.insertBefore(new ItemStack(Items.MOSS_BLOCK), new ItemStack(OFBlocks.VEGETABLE_COMPOST.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
+            event.insertAfter(new ItemStack(Items.JACK_O_LANTERN), new ItemStack(OFBlocks.OVERWEIGHT_BEETROOT.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.OVERWEIGHT_BEETROOT.get()), new ItemStack(OFBlocks.PEELED_OVERWEIGHT_BEETROOT.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.PEELED_OVERWEIGHT_BEETROOT.get()), new ItemStack(OFBlocks.OVERWEIGHT_CARROT.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.OVERWEIGHT_CARROT.get()), new ItemStack(OFBlocks.PEELED_OVERWEIGHT_CARROT.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.PEELED_OVERWEIGHT_CARROT.get()), new ItemStack(OFBlocks.OVERWEIGHT_COCOA.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.OVERWEIGHT_COCOA.get()), new ItemStack(OFBlocks.PEELED_OVERWEIGHT_COCOA.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.PEELED_OVERWEIGHT_COCOA.get()), new ItemStack(OFBlocks.OVERWEIGHT_POTATO.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.OVERWEIGHT_POTATO.get()), new ItemStack(OFBlocks.PEELED_OVERWEIGHT_POTATO.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.PEELED_OVERWEIGHT_POTATO.get()), new ItemStack(OFBlocks.OVERWEIGHT_BAKED_POTATO.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.OVERWEIGHT_BAKED_POTATO.get()), new ItemStack(OFBlocks.OVERWEIGHT_POISONOUS_POTATO.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.OVERWEIGHT_POISONOUS_POTATO.get()), new ItemStack(OFBlocks.OVERWEIGHT_APPLE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.OVERWEIGHT_APPLE.get()), new ItemStack(OFBlocks.OVERWEIGHT_GOLDEN_APPLE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(OFBlocks.OVERWEIGHT_GOLDEN_APPLE.get()), new ItemStack(OFBlocks.OVERWEIGHT_NETHER_WART.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
+            for (DeferredHolder<Block, ? extends Block> block : OFBlocks.BLOCKS.getEntries()) {
                 if (OFBlocks.COMPAT.containsKey(block) && ModList.get().isLoaded(OFBlocks.COMPAT.get(block))) {
-                    put(entries, block.get());
+                    event.insertAfter(new ItemStack(OFBlocks.SEEDLESS_PEELED_MELON.get()), new ItemStack(block.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 }
             }
-            putAfter(entries, Items.PUMPKIN_PIE, OFBlocks.OVERWEIGHT_BEETROOT.get(), OFBlocks.OVERWEIGHT_CARROT.get(), OFBlocks.OVERWEIGHT_COCOA.get(), OFBlocks.OVERWEIGHT_POTATO.get(), OFBlocks.OVERWEIGHT_BAKED_POTATO.get(), OFBlocks.OVERWEIGHT_NETHER_WART.get(), OFBlocks.OVERWEIGHT_POISONOUS_POTATO.get(), OFBlocks.OVERWEIGHT_APPLE.get(), OFBlocks.OVERWEIGHT_GOLDEN_APPLE.get(), OFBlocks.SEEDED_PEELED_MELON.get(), OFBlocks.HALF_SEEDED_PEELED_MELON.get(), OFBlocks.SEEDLESS_PEELED_MELON.get());
-            entries.putAfter(new ItemStack(Items.HONEY_BOTTLE), new ItemStack(OFItems.MELON_JUICE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
-    }
-
-    private static void putAfter(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> map, Item after, ItemLike... item) {
-        List<ItemLike> stream = Lists.newArrayList(Arrays.stream(item).toList());
-        Collections.reverse(stream);
-        stream.forEach(blk -> map.putAfter(new ItemStack(after), new ItemStack(blk), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));
-    }
-
-    private static void put(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> map, ItemLike... item) {
-        List<ItemLike> stream = Lists.newArrayList(Arrays.stream(item).toList());
-        Collections.reverse(stream);
-        stream.forEach(blk -> map.put(new ItemStack(blk), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));
+        if (tabKey == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.insertBefore(new ItemStack(Items.SADDLE), new ItemStack(OFItems.STRAW_HAT), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.WARPED_FUNGUS_ON_A_STICK), new ItemStack(OFItems.VEGETABLE_PEELS.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        }
+        if (tabKey == CreativeModeTabs.FOOD_AND_DRINKS) {
+            event.insertAfter(new ItemStack(Items.HONEY_BOTTLE), new ItemStack(OFItems.MELON_JUICE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        }
     }
 
     @SubscribeEvent

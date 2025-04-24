@@ -1,0 +1,45 @@
+{
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2025-04-23 17:16:31 +1000"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:beach": "2025-04-23 17:16:31 +1000"
+    },
+    "done": false
+  },
+  "minecraft:story/root": {
+    "criteria": {
+      "crafting_table": "2025-04-23 17:16:35 +1000"
+    },
+    "done": true
+  },
+  "overweight_farming:recipes/building_blocks/vegetable_compost": {
+    "criteria": {
+      "has_vegetable_peels": "2025-04-23 17:16:33 +1000"
+    },
+    "done": true
+  },
+  "overweight_farming:recipes/apply_violent_fullmetal_directly_to_compost": {
+    "criteria": {
+      "has_vegetable_compost": "2025-04-23 17:16:44 +1000"
+    },
+    "done": true
+  },
+  "overweight_farming:recipes/misc/vegetable_peels_from_vegetable_compost": {
+    "criteria": {
+      "has_vegetable_compost": "2025-04-23 17:16:44 +1000"
+    },
+    "done": true
+  },
+  "overweight_farming:recipes/apply_fullmetal_directly_to_compost": {
+    "criteria": {
+      "has_vegetable_compost": "2025-04-23 17:16:44 +1000"
+    },
+    "done": true
+  },
+  "DataVersion": 3955
+}

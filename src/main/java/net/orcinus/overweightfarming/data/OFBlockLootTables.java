@@ -1,10 +1,10 @@
 package net.orcinus.overweightfarming.data;
 
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -20,8 +20,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.orcinus.overweightfarming.blocks.CropStemBlock;
 import net.orcinus.overweightfarming.init.OFBlocks;
 import net.orcinus.overweightfarming.init.OFItemTags;
@@ -34,8 +33,8 @@ import java.util.stream.Collectors;
 
 public class OFBlockLootTables extends BlockLootSubProvider {
 
-    public OFBlockLootTables() {
-        super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+    public OFBlockLootTables(HolderLookup.Provider provider) {
+        super(Set.of(), FeatureFlags.VANILLA_SET, provider);
     }
 
     @Override
@@ -84,8 +83,8 @@ public class OFBlockLootTables extends BlockLootSubProvider {
     }
 
     @Nullable
-    private Item getCompatItem(String farmersdelight, String onion) {
-        return ForgeRegistries.ITEMS.getValue(new ResourceLocation(farmersdelight, onion));
+    private Item getCompatItem(String modId, String item) {
+        return BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(modId, item));
     }
 
     private void simpleOverweightSeededCropDrop(@NotNull Block block, Item item, Item seed) {
@@ -114,7 +113,7 @@ public class OFBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return OFBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).filter(block -> !(block instanceof CropStemBlock)).collect(Collectors.toList());
+        return OFBlocks.BLOCKS.getEntries().stream().map(DeferredHolder::get).filter(block -> !(block instanceof CropStemBlock)).collect(Collectors.toList());
     }
 
 }

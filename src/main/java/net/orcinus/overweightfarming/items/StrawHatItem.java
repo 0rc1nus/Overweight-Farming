@@ -14,9 +14,10 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.orcinus.overweightfarming.OverweightFarming;
 import net.orcinus.overweightfarming.client.models.StrawHatModel;
+import net.orcinus.overweightfarming.init.OFArmorMaterials;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,11 +25,10 @@ import java.util.LinkedList;
 import java.util.function.Consumer;
 
 public class StrawHatItem extends ArmorItem {
-    public static final StrawHatMaterial MATERIAL = new StrawHatMaterial();
-    private static final ResourceLocation TEXTURE = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat.png");
-    private static final ResourceLocation TRANS_TEXTURE = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/trans_rights.png");
-    private static final ResourceLocation STRAW_TEXTURE = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat_straw.png");
-    private static final ResourceLocation TEXTURE_420 = new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/420.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat.png");
+    private static final ResourceLocation TRANS_TEXTURE = ResourceLocation.fromNamespaceAndPath(OverweightFarming.MODID, "textures/entity/straw_hat/trans_rights.png");
+    private static final ResourceLocation STRAW_TEXTURE = ResourceLocation.fromNamespaceAndPath(OverweightFarming.MODID, "textures/entity/straw_hat/straw_hat_straw.png");
+    private static final ResourceLocation TEXTURE_420 = ResourceLocation.fromNamespaceAndPath(OverweightFarming.MODID, "textures/entity/straw_hat/420.png");
     public static final LinkedList<String> LISTS = Util.make(Lists.newLinkedList(), list -> {
         list.add("accessible_knowledge");
         list.add("amogus");
@@ -51,18 +51,17 @@ public class StrawHatItem extends ArmorItem {
     });
 
     public StrawHatItem(Type slot, Properties properties) {
-        super(MATERIAL, slot, properties);
+        super(OFArmorMaterials.STRAW, slot, properties);
     }
 
-    @Nullable
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+    public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
         for (String id : LISTS) {
             String namingContent = id.replace('_', ' ');
             if (!getContents(stack).equals(namingContent)) continue;
-            return getContents(stack).equals(namingContent) ? new ResourceLocation(OverweightFarming.MODID, "textures/entity/straw_hat/" + id + ".png").toString() : TEXTURE.toString();
+            return getContents(stack).equals(namingContent) ? OverweightFarming.id("textures/entity/straw_hat/" + id + ".png") : TEXTURE;
         }
-        return is420(stack) ? TEXTURE_420.toString() : isStraw(stack) ? STRAW_TEXTURE.toString() : isTrans(stack) ? TRANS_TEXTURE.toString() : TEXTURE.toString();
+        return is420(stack) ? TEXTURE_420 : isStraw(stack) ? STRAW_TEXTURE : isTrans(stack) ? TRANS_TEXTURE : TEXTURE;
     }
 
     public static boolean is420(ItemStack stack) {
@@ -86,53 +85,10 @@ public class StrawHatItem extends ArmorItem {
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 return new StrawHatModel<>(StrawHatModel.createBodyLayer().bakeRoot());
             }
         });
-    }
-
-    private static class StrawHatMaterial implements ArmorMaterial {
-
-        @Override
-        public int getDurabilityForType(Type p_266807_) {
-            return 5;
-        }
-
-        @Override
-        public int getDefenseForType(Type p_267168_) {
-            return 1;
-        }
-
-        @Override
-        public int getEnchantmentValue() {
-            return 0;
-        }
-
-        @Override
-        public SoundEvent getEquipSound() {
-            return SoundEvents.ARMOR_EQUIP_LEATHER;
-        }
-
-        @Override
-        public Ingredient getRepairIngredient() {
-            return Ingredient.of(Items.WHEAT);
-        }
-
-        @Override
-        public String getName() {
-            return "straw";
-        }
-
-        @Override
-        public float getToughness() {
-            return 0;
-        }
-
-        @Override
-        public float getKnockbackResistance() {
-            return 0;
-        }
     }
 }
 

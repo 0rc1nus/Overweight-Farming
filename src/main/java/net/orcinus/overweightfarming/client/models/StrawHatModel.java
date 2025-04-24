@@ -11,8 +11,8 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class StrawHatModel<T extends LivingEntity> extends HumanoidModel<T> {
@@ -36,14 +36,15 @@ public class StrawHatModel<T extends LivingEntity> extends HumanoidModel<T> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int light, int overlay, int color) {
         poseStack.pushPose();
         this.Head.copyFrom(this.head);
         if (this.young) {
             poseStack.scale(0.75F, 0.75F, 0.75F);
             this.Head.setPos(0.0F, 15.0F, 0.0F);
         }
-        this.Head.render(poseStack, buffer, packedLight, packedOverlay);
+        this.Head.render(poseStack, buffer, light, overlay);
         poseStack.popPose();
     }
+
 }

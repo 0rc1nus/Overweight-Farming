@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "overweight_farming:peeled_overweight_onion_block"
+    }
+  ],
+  "tool": {
+    "type": "farmersdelight:item_ability",
+    "action": "hoe_dig"
+  },
+  "result": [
+    {
+      "item": {
+        "count": 10,
+        "id": "farmersdelight:onion"
+      }
+    }
+  ]
+}

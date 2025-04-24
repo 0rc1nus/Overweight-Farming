@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "waxed_seeded_peeled_melon",
+  "ingredients": [
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "overweight_farming:seeded_peeled_melon"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "overweight_farming:waxed_seeded_peeled_melon"
+  }
+}

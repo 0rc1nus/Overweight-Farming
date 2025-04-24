@@ -1,124 +1,82 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = "https://files.minecraftforge.net/maven" }
-        maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
-        mavenCentral()
+plugins {
+    id "java-library"
+    id "idea"
+    id "maven-publish"
+    id "net.neoforged.gradle.userdev" version "7.0.182"
+}
+
+version = "${project.minecraft_version}-${project.mod_version}"
+group = "net.orcinus.overweightfarming"
+
+base {
+    archivesName = project.mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+minecraft.accessTransformers.file rootProject.file("src/main/resources/META-INF/accesstransformer.cfg")
+
+runs {
+    configureEach {
+        systemProperty "forge.logging.markers", "REGISTRIES"
+        systemProperty "forge.logging.console.level", "debug"
     }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: "${project.forgegradle_version}", changing: true
-        classpath group: "org.spongepowered", name: "mixingradle", version: "0.7-SNAPSHOT"
-    }
-}
-
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'maven-publish'
-apply plugin: "org.spongepowered.mixin"
-
-mixin {
-    add sourceSets.main, "overweight_farming.refmap.json"
-}
-
-group = 'net.orcinus.overweight_farming'
-version = "${project.minecraft_version}-${project.mod_version}-forge"
-
-java {
-    archivesBaseName = 'overweightfarming'
-    toolchain.languageVersion = JavaLanguageVersion.of(17)
-}
-
-minecraft {
-    mappings channel: 'official', version: '1.20.1'
-
-     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-    runs {
-        client {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-
-            arg "-mixin.config=overweight_farming.mixins.json"
-
-            mods {
-                overweight_farming {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-
-            arg "-mixin.config=overweight_farming.mixins.json"
-
-            mods {
-                overweight_farming {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-
-            property 'forge.logging.console.level', 'debug'
-            property "mixin.env.remapRefMap", "true"
-            property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
-
-            args '--mod', 'overweight_farming', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            mods {
-                overweight_farming {
-                    source sourceSets.main
-                }
-            }
+    client {
+        modSources {
+            add project.sourceSets.main
         }
     }
+    server {
+        modSources {
+            add project.sourceSets.main
+        }
+    }
+    data {
+        modSources {
+            add project.sourceSets.main
+        }
+        arguments.addAll "--mod", project.mod_id, "--all", "--output", file("src/generated/resources/").getAbsolutePath(), "--existing"
+    }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
-repositories {
-    maven {
-        url "https://www.cursemaven.com"
-    }
+sourceSets.main.resources {
+    srcDir "src/generated/resources"
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+    implementation "net.neoforged:neoforge:${project.neoforge}"
 }
 
-jar {
+repositories {
+    maven { url "https://maven.teamabnormals.com/" }
+    maven { url = "https://maven.blamejared.com/" }
+    maven { url = "https://modmaven.dev" }
+}
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [mod_version: mod_version, minecraft_version: minecraft_version, neoforge: neoforge]
+    inputs.properties replaceProperties
+    filesMatching(["META-INF/neoforge.mods.toml"]) {
+        expand replaceProperties
+    }
+}
+
+tasks.named("jar", Jar).configure {
     manifest {
         attributes([
-                "Specification-Title"     : "Overweight Farming",
-                "Specification-Vendor"    : "Binome",
+                "Specification-Title"     : project.mod_name,
+                "Specification-Vendor"    : "Team Galena",
                 "Specification-Version"   : "1",
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "Binome",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "overweight_farming.mixins.json"
+                "Implementation-Title"    : project.mod_name,
+                "Implementation-Version"  : project.mod_version,
+                "Implementation-Vendor"   : "Team Galena",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
 
-jar.finalizedBy('reobfJar')
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "https://maven.minecraftforge.net"
-        }
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
     }
 }

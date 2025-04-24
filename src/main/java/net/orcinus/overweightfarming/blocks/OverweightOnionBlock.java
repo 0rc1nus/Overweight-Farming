@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.IPlantable;
+import net.neoforged.neoforge.common.util.TriState;
 import net.orcinus.overweightfarming.init.OFBlocks;
 
 public class OverweightOnionBlock extends CropFullBlock {
@@ -21,13 +21,12 @@ public class OverweightOnionBlock extends CropFullBlock {
     }
 
     @Override
-    public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
-        BlockState plant = plantable.getPlant(world, pos.relative(facing));
-        return plant.is(OFBlocks.ALLIUM_BUSH.get());
+    public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
+        return plant.is(OFBlocks.ALLIUM_BUSH.get()) ? TriState.TRUE : super.canSustainPlant(state, level, soilPosition, facing, plant);
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos blockPos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos blockPos, BlockState state) {
         return world.getBlockState(blockPos.above()).isAir() && world.getBlockState(blockPos.above(2)).isAir();
     }
 

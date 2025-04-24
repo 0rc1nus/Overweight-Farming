@@ -3,7 +3,6 @@ package net.orcinus.overweightfarming.blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,7 +14,7 @@ public class NetherCropFullBlock extends CropFullBlock {
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos blockPos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos blockPos, BlockState state) {
         return !world.getBlockState(blockPos.below()).is(this.stemBlock) && world.getBlockState(blockPos.above()).isAir();
     }
 

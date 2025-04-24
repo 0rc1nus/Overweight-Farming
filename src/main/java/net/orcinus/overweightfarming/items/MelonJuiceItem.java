@@ -59,7 +59,7 @@ public class MelonJuiceItem extends Item {
     }
 
     @Override
-    public int getUseDuration(ItemStack stack) {
+    public int getUseDuration(ItemStack itemStack, LivingEntity living) {
         return 40;
     }
 

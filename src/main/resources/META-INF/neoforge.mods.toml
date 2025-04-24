@@ -1,0 +1,34 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="All Rights Reserved"
+
+[[mixins]]
+   config = "overweight_farming.mixins.json"
+
+[[mods]]
+   modId="overweight_farming"
+   version="${minecraft_version}-${mod_version}-forge"
+   displayName="Overweight Farming"
+   displayURL="https://discord.com/invite/sA858vGruu"
+   authors="Team Galena"
+   logoFile="overweight_farming_logo.png"
+   description='''
+   This mod enhances the farming system
+   '''
+
+[[dependencies.overweight_farming]]
+   modId="minecraft"
+   type = "required"
+   versionRange="[${minecraft_version}]"
+   ordering="AFTER"
+   side="BOTH"
+
+[[dependencies.overweight_farming]]
+   modId="neoforge"
+   type = "required"
+   versionRange="[${neoforge},)"
+   ordering="AFTER"
+   side="BOTH"
+
+[[accessTransformers]]
+   file="META-INF/accesstransformer.cfg"

@@ -1,9 +1,6 @@
 package net.orcinus.overweightfarming.init;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.orcinus.overweightfarming.OverweightFarming;
@@ -14,7 +11,7 @@ public class OFBlockTags {
     public static final TagKey<Block> OVERWEIGHT_APPLE_LEAVES = register("overweight_apple_leaves");
 
     public static TagKey<Block> register(String name) {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation(OverweightFarming.MODID, name));
+        return TagKey.create(Registries.BLOCK, OverweightFarming.id(name));
     }
 
 }

@@ -1,9 +1,17 @@
 package net.orcinus.overweightfarming.blocks;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.vehicle.VehicleEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -14,13 +22,22 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.EntityCollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.SpecialPlantable;
+import org.jetbrains.annotations.Nullable;
 
-public class CropFullBlock extends BushBlock implements BonemealableBlock {
+public class CropFullBlock extends BushBlock implements BonemealableBlock, SpecialPlantable {
     public final Block stemBlock;
     private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+    public static final MapCodec<CropFullBlock> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> instance.group(
+                    BuiltInRegistries.BLOCK.byNameCodec().fieldOf("block").forGetter(CropFullBlock::getStemBlock),
+                    propertiesCodec()
+            ).apply(instance, CropFullBlock::new)
+    );
 
     public CropFullBlock(Block stemBlock, Properties properties) {
         super(properties);
@@ -29,8 +46,9 @@ public class CropFullBlock extends BushBlock implements BonemealableBlock {
     }
 
     @Override
-    public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
-        return SHAPE;
+    protected VoxelShape getCollisionShape(BlockState p_60572_, BlockGetter p_60573_, BlockPos p_60574_, CollisionContext context) {
+        boolean isPlayer = context instanceof EntityCollisionContext entityCollisionContext && (entityCollisionContext.getEntity() instanceof LivingEntity || entityCollisionContext.getEntity() instanceof VehicleEntity || entityCollisionContext.getEntity() instanceof ItemEntity || entityCollisionContext.getEntity() instanceof ExperienceOrb);
+        return isPlayer ? Shapes.block() : Shapes.empty();
     }
 
     public Block getStemBlock() {
@@ -38,13 +56,18 @@ public class CropFullBlock extends BushBlock implements BonemealableBlock {
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader world, BlockPos blockPos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos blockPos, BlockState state) {
         return !world.getBlockState(blockPos.above()).is(this.stemBlock);
     }
 
     @Override
     public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos blockPos, BlockState state) {
         return true;
+    }
+
+    @Override
+    protected MapCodec<? extends BushBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -80,6 +103,15 @@ public class CropFullBlock extends BushBlock implements BonemealableBlock {
 
     public boolean shouldGrowRoots() {
         return true;
+    }
+
+    @Override
+    public boolean canPlacePlantAtPosition(ItemStack itemStack, LevelReader level, BlockPos pos, @Nullable Direction direction) {
+        return false;
+    }
+
+    @Override
+    public void spawnPlantAtPosition(ItemStack itemStack, LevelAccessor level, BlockPos pos, @Nullable Direction direction) {
     }
 
 }

@@ -1,0 +1,53 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "display": {
+    "icon": {
+      "count": 1,
+      "id": "minecraft:stone_axe"
+    },
+    "title": {
+      "translate": "advancements.husbandry.peel_overweight_onion.title"
+    },
+    "description": {
+      "translate": "advancements.husbandry.peel_overweight_onion.description"
+    }
+  },
+  "criteria": {
+    "peel_overweight_onion": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "overweight_farming:overweight_onion_block"
+                ]
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": [
+                "minecraft:wooden_axe",
+                "minecraft:golden_axe",
+                "minecraft:stone_axe",
+                "minecraft:iron_axe",
+                "minecraft:diamond_axe",
+                "minecraft:netherite_axe"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "peel_overweight_onion"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

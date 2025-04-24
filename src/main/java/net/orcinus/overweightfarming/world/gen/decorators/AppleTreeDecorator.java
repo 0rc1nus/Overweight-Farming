@@ -1,6 +1,7 @@
 package net.orcinus.overweightfarming.world.gen.decorators;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -17,7 +18,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class AppleTreeDecorator extends TreeDecorator {
-    public static final Codec<AppleTreeDecorator> CODEC = RecordCodecBuilder.create(instance -> instance.group(Codec.floatRange(0.0F, 1.0F).fieldOf("smallTreeProbability").forGetter(decorator -> decorator.smallTreeProbability), Codec.floatRange(0.0F, 1.0F).fieldOf("largeTreeProbability").forGetter(decorator -> decorator.largeTreeProbability)).apply(instance, AppleTreeDecorator::new));
+    public static final MapCodec<AppleTreeDecorator> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> instance.group(
+                    Codec.floatRange(0.0F, 1.0F).fieldOf("smallTreeProbability").forGetter(decorator -> decorator.smallTreeProbability),
+                    Codec.floatRange(0.0F, 1.0F).fieldOf("largeTreeProbability").forGetter(decorator -> decorator.largeTreeProbability)
+            ).apply(instance, AppleTreeDecorator::new));
     private final float smallTreeProbability;
     private final float largeTreeProbability;
 

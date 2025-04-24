@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "overweight_farming:vegetable_peels",
+  "ingredients": [
+    {
+      "item": "overweight_farming:vegetable_compost"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "overweight_farming:vegetable_peels"
+  }
+}

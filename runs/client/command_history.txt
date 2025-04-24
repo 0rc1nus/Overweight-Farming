@@ -1,0 +1,13 @@
+/give @p overweight_farming:overweight_onion_block
+/give @p overweight_farming:overweight_cabbage_block
+/time set midnight
+/gamerule randomTickSpeed 3000
+/gamerule randomTickSpeed 3
+/gamerule randomTickSpeed 3000
+/gamerule randomTickSpeed 3
+/give @p overweight_farming:overweight_onion_block
+/advancement revoke @p everything
+/give @p overweight_farming:overweight_onion_block
+/advancement revoke @p everything
+/give @p overweight_farming:overweight_onion_block
+/advancement revoke @p everything

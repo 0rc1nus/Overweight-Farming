@@ -6,6 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 
 public class OFModelLayers {
 
-    public static final ModelLayerLocation STRAW_HAT = new ModelLayerLocation(new ResourceLocation(OverweightFarming.MODID, "straw_hat"), "main");
+    public static final ModelLayerLocation STRAW_HAT = new ModelLayerLocation(OverweightFarming.id("straw_hat"), "main");
 
 }

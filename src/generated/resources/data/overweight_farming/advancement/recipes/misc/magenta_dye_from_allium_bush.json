@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_allium_bush": {
+      "conditions": {
+        "items": [
+          {
+            "items": "overweight_farming:allium_bush"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "overweight_farming:magenta_dye_from_allium_bush"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_allium_bush"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "overweight_farming:magenta_dye_from_allium_bush"
+    ]
+  }
+}

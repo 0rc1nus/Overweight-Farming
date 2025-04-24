@@ -5,7 +5,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -14,6 +14,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
@@ -26,25 +27,21 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CocoaBlock;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.NetherWartBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.level.block.CropGrowEvent;
 import net.orcinus.overweightfarming.OverweightFarming;
-import net.orcinus.overweightfarming.blocks.OverweightCarrotBlock;
 import net.orcinus.overweightfarming.init.OFBlocks;
 import net.orcinus.overweightfarming.init.OFItems;
 import net.orcinus.overweightfarming.util.OverweightGrowthManager;
 
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = OverweightFarming.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = OverweightFarming.MODID)
 public class MiscEvents {
     public static final Supplier<BiMap<Block, Block>> WAXABLES = Suppliers.memoize(() -> ImmutableBiMap.<Block, Block>builder()
             .put(OFBlocks.SEEDED_PEELED_MELON.get(), OFBlocks.WAXED_SEEDED_PEELED_MELON.get())
@@ -66,7 +63,7 @@ public class MiscEvents {
     public static final Supplier<BiMap<Block, Block>> UNPEELABLES = Suppliers.memoize(() -> PEELABLES.get().inverse());
 
     @SubscribeEvent
-    public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         ItemStack stack = event.getItemStack();
         Level world = event.getLevel();
         BlockPos blockPos = event.getPos();
@@ -79,7 +76,7 @@ public class MiscEvents {
                     if (player instanceof ServerPlayer serverPlayer) {
                         CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, blockPos, stack);
                     }
-                    stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                    stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                     world.playSound(null, blockPos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
                     world.setBlockAndUpdate(blockPos, WAX_OFF_BY_BLOCK.get().get(block).defaultBlockState());
                     world.levelEvent(player, 3004, blockPos, 0);
@@ -91,7 +88,7 @@ public class MiscEvents {
                     if (player instanceof ServerPlayer serverPlayer) {
                         CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, blockPos, stack);
                     }
-                    stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                    stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                     world.playSound(null, blockPos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
                     Block.popResource(world, blockPos, new ItemStack(OFItems.VEGETABLE_PEELS.get()));
                     world.setBlockAndUpdate(blockPos, PEELABLES.get().get(block).defaultBlockState());
@@ -132,7 +129,7 @@ public class MiscEvents {
     }
 
     @SubscribeEvent
-    public void onCropsGrow(BlockEvent.CropGrowEvent.Pre event) {
+    public static void onCropsGrow(CropGrowEvent.Pre event) {
         LevelAccessor level = event.getLevel();
         BlockPos blockPos = event.getPos();
         BlockState state = event.getState();
@@ -144,11 +141,11 @@ public class MiscEvents {
                     boolean flag = state.hasProperty(CropBlock.AGE) && state.getValue(CropBlock.AGE) < 7 && state.getValue(CropBlock.AGE) == 3;
                     boolean flag1 = state.hasProperty(CocoaBlock.AGE) && state.getValue(CocoaBlock.AGE) == 1;
                     boolean flag2 = (state.getBlock() instanceof BeetrootBlock || state.getBlock() instanceof NetherWartBlock) && state.hasProperty(BlockStateProperties.AGE_3) && state.getValue(BlockStateProperties.AGE_3) < 3 && state.getValue(BlockStateProperties.AGE_3) > 1;
-                    boolean flag3 = ModList.get().isLoaded("hedgehog") && state.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("hedgehog", "kiwi_vines")) && state.getValue(BlockStateProperties.BERRIES);
+                    boolean flag3 = ModList.get().isLoaded("hedgehog") && state.getBlock() == BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("hedgehog", "kiwi_vines")) && state.getValue(BlockStateProperties.BERRIES);
                     if (flag || flag1 || flag2 || flag3) {
                         float chance = world.isNight() && world.getMoonPhase() == 0 ? 0.0010538863F : 3.4290552E-4F;
                         if (random.nextFloat() < chance) {
-                            event.setResult(Event.Result.DENY);
+                            event.setResult(CropGrowEvent.Pre.Result.DO_NOT_GROW);
                             manager.growOverweightCrops(world, blockPos, state, random);
                         }
                     }

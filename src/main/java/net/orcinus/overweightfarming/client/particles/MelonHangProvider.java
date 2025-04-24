@@ -1,6 +1,5 @@
 package net.orcinus.overweightfarming.client.particles;
 
-import net.orcinus.overweightfarming.init.OFParticleTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.DripParticle;
 import net.minecraft.client.particle.Particle;
@@ -8,8 +7,9 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.orcinus.overweightfarming.init.OFParticleTypes;
 
 @OnlyIn(Dist.CLIENT)
 public class MelonHangProvider implements ParticleProvider<SimpleParticleType> {
