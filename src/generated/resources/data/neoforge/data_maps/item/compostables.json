@@ -1,0 +1,73 @@
+{
+  "values": {
+    "overweight_farming:allium_bush": {
+      "chance": 0.65
+    },
+    "overweight_farming:half_seeded_peeled_melon": {
+      "chance": 0.65
+    },
+    "overweight_farming:overweight_apple_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:overweight_baked_potato_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:overweight_beetroot_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:overweight_cabbage_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:overweight_carrot_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:overweight_cocoa_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:overweight_golden_apple_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:overweight_onion_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:overweight_poisonous_potato_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:overweight_potato_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:peeled_overweight_beetroot_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:peeled_overweight_carrot_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:peeled_overweight_onion_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:peeled_overweight_potato_block": {
+      "chance": 1.0
+    },
+    "overweight_farming:seeded_peeled_melon": {
+      "chance": 0.65
+    },
+    "overweight_farming:seedless_peeled_melon": {
+      "chance": 0.65
+    },
+    "overweight_farming:vegetable_compost": {
+      "chance": 1.0
+    },
+    "overweight_farming:vegetable_peels": {
+      "chance": 1.0
+    },
+    "overweight_farming:waxed_half_seeded_peeled_melon": {
+      "chance": 0.65
+    },
+    "overweight_farming:waxed_seeded_peeled_melon": {
+      "chance": 0.65
+    },
+    "overweight_farming:waxed_seedless_peeled_melon": {
+      "chance": 0.65
+    }
+  }
+}

@@ -7,17 +7,18 @@
   },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
-      "minecraft:old_growth_birch_forest": "2025-04-25 12:36:24 +1000",
       "minecraft:beach": "2025-04-25 10:37:20 +1000",
-      "minecraft:desert": "2025-04-25 12:32:55 +1000",
       "minecraft:dark_forest": "2025-04-25 12:36:18 +1000",
       "minecraft:forest": "2025-04-25 00:50:03 +1000",
+      "minecraft:river": "2025-04-25 10:37:03 +1000",
+      "minecraft:snowy_taiga": "2025-04-25 00:49:49 +1000",
+      "minecraft:old_growth_birch_forest": "2025-04-25 12:36:24 +1000",
+      "minecraft:desert": "2025-04-25 12:32:55 +1000",
       "minecraft:ocean": "2025-04-25 12:36:11 +1000",
       "minecraft:sunflower_plains": "2025-04-25 12:37:17 +1000",
-      "minecraft:river": "2025-04-25 10:37:03 +1000",
       "minecraft:birch_forest": "2025-04-25 12:37:52 +1000",
       "minecraft:windswept_hills": "2025-04-25 12:36:09 +1000",
-      "minecraft:snowy_taiga": "2025-04-25 00:49:49 +1000",
+      "minecraft:windswept_savanna": "2025-04-25 16:50:25 +1000",
       "minecraft:plains": "2025-04-25 00:50:18 +1000"
     },
     "done": false
@@ -331,6 +332,108 @@
   "minecraft:recipes/misc/blue_dye_from_cornflower": {
     "criteria": {
       "has_cornflower": "2025-04-25 12:56:01 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_bricks": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_brick_slab_from_stone_stonecutting": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_brick_stairs_from_stone_stonecutting": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_slab_from_stone_stonecutting": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_bricks_from_stone_stonecutting": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_slab": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/chiseled_stone_bricks_stone_from_stonecutting": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_stairs_from_stone_stonecutting": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/stone_button": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/stonecutter": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/stone_pressure_plate": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/smooth_stone": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/stone_brick_walls_from_stone_stonecutting": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/stone_stairs": {
+    "criteria": {
+      "has_stone": "2025-04-25 16:50:23 +1000"
+    },
+    "done": true
+  },
+  "overweight_farming:recipes/misc/magenta_dye_from_allium_bush": {
+    "criteria": {
+      "has_allium_bush": "2025-04-25 17:06:55 +1000"
+    },
+    "done": true
+  },
+  "overweight_farming:recipes/misc/vegetable_peels_from_vegetable_compost": {
+    "criteria": {
+      "has_vegetable_compost": "2025-04-25 17:06:58 +1000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/magenta_dye_from_allium": {
+    "criteria": {
+      "has_allium": "2025-04-25 17:06:50 +1000"
     },
     "done": true
   },

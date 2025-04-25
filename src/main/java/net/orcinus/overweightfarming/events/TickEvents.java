@@ -161,7 +161,7 @@ public class TickEvents {
                                 boolean validForOverweight = false;
                                 if (world instanceof ServerLevel serverLevel) {
                                     if (flag) {
-                                        if (block == kiwiVines && state.getValue(BlockStateProperties.BERRIES)) {
+                                        if (state.is(kiwiVines) && state.hasProperty(BlockStateProperties.BERRIES) && state.getValue(BlockStateProperties.BERRIES)) {
                                             validForOverweight = true;
                                         }
                                         if (state.hasProperty(CropBlock.AGE)) {

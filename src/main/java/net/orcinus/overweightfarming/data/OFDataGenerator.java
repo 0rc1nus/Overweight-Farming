@@ -49,6 +49,8 @@ public class OFDataGenerator {
 
         DatapackBuiltinEntriesProvider datapackProvider = new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, builder, Set.of(OverweightFarming.MODID));
         dataGenerator.addProvider(event.includeServer(), datapackProvider);
+        dataGenerator.addProvider(event.includeServer(), new OFPaintingTagsProvider(packOutput, lookupProvider, existingFileHelper));
+        dataGenerator.addProvider(event.includeServer(), new OFDataMapsProvider(packOutput, lookupProvider));
     }
 
 }

@@ -11,7 +11,6 @@ import net.orcinus.overweightfarming.init.OFEntityTypes;
 import net.orcinus.overweightfarming.init.OFItems;
 import net.orcinus.overweightfarming.init.OFParticleTypes;
 import net.orcinus.overweightfarming.init.OFTreeDecoratorTypes;
-import net.orcinus.overweightfarming.init.OFVanillaIntegration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,7 +31,6 @@ public class OverweightFarming {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(OFVanillaIntegration::init);
     }
 
     public static ResourceLocation id(String name) {
