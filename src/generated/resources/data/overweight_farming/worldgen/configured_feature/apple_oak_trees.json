@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "overweight_farming:fancy_apple_oak_checked",
+    "features": [
+      {
+        "chance": 0.2,
+        "feature": "overweight_farming:apple_oak_checked"
+      },
+      {
+        "chance": 0.1,
+        "feature": "overweight_farming:apple_oak_bees_checked"
+      },
+      {
+        "chance": 0.4,
+        "feature": "overweight_farming:fancy_apple_oak_bees_checked"
+      }
+    ]
+  }
+}

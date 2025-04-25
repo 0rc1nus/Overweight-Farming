@@ -56,16 +56,6 @@ public class OFRecipeProvider extends RecipeProvider {
                 .group("magenta_dye")
                 .unlockedBy(getHasName(OFBlocks.ALLIUM_BUSH.get()), has(OFBlocks.ALLIUM_BUSH.get()))
                 .save(recipeOutput, OverweightFarming.id(getConversionRecipeName(Items.MAGENTA_DYE, OFBlocks.ALLIUM_BUSH.get())));
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("farmersdelight", "organic_compost")))
-                .requires(Items.DIRT)
-                .requires(OFBlocks.VEGETABLE_COMPOST.get())
-                .requires(Items.BONE_MEAL)
-                .unlockedBy(getHasName(OFBlocks.VEGETABLE_COMPOST.get()), has(OFBlocks.VEGETABLE_COMPOST.get()))
-                .unlockedBy(getHasName(Items.BONE_MEAL), has(Items.BONE_MEAL))
-                .save(recipeOutput.withConditions(
-                        new ModLoadedCondition("farmersdelight")
-                ), OverweightFarming.id("apply_fullmetal_directly_to_compost"));
     }
 
     protected static void nineBlockStorageRecipesRecipesWithCustomUnpacking(

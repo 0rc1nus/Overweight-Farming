@@ -1,13 +1,50 @@
-/give @p overweight_farming:overweight_onion_block
-/give @p overweight_farming:overweight_cabbage_block
+/tp @p ~ ~ ~20000
+/locate biome minecraft:plains
+/locate biome minecraft:forest
+/tp @s -174 63 20055
+/tp @p ~ ~ ~20000
+/locate biome minecraft:forest
+/tp @s -402 83 39841
+/tp @p ~ ~ ~20000
+/locate biome minecraft:forest
+/time set day
+/tp @s -846 70 60195
+/tp @p ~ ~ ~20000
+/locate biome minecraft:forest
+/tp @s -808 72 80432\
+/tp @s -808 72 80432
+/locate biome minecraft:forest
+/tp @s -317 87 162
+/tp @p ~ ~ ~20000
+/locate biome minecraft:forest
+/tp @s -587 75 20143
+/tp @p ~ ~ ~200000
+/locate biome minecraft:forest
+/tp @s -635 74 220198
 /time set midnight
+/tick rate 2000
+/tick rate 20
 /gamerule randomTickSpeed 3000
 /gamerule randomTickSpeed 3
+/time set day
+/tick rate 2000
+/tick rate 20
 /gamerule randomTickSpeed 3000
 /gamerule randomTickSpeed 3
-/give @p overweight_farming:overweight_onion_block
-/advancement revoke @p everything
-/give @p overweight_farming:overweight_onion_block
-/advancement revoke @p everything
-/give @p overweight_farming:overweight_onion_block
-/advancement revoke @p everything
+/tp @p ~ ~ ~200000
+/locate biome minecraft:forest
+/tp @s -175 73 420643
+/tp @p ~ ~ ~20000
+/locate biome minecraft:forest
+/tp @s -177 78 440807
+/locate biome minecraft:dark_forest
+/tp @s 68 89 440202
+/locate biome minecraft:forest
+/tp @s 222 92 440379
+/tp @p ~ ~ ~20000
+/locate biome minecraft:forest
+/tp @s 419 107 460603
+/time set day
+/place feature overweight_farming:fancy_apple_oak_bees
+/place feature overweight_farming:fancy_apple_oak
+/time set day

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#overweight_farming:apple_tree_generates",
+  "features": "overweight_farming:apple_oak_trees",
+  "step": "vegetal_decoration"
+}
