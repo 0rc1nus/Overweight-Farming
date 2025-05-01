@@ -419,6 +419,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/misc/magenta_dye_from_allium": {
+    "criteria": {
+      "has_allium": "2025-04-25 17:06:50 +1000"
+    },
+    "done": true
+  },
   "overweight_farming:recipes/misc/magenta_dye_from_allium_bush": {
     "criteria": {
       "has_allium_bush": "2025-04-25 17:06:55 +1000"
@@ -428,12 +434,6 @@
   "overweight_farming:recipes/misc/vegetable_peels_from_vegetable_compost": {
     "criteria": {
       "has_vegetable_compost": "2025-04-25 17:06:58 +1000"
-    },
-    "done": true
-  },
-  "minecraft:recipes/misc/magenta_dye_from_allium": {
-    "criteria": {
-      "has_allium": "2025-04-25 17:06:50 +1000"
     },
     "done": true
   },

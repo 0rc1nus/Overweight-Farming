@@ -1,4 +1,3 @@
-/locate biome minecraft:plains
 /locate biome minecraft:forest
 /tp @s -174 63 20055
 /tp @p ~ ~ ~20000
@@ -48,3 +47,4 @@
 /place feature overweight_farming:fancy_apple_oak
 /time set day
 /give @p overweight_farming:allium_bush
+/weather clear

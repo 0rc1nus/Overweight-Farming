@@ -7,10 +7,10 @@ import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.orcinus.overweightfarming.OverweightFarming;
 
 public class OFPaintingVariants {
-    public static final ResourceKey<PaintingVariant> FUN_LAND = create("fun_land");
+//    public static final ResourceKey<PaintingVariant> FUN_LAND = create("fun_land");
 
     public static void bootstrap(BootstrapContext<PaintingVariant> context) {
-        register(context, FUN_LAND, 2, 3);
+//        register(context, FUN_LAND, 2, 3);
     }
 
     private static void register(BootstrapContext<PaintingVariant> context, ResourceKey<PaintingVariant> key, int width, int height) {
